@@ -1,12 +1,11 @@
 var mongoose=require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-mongoose.connect('mongodb://localhost:27017/NGOplusplusdb', function(err){
+mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
         console.log("Connected to DB");
         if(err){console.log(err);
         }
 });
-
 
 var userSchema = new mongoose.Schema({
         username: {
@@ -29,6 +28,15 @@ var userSchema = new mongoose.Schema({
 
 }, {timestamps:true})
 
+var meetingSchema = new mongoose.Schema({
+        mentor: userSchema,
+        mentee: userSchema,
+        date: Date,
+        time: String,
+})
+
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(require('mongoose-bcrypt'));
-module.exports=mongoose.model('user', userSchema);
+module.exports={user: mongoose.model('user', userSchema),
+        meeting: mongoose.model('meeting', meetingSchema)
+};
