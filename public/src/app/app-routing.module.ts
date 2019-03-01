@@ -8,6 +8,7 @@ import { ResourcesComponent } from './resources/resources.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DonateComponent } from './donate/donate.component';
+import { SchedulingComponent } from './scheduling/scheduling.component'
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user/details', component: UserProfileComponent},
@@ -18,7 +19,7 @@ const routes: Routes = [
   {path: 'Mentor', component: MentorshipComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'donate', component: DonateComponent},
-
+  {path: 'schedule', component: SchedulingComponent},
   {path:'**', redirectTo:'home'},
 ];
 
