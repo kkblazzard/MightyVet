@@ -1,3 +1,6 @@
-<p>
-  home works!
-</p>
+<div class="nav-item" *ngIf="_httpService.loginUserID==true">
+  <a class="nav-link" (click)="clearLogin()" [routerLink]="['/']"><i class="fas fa-user-tie"></i>Logout</a>
+</div>
+<div class="nav-item" *ngIf="_httpService.loginUserID==true">
+  <a class="nav-link" (click)="clearLogin()" [routerLink]="['/']"><i class="fas fa-user-tie"></i>Logout</a>
+</div>
