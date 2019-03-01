@@ -15,11 +15,11 @@ const routes: Routes = [
   {path: 'user', component: SignUpComponent},
   {path: 'login', redirectTo: 'user/details'},
   {path: 'courses', component: CoursesComponent},
-  {path: 'courses/deails', component: CourseDetailComponent},
-  {path: 'Mentor', component: MentorshipComponent},
+  {path: 'courses/details', component: CourseDetailComponent},
+  {path: 'mentorship', component: MentorshipComponent},
+  {path: 'mentorship/schedule', component: SchedulingComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'donate', component: DonateComponent},
-  {path: 'schedule', component: SchedulingComponent},
   {path:'**', redirectTo:'home'},
 ];
 
