@@ -13,6 +13,7 @@ import { ResourcesComponent } from './resources/resources.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DonateComponent } from './donate/donate.component';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { DonateComponent } from './donate/donate.component';
     SignUpComponent,
     UserProfileComponent,
     DonateComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
