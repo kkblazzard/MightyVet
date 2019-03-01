@@ -7,7 +7,6 @@ mongoose.connect('mongodb://localhost:27017/NGOplusplusdb', function(err){
         }
 });
 
-
 var userSchema = new mongoose.Schema({
         username: {
                 type: String, 
@@ -29,6 +28,15 @@ var userSchema = new mongoose.Schema({
 
 }, {timestamps:true})
 
+var meetingSchema = new mongoose.Schema({
+        mentor: userSchema,
+        mentee: userSchema,
+        date: Date,
+        time: Time,
+})
+
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(require('mongoose-bcrypt'));
-module.exports=mongoose.model('user', userSchema);
+module.exports={user: mongoose.model('user', userSchema),
+        meeting: mongoose.model('meeting', meetingSchema)
+};

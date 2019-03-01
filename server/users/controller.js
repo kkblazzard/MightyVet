@@ -1,4 +1,6 @@
-const Users=require('./models');
+const Models=require('./models');
+const Users = Models.user;
+const Meetings = Models.meeting;
 module.exports={
     userAll: (req, res)=>Users
         .find().then(all=>console.log(all) || res.json(all))

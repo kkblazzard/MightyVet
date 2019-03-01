@@ -1,0 +1,10 @@
+<form class="edit">
+  <label>Mentor</label>
+  <input type="text" [ngModel]="meeting.mentor"></p>
+  <label>Date</label>
+  <input type="date" [ngModel]="meeting.date"></p>
+  <label>Time</label>
+  <input type="time" [ngModel]="meeting.time"></p>
+  <button>CANCEL</button>
+  <button (onClick)="submitForm()">EDIT</button>
+</form>
