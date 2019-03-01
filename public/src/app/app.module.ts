@@ -13,6 +13,10 @@ import { ResourcesComponent } from './resources/resources.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DonateComponent } from './donate/donate.component';
+import { SchedulingComponent } from './scheduling/scheduling.component';
+import { ScheduleviewComponent } from './scheduleview/scheduleview.component';
+import { ScheduleeditComponent } from './scheduleedit/scheduleedit.component';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +28,10 @@ import { DonateComponent } from './donate/donate.component';
     SignUpComponent,
     UserProfileComponent,
     DonateComponent,
+    SchedulingComponent,
+    ScheduleviewComponent,
+    ScheduleeditComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DonateComponent } from './donate/donate.component';
 const routes: Routes = [
-  {path: "", component: HomeComponent},
+  {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user/details', component: UserProfileComponent},
   {path: 'user', component: SignUpComponent},
   {path: 'login', redirectTo: 'user/details'},
