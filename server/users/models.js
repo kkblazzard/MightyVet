@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-mongoose.connect('mongodb://localhost:27017/NGOplusplusdb', function(err){
+mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
         console.log("Connected to DB");
         if(err){console.log(err);
         }
@@ -32,7 +32,7 @@ var meetingSchema = new mongoose.Schema({
         mentor: userSchema,
         mentee: userSchema,
         date: Date,
-        time: Time,
+        time: String,
 })
 
 userSchema.plugin(uniqueValidator);
