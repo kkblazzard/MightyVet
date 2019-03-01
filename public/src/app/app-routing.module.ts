@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', redirectTo: 'user/details'},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/deails', component: CourseDetailComponent},
-  {path: 'Mentor', component: MentorshipComponent},
+  {path: 'mentorship', component: MentorshipComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'donate', component: DonateComponent},
 
