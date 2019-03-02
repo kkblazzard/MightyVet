@@ -23,7 +23,15 @@ var userSchema = new mongoose.Schema({
                 minlength:[3, "password must be 3 characters or longer"],
                 bcrypt: true 
         },
-        certification:{type:Number},
+
+        location: {type: String},
+
+        description: {type: String},
+
+        picture:{type: String},
+
+        certification:{type:String},
+
         mentor:{type: Boolean}
 
 }, {timestamps:true})
@@ -37,6 +45,7 @@ var meetingSchema = new mongoose.Schema({
 
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(require('mongoose-bcrypt'));
-module.exports={user: mongoose.model('user', userSchema),
+module.exports={
+        user: mongoose.model('user', userSchema),
         meeting: mongoose.model('meeting', meetingSchema)
 };
