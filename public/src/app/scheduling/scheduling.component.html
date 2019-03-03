@@ -9,7 +9,7 @@
         [view]="view"
         [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false"
-      >Previous</button>
+      ><</button>
     <span>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
       <button
         class="btn btn-primary"
@@ -17,7 +17,7 @@
         [view]="view"
         [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false"
-      >Next</button>
+      >></button>
     </div>
   </div>
 </div>
