@@ -51,7 +51,28 @@ module.exports={
                     }
                 });
             }
-        })
-
+        }),
+    meetingsAll: (req, res)=>Meetings
+    .find().then(all=>console.log(all) || res.json(all))
+    .catch(err=>console.log(err)|| res.json(err)),
+    meetingsNew: (req, res) => {
+        console.log("entered new controller", req.body);
+        Meetings
+        .create(req.body)
+        .then(anew=>console.log("created in controller",anew)|| res.json(anew))
+        .catch(err=>console.log(err) || res.json(err))
+    },
+    meetingsRemove: (req, res) => Meetings
+        .findByIdAndDelete(req.params.id)
+        .then(deleted=>console.log("deleted") ||res.json(deleted))
+        .catch(err=>console.log(err) || res.json(err)),
+    meetingsDetails:(req, res) => Meetings
+        .findById(req.params.id)
+        .then(one=>console.log(one) || res.json(one))
+        .catch(err=>console.log(err) || res.json(err)),
+    meetingsUpdate: (req, res) => Meetings
+        .findByIdAndUpdate(req.params.id,req.body,{new: true})
+        .then(updated =>console.log("updated",updated)||res.json(updated))
+        .catch(err=>console.log(err) || res.json(err)),
         
 }
