@@ -1,10 +1,28 @@
 <h1>Upcoming Office Hours</h1>
 <br>
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <button
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false"
+      >Previous</button>
+    <span>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+      <button
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false"
+      >Next</button>
+    </div>
+  </div>
+</div>
 <mwl-calendar-month-view
   [viewDate]="viewDate"
-  [events]="events"
-  [activeDayIsOpen]="true"
-  (beforeViewRender)="beforeMonthViewRender($event)"
 >
 </mwl-calendar-month-view>
 <div *ngFor="let upcoming of upcomings">
