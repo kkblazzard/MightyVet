@@ -38,8 +38,6 @@ var userSchema = new mongoose.Schema({
 
 }, {timestamps:true})
 
-
-
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(require('mongoose-bcrypt'));
 module.exports={

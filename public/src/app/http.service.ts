@@ -23,15 +23,21 @@ export class HttpService {
     return this._http.put('/api/users/' + id, userUpdate);
   }
   getUser(id) {
-    console.log("httpSErvice getting user", id);
+    console.log("http.service getting user", id);
     return this._http.get(`/api/users/${id}`);
+  }
+  getMeetings(id, bool){
+    if(bool){
+      return this._http.get(`/api/meetings/mentor/${id}`);
+    }
+    else{
+      return this._http.get(`/api/meetings/mentee/${id}`);
+    }
   }
   deleteUser(id) {
     return this._http.delete('/api/users/' + id);
   }
 
 //------------------donations--------------------------
-
-
 
 }
