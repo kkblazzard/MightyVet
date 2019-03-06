@@ -1,0 +1,81 @@
+
+.container .title_container {
+    margin: 0px auto;
+    margin-top: 80px;
+    text-align: left;
+    max-width: 913px;
+}
+#wrapper #splash_section {
+    width: 100%;
+    padding: 0px !important;
+}
+.parallax_block {
+    background: transparent;
+    min-height: 850px;
+    width: 100%;
+    z-index: 99;
+}
+.upper_parallax {
+    background: transparent;
+    min-height: 850px;
+    width: 100%;
+}
+#wrapper #our_cause {
+    position: relative;
+    background: #00A1D6;
+    height: 720px;
+    overflow: hidden;
+    background: url(/assets/images/video_splash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#wrapper #mightyvet_highlights_section {
+    padding: 110px 80px 61px;
+    background: #00a1d6;
+}
+#wrapper #our_cause #video-background {
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /* z-index: -100; */
+    background-size: cover;
+    overflow: hidden;
+}
+#mission{
+    background-color:white;
+    
+}
+.feature_item_tier_1{
+display:inline-block;
+margin:10px;
+vertical-align: top;
+}
+.tier_1{
+
+    
+}
+.feature_item_tier_2{
+    display:inline-block;
+    margin:10px;
+    text-align: center;
+}
+.tier_2{
+    width:60%;
+    
+}
+.feature_item_tier_3{
+    display:inline-block;
+    margin:10px;
+}
+.tier_3{
+    width:40%;
+    
+}
+#footer_section {
+    padding: 100px 80px;
+    background-color: #34314c;
+}
