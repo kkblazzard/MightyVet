@@ -19,11 +19,14 @@ module.exports={
         .then(deleted=>console.log("deleted") ||res.json(deleted))
         .catch(err=>console.log(err) || res.json(err)),
 
-    meetingDetails:(req, res) => Meetings
-        .findById(req.params.id)
-        .then(one=>console.log(one) || res.json(one))
+    mentorMeetings:(req, res) => Meetings
+        .find({mentor: req.params.id})
+        .then(meetings=>console.log(meetings) || res.json(meetings))
         .catch(err=>console.log(err) || res.json(err)),
-
+    menteeMeetings:(req,res)=> Meetings
+        .find({mentor: req.params.id})
+        .then(meetings=>console.log(meetings) || res.json(meetings))
+        .catch(err=>console.log(err) || res.json(err)),
     meetingUpdate: (req, res) => Meetings
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
