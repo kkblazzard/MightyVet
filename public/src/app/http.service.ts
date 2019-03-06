@@ -14,14 +14,20 @@ export class HttpService {
     return this._http.post('/api/users/login', user);
   }
 // -------------------users------------------------------
-userUpdate(id, userUpdate) {
-  console.log("http.service userupdate", userUpdate);
-  return this._http.put('/api/users/' + id, userUpdate);
-}
-getUser(id) {
-  console.log("httpSErvice getting user", id);
-  return this._http.get(`/api/users/${id}`);
-}
-
-
+  userUpdate(id, userUpdate) {
+    console.log("http.service userupdate", userUpdate);
+    return this._http.put('/api/users/' + id, userUpdate);
+  }
+  getUser(id) {
+    console.log("http.service getting user", id);
+    return this._http.get(`/api/users/${id}`);
+  }
+  getMeetings(id, bool){
+    if(bool){
+      return this._http.get(`/api/meetings/mentor/${id}`);
+    }
+    else{
+      return this._http.get(`/api/meetings/mentee/${id}`);
+    }
+  }
 }

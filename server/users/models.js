@@ -39,8 +39,8 @@ var userSchema = new mongoose.Schema({
 var meetingSchema = new mongoose.Schema({
         mentor: userSchema,
         mentee: userSchema,
-        date: Date,
-        time: String,
+        start: Date,
+        end: Date,
 })
 
 userSchema.plugin(uniqueValidator);

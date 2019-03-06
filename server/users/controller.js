@@ -66,9 +66,13 @@ module.exports={
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted))
         .catch(err=>console.log(err) || res.json(err)),
-    meetingsDetails:(req, res) => Meetings
-        .findById(req.params.id)
-        .then(one=>console.log(one) || res.json(one))
+    mentorMeetings:(req, res) => Meetings
+        .find({mentor: req.params.id})
+        .then(meetings=>console.log(meetings) || res.json(meetings))
+        .catch(err=>console.log(err) || res.json(err)),
+    menteeMeetings:(req,res) => Meetings
+        .findById({mentee: req.params.id})
+        .then(meetings=>console.log(meetings) || res.json(meetings))
         .catch(err=>console.log(err) || res.json(err)),
     meetingsUpdate: (req, res) => Meetings
         .findByIdAndUpdate(req.params.id,req.body,{new: true})

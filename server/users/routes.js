@@ -9,7 +9,8 @@ module.exports=function(app){
     .post('/api/users/login', controller.userLogin)
     .get('/api/meetings', controller.meetingsAll)
     .post('/api/meetings', controller.meetingsNew)
-    .get('/api/meetings/:id', controller.meetingsDetails)
+    .get('/api/meetings/mentor/:id', controller.mentorMeetings)
+    .get('/api/meetings/mentee/:id', controller.menteeMeetings)
     .put('/api/meetings/:id', controller.meetingsUpdate)
     .delete('/api/meetings/:id', controller.meetingsRemove)
 }
