@@ -9,8 +9,8 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
 var meetingSchema = new mongoose.Schema({
         mentor: userSchema,
         mentee: userSchema,
-        date: Date,
-        time: String,
+        start: Date,
+        end: String,
 }, {timestamps:true})
 
 module.exports={
