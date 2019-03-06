@@ -14,6 +14,10 @@ export class HttpService {
     return this._http.post('/api/users/login', user);
   }
 // -------------------users------------------------------
+  addUser(newUser) {
+    console.log("http.service addUser", newUser);
+    return this._http.post('/api/users', newUser);
+  }
   userUpdate(id, userUpdate) {
     console.log("http.service userupdate", userUpdate);
     return this._http.put('/api/users/' + id, userUpdate);
@@ -30,4 +34,10 @@ export class HttpService {
       return this._http.get(`/api/meetings/mentee/${id}`);
     }
   }
+  deleteUser(id) {
+    return this._http.delete('/api/users/' + id);
+  }
+
+//------------------donations--------------------------
+
 }

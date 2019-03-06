@@ -30,22 +30,16 @@ var userSchema = new mongoose.Schema({
 
         picture:{type: String},
 
+        webinars: [String],  //list of webinar ids
+
         certification:{type:String},
 
-        mentor:{type: Boolean}
+        isMentor:{type: Boolean}
 
 }, {timestamps:true})
-
-var meetingSchema = new mongoose.Schema({
-        mentor: userSchema,
-        mentee: userSchema,
-        start: Date,
-        end: Date,
-})
 
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(require('mongoose-bcrypt'));
 module.exports={
-        user: mongoose.model('user', userSchema),
-        meeting: mongoose.model('meeting', meetingSchema)
+        user: mongoose.model('user', userSchema)
 };
