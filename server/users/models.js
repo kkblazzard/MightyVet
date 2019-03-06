@@ -19,7 +19,7 @@ var userSchema = new mongoose.Schema({
 
         password: {
                 type: String, 
-                required:[true, "Please enter a password name"], 
+                required:[true, "Please enter a password"], 
                 minlength:[3, "password must be 3 characters or longer"],
                 bcrypt: true 
         },

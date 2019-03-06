@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
 var DonationSchema = new mongoose.Schema({
         amount: {type: Number},
         description: {type: String},
-        user: userSchema
+        user: {type: String}
 
 }, {timestamps:true})
 
