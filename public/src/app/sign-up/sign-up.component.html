@@ -1,3 +1,35 @@
-<p>
-  sign-up works!
-</p>
+<div>
+  <form (submit)="register()" class="postForm">
+    <label>First Name:</label> 
+    <input type="text" name="newUser.firstName" [(ngModel)]="newUser.firstName">
+    <br>
+    <br>
+    <label>Last Name:</label> 
+    <input type="text" name="newUser.lastName" [(ngModel)]="newUser.lastName">
+    <br>
+    <br>
+    <label>Email Address:</label> 
+    <input type="text" name="newUser.email" [(ngModel)]="newUser.email">
+    <br>
+    <br>
+    <label>Password:</label> 
+    <input type="text" name="newUser.password" [(ngModel)]="newUser.password">
+    <br>
+    <br>
+    <label>Confirm Password:</label> 
+    <input type="text" name="newUser.confirmPassword" [(ngModel)]="newUser.confirmPassword">
+    <br>
+    <br>
+    <label>Company:</label> 
+    <input type="text" name="newUser.company" [(ngModel)]="newUser.company">
+    <br>
+    <br>
+    <label>Are you registering as a mentor?:</label> 
+    <select type="boolen" name="newUser.mentor" [(ngModel)]="newUser.mentor">
+      <option value=false>No</option>
+      <option value=true>Yes</option>
+    </select>
+  </form>
+
+
+</div>
