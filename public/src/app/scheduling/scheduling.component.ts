@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttpService } from '../http.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CalendarView } from 'angular-calendar';
+import { CalendarView, CalendarEvent } from 'angular-calendar';
 @Component({
   selector: 'app-scheduling',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,13 +12,19 @@ export class SchedulingComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
-  events: any;
+  events: [CalendarEvent];
   constructor(
     private _httpService : HttpService,
     private _route: ActivatedRoute,
     private _router: Router) { }
   ngOnInit() {
-    this.events = this.getEvents(localStorage.getItem('loginId'));
+    this.getEvents(localStorage.getItem('loginId')).subscribe((data)=>{
+      for(var items in data){
+        let event : CalendarEvent;
+        event = JSON.parse(items);;
+        this.events.push(event);
+      }
+    });
     }
   isMentor(id){
     return this._httpService.getUser(id)['mentor'];
