@@ -7,12 +7,10 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
 });
 
 var meetingSchema = new mongoose.Schema({
-        mentor: userSchema,
-        mentee: userSchema,
-        start: Date,
-        end: String,
+        mentor: {type: String},
+        mentee: {type: String},
+        start: {type: Date},
+        duration: {type:String}
 }, {timestamps:true})
 
-module.exports={
-        meeting: mongoose.model('meeting', meetingSchema)
-};
+module.exports=mongoose.model('meeting', meetingSchema);
