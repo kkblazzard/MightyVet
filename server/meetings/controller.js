@@ -12,7 +12,6 @@ module.exports={
         .then(anew=>console.log("created in controller",anew)|| res.json(anew))
         .catch(err=>console.log(err) || res.json(err))
     },
-    
     meetingUpdate: (req, res) => Meetings
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
