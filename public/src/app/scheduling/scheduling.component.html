@@ -10,7 +10,7 @@
         [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false"
       ><</button>
-    <span>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+    <button class="btn btn-success">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</button>
       <button
         class="btn btn-primary"
         mwlCalendarNextView
@@ -26,6 +26,218 @@
   [events]="events"
 >
 </mwl-calendar-month-view>
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <button
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false"
+      ><</button>
+    <button class="btn btn-success">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</button>
+      <button
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false"
+      >></button>
+    </div>
+  </div>
+</div>
+<div class="cal-month-view">
+  <div class="cal-days">
+    <div class="ng-star-inserted">
+      <div class="cal-cell-row">
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">1</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">2</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">3</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">4</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">5</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">6</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">7</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-cell-row">
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">8</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">9</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">10</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">11</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">12</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">13</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">14</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-cell-row">
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">15</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">16</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">17</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">18</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">19</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">20</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">21</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-cell-row">
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">22</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">23</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">24</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">25</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">26</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">27</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">28</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-cell-row">
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">29</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">30</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">31</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">1</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">2</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">3</span>
+          </div>
+        </div>
+        <div class="cal-cell cal-day-cell">
+          <div class="cal-cell-top">
+            <span class="cal-cell-number">4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div *ngFor="let upcoming of upcomings">
   <p>{{upcoming.date}}</p>
 </div>
