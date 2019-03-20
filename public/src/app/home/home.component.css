@@ -1,81 +1,48 @@
-
-.container .title_container {
-    margin: 0px auto;
-    margin-top: 80px;
-    text-align: left;
-    max-width: 913px;
+.rect1{
+    margin-top: 30px;
 }
-#wrapper #splash_section {
-    width: 100%;
-    padding: 0px !important;
+.rect1-left{
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
 }
-.parallax_block {
-    background: transparent;
-    min-height: 850px;
-    width: 100%;
-    z-index: 99;
+.rect1-card img{
+    vertical-align: middle;
+    margin: 0 15%;
 }
-.upper_parallax {
-    background: transparent;
-    min-height: 850px;
-    width: 100%;
+.rect1-card .card-text{
+    display: inline-block;
+    width: 50%;
 }
-#wrapper #our_cause {
-    position: relative;
-    background: #00A1D6;
-    height: 720px;
-    overflow: hidden;
-    background: url(/assets/images/video_splash.jpg);
-    background-size: cover;
+.card-text h5{
+    color: #395371;
+    font-size: 16px;
+    letter-spacing: 0.03em;
+    font-weight: 800;
+}
+.card-text p{
+    font-size: 17px;
+    line-height: 23px;
+}
+.rect1-right{
+    width: 48%;
+    height: 500px;
+    display: inline-block;
+    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('/assets/img/home_page/splash_2.jpg');
     background-repeat: no-repeat;
-}
-#wrapper #mightyvet_highlights_section {
-    padding: 110px 80px 61px;
-    background: #00a1d6;
-}
-#wrapper #our_cause #video-background {
-    position: absolute;
-    right: 0;
-    top: 0;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    /* z-index: -100; */
+    background-position: center center;
     background-size: cover;
-    overflow: hidden;
+    vertical-align: top;
 }
-#mission{
-    background-color:white;
-    
+.rect1-right{
+    padding: 10px;
 }
-.feature_item_tier_1{
-display:inline-block;
-margin:10px;
-vertical-align: top;
+.rect1-right h1{
+    font-weight: normal;
+    color: #395371;
+    font-size: 46px;
 }
-.tier_1{
-
-    
-}
-.feature_item_tier_2{
-    display:inline-block;
-    margin:10px;
-    text-align: center;
-}
-.tier_2{
-    width:60%;
-    
-}
-.feature_item_tier_3{
-    display:inline-block;
-    margin:10px;
-}
-.tier_3{
-    width:40%;
-    
-}
-#footer_section {
-    padding: 100px 80px;
-    background-color: #34314c;
+.rect1-right p{
+    font-size: 23px;
+    line-height: 36px;
 }
