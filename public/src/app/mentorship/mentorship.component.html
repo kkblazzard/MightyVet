@@ -1,9 +1,14 @@
-<div class="mentor">
-  <h1>Mentors</h1>
-  <br>
-  <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to evaluate your career options.</p>
-  <button [routerLink]="['schedule']">SCHEDULE OFFICE HOURS</button>
-</div>
-<div *ngIf="!login.mentor" class="feature">
-  <h1>Featured Mentors</h1>
+<div class="container">
+    <div class="background-image"></div>
+    <div class="mentor">
+        <div>
+            <h1 class="mentor-title">Mighty Mentors</h1>
+        </div>
+        <p class="mentor-info">Rotating office hours will be held online with the deans of veterinary schools and other thought leaders from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to evaluate your career options.</p>
+        <button class="mentor-calendar" [routerLink]="['schedule']">SCHEDULE OFFICE HOURS</button>
+    </div>
+    <!-- <div *ngIf="!login.mentor" class="feature"> -->
+    <div class="mentor-featured">
+        <h1 class="mentor-featured__title">Featured Mentors</h1>
+    </div>
 </div>
