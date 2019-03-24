@@ -21,7 +21,16 @@
 }
 .rect1-card img{
     vertical-align: middle;
-    margin: 0 15%;
+}
+#resources{
+    margin-left: 10px;
+    margin-right: 56px;
+}
+#courses{
+    margin-right: 61px;
+}
+#mentorship{
+    margin-right: 55px;
 }
 .rect1-card .card-text{
     display: inline-block;

@@ -9,6 +9,9 @@ require('./server/accreditations/routes')(app);
 require('./server/users/routes')(app);
 require('./server/meetings/routes')(app);
 require('./server/webinars/routes')(app);
+require('./server/mentees/routes')(app);
+require('./server/mentors/routes')(app);
+require('./server/mentorsearches/routes')(app);
 
 app.all("*", (req,res,next) => {
     res.sendFile(path.resolve("./public/dist/public/index.html"))

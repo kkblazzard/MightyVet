@@ -1,3 +1,11 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
+
+@media only screen and (max-width:991px){
+    .container{
+        max-width: 900px;
+        margin: 0;
+        padding: 10px 30px;
+    }
+}
