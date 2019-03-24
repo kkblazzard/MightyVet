@@ -8,7 +8,6 @@ export class HttpService {
   constructor(private _http: HttpClient) { }
 
 // -------------------log&reg-----------------------
-
   confirmLogin(user) {
     console.log("http.service confirmLogin", user);
     return this._http.post('/api/users/login', user);
@@ -51,23 +50,6 @@ export class HttpService {
   deleteMeeting(id) {
     return this._http.delete('/api/meetings/' + id);
   }
-  
-// ---------------donations--------------------
-  addDonation(newDonation) {
-    console.log("http.service addDonation", newDonation);
-    return this._http.post('/api/donations', newDonation);
-  }
-  // donationUpdate(id, donationUpdate) {
-  //   console.log("http.service donationupdate", donationUpdate);
-  //   return this._http.put('/api/donations/' + id, donationUpdate);
-  // }
-  getDonation(id) {
-    console.log("http.service getting donation", id);
-    return this._http.get(`/api/donations/${id}`);
-  }
-  // deleteDonation(id) {
-  //   return this._http.delete('/api/donations/' + id);
-  // }
 
 // ---------------webinars--------------------
 

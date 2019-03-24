@@ -5,9 +5,9 @@ const path = require('path');
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public/dist/public/')));
 
+require('./server/accreditations/routes')(app);
 require('./server/users/routes')(app);
 require('./server/meetings/routes')(app);
-require('./server/donations/routes')(app);
 require('./server/webinars/routes')(app);
 
 app.all("*", (req,res,next) => {

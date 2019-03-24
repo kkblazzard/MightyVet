@@ -1,6 +1,19 @@
 .rect1{
     margin-top: 30px;
 }
+.phone_btn{
+    background: #95D9C3;
+    color: #395371;
+    display: block;
+    margin-top: 10px;
+    margin-left: 60%;
+    width: 370px;
+    border-radius: 5px;
+}
+.phone_btn:hover{
+    background-color: #395371;
+    color: white;
+}
 .rect1-left{
     display: inline-block;
     width: 48%;

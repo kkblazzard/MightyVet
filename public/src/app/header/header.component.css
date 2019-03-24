@@ -7,6 +7,7 @@
 .logo{
     height: 100px;
     margin-right: 15%;
+    cursor: pointer;
 }
 .dog{
     margin-left: 5px;
