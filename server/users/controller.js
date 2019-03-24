@@ -1,5 +1,4 @@
-const Models=require('./models');
-const Users = Models.user;
+const Users=require('./models');
 
 module.exports={
     userAll: (req, res)=>Users

@@ -1,29 +1,29 @@
-const Webinars=require('./models');
+const Accreditations=require('./models');
 
 module.exports={
-    webinarAll: (req, res)=>Webinars
+    accreditationAll: (req, res)=>Accreditations
         .find().then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
 
-    webinarNew: (req, res) => {
+    accreditationNew: (req, res) => {
         console.log("entered new controller", req.body);
-        Webinars
+        Accreditations
         .create(req.body)
         .then(anew=>console.log("created in controller",anew)|| res.json(anew))
         .catch(err=>console.log(err) || res.json(err))
     },
 
-    webinarRemove: (req, res) => Webinars
+    accreditationRemove: (req, res) => Accreditations
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted))
         .catch(err=>console.log(err) || res.json(err)),
 
-    webinarDetails:(req, res) => Webinars
+    accreditationDetails:(req, res) => Accreditations
         .findById(req.params.id)
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
 
-    webinarUpdate: (req, res) => Webinars
+    accreditationUpdate: (req, res) => Accreditations
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err))

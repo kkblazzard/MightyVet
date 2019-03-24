@@ -7,8 +7,9 @@ import { MentorshipComponent } from './mentorship/mentorship.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { DonateComponent } from './donate/donate.component';
-import { SchedulingComponent } from './scheduling/scheduling.component'
+import { SupportComponent } from './support/support.component';
+import { SchedulingComponent } from './scheduling/scheduling.component';
+import { BlogComponent } from './blog/blog.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user/details', component: UserProfileComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'mentorship', component: MentorshipComponent},
   {path: 'mentorship/schedule', component: SchedulingComponent},
   {path: 'resources', component: ResourcesComponent},
-  {path: 'donate', component: DonateComponent},
+  {path: 'support', component: SupportComponent},
+  {path: "blog", component: BlogComponent},
   {path:'**', redirectTo:'home'},
 ];
 

@@ -8,14 +8,23 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
 });
 
 var userSchema = new mongoose.Schema({
-        username: {
-                type: String, 
-                required:[true, "Please enter a User name"], 
-                minlength:[3, "User Name must be 3 characters or longer"], 
-                unique: [true, "That name is already used, please try another name"]
+        firstName: {
+                type: String,
+                required: [true, "Please enter a first name."],
+                minlength: [2, "First name must be 2 characters or longer."]
+        },
+        
+        lastName: {
+                type: String,
+                required: [true, "Please enter a last name."],
+                minlength: [2, "Last name must be 2 characters or longer."]
         },
 
-        email: {type: String},
+        email: {
+                type: String,
+                required: [true, "Please enter an email."],
+                unique: [true, "This email address is already in use."]
+        },
 
         password: {
                 type: String, 
@@ -24,22 +33,20 @@ var userSchema = new mongoose.Schema({
                 bcrypt: true 
         },
 
+        title: {type: String}, //job titles
+
         location: {type: String},
 
         description: {type: String},
 
         picture:{type: String},
 
-        webinars: [String],  //list of webinar ids
+        accreditations: {type:[String]},  //list of accreditation ids
 
-        certification:{type:String},
-
-        isMentor:{type: Boolean}
+        mentor_id: {type:String}
 
 }, {timestamps:true})
 
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(require('mongoose-bcrypt'));
-module.exports={
-        user: mongoose.model('user', userSchema)
-};
+module.exports=mongoose.model('user', userSchema);
