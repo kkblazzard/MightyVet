@@ -12,7 +12,7 @@ export class SchedulingComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
-  events: [CalendarEvent] = [
+  events: any = [
     {
       start: new Date(),
       end: new Date(),
