@@ -19,6 +19,8 @@ import { SupportComponent } from './support/support.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { HeaderComponent } from './header/header.component';
 import { BlogComponent } from './blog/blog.component';
+import { LoginComponent } from './login/login.component';
+import { AboutComponent } from './about/about.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +35,8 @@ import { BlogComponent } from './blog/blog.component';
     SchedulingComponent,
     HeaderComponent,
     BlogComponent,
+    LoginComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,12 +4,12 @@
   </div>
   <div>
     <div class="login offset-8" *ngIf="!loggedin">
-      <a id="login" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" (click)="login()">LOG IN</a>
-      <a id="signup" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" (click)="signup()">SIGN UP</a>
+      <a id="login" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/login']">LOG IN</a>
+      <a id="signup" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/signup']">SIGN UP</a>
       <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png">
     </div>
     <div class="profile offset-8" *ngIf="loggedin">
-      <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/profile']">
+      <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
     </div>
     <button class="navbar-toggler offset-8" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
       aria-expanded="false" aria-label="Toggle navigation">
