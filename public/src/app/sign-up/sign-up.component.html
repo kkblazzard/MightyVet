@@ -1,24 +1,50 @@
 <div>
   <form (submit)="register()" class="postForm">
+      <p *ngIf="createNewErrors.errors.firstName" style="color:red">
+          {{createNewErrors.errors.firstName.message}}
+        </p>
+      <br>
     <label>First Name:</label> 
     <input type="text" name="newUser.firstName" [(ngModel)]="newUser.firstName">
     <br>
+    <p *ngIf="createNewErrors.errors.lastName" style="color:red">
+        {{createNewErrors.errors.lastName.message}}
+      </p>
     <br>
     <label>Last Name:</label> 
     <input type="text" name="newUser.lastName" [(ngModel)]="newUser.lastName">
     <br>
+    <p *ngIf="createNewErrors.errors.email" style="color:red">
+        {{createNewErrors.errors.email.message}}
+      </p>
     <br>
     <label>Email Address:</label> 
     <input type="text" name="newUser.email" [(ngModel)]="newUser.email">
     <br>
+    <p *ngIf="createNewErrors.errors.username" style="color:red">
+        {{createNewErrors.errors.username.message}}
+      </p>
+    <br>
+    <label>Username:</label> 
+    <input type="text" name="newUser.username" [(ngModel)]="newUser.username">
+    <br>
+    <p *ngIf="createNewErrors.errors.password" style="color:red">
+        {{createNewErrors.errors.password.message}}
+      </p>
     <br>
     <label>Password:</label> 
     <input type="text" name="newUser.password" [(ngModel)]="newUser.password">
     <br>
+    <p *ngIf="createNewErrors.errors.confirmPassword" style="color:red">
+        {{createNewErrors.errors.confirmPassword.message}}
+      </p>
     <br>
     <label>Confirm Password:</label> 
     <input type="text" name="newUser.confirmPassword" [(ngModel)]="newUser.confirmPassword">
     <br>
+    <p *ngIf="createNewErrors.errors.company" style="color:red">
+        {{createNewErrors.errors.company.message}}
+      </p>
     <br>
     <label>Company:</label> 
     <input type="text" name="newUser.company" [(ngModel)]="newUser.company">
@@ -29,6 +55,7 @@
       <option value=false>No</option>
       <option value=true>Yes</option>
     </select>
+    <input type="submit" value="Register">
   </form>
 
 
