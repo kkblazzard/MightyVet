@@ -15,8 +15,8 @@ import { AboutComponent } from './about/about.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
-  {path: 'signup', redirectTo: 'user'},
-  {path: 'login', redirectTo: 'user'},
+  {path: 'signup', component: SignUpComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/details', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
