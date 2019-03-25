@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   private _route: ActivatedRoute,
   private _router: Router
   ) { }
-
   ngOnInit() {
   }
 

@@ -1,5 +1,4 @@
-const Models=require('./models');
-const Webinars = Models.webinar;
+const Webinars=require('./models');
 
 module.exports={
     webinarAll: (req, res)=>Webinars

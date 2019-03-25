@@ -10,7 +10,7 @@ var meetingSchema = new mongoose.Schema({
         mentor: {type: String},
         mentee: {type: String},
         start: {type: Date},
-        duration: {type:String}
+        end: {type:Date}
 }, {timestamps:true})
 
 module.exports=mongoose.model('meeting', meetingSchema);
