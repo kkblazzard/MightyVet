@@ -15,8 +15,8 @@ import { AboutComponent } from './about/about.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
-  {path: 'signup', component: SignUpComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignUpComponent}, //do not change (to redirect to user) until login creation complete
+  {path: 'login', component: LoginComponent}, //do not change (to redirect to user) until login creation complete
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/details', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
