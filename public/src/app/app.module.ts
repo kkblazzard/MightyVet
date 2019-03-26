@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpService } from './http.service';
+import { WebinarsService } from './http_services/webinars.service';
+import { UsersService } from './http_services/users.service';
+import { MeetingsService } from './http_services/meetings.service';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,7 +53,7 @@ import { FooterComponent } from './footer/footer.component';
       useFactory: adapterFactory
     })
   ],
-  providers: [HttpService],
+  providers: [WebinarsService,UsersService,MeetingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { HttpService } from '../http.service';
+import { MeetingsService } from '../http_services/meetings.service';
+import { UsersService } from '../http_services/users.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CalendarView, CalendarEvent } from 'angular-calendar';
 @Component({
@@ -21,7 +22,8 @@ export class SchedulingComponent implements OnInit {
     }
   ]
   constructor(
-    private _httpService : HttpService,
+    private _MeetingsService : MeetingsService,
+    private _UsersService : UsersService,
     private _route: ActivatedRoute,
     private _router: Router) { }
   ngOnInit() {
@@ -35,9 +37,9 @@ export class SchedulingComponent implements OnInit {
     });
     }
   isMentor(id){
-    this._httpService.getUser(id).subscribe(data=>{return data['mentor']})
+    this._UsersService.getUser(id).subscribe(data=>{return data['mentor']})
   }
   getEvents(id){
-    return this._httpService.getMeetings(id, this.isMentor(id));
+    return this._MeetingsService.getMeetings(id, this.isMentor(id));
   }
 }

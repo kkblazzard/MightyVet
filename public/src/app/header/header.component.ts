@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
+import { UsersService } from '../http_services/users.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { BootstrapOptions } from '@angular/core/src/application_ref';
 @Component({
@@ -9,7 +9,7 @@ import { BootstrapOptions } from '@angular/core/src/application_ref';
 })
 export class HeaderComponent implements OnInit {
   loggedin: boolean = false;
-  constructor(private _httpService: HttpService,
+  constructor(private _UsersService: UsersService,
     private _route: ActivatedRoute,
     private _router: Router) { }
 
