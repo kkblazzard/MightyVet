@@ -7,8 +7,8 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-
   constructor(
+
     private _route: ActivatedRoute,
     private _router: Router) { }
 

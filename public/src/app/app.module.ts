@@ -23,6 +23,7 @@ import { HeaderComponent } from './header/header.component';
 import { BlogComponent } from './blog/blog.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { AboutComponent } from './about/about.component';
     BlogComponent,
     LoginComponent,
     AboutComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
