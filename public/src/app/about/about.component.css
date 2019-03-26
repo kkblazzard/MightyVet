@@ -1,0 +1,19 @@
+.mightymission .info{
+    vertical-align: top;
+    display: inline-block;
+    width: 45%;
+}
+.mightymission .video{
+    vertical-align: top;
+    display: inline-block;
+    width: 45%;
+}
+.card img{
+    width: 15%;
+    vertical-align: top;
+}
+.card .info{
+    vertical-align: top;
+    display: inline-block;
+    width: 60%;
+}
