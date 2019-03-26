@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
+import { UsersService } from '../http_services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private _httpService: HttpService,
+  constructor(private _usersService: UsersService,
     private _router: Router) { }
   newUser:{};
   createNewErrors:any;
@@ -19,9 +19,13 @@ export class SignUpComponent implements OnInit {
   registration=false;
   login=false;
   ngOnInit() {
+    this.newUser={
+      firstName:"",
+      LastName:"",
+    }
   }
 register(){
-  let observable = this._httpService.addUser(this.newUser);
+  let observable = this._usersService.addUser(this.newUser);
     observable.subscribe(data => {
       if (data['errors']) {
         console.log(data);
@@ -32,7 +36,7 @@ register(){
         localStorage.setItem('loginUserID', data['_id']);
         console.log(localStorage.getItem('loginUserID'));
         this.registration=false;
-        this._router.navigate(['user/details']);
+        this._router.navigate(['user']);
       }
     });
     
