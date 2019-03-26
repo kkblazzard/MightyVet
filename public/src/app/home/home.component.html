@@ -1,29 +1,30 @@
-  <div class="rect1">
-    <div class="rect1-left">
-      <div class="rect1-card">
-        <img alt="courses" src="assets/img/home_page/courses.png">
-        <div class="card-text">
-          <h5>FREE CE COURSES</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
-        </div>
-      </div>
-      <div class="rect1-card">
-        <img alt="mentorship" src="assets/img/home_page/hands.png">
-        <div class="card-text">
-          <h5>MENTORSHIP FROM INDUSTRY EXPERTS</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
-        </div>
-      </div>
-      <div class="rect1-card">
-        <img alt="resources" src="assets/img/home_page/resources.png">
-        <div class="card-text">
-          <h5>ONLINE RESOURCES</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
-        </div>
+<div class="rect1">
+  <div class="rect1-left">
+    <div class="rect1-card">
+      <img id="courses" alt="courses" [routerLink]="['/courses']" src="assets/img/home_page/courses.png">
+      <div class="card-text">
+        <h5>FREE CE COURSES</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
       </div>
     </div>
-    <div class="rect1-right">
-      <h1>Free Support for the Veterinary Community</h1>
-      <p>MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
+    <div class="rect1-card">
+      <img id="mentorship" alt="mentorship" [routerLink]="['/mentorship']" src="assets/img/home_page/hands.png">
+      <div class="card-text">
+        <h5>MENTORSHIP FROM INDUSTRY EXPERTS</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
+      </div>
+    </div>
+    <div class="rect1-card">
+      <img id="resources" alt="resources" [routerLink]="['/resources']" src="assets/img/home_page/resources.png">
+      <div class="card-text">
+        <h5>ONLINE RESOURCES</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
+      </div>
     </div>
   </div>
+  <div class="rect1-right">
+    <h1>Free Support for the Veterinary Community</h1>
+    <p>MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
+  </div>
+  <button class="btn phone_btn">ARE YOU IN CRISIS?</button>
+</div>

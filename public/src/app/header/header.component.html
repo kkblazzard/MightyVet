@@ -1,28 +1,30 @@
-<nav class="navbar navbar-expand-sm">
-  <img class="logo" src="assets/img/nav-bar/logo.png" alt="MightyVet logo" [routerLink]="['']">
+<nav class="navbar navbar-light navbar-expand-lg">
+  <div class="logo-ctn col-lg-4">
+  <img class="logo" src="assets/img/nav-bar/logo.png" alt="MightyVet Logo" [routerLink]="['']">
+  </div>
   <div>
-    <div class="login" *ngIf="!loggedin">
-      <a id="login" (click)="login()">LOG IN</a>
-      <a id="signup" (click)="signup()">SIGN UP</a>
+    <div class="login offset-8" *ngIf="!loggedin">
+      <a id="login" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/login']">LOG IN</a>
+      <a id="signup" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/signup']">SIGN UP</a>
       <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png">
     </div>
-    <div class="profile" *ngIf="loggedin">
-      <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/profile']">
+    <div class="profile offset-8" *ngIf="loggedin">
+      <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+    <button class="navbar-toggler offset-8" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link active" [routerLink]="['/courses']">Online Learning</a>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/courses']">Online Learning</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" [routerLink]="['/mentorship']">Mentorship</a>
+          <a class="nav-link" [routerLink]="['/mentorship']">Mentorship</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" [routerLink]="['/resources']">Resources</a>
+          <a class="nav-link" [routerLink]="['/resources']">Resources</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/blog']">Blog</a>
