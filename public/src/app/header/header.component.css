@@ -4,6 +4,9 @@
 .navbar-nav{
     box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
 }
+.collapse{
+    margin-top: 10px;
+}
 .logo{
     height: inherit;
     cursor: pointer;
@@ -65,18 +68,27 @@
 .navbar .nav-item:hover a{
     color: white;
 }
+@media only screen and (min-width: 992px) {
+    .navbar{
+        position: relative;
+    }
+}
 @media only screen and (max-width: 991px) {
     .logo{
         margin-right: 10px;
+        height: 70px;
     }
     .logo-ctn{
-        width: 0;
+        width: 100px;
     }
     .log-ctn{
         padding: 0;
     }
     .login{
         margin-left: 0;
+    }
+    .dog{
+        margin-right: 10px;
     }
 }
 @media only screen and (max-width: 380px) {
