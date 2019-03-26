@@ -1,4 +1,113 @@
 <div class="container">
+    <main class="main">
+        <div class="main-left">
+            <div class="main-left__top " >
+                <img class="main-image" src="../../assets/mentor-images/main.png" alt="main images">
+            </div>
+            
+            <div class="main-left__bottom  ">
+                <h4>The benefits of mentoring</h4>
+                <div class="list">
+                    <ul>
+                        <li>Are you willing to connect with people?</li>
+                        <li>Help with emotional health?</li>
+                        <li>Give advice on financial or business matters?</li>
+                        <li>Lorem Epsom</li>
+                        <li>filler list</li>
+                    </ul>
+                </div>
+                <button class="become_mentor_button" >Apply to Become a Mentor</button>
+            </div>
+        </div>
+        <div class="main-right">
+            <div class="main-right__top">
+                <div class="main-right__top-header">
+                    <h2>MightyVet is looking for some mighty mentors.</h2>
+                </div>
+                <div class="main-right__top-text">
+                    <p>
+                        Rotating office hours will be held online with the deans of veterinary schools 
+                        and other thought leaders from the veterinary industry. Ask questions of the 
+                        veterinary community for a real-time feedback loop to evaluate your career 
+                        options. You can schedule office hours with one of our featured members.
+                    </p>
+                </div>
+                <div class="main-right__top-button">
+                    <button>Schedule with a Mentor</button>
+                </div>
+            </div>
+            
+            <div class="main_right__bottom ">
+                <h4>The benefits of having a mentor</h4>
+                <div class="list">
+                    <ul>
+                        <li>Are you willing to connect with people?</li>
+                        <li>Help with emotional health?</li>
+                        <li>Give advice on financial or business matters?</li>
+                        <li>Lorem Epsom</li>
+                        <li>filler list</li>
+                    </ul>
+                </div>
+                <button class="find_mentor__button" >Find a Mentor</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="search">
+        <div class="bar">
+            <button class="search__button">SEARCH MENTORS</button>
+            <input class="search_bar__input" type="text">
+            <button class="magnifying_glass__button" > <img id="magnifying_glass" src="../../assets/mentor-images/magnifying_glass.jpg" alt=""></button>
+        </div>
+        <div class="checkboxes">
+            <p>
+                Refine results by:
+            </p>
+            <input type="checkbox" name="name" value="name">Name
+            <input type="checkbox" name="speciality" value="speciality">Specialty
+            <input type="checkbox" name="mental_health" value="mental_health">Mental Health
+            <input type="checkbox" name="career_advice" value="career_advice">Career Advice
+        </div>
+    </div>
+    <footer class="footer">
+        <h1 class="footer__header">MightVet Mentors</h1>
+        <div class="footer__mentors">
+            <div class="mentor" *ngFor="let mentor of featuredMentors">
+                <div>
+                    <img src= "../../assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
+                </div>
+                <div class="mentor_header">
+                    <h5>{{mentor.title}}</h5>
+                    <h6>{{mentor.position}}</h6>
+                </div>
+                <p>{{mentor.description}}</p>
+            </div>
+        </div>
+        <button class="see_all">
+            <h1 class="see_all_h1">See All</h1>
+            <!-- ***************************************************** -->
+            <!-- THIS WILL LATER DISPLAY A TABLE OF ALL USERS???? -->
+            <!-- ***************************************************** -->
+        </button>
+    </footer>
+    <!-- <div>
+        <ul *ngOf="let test in tests">
+            <li>{{tests.test.name}}</li>
+        </ul>
+    </div> -->
+
+</div>
+
+
+
+
+
+
+<!-- 
+
+    Old mentorship page
+
+    <div class="container">
     <div class="background-image"></div>
     <div class="mentor">
         <div>
@@ -7,8 +116,8 @@
         <p class="mentor-info">Rotating office hours will be held online with the deans of veterinary schools and other thought leaders from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to evaluate your career options.</p>
         <button class="mentor-calendar" [routerLink]="['schedule']">SCHEDULE OFFICE HOURS</button>
     </div>
-    <!-- <div *ngIf="!login.mentor" class="feature"> -->
+     <div *ngIf="!login.mentor" class="feature">
     <div class="mentor-featured">
         <h1 class="mentor-featured__title">Featured Mentors</h1>
     </div>
-</div>
+</div> -->
