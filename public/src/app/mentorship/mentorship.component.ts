@@ -145,7 +145,7 @@ export class MentorshipComponent implements OnInit {
 
 
     constructor(
-        private _UsersService: UsersService,,
+        private _UsersService: UsersService,
         private _route: ActivatedRoute,
         private _router: Router
     ) { }
