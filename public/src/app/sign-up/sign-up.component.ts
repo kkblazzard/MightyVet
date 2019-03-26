@@ -11,7 +11,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private _httpService: HttpService,
     private _router: Router) { }
-  newUser:{};
+  newUser:any = {};
   createNewErrors:any;
   loginInput = {};
   loginError :any;

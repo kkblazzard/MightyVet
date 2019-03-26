@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    this.isLoggedIn()
+    this.isLoggedIn();
   }
   isLoggedIn(){
     if (localStorage.getItem('user_id')){

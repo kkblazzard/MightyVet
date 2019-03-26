@@ -8,8 +8,8 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
 var SpeakerSchema = new mongoose.Schema({
         firstName: String, 
         lastName: String,
-        image: String,
-        webinars: [String], 
+        image: String, 
+        webinars: [String], //array of webinar ids
 }, {timestamps:true})
 
 module.exports=mongoose.model('speaker', SpeakerSchema);
