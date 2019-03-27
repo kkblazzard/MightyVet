@@ -11,6 +11,7 @@
     <iframe width="550px" height="250px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
+<h2>Board Members</h2>
 <div class="block">
   <img src="/assets/img/about_page/Weinrauch.jpg" alt="Dr. Steve Weinrauch">
   <div class="info">
@@ -40,6 +41,14 @@
   </div>
 </div>
 <h1>Meet our Partners</h1>
-<div *ngFor="let partner of partners">
-  <a [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+<div class="partners" *ngFor="let tiers of partners">
+  <div class="tier1" *ngIf="tiers.tier == 1">
+      <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+  </div>
+  <div class="tier2" *ngIf="tiers.tier == 2">
+      <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+  </div>
+  <div class="tier3" *ngIf="tiers.tier == 3">
+      <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+  </div>
 </div>

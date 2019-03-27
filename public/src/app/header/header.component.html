@@ -10,7 +10,7 @@
       </button>
       <a id="login" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/login']">LOG IN</a>
       <a id="signup" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/signup']">SIGN UP</a>
-      <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png">
+      <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
     </div>
     <div class="profile offset-8" *ngIf="loggedin">
       <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
