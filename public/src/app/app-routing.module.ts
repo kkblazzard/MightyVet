@@ -12,6 +12,7 @@ import { SupportComponent } from './support/support.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { BlogComponent } from './blog/blog.component';
 import { AboutComponent } from './about/about.component';
+import { AdminComponent } from './admin/admin.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'support', component: SupportComponent},
   {path: "blog", component: BlogComponent},
   {path: "about", component: AboutComponent},
+  {path: "admin", component: AdminComponent},
   {path:'**', redirectTo:'home'},
 ];
 

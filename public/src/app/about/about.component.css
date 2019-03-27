@@ -8,6 +8,18 @@
     vertical-align: top;
     display: inline-block;
 }
+.partners{
+    text-align: center;
+}
+.tier1 img{
+    height: 90px;
+}
+.tier2 img{
+    height: 60px;
+}
+.tier3 img{
+    height: 30px;
+}
 .sophia{
     font-weight: 800;
     font-size: 15px;

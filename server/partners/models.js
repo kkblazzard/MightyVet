@@ -11,4 +11,10 @@ var PartnerSchema = new mongoose.Schema({
         link: String, 
 }, {timestamps:true})
 
-module.exports=mongoose.model('partners', PartnerSchema);
+var PartnersSchema = new mongoose.Schema({
+        tier: Number, 
+        partners: [PartnerSchema]
+}, {timestamps:true})
+
+
+module.exports=mongoose.model('partners', PartnersSchema);
