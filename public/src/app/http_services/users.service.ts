@@ -12,6 +12,10 @@ export class UsersService {
     return this._http.post('/api/users/login', user);
   }
 // -------------------users------------------------------
+  getUsers() {
+    console.log("http.service getting users");
+    return this._http.get('/api/users');
+  }
   addUser(newUser) {
     console.log("http.service addUser", newUser);
     return this._http.post('/api/users', newUser);

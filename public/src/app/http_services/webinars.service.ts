@@ -8,6 +8,10 @@ export class WebinarsService {
   constructor(private _http: HttpClient) { }
   // ---------------webinars--------------------
 
+  getWebinars() {
+    console.log("http.service getting webinars");
+    return this._http.get(`/api/webinars`);
+  }
   addWebinar(newWebinar) {
     console.log("http.service addWebinar", newWebinar);
     return this._http.post('/api/webinars', newWebinar);

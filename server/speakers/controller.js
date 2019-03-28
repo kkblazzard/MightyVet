@@ -12,7 +12,13 @@ module.exports={
         .then(anew=>console.log("created in controller",anew)|| res.json(anew))
         .catch(err=>console.log(err) || res.json(err))
     },
-
+    speakerWebinar: (req, res) => {
+        console.log("entered new controller", req.body);
+        Speakers
+        .findByIdAndUpdate(req.params.id,{$push: {webinars:req.body.webinar_id}})
+        .then(updated => console.log("updated",updated)||res.json(updated))
+        .catch(err=>console.log(err) || res.json(err))
+    },
     speakerRemove: (req, res) => Speakers
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted))
