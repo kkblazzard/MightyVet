@@ -1,129 +1,15 @@
 <nav class="navbar navbar-light">
   <span class="navbar-brand">Admin Page</span>
   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" (click)="viewPartners()">Partners</a>
+    <li class="nav-item" [routerLink]="['/admin', 'partners']">
+      <a class="nav-link">Partners</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="viewWebinars()">Webinars</a>
+    <li class="nav-item" [routerLink]="['/admin', 'webinars']">
+      <a class="nav-link">Webinars</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="viewUsers()">Users</a>
+    <li class="nav-item" [routerLink]="['/admin', 'users']">
+      <a class="nav-link">Users</a>
     </li>
   </ul>
 </nav>
-<div *ngIf="view == 'partners'">
-  <h2>New Partners Form</h2>
-  <form method="post">
-    <label>Partner Name</label>
-    <input name="name" type="text" [(ngModel)]="newPartner.partner.name">
-    <label>Partner Image</label>
-    <input name="img" type="text" [(ngModel)]="newPartner.partner.img">
-    <label>Partner Link</label>
-    <input name="link" type="text" [(ngModel)]="newPartner.partner.link">
-    <label>Tier</label>
-    <select name="tier" [(ngModel)]="newPartner.tier">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
-    <button class="btn btn-outline-success" (click)="addPartner()">New Partner</button>
-  </form>
-  <h2>All Partners</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Tier</th>
-        <th>Partner Name</th>
-        <th>Partner Image</th>
-        <th>Partner Link</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let tier of partners">
-      <tr *ngFor="let partner of tier.partners">
-        <td>{{tier.tier}}</td>
-        <td>{{partner.name}}</td>
-        <td>{{partner.img}}</td>
-        <td>{{partner.link}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="view == 'webinars'">
-  <h2>New Webinars Form</h2>
-  <form method="post">
-    <label>Title</label>
-    <input name="title" [(ngModel)]="newWebinar.title">
-    <label>Description</label>
-    <textarea name="description" [(ngModel)]="newWebinar.description"></textarea>
-    <label>Speaker</label>
-    <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker">
-      <option></option>
-      <option *ngFor="let speaker of speakers" [value]="speaker">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
-      <option value="new">New Speaker</option>
-    </select>
-    <form class="speaker_form" *ngIf="newWebinar.speaker == 'new'">
-      <label>Title</label>
-      <select name="title" [(ngModel)]="newSpeaker.title">
-        <option>Dr.</option>
-        <option>Mr.</option>
-        <option>Ms.</option>
-      </select>
-      <label>First Name</label>
-      <input name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
-      <label>Last Name</label>
-      <input name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
-      <label>Description</label>
-      <textarea name="description" [(ngModel)]="newSpeaker.description"></textarea>
-      <label>Speaker Image</label>
-      <input name="img" type="text" [(ngModel)]="newSpeaker.img">
-      <button class="btn btn-outline-secondary" (click)="addSpeaker()">New Speaker</button>
-    </form>
-    <label>Video Link</label>
-    <input name="video_link" [(ngModel)]="newWebinar.video_link">
-    <button class="btn btn-outline-success" (click)="addWebinar()">New Webinar</button>
-  </form>
-  <h2>All Webinars</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Speaker</th>
-        <th>Video Link</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let webinar of webinars">
-        <td>{{webinar.title}}</td>
-        <td>{{webinar.description}}</td>
-        <td>{{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}</td>
-        <td>{{webinar.video_link}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="view == 'users'">
-  <h2>All Users</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Title and Org</th>
-        <th>State</th>
-        <th>Mentor</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{user.firstName}} {{user.lastName}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.title}} at {{user.org}}</td>
-        <td>{{partner.state}}</td>
-        <td *ngIf="partner.mentor">Yes</td>
-        <td *ngIf="!partner.mentor">No</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<router-outlet></router-outlet>

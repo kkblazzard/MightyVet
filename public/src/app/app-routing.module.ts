@@ -13,6 +13,9 @@ import { SchedulingComponent } from './scheduling/scheduling.component';
 import { BlogComponent } from './blog/blog.component';
 import { AboutComponent } from './about/about.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
@@ -26,7 +29,11 @@ const routes: Routes = [
   {path: 'support', component: SupportComponent},
   {path: "blog", component: BlogComponent},
   {path: "about", component: AboutComponent},
-  {path: "admin", component: AdminComponent},
+  {path: "admin", component: AdminComponent, children:[
+    {path: "webinars", component: AdminWebinarsComponent},
+    {path: "users", component: AdminUsersComponent},
+    {path: "partners", component: AdminPartnersComponent}
+  ]},
   {path:'**', redirectTo:'home'},
 ];
 

@@ -25,6 +25,9 @@ import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
+import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,9 @@ import { AdminComponent } from './admin/admin.component';
     AboutComponent,
     FooterComponent,
     AdminComponent,
+    AdminPartnersComponent,
+    AdminWebinarsComponent,
+    AdminUsersComponent,
   ],
   imports: [
     BrowserModule,

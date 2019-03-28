@@ -1,0 +1,52 @@
+<h2>New Webinars Form</h2>
+<form method="post">
+  <label>Title</label>
+  <input name="title" [(ngModel)]="newWebinar.title">
+  <label>Description</label>
+  <textarea name="description" [(ngModel)]="newWebinar.description"></textarea>
+  <label>Speaker</label>
+  <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker">
+    <option></option>
+    <option *ngFor="let speaker of speakers" [value]="speaker">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
+    <option value="new">New Speaker</option>
+  </select>
+  <form class="speaker_form" *ngIf="newWebinar.speaker == 'new'">
+    <label>Title</label>
+    <select name="title" [(ngModel)]="newSpeaker.title">
+      <option>Dr.</option>
+      <option>Mr.</option>
+      <option>Ms.</option>
+    </select>
+    <label>First Name</label>
+    <input name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
+    <label>Last Name</label>
+    <input name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
+    <label>Description</label>
+    <textarea name="description" [(ngModel)]="newSpeaker.description"></textarea>
+    <label>Speaker Image</label>
+    <input name="img" type="text" [(ngModel)]="newSpeaker.img">
+    <button class="btn btn-outline-secondary" (click)="addSpeaker()">New Speaker</button>
+  </form>
+  <label>Video Link</label>
+  <input name="video_link" [(ngModel)]="newWebinar.video_link">
+  <button class="btn btn-outline-success" (click)="addWebinar()">New Webinar</button>
+</form>
+<h2>All Webinars</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Speaker</th>
+      <th>Video Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let webinar of webinars">
+      <td>{{webinar.title}}</td>
+      <td>{{webinar.description}}</td>
+      <td>{{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}</td>
+      <td>{{webinar.video_link}}</td>
+    </tr>
+  </tbody>
+</table>
