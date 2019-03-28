@@ -5,5 +5,27 @@ input{
     display: block;
 }
 select{
-    display: block;
+    vertical-align: top;
+}
+.speaker_form{
+    display: inline-block;
+}
+.navbar li{
+    padding: 10px;
+}
+.navbar{
+    margin: 0px;
+    background-color: white;
+}
+.navbar a{
+    color: #395371;
+}
+.navbar .nav-item{
+    font-size: 16px;
+}
+.navbar .nav-item:hover{
+    background-color: #7DA7D9;
+}
+.navbar .nav-item:hover a{
+    color: white;
 }
