@@ -12,6 +12,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class AdminWebinarsComponent implements OnInit {
+  newQuestions: number = 0;
+  newAnswers: number = 0;
   speaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
   stage: number = 1;
   newWebinar: any = {title: "", datetime: new Date(), description: "", speaker: "", video_link: "", quiz: []}
@@ -79,6 +81,13 @@ export class AdminWebinarsComponent implements OnInit {
   public get dateTimeLocal(): string {
     return this.parseDateToStringWithFormat(this.newWebinar.datetime);
   }
+  addMultipleQuestions(){
+    for (let i = 0; i < this.newQuestions; i++){
+      this.newWebinar.quiz.push({question: "", right_answer: "", wrong_answers: Array(this.newAnswers).fill("")});
+    } 
+    this.newQuestions = 0;
+    this.newAnswers = 0;
+  }
   addQuestion(){
     this.newWebinar.quiz.push({question: "", right_answer: "", wrong_answers: [""]})
   }
@@ -86,6 +95,12 @@ export class AdminWebinarsComponent implements OnInit {
     this.newWebinar.quiz[index].wrong_answers.push("");
     console.log(index);
     console.log(this.newWebinar)
+  }
+  deleteQuestion(i){
+    this.newWebinar.quiz.splice(i, 1)
+  }
+  deleteAnswer(i){
+    this.newWebinar.quiz[i].wrong_answers.pop();
   }
   getSpeakers(){
     let obs = this._speakersService.getSpeakers();

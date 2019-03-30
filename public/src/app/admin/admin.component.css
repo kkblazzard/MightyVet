@@ -5,6 +5,9 @@
     margin: 0px;
     background-color: white;
 }
+span{
+    color: #395371;
+}
 .navbar a{
     color: #395371;
 }
@@ -16,4 +19,7 @@
 }
 .navbar .nav-item:hover a{
     color: white;
+}
+.nav-item{
+    box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
 }
