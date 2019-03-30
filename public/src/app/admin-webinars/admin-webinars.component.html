@@ -1,13 +1,16 @@
 <h2>New Webinars Form</h2>
-<form method="post">
+<form *ngIf="stage == 1">
+  <h3>Webinar Info</h3>
   <label>Title</label>
-  <input name="title" [(ngModel)]="newWebinar.title">
+  <input name="title" type="text" [(ngModel)]="newWebinar.title">
+  <label>Date and Time</label>
+  <input name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
   <label>Description</label>
   <textarea name="description" [(ngModel)]="newWebinar.description"></textarea>
   <label>Speaker</label>
   <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker">
     <option></option>
-    <option *ngFor="let speaker of speakers" [value]="speaker">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
+    <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
     <option value="new">New Speaker</option>
   </select>
   <form class="speaker_form" *ngIf="newWebinar.speaker == 'new'">
@@ -29,24 +32,63 @@
   </form>
   <label>Video Link</label>
   <input name="video_link" [(ngModel)]="newWebinar.video_link">
-  <button class="btn btn-outline-success" (click)="addWebinar()">New Webinar</button>
+  <button class="btn btn-outline-success" (click)="stage2()">Quiz</button>
 </form>
+<form *ngIf="stage == 2">
+  <h3>Quiz</h3>
+  <!-- indexes are needed to differenciate the inputs as they are being added, trackBy and keysPipe to make sure the double nested loop don't mess with two-way model binding-->
+  <div class="question" *ngFor="let question of newWebinar.quiz; let i = index">
+    <label>Question {{i+1}}</label>
+    <input [name]="question.question+'_'+i" type="text" [(ngModel)]="question.question">
+    <label>Correct Answer</label>
+    <input [name]="question.right_answer+'_'+i" type="text" [(ngModel)]="question.right_answer">
+    <label>Wrong Answers</label>
+    <input *ngFor="let wrong_answer of question.wrong_answers | keys; let in = index; trackBy:keys" [name]="question.wrong_answers[wrong_answer]+'_'+i+'_'+in" type="text" [(ngModel)]="question.wrong_answers[wrong_answer]"> 
+    <button (click)="addAnswer(i)">Add Wrong Answer</button>
+  </div>
+  <button (click)="addQuestion()">Add Question</button>
+  <button (click)="stage1()">Go Back</button>
+  <button (click)="stage3()">Preview</button>
+</form>
+<div *ngIf="stage == 3">
+  <h4>Title: {{newWebinar.title}}</h4>
+  <p>Date and Time: {{newWebinar.datetime | date:'hh:mm a on MMMM dd y'}}</p>
+  <p>Description: {{newWebinar.description}}</p>
+  <p>Speaker: {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</p>
+  <label>Video:</label>
+  <iframe width="600px" height="400px" [src]="sanitizer.bypassSecurityTrustResourceUrl(newWebinar.video_link)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <h4>Quiz:</h4>
+  <div class="question card" *ngFor="let question of newWebinar.quiz, let i = index">
+    <p>Question {{i+1}}: {{question.question}}</p>
+    <p>Correct Answer: {{question.right_answer}}</p>
+    <span>Wrong Answers:</span>
+    <ul>
+      <li *ngFor="let wrong_answer of question.wrong_answers">{{wrong_answer}}</li>
+    </ul>
+  </div>
+  <button (click)="stage2()">Go Back</button>
+  <button (click)=addWebinar()>Submit New Webinar</button>
+</div>
 <h2>All Webinars</h2>
 <table class="table">
   <thead>
     <tr>
       <th>Title</th>
+      <th>Date and Time</th>
       <th>Description</th>
       <th>Speaker</th>
       <th>Video Link</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let webinar of webinars">
       <td>{{webinar.title}}</td>
+      <td>{{webinar.datetime | date:'hh:mm a on MMMM dd y'}}</td>
       <td>{{webinar.description}}</td>
       <td>{{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}</td>
       <td>{{webinar.video_link}}</td>
+      <td><button>View Quiz</button></td>
     </tr>
   </tbody>
 </table>

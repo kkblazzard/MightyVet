@@ -28,7 +28,6 @@ export class UsersService {
     console.log("http.service getting user", id);
     return this._http.get(`/api/users/${id}`);
   }
-
   deleteUser(id) {
     return this._http.delete('/api/users/' + id);
   }

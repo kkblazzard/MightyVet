@@ -11,16 +11,13 @@ var QuestionSchema = new mongoose.Schema({
         wrong_answers:{type:[String]}
 }, {timestamps:true})
 
-var QuizSchema = new mongoose.Schema({
-        questions: [QuestionSchema],
-}, {timestamps:true})
-
 var WebinarSchema = new mongoose.Schema({
         title: {type: String},
+        datetime: {type: Date},
         description: {type: String},
         speaker: {type: SpeakerSchema},
         video_link: {type: String},
-        // quiz: {type: QuizSchema}
+        quiz: [QuestionSchema]
 }, {timestamps:true})
 
 module.exports=mongoose.model('webinar', WebinarSchema);
