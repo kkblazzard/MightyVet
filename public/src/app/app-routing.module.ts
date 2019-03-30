@@ -16,6 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
+import { AvailabilityComponent } from './availability/availability.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'courses/details', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
   {path: 'mentorship/schedule', component: SchedulingComponent},
+  {path: 'mentorship/schedule/:date', component: AvailabilityComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'support', component: SupportComponent},
   {path: "blog", component: BlogComponent},

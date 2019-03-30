@@ -28,6 +28,16 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AvailabilityComponent } from './availability/availability.component';
+import { Pipe, PipeTransform } from '@angular/core'
+
+@Pipe({ name: 'keys',  pure: false })
+
+export class KeysPipe implements PipeTransform {
+    transform(value: any): any {
+        return Object.keys(value) 
+    }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +59,8 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
     AdminPartnersComponent,
     AdminWebinarsComponent,
     AdminUsersComponent,
+    AvailabilityComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
