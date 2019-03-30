@@ -1,11 +1,14 @@
-<nav class="navbar navbar-light">
-  <span class="navbar-brand">Admin Page</span>
-  <ul class="navbar-nav">
+<nav class="navbar navbar-light navbar-expand-sm">
+  <span class="navbar-brand">Admin Navigation</span>
+  <ul class="navbar-nav collapse navbar-collapse">
     <li class="nav-item" [routerLink]="['/admin', 'partners']">
       <a class="nav-link">Partners</a>
     </li>
     <li class="nav-item" [routerLink]="['/admin', 'webinars']">
       <a class="nav-link">Webinars</a>
+    </li>
+    <li class="nav-item" [routerLink]="['/admin', 'mentors']">
+      <a class="nav-link">Mentors</a>
     </li>
     <li class="nav-item" [routerLink]="['/admin', 'users']">
       <a class="nav-link">Users</a>

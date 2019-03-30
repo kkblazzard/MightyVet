@@ -16,6 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
+import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
 import { AvailabilityComponent } from './availability/availability.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
@@ -34,7 +35,8 @@ const routes: Routes = [
   {path: "admin", component: AdminComponent, children:[
     {path: "webinars", component: AdminWebinarsComponent},
     {path: "users", component: AdminUsersComponent},
-    {path: "partners", component: AdminPartnersComponent}
+    {path: "partners", component: AdminPartnersComponent},
+    {path: "mentors", component: AdminMentorsComponent}
   ]},
   {path:'**', redirectTo:'home'},
 ];
