@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
+var AccreditationSchema = require('../accreditations/schema');
 var UserSchema = new mongoose.Schema({
     firstName: {
             type: String,
@@ -35,7 +36,7 @@ var UserSchema = new mongoose.Schema({
 
     picture: {type: String},
 
-    accreditations: {type:[String]},  //list of accreditation ids
+    accreditations: {type: [AccreditationSchema]},  //list of accreditation ids
 
     mentors: [String], //list of mentor ids
 
