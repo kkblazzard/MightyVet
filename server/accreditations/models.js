@@ -5,10 +5,6 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
         }
 });
 
-var AccreditationSchema = new mongoose.Schema({
-        user_id: String, 
-        webinar_id: String, 
-        credit_received: Boolean
-}, {timestamps:true})
+var AccreditationSchema = require('./schema')
 
 module.exports=mongoose.model('accreditation', AccreditationSchema);
