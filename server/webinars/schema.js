@@ -11,7 +11,7 @@ var WebinarSchema = new mongoose.Schema({
         title: {type: String},
         datetime: {type: Date},
         description: {type: String},
-        users: {type: [user_id]}, //list of user ids
+        users: {type: [String]}, //list of user ids
         speaker: {type: SpeakerSchema},
         video_link: {type: String},
         quiz: [QuestionSchema]
