@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 
-var UserSchema = require('../users/schema')
 var SpeakerSchema = require('../speakers/schema')
 var QuestionSchema = new mongoose.Schema({
         question:{type:String},
@@ -12,7 +11,7 @@ var WebinarSchema = new mongoose.Schema({
         title: {type: String},
         datetime: {type: Date},
         description: {type: String},
-        users: {type: [UserSchema]},
+        users: {type: [user_id]}, //list of user ids
         speaker: {type: SpeakerSchema},
         video_link: {type: String},
         quiz: [QuestionSchema]
