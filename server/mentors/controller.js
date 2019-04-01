@@ -30,7 +30,7 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err)),
     
     approveMentee: (req, res) => Mentors
-    .findByIdAndUpdate({_id: req.params.id, "mentees.id":req.body.mentee_id},{$set:{"mentees.$.approval":true}},{new: true})
+        .findByIdAndUpdate({_id: req.params.id, "mentees.id":req.body.mentee_id},{$set:{"mentees.$.approval":true}},{new: true})
     .then(updated =>console.log("approved",updated)||res.json(updated))
     .catch(err=>console.log(err) || res.json(err)),
 

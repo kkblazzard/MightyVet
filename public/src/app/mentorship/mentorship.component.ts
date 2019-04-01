@@ -1,16 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../http_services/users.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
+
+
 @Component({
-  selector: 'app-mentorship',
-  templateUrl: './mentorship.component.html',
-  styleUrls: ['./mentorship.component.css']
+    selector: 'app-mentorship',
+    templateUrl: './mentorship.component.html',
+    styleUrls: ['./mentorship.component.css']
 })
+
 export class MentorshipComponent implements OnInit {
+    // communicating with mentor checkboxes on and off switches
+    inPersonBox = false;
+    EmailBox = false;
+    byPhoneBox = false;
+    textBox = false;
+
+    // what kind of mentee support needed checkboxes on and off switches
+    mentalHealthBox = false;
+    financialAdviceBox = false;
+    careerAdviceBox = false;
+    technicalBox = false;
+
+
+    // variables to hold modals
+    findMentorModal;
+    blurredModal;
+    becomeMentorModal;
+    scheduleWithMentorModal;
+    calendarModal;
+
 
     login: any;
     // mentors= [];
 
+
+    newMentee:any = {};
+    newMenteeErrors:any;
+
+    // temp fake mentor data
     featuredMentors = [
         {
             "image": "profile_steve.png",
@@ -150,10 +179,132 @@ export class MentorshipComponent implements OnInit {
         private _router: Router
     ) { }
     
+    // gets all information we need when the page loads.
     ngOnInit() {
         // this.mentors = retrieveAllMentors();
         // this.featuredMentors = this.mentors[0-7];
+        this.findMentorModal = document.getElementById("applyForMentorship");
+        this.becomeMentorModal = document.getElementById("becomeAMentor");
+        this.blurredModal = document.getElementById("blurryBackground");
+        this.calendarModal = document.getElementById("calendar");
+        this.newMentee={
+            firstName:"",
+            lastName:"",
+            email:"",
+            zipcode:"",
+            titles:"",
+            roles:"",
+            organizations:""
+          }
     }
+
+    // switches the appropiate checked box on or off for searching later
+    communicateBox(message: string){
+        if (message === "In Person"){
+            this.inPersonBox = !this.inPersonBox;
+        } else if (message === "Email"){
+            this.EmailBox = !this.EmailBox;
+        } else if (message === "By Phone"){
+            this.byPhoneBox = !this.byPhoneBox;
+        } else if (message === "Text"){
+            this.textBox = !this.textBox;
+        }
+    }
+
+    // switches the appropiate checked box on or off for searching later
+    supportBox(message:string){
+        if (message === "Mental Health"){
+            this.mentalHealthBox = !this.mentalHealthBox;
+        } else if (message === "Financial Advice"){
+            this.financialAdviceBox = !this.financialAdviceBox;
+        } else if (message === "Career Advice"){
+            this.careerAdviceBox = !this.careerAdviceBox;
+        } else if (message === "Technical or Surgical"){
+            this.technicalBox = !this.technicalBox;
+        }
+    }
+
+    // action when form is submitted
+    submit(){
+        // this will keep all the form data
+        // 
+        // 
+        // 
+
+
+        // keeps track of boxes checked when submitted
+        console.log( 
+            [
+                {"inPersonBox": this.inPersonBox}, 
+                {"emailBox": this.EmailBox}, 
+                {"byPhoneBox": this.byPhoneBox},
+                {"textBox": this.textBox},
+                {"mentalHealthBox": this.mentalHealthBox},
+                {"financialAdiveBox": this.financialAdviceBox},
+                {"careerAdviceBox": this.careerAdviceBox},
+                {"technicalBox": this.technicalBox}
+            ]
+        );
+        console.log(this.newMentee)
+
+
+        // area that will eventually submit all data based on form input and checkboxes
+        // 
+        // 
+        // 
+
+        // closesModals once complete or will return an error
+
+        this.closeModals()
+        // 
+        // 
+        this.newMentee={
+            firstName:"",
+            lastName:"",
+            email:"",
+            zipcode:"",
+            titles:"",
+            roles:"",
+            organizations:""
+          }
+    }
+
+    // closes find a mentor modal
+    closeModals(){
+        this.findMentorModal.style.display = "none";
+        this.blurredModal.style.display = "none";
+        this.becomeMentorModal.style.display = "none";
+        this.calendarModal.style.display = "none";
+    }
+    
+    // opens blurred modal
+    openMentoredModal(){
+        this.findMentorModal.style.display = "block";
+        this.blurredModal.style.display = "block";
+    }
+    openBecomeAMentor(){
+        this.becomeMentorModal.style.display = "block";
+        this.blurredModal.style.display = "block";
+    }
+    openCalendar(){
+        this.calendarModal.style.display = "block";
+        this.blurredModal.style.display = "block";
+    }
+    closeCalendar(){
+        this.calendarModal.style.display = "none";
+    }
+    
+    // clears form and then opens mentored modal a
+    applyToBeMentored(){
+        // clear from to make sure the form is empty when opened
+        this.openMentoredModal();
+    }
+    applyToBeAMentor(){
+        this.openBecomeAMentor();
+    }
+
+
+
 
 
     /*
@@ -177,10 +328,6 @@ export class MentorshipComponent implements OnInit {
 
     findaMentor(){
         pull up full list of mentors???
-    }
-
-    applyToBeMentor(){
-        pop up modal with form of application to be a mentor
     }
 
     */
