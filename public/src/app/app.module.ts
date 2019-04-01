@@ -4,6 +4,11 @@ import { NgModule } from '@angular/core';
 import { WebinarsService } from './http_services/webinars.service';
 import { UsersService } from './http_services/users.service';
 import { MeetingsService } from './http_services/meetings.service';
+import { AccreditationsService } from './http_services/accreditations.service';
+import { MentorsService } from './http_services/mentors.service';
+import { NewslettersService } from './http_services/newsletters.service';
+import { PartnersService } from './http_services/partners.service';
+import { SpeakersService } from './http_services/speakers.service';
 //modules
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -80,7 +85,7 @@ export class KeysPipe implements PipeTransform {
       useFactory: adapterFactory
     })
   ],
-  providers: [WebinarsService,UsersService,MeetingsService],
+  providers: [WebinarsService,UsersService,MeetingsService,AccreditationsService,MentorsService,NewslettersService,PartnersService,SpeakersService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
