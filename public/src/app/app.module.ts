@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpService } from './http.service';
+import { WebinarsService } from './http_services/webinars.service';
+import { UsersService } from './http_services/users.service';
+import { MeetingsService } from './http_services/meetings.service';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +24,22 @@ import { BlogComponent } from './blog/blog.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
+import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AvailabilityComponent } from './availability/availability.component';
+import { Pipe, PipeTransform } from '@angular/core';
+import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
+import { NotFoundComponent } from './not-found/not-found.component'
+
+@Pipe({ name: 'keys',  pure: false })
+
+export class KeysPipe implements PipeTransform {
+    transform(value: any): any {
+        return Object.keys(value) 
+    }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +57,14 @@ import { FooterComponent } from './footer/footer.component';
     LoginComponent,
     AboutComponent,
     FooterComponent,
+    AdminComponent,
+    AdminPartnersComponent,
+    AdminWebinarsComponent,
+    AdminUsersComponent,
+    AvailabilityComponent,
+    KeysPipe,
+    AdminMentorsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +77,7 @@ import { FooterComponent } from './footer/footer.component';
       useFactory: adapterFactory
     })
   ],
-  providers: [HttpService],
+  providers: [WebinarsService,UsersService,MeetingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

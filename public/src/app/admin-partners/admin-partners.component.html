@@ -1,0 +1,35 @@
+<h2>New Partners Form</h2>
+<form method="post">
+  <label>Partner Name</label>
+  <input name="name" type="text" [(ngModel)]="newPartner.partner.name">
+  <label>Partner Image</label>
+  <input name="img" type="text" [(ngModel)]="newPartner.partner.img">
+  <label>Partner Link</label>
+  <input name="link" type="text" [(ngModel)]="newPartner.partner.link">
+  <label>Tier</label>
+  <select name="tier" [(ngModel)]="newPartner.tier">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+  </select>
+  <button class="btn btn-outline-success" (click)="addPartner()">New Partner</button>
+</form>
+<h2>All Partners</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Tier</th>
+      <th>Partner Name</th>
+      <th>Partner Image</th>
+      <th>Partner Link</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let tier of partners">
+    <tr *ngFor="let partner of tier.partners">
+      <td>{{tier.tier}}</td>
+      <td>{{partner.name}}</td>
+      <td>{{partner.img}}</td>
+      <td>{{partner.link}}</td>
+    </tr>
+  </tbody>
+</table>

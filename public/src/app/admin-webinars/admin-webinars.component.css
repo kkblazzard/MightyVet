@@ -1,0 +1,18 @@
+label{
+    display: block;
+}
+input{
+    display: block;
+}
+select{
+    vertical-align: top;
+}
+.speaker_form{
+    display: inline-block;
+}
+.question{
+    padding: 10px;
+    border: solid green 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

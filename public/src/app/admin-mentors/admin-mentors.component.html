@@ -1,0 +1,34 @@
+<h2>Mentors Waiting for Approval</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tentativeMentor of approvalMentors">
+      <td>{{mentor.user.firstName}} {{mentor.user.lastName}}</td>
+      <td>
+        <button>View Application</button>
+        <button (click)="approveMentor(mentor._id)">Approve</button>
+        <button (click)="declineMentor(mentor._id)">Decline</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2>All Mentors</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mentees</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mentor of mentors">
+      <td>{{mentor.user.firstName}} {{mentor.user.lastName}}</td>
+      <td>{{mentor.mentees.length}}</td>
+    </tr>
+  </tbody>
+</table>

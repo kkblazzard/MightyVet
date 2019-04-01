@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
@@ -9,7 +8,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class BlogComponent implements OnInit {
 
-  constructor(private _httpService: HttpService,
+  constructor(
     private _route: ActivatedRoute,
     private _router: Router) { }
 

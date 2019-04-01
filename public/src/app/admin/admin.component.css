@@ -1,0 +1,25 @@
+.navbar li{
+    padding: 10px;
+}
+.navbar{
+    margin: 0px;
+    background-color: white;
+}
+span{
+    color: #395371;
+}
+.navbar a{
+    color: #395371;
+}
+.navbar .nav-item{
+    font-size: 16px;
+}
+.navbar .nav-item:hover{
+    background-color: #7DA7D9;
+}
+.navbar .nav-item:hover a{
+    color: white;
+}
+.nav-item{
+    box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
+}

@@ -1,19 +1,71 @@
-.mightymission .info{
-    vertical-align: top;
-    display: inline-block;
-    width: 45%;
+.row{
+    padding-left: 40px;
+    padding-right: 40px;
 }
-.mightymission .video{
-    vertical-align: top;
-    display: inline-block;
-    width: 45%;
+.mightymission{
+    margin-top: 10px;
 }
-.card img{
-    width: 15%;
-    vertical-align: top;
+.partners{
+    padding: 15px 40px;
+    text-align: center;
 }
-.card .info{
-    vertical-align: top;
+.tier1 img{
+    height: 90px;
+}
+.tier2 img{
+    height: 60px;
+}
+.tier3 img{
+    height: 30px;
+}
+.header{
+    margin-left: 40px;
+}
+.sophia{
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+}
+p{
+    font-size: 16px;
+    line-height: normal;
+    letter-spacing: 0.03em;
+}
+img{
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 15%
+}
+.info{
+    vertical-align: middle;
     display: inline-block;
-    width: 60%;
+    width: 50%;
+}
+.block{
+    margin-left: 40px;
+    margin-top: 10px;
+}
+h1{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: normal;
+    color: #395371;
+}
+h2{
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 26px;
+    color: #395371;
+}
+h3{
+    font-weight: 800;
+    font-size: 26px;
+    color: #395371;
+}
+h4{
+    color: #395371;
+    font-size: 16px;
+    letter-spacing: 0.03em;
+    font-weight: 800;
 }

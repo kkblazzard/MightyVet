@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from './http.service';
+import { UsersService } from './http_services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { HttpService } from './http.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _httpService: HttpService){}
+  constructor(private _httpService: UsersService){}
   userID: string;
 
   ngOnInit(){
