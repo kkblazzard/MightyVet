@@ -1,17 +1,17 @@
-<h1>A Mighty Mission</h1>
-<div class="mightymission">
-  <div class="info">
-  <h2>Remembering Why We Do This</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-  <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="row mightymission">
+  <h1 class="col-12">A Mighty Mission</h1>
+  <div class="info col-lg">
+    <h2>Remembering Why We Do This</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+    <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
   </div>
-  <div class="video">
+  <div class="video col-lg">
     <h4 class="sophia">Hear Sophia's Story</h4>
-    <iframe width="550px" height="250px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="550px" height="350px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </div>
-<h2>Board Members</h2>
+<h2 class="header">Board Members</h2>
 <div class="block">
   <img src="/assets/img/about_page/Weinrauch.jpg" alt="Dr. Steve Weinrauch">
   <div class="info">
@@ -40,7 +40,7 @@
     <p>Mr. Dollar is currently SVP and President, Global Software and Services at Covetrus – a company formed out of the recent Henry Schein Animal Health and Vets First Choice merger. Prior to the formation of Covetrus, Dollar was President of Global Animal Health Practice Solutions at Henry Schein. A senior technology executive who has driven growth and profitability for multibillion-dollar Fortune 500 public companies, Dollar spent 17 years in technology product management and general management, working in numerous leadership roles at McKesson Corporation. He received his bachelor’s degree from Missouri State University.</p>
   </div>
 </div>
-<h1>Meet our Partners</h1>
+<h1 class="header">Meet our Partners</h1>
 <div class="partners" *ngFor="let tiers of partners">
   <div class="tier1" *ngIf="tiers.tier == 1">
       <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>

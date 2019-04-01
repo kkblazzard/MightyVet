@@ -18,6 +18,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
 import { AvailabilityComponent } from './availability/availability.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
@@ -38,11 +39,11 @@ const routes: Routes = [
     {path: "partners", component: AdminPartnersComponent},
     {path: "mentors", component: AdminMentorsComponent}
   ]},
-  {path:'**', redirectTo:'home'},
+  {path:'**', component: NotFoundComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })], //scrollpositionrestoration scrolls us back to the top everytime a route is activated
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

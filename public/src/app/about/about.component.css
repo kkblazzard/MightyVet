@@ -1,14 +1,12 @@
-.mightymission .info{
-    vertical-align: top;
-    display: inline-block;
-    width: 45%;
+.row{
+    padding-left: 40px;
+    padding-right: 40px;
 }
-.mightymission .video{
-    margin-left: 20px;
-    vertical-align: top;
-    display: inline-block;
+.mightymission{
+    margin-top: 10px;
 }
 .partners{
+    padding: 15px 40px;
     text-align: center;
 }
 .tier1 img{
@@ -20,13 +18,15 @@
 .tier3 img{
     height: 30px;
 }
+.header{
+    margin-left: 40px;
+}
 .sophia{
     font-weight: 800;
     font-size: 15px;
     letter-spacing: 0.03em;
 }
 p{
-    font-weight: 800;
     font-size: 16px;
     line-height: normal;
     letter-spacing: 0.03em;
@@ -34,13 +34,15 @@ p{
 img{
     vertical-align: middle;
     margin-right: 10px;
+    width: 15%
 }
 .info{
-    vertical-align: top;
+    vertical-align: middle;
     display: inline-block;
-    width: 80%;
+    width: 50%;
 }
 .block{
+    margin-left: 40px;
     margin-top: 10px;
 }
 h1{
@@ -51,6 +53,7 @@ h1{
     color: #395371;
 }
 h2{
+    margin-top: 20px;
     font-weight: 600;
     font-size: 26px;
     color: #395371;
