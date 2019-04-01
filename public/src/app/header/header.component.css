@@ -1,8 +1,12 @@
 .navbar{
-    padding: 10px 0;
+    padding: 10px 25px;
 }
-.navbar-nav{
+.navigation{
     box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
+}
+.right-navbar{
+    margin: 0;
+    padding: 0;
 }
 .collapse{
     margin-top: 10px;
@@ -14,9 +18,6 @@
 .dog{
     margin-left: 5px;
     height:35px;
-}
-.login{
-    margin-bottom: 10px;
 }
 .login a{
     padding: 5px;
@@ -68,6 +69,9 @@
 .navbar .nav-item:hover a{
     color: white;
 }
+img:focus{
+    outline: 0;
+}
 @media only screen and (min-width: 992px) {
     .navbar{
         position: relative;
@@ -80,6 +84,7 @@
     }
     .logo-ctn{
         width: 100px;
+        display: inline-block;
     }
     .log-ctn{
         padding: 0;
@@ -87,12 +92,28 @@
     .login{
         margin-left: 0;
     }
-    .dog{
-        margin-right: 10px;
-    }
 }
-@media only screen and (max-width: 380px) {
-  .login a{
+@media only screen and (max-width: 454px) {
+    .logo-ctn{
+        padding: 0;
+        width: 60px;
+    }
+    .logo{
+        height: 50px;
+    }
+    .login a{
     font-size: 12px;
-  }
+    }
+    .dog{
+    height: 25px;
+    }
+    .navbar-toggler{
+    height: 30px;
+    width: 35px;
+    padding: 0;
+    }
+    .navbar-toggler-icon{
+    height: 20px;
+    width: 20px;
+    }
 }

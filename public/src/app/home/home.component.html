@@ -1,30 +1,69 @@
-<div class="rect1">
-  <div class="rect1-left">
+<div class="row rect1">
+  <div class="col-lg">
     <div class="rect1-card">
-      <img id="courses" alt="courses" [routerLink]="['/courses']" src="assets/img/home_page/courses.png">
+      <img id="courses" alt="courses" [routerLink]="['/courses']" [src]="imgSrc1" (mouseover)="imgSrc1 = 'assets/img/home_page/green_courses.png'" (mouseout)="imgSrc1 = 'assets/img/home_page/courses.png'">
       <div class="card-text">
         <h5>FREE CE COURSES</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
       </div>
     </div>
     <div class="rect1-card">
-      <img id="mentorship" alt="mentorship" [routerLink]="['/mentorship']" src="assets/img/home_page/hands.png">
+      <img id="mentorship" alt="mentorship" [routerLink]="['/mentorship']" [src]="imgSrc2" (mouseover)="imgSrc2 = 'assets/img/home_page/green_hands.png'" (mouseout)="imgSrc2 = 'assets/img/home_page/hands.png'">
       <div class="card-text">
         <h5>MENTORSHIP FROM INDUSTRY EXPERTS</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
       </div>
     </div>
     <div class="rect1-card">
-      <img id="resources" alt="resources" [routerLink]="['/resources']" src="assets/img/home_page/resources.png">
+      <img id="resources" alt="resources" [routerLink]="['/resources']" [src]="imgSrc3" (mouseover)="imgSrc3 = 'assets/img/home_page/green_resources.png'" (mouseout)="imgSrc3 = 'assets/img/home_page/resources.png'">
       <div class="card-text">
         <h5>ONLINE RESOURCES</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
       </div>
     </div>
   </div>
-  <div class="rect1-right">
+  <div class="col-lg rect1-right">
     <h1>Free Support for the Veterinary Community</h1>
     <p>MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
   </div>
-  <button class="btn phone_btn">ARE YOU IN CRISIS?</button>
+</div>
+<div class="row newsletter">
+  <span class="col-lg">GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</span>
+  <form class="row col-lg" (submit)="submitNewsletter()">
+    <input class="col" name="newsletter" type="text" [(ngModel)]="newsletter" placeholder="Your email here">
+    <button class="col ml-auto">Add me to the list</button>
+  </form>
+</div>
+<div class="row mightymission">
+  <h1 class="col-12">A Mighty Mission</h1>
+  <div class="info col-lg">
+    <h2 class="header1">Remembering Why We Do This</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+    <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
+    <button [routerLink]="['/about']">Learn More About MightyVet</button>
+  </div>
+  <div class="video col-lg">
+    <iframe width="550px" height="350px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+<div class="row available-courses">
+  <h1 class="col-12">Available Courses</h1>
+  <div class="col-lg-3 col-md-6 col-sm-12">class</div>
+  <div class="col-lg-3 col-md-6 col-sm-12">class</div>
+  <div class="col-lg-3 col-md-6 col-sm-12">class</div>
+  <div class="col-lg-3 col-md-6 col-sm-12">class</div>
+  <button [routerLink]="['/courses']">View All Courses</button>
+</div>
+<div class="row mighty-mentors">
+  <h1 class="col-12">Mighty Mentors</h1>
+  <div class="col-lg">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+    <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
+    <button [routerLink]="['/mentorship']">Meet Our Mentors</button>
+  </div>
+  <div class="col-lg">
+    <h1>Featured Mentors go here.</h1>
+  </div>
 </div>

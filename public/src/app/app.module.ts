@@ -30,7 +30,8 @@ import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.componen
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { Pipe, PipeTransform } from '@angular/core';
-import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
+import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
+import { NotFoundComponent } from './not-found/not-found.component'
 
 @Pipe({ name: 'keys',  pure: false })
 
@@ -62,7 +63,8 @@ export class KeysPipe implements PipeTransform {
     AdminUsersComponent,
     AvailabilityComponent,
     KeysPipe,
-    AdminMentorsComponent
+    AdminMentorsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
