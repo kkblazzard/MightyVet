@@ -3,7 +3,6 @@
 }
 
 /* search bar */
-
 .bar{
     width: 100%;
     display: block;
@@ -23,9 +22,6 @@
     border: .2rem solid #565656;
 }
 
-/* .search{
-    text-align: left;
-} */
 #magnifying_glass{
     background: #565656;
     /* padding: .2rem 1rem; */
@@ -42,4 +38,24 @@
     border-bottom-right-radius: 5px;
     color: white;
     padding: .2rem 1rem;
+}
+
+
+/* left side */
+.left_filter{
+    display: inline-block;
+    width: 10%;
+    margin-right: 5%;
+}
+
+
+/* main */
+.main_cards{
+    display: inline-block;
+    vertical-align: top;
+    width: 80%;
+}
+.main_cards *{
+    display: inline-block;
+    vertical-align: top;
 }
