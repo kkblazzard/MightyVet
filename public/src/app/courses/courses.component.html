@@ -1,3 +1,77 @@
-<p>
-  courses works!
-</p>
+<h1> Browse Courses</h1>
+<img class="top_image" src="assets/img/courses/hero.png" alt="puppy in arms">
+<div class="bar">
+  <button class="search__button">SEARCH COURSES</button>
+  <input class="search_bar__input" type="text">
+  <button class="magnifying_glass__button" > <img id="magnifying_glass" src="../../assets/mentor-images/magnifying_glass.jpg" alt=""></button>
+</div>
+
+<div class="left_filter">
+  <p>Filter Results</p>
+  <p>View by Date</p>
+  <p>Area of study</p>
+  <p>Special Types</p>
+  <p>Learning Format</p>
+  <p>Credits</p>
+  <button>Apply</button>
+
+</div>
+
+<div class="main_cards">
+<!-- set *ngFor= "let c of allCourses" when data ready -->
+  <div class="card col-sm-6" style="width: 18rem;" > 
+    <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
+    <div class="card-body">
+      <h5 class="card-title">{{course.title}}</h5>
+      <p class="card-text">{{course.description}}</p>
+      <a class="card-link" href="{{course.link}}" >READ MORE </a>
+    </div>
+  </div>
+
+
+  <div class="card col-sm-6" style="width: 18rem;" > 
+    <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
+    <div class="card-body">
+      <h5 class="card-title">{{course.title}}</h5>
+      <p class="card-text">{{course.description}}</p>
+      <a class="card-link" href="{{course.link}}" >READ MORE </a>
+    </div>
+  </div>
+  <div class="card col-sm-6" style="width: 18rem;" > 
+    <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
+    <div class="card-body">
+      <h5 class="card-title">{{course.title}}</h5>
+      <p class="card-text">{{course.description}}</p>
+      <a class="card-link" href="{{course.link}}" >READ MORE </a>
+    </div>
+  </div>
+  <div class="card col-sm-6" style="width: 18rem;" > 
+    <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
+    <div class="card-body">
+      <h5 class="card-title">{{course.title}}</h5>
+      <p class="card-text">{{course.description}}</p>
+      <a class="card-link" href="{{course.link}}" >READ MORE </a>
+    </div>
+  </div>
+  <div class="card col-sm-6" style="width: 18rem;" > 
+    <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
+    <div class="card-body">
+      <h5 class="card-title">{{course.title}}</h5>
+      <p class="card-text">{{course.description}}</p>
+      <a class="card-link" href="{{course.link}}" >READ MORE </a>
+    </div>
+  </div>
+  <div class="card col-sm-6" style="width: 18rem;" > 
+    <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
+    <div class="card-body">
+      <h5 class="card-title">{{course.title}}</h5>
+      <p class="card-text">{{course.description}}</p>
+      <a class="card-link" href="{{course.link}}" >READ MORE </a>
+    </div>
+  </div>
+
+
+
+
+</div>
+<!-- end class "main_cards" -->
