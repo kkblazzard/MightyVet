@@ -133,7 +133,7 @@ export class AdminWebinarsComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
 
       this.fileToUpload = new ImageSnippet(event.target.result, file);
-      let obs = this._filesUploadService.uploadImage(this.fileToUpload.file)
+      let obs = this._filesUploadService.speakerUploadImage(this.fileToUpload.file)
       obs.subscribe(
         (data) => {
           this.newSpeaker.img = data['imageUrl'];
