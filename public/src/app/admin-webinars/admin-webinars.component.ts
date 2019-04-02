@@ -4,6 +4,7 @@ import { WebinarsService } from '../http_services/webinars.service';
 import { SpeakersService } from '../http_services/speakers.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileUploadService } from '../http_services/file-upload.service'
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -15,6 +16,7 @@ class ImageSnippet {
 })
 
 export class AdminWebinarsComponent implements OnInit {
+  speaker_image: String = "";
   fileToUpload: ImageSnippet;
   newQuestions: number = 0;
   newAnswers: number = 0;
@@ -120,6 +122,7 @@ export class AdminWebinarsComponent implements OnInit {
       this.newWebinar.speaker = data['_id'];
       this.fileToUpload.src="";
       this.fileToUpload.file=null;
+      this.getSpeakerImage();
       this.newSpeaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: "", webinars: []};
     })
   }
@@ -141,5 +144,14 @@ export class AdminWebinarsComponent implements OnInit {
     });
 
     reader.readAsDataURL(file);
+  }
+  getSpeakerImage(){
+    if (this.newWebinar.speaker == "" || this.newWebinar.speaker == "new"){
+      this.speaker_image = "";
+    }
+    else{
+      let obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
+      obs.subscribe(data => this.speaker_image = data['img']);
+    }
   }
 }

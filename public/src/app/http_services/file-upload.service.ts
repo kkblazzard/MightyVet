@@ -9,6 +9,7 @@ export class FileUploadService {
   constructor(private _http: HttpClient) { }
 
   public uploadImage(image: File) {
+    console.log("http.service uploading image");
     const formData = new FormData();
 
     formData.append('image', image);

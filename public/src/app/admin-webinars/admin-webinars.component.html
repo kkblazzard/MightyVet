@@ -8,11 +8,12 @@
   <label>Description</label>
   <textarea name="description" [(ngModel)]="newWebinar.description"></textarea>
   <label>Speaker</label>
-  <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker">
+  <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker" (ngModelChange)="getSpeakerImage()">
     <option></option>
     <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
     <option value="new">New Speaker</option>
   </select>
+  <img *ngIf="speaker_image" [src]="speaker_image" alt="Speaker Image">
   <form class="speaker_form" *ngIf="newWebinar.speaker == 'new'">
     <label>Title</label>
     <select name="title" [(ngModel)]="newSpeaker.title">
@@ -26,8 +27,8 @@
     <input name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
     <label>Description</label>
     <textarea name="description" [(ngModel)]="newSpeaker.description"></textarea>
+    <img *ngIf="newSpeaker.img != ''" [src]="newSpeaker.img" alt="Speaker Image">
     <label for="file">Choose Picture</label>
-    <img *ngIf="newSpeaker.img" [src]="newSpeaker.img" alt="Uploaded Image">
     <input #imageInput
         id="file"
         type="file"
