@@ -2,7 +2,7 @@
     padding-left: 40px;
     padding-right: 40px;
 }
-img:focus{
+:focus{
     outline: 0;
 }
 .rect1{

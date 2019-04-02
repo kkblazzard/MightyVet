@@ -69,6 +69,12 @@
 .navbar .nav-item:hover a{
     color: white;
 }
+.navbar .activated{
+    background-color: #7DA7D9;
+}
+.navbar .activated a{
+    color: white;
+}
 img:focus{
     outline: 0;
 }
