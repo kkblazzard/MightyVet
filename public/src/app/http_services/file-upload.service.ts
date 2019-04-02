@@ -8,12 +8,28 @@ export class FileUploadService {
 
   constructor(private _http: HttpClient) { }
 
-  public uploadImage(image: File) {
-    console.log("http.service uploading image");
+  public speakerUploadImage(image: File) {
+    console.log("http.service uploading speaker image");
     const formData = new FormData();
 
     formData.append('image', image);
 
-    return this._http.post('/api/imageupload', formData);
+    return this._http.post('/api/speakers/imageupload', formData);
+  }
+  public webinarUploadImage(image: File) {
+    console.log("http.service uploading webinar image");
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this._http.post('/api/webinars/imageupload', formData);
+  }
+  public userUploadImage(image: File) {
+    console.log("http.service uploading user image");
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this._http.post('/api/users/imageupload', formData);
   }
 }
