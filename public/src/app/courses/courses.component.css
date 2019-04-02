@@ -44,10 +44,14 @@
 /* left side */
 .left_filter{
     display: inline-block;
-    width: 10%;
+    width: 15%;
     margin-right: 5%;
 }
-
+.apply_button{
+    background: #627894;
+    border-radius: 5px;
+    color: white;
+}
 
 /* main */
 .main_cards{
