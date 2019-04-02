@@ -34,7 +34,8 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { Pipe, PipeTransform } from '@angular/core';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
+import { FileUploadComponent } from './file-upload/file-upload.component'
 
 @Pipe({ name: 'keys',  pure: false })
 
@@ -67,7 +68,8 @@ export class KeysPipe implements PipeTransform {
     AvailabilityComponent,
     KeysPipe,
     AdminMentorsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

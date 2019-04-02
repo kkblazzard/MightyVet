@@ -26,8 +26,13 @@
     <input name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
     <label>Description</label>
     <textarea name="description" [(ngModel)]="newSpeaker.description"></textarea>
-    <label>Speaker Image</label>
-    <input name="img" type="text" [(ngModel)]="newSpeaker.img">
+    <label for="file">Choose Picture</label>
+    <img *ngIf="newSpeaker.img" [src]="newSpeaker.img" alt="Uploaded Image">
+    <input #imageInput
+        id="file"
+        type="file"
+        accept="image/*"
+        (change)="processFile(imageInput)">
     <button class="btn btn-outline-secondary" (click)="addSpeaker()">New Speaker</button>
   </form>
   <label>Video Link</label>
@@ -40,41 +45,45 @@
   <input type="number" name="newQuestions" [(ngModel)]="newQuestions">
   <label>Number of Wrong Answers per New Question</label>
   <input type="number" name="newAnswers" [(ngModel)]="newAnswers">
-  <button (click)="addMultipleQuestions()">Add Multiple Questions</button>
+  <button class="btn btn-outline-primary" (click)="addMultipleQuestions()">Add Multiple Questions</button>
   <!-- indexes are needed to differenciate the inputs as they are being added, trackBy and keysPipe to make sure the double nested loop don't mess with two-way model binding-->
-  <div class="question" *ngFor="let question of newWebinar.quiz; let i = index">
+  <div class="card" *ngFor="let question of newWebinar.quiz; let i = index">
     <label>Question {{i+1}}</label>
     <input [name]="question.question+'_'+i" type="text" [(ngModel)]="question.question">
     <label>Correct Answer</label>
     <input [name]="question.right_answer+'_'+i" type="text" [(ngModel)]="question.right_answer">
     <label>Wrong Answers</label>
     <input *ngFor="let wrong_answer of question.wrong_answers | keys; let in = index; trackBy:keys" [name]="question.wrong_answers[wrong_answer]+'_'+i+'_'+in" type="text" [(ngModel)]="question.wrong_answers[wrong_answer]"> 
-    <button (click)="addAnswer(i)">Add Wrong Answer</button>
+    <button class="btn btn-outline-primary" (click)="addAnswer(i)">Add Wrong Answer</button>
     <button *ngIf="question.wrong_answers.length > 1" class="btn btn-outline-danger" (click)="deleteAnswer(i)">Delete Wrong Answer</button>
     <button class="btn btn-outline-danger" (click)="deleteQuestion(i)">Delete Question</button>
   </div>
-  <button (click)="addQuestion()">Add Question</button>
-  <button (click)="stage1()">Go Back</button>
-  <button (click)="stage3()">Preview</button>
+  <button class="btn btn-outline-primary" (click)="addQuestion()">Add Question</button>
+  <button class="btn btn-outline-danger" (click)="stage1()">Go Back</button>
+  <button class="btn btn-outline-success" (click)="stage3()">Preview</button>
 </form>
 <div *ngIf="stage == 3">
   <h4>Title: {{newWebinar.title}}</h4>
   <p>Date and Time: {{newWebinar.datetime | date:'hh:mm a on MMMM dd y'}}</p>
   <p>Description: {{newWebinar.description}}</p>
   <p>Speaker: {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</p>
-  <label>Video:</label>
-  <iframe width="600px" height="400px" [src]="sanitizer.bypassSecurityTrustResourceUrl(newWebinar.video_link)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p>Video Link: {{newWebinar.video_link}}</p>
   <h4>Quiz:</h4>
-  <div class="question card" *ngFor="let question of newWebinar.quiz, let i = index">
+  <h6>Please answer the following questions</h6>
+  <div class="question" *ngFor="let question of newWebinar.quiz, let i = index">
     <p>Question {{i+1}}: {{question.question}}</p>
-    <p>Correct Answer: {{question.right_answer}}</p>
-    <span>Wrong Answers:</span>
-    <ul>
-      <li *ngFor="let wrong_answer of question.wrong_answers">{{wrong_answer}}</li>
-    </ul>
+    <div>
+      <input id="'ra_'+i" type="radio">
+      <label [for]="'ra_'+i">{{question.right_answer}}</label>
+    </div>
+    <div *ngFor="let wrong_answer of question.wrong_answers, let in = index">
+        <input type="radio" [id]="'wa_'+i+'_'+in"/>
+        <label [for]="'wa_'+i+'_'+in">{{wrong_answer}}</label>
+    </div>
   </div>
-  <button (click)="stage2()">Go Back</button>
-  <button (click)=addWebinar()>Submit New Webinar</button>
+  <button class="btn btn-outline-secondary">Calculate Quiz Result</button>
+  <button class="btn btn-outline-danger" (click)="stage2()">Go Back</button>
+  <button class="btn btn-outline-success" (click)=addWebinar()>Submit New Webinar</button>
 </div>
 <h2>All Webinars</h2>
 <table class="table">
