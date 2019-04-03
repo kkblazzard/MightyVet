@@ -1,3 +1,8 @@
+/* global css */
+:focus{
+    outline: 0;
+}
+/* local css */
 .navbar{
     margin: 0 0 20px 0;
     padding: 0px;
@@ -49,8 +54,8 @@
 .profile_img{
     height: 35px;
 }
-.navbar li{
-    padding: 10px;
+.navbar .nav-link{
+    padding: 10px 15px;
 }
 .navbar a{
     color: #395371;
@@ -69,9 +74,6 @@
 }
 .navbar .activated a{
     color: white;
-}
-img:focus{
-    outline: 0;
 }
 @media only screen and (min-width: 992px) {
     .navbar{
