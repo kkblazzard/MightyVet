@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+//Fontawesome
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 //components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -80,6 +82,7 @@ export class KeysPipe implements PipeTransform {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    AngularFontAwesomeModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,

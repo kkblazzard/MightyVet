@@ -10,16 +10,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular-font-awesome": "^3.1.2",
     "aws-sdk": "^2.433.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dependencies": "0.0.1",
     "express": "^4.16.4",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "mongoose": "^5.4.4",
     "mongoose-bcrypt": "^1.6.0",
     "mongoose-unique-validator": "^2.0.2",
     "multer": "^1.4.1",
-    "multer-s3": "^2.9.0"
+    "multer-s3": "^2.9.0",
+    "normalize.css": "^8.0.1"
   }
 }

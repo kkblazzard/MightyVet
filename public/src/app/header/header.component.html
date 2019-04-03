@@ -1,23 +1,27 @@
-<nav class="row navbar navbar-light navbar-expand-lg fixed-top">
-  <div class="logo-ctn col-sm-4">
-  <img class="logo" src="assets/img/nav-bar/logo.png" alt="MightyVet Logo" [routerLink]="['']">
-  </div>
-  <div class="col-8 row right-navbar">
-    <div class="ml-auto login" *ngIf="!loggedin">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-      aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a id="login" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/login']">LOG IN</a>
-      <a id="signup" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/signup']">SIGN UP</a>
-      <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
+<div class="container">
+  <nav class="navbar navbar-light navbar-expand-lg fixed-top d-flex justify-content-between">
+    <div class="logo-ctn">
+      <img class="logo" src="assets/img/nav-bar/logo.png" alt="MightyVet Logo" [routerLink]="['']">
     </div>
-    <div class="profile ml-auto" *ngIf="loggedin">
-      <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="right-navbar">
+      <div class="ml-auto d-flex align-items-end flex-column">
+        <div class="login" *ngIf="!loggedin">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+          aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a id="login" class="col-2" [routerLink]="['/login']">LOG IN</a>
+          <a id="signup" class="col-2" [routerLink]="['/signup']">SIGN UP</a>
+          <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
+        </div>
+        <div class="profile" *ngIf="loggedin">
+          <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+          aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="ml-auto navbar-nav navigation">
