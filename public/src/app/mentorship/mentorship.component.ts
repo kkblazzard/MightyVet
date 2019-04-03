@@ -35,7 +35,7 @@ export class MentorshipComponent implements OnInit {
     login: any;
     // mentors= [];
 
-
+    newMentor: any = {};
     newMentee:any = {};
     newMenteeErrors:any;
 
@@ -193,9 +193,18 @@ export class MentorshipComponent implements OnInit {
             email:"",
             zipcode:"",
             titles:"",
-            roles:"",
-            organizations:""
-          }
+            organizations:"",
+            support: []
+        }
+        this.newMentor={
+            firstName:"",
+            lastName:"",
+            email:"",
+            zipcode:"",
+            titles:"",
+            organizations:"",
+            support: []
+        }
     }
 
     // switches the appropiate checked box on or off for searching later
