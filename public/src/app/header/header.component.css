@@ -1,27 +1,26 @@
 .navbar{
-    padding: 10px 25px;
+    margin: 0 0 20px 0;
+    padding: 0px;
 }
 .navigation{
     box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
-}
-.right-navbar{
-    margin: 0;
-    padding: 0;
 }
 .collapse{
     margin-top: 10px;
 }
 .logo{
-    height: inherit;
+    padding: 20px 20px 20px 0;
+    max-width: 140px;
     cursor: pointer;
 }
 .dog{
     margin-left: 5px;
-    height:35px;
+    max-width: 32px;
 }
 .login a{
     padding: 5px;
-    margin: 0 2px;
+    margin: 0 0 0 2px;
+    font-size: .8em;
 }
 #login{
     border: solid transparent 3px;
@@ -53,15 +52,8 @@
 .navbar li{
     padding: 10px;
 }
-.navbar{
-    margin: 0px;
-    background-color: white;
-}
 .navbar a{
     color: #395371;
-}
-.navbar .nav-item{
-    font-size: 16px;
 }
 .navbar .nav-item:hover{
     background-color: #7DA7D9;
@@ -75,16 +67,17 @@ img:focus{
 @media only screen and (min-width: 992px) {
     .navbar{
         position: relative;
+
     }
 }
 @media only screen and (max-width: 991px) {
-    .logo{
-        margin-right: 10px;
-        height: 70px;
+    .navbar {
+        background: #fff;
     }
-    .logo-ctn{
-        width: 100px;
-        display: inline-block;
+    .logo{
+        margin: 10px 20px;
+        height: 60px;
+        padding: 0;
     }
     .log-ctn{
         padding: 0;
@@ -92,28 +85,32 @@ img:focus{
     .login{
         margin-left: 0;
     }
+    .right-navbar {
+        margin-right: 20px;
+    }
 }
 @media only screen and (max-width: 454px) {
-    .logo-ctn{
-        padding: 0;
-        width: 60px;
+    .navbar {
+        background: #fff;
     }
     .logo{
-        height: 50px;
-    }
-    .login a{
-    font-size: 12px;
+        margin: 10px 20px;
+        height: 60px;
+        padding: 0;
     }
     .dog{
-    height: 25px;
+        height: 25px;
     }
     .navbar-toggler{
-    height: 30px;
-    width: 35px;
-    padding: 0;
+        height: 30px;
+        width: 35px;
+        padding: 0;
     }
     .navbar-toggler-icon{
-    height: 20px;
-    width: 20px;
+        height: 20px;
+        width: 20px;
+    }
+    .right-navbar {
+        margin-right: 20px;
     }
 }
