@@ -55,11 +55,17 @@
 .navbar a{
     color: #395371;
 }
+.navbar li.nav-item {
+    padding:0;
+}
 .navbar .nav-item:hover{
     background-color: #7DA7D9;
 }
 .navbar .nav-item:hover a{
     color: white;
+}
+a .nav-link {
+    padding: 10px;
 }
 img:focus{
     outline: 0;
@@ -97,18 +103,6 @@ img:focus{
         margin: 10px 20px;
         height: 60px;
         padding: 0;
-    }
-    .dog{
-        height: 25px;
-    }
-    .navbar-toggler{
-        height: 30px;
-        width: 35px;
-        padding: 0;
-    }
-    .navbar-toggler-icon{
-        height: 20px;
-        width: 20px;
     }
     .right-navbar {
         margin-right: 20px;

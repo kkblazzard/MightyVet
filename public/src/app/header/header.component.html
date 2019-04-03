@@ -10,8 +10,8 @@
           aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a id="login" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/login']">LOG IN</a>
-          <a id="signup" class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2" [routerLink]="['/signup']">SIGN UP</a>
+          <a id="login" class="col-2" [routerLink]="['/login']">LOG IN</a>
+          <a id="signup" class="col-2" [routerLink]="['/signup']">SIGN UP</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
         </div>
         <div class="profile" *ngIf="loggedin">
@@ -24,23 +24,23 @@
       </div>
       <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="ml-auto navbar-nav navigation">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/courses']">Online Learning</a>
+          <li class="nav-item" [routerLink]="['/courses']">
+            <a class="nav-link"">Online Learning</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/mentorship']">Mentorship</a>
+          <li class="nav-item" [routerLink]="['/mentorship']">
+            <a class="nav-link">Mentorship</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/resources']">Resources</a>
+          <li class="nav-item" [routerLink]="['/resources']">
+            <a class="nav-link">Resources</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/blog']">Blog</a>
+          <li class="nav-item" [routerLink]="['/blog']">
+            <a class="nav-link">Blog</a>
           </li>
-          <li class="nav-item" >
-            <a class="nav-link" [routerLink]="['/support']">Support Us</a>
+          <li class="nav-item" [routerLink]="['/support']">
+            <a class="nav-link">Support Us</a>
           </li>
-          <li class="nav-item" >
-            <a class="nav-link" [routerLink]="['/about']">About</a>
+          <li class="nav-item" [routerLink]="['/about']">
+            <a class="nav-link">About</a>
           </li>
         </ul>
       </div>
