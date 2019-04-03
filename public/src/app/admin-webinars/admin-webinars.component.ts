@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebinarsService } from '../http_services/webinars.service';
 import { SpeakersService } from '../http_services/speakers.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { FileUploadService } from '../http_services/file-upload.service'
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
@@ -18,16 +17,16 @@ class ImageSnippet {
 export class AdminWebinarsComponent implements OnInit {
   speaker_image: String = "";
   fileToUpload: ImageSnippet;
+  fileToUpload2: ImageSnippet;
   newQuestions: number = 0;
   newAnswers: number = 0;
   speaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
   stage: number = 1;
-  newWebinar: any = {title: "", datetime: new Date(), description: "", speaker: "", video_link: "", quiz: []}
+  newWebinar: any = {title: "", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []}
   webinars: any;
   speakers: any;
   newSpeaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""}
   constructor(
-    public sanitizer: DomSanitizer,
     private _webinarsService: WebinarsService,
     private _speakersService: SpeakersService,
     private _filesUploadService: FileUploadService,
@@ -50,7 +49,7 @@ export class AdminWebinarsComponent implements OnInit {
       console.log(data);
       if (!data['errors']){
         this.getWebinars();
-        this.newWebinar = this.newWebinar = {title: "", datetime: new Date(), description: "", speaker: "", video_link: "", quiz: []};
+        this.newWebinar = this.newWebinar = {title: "", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
       }
     })
   }
@@ -137,6 +136,25 @@ export class AdminWebinarsComponent implements OnInit {
       obs.subscribe(
         (data) => {
           this.newSpeaker.img = data['imageUrl'];
+        },
+        (err) => {
+        
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
+  processFile2(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.fileToUpload2 = new ImageSnippet(event.target.result, file);
+      let obs = this._filesUploadService.webinarUploadImage(this.fileToUpload2.file)
+      obs.subscribe(
+        (data) => {
+          this.newWebinar.img = data['imageUrl'];
         },
         (err) => {
         

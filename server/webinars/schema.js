@@ -13,18 +13,24 @@ var WebinarSchema = new mongoose.Schema({
                 required: [true, "Please enter a title."],
                 minlength: [true, "The title must be at least 5 characters long."]
         },
-        datetime: {type: Date},
+        datetime: {type: Date}
+        ,
         description: {
                 type: String,
                 required: [true, "Please enter a description."],
                 minlength: [true, "The description must be at least 10 characters long."]
         },
-        users: {type: [String]}, //list of user ids
+        users: {type: [String]}  //list of user ids
+        ,
         speaker: {
                 type: SpeakerSchema,
                 required: [true, "Please choose a speaker or create a new one."]
         },
-        video_link: {
+        img: {
+                type: String,
+                required: [true, "Please upload a picture."]
+        },
+        webinar_link: {
                 type: String,
                 required: [true, "Please enter the link for the video."]
         },

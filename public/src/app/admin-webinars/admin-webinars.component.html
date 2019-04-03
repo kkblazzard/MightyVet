@@ -7,7 +7,14 @@
   <input name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
   <label>Description</label>
   <textarea name="description" [(ngModel)]="newWebinar.description"></textarea>
+  <label *ngIf="!newWebinar.img" for="file">Choose Picture</label>
+  <input #imageInput2
+    id="file"
+    type="file"
+    accept="image/*"
+    (change)="processFile2(imageInput2)">
   <label>Speaker</label>
+  <img *ngIf="newWebinar.img" [src]="newWebinar.img" alt="Picture">
   <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker" (ngModelChange)="getSpeakerImage()">
     <option></option>
     <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
@@ -27,17 +34,18 @@
     <input name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
     <label>Description</label>
     <textarea name="description" [(ngModel)]="newSpeaker.description"></textarea>
-    <img *ngIf="newSpeaker.img != ''" [src]="newSpeaker.img" alt="Speaker Image">
-    <label for="file">Choose Picture</label>
+    <label *ngIf="newSpeaker.img == ''" for="file">Choose Picture</label>
     <input #imageInput
         id="file"
         type="file"
         accept="image/*"
         (change)="processFile(imageInput)">
+    <img *ngIf="newSpeaker.img != ''" [src]="newSpeaker.img" alt="Speaker Image">
     <button class="btn btn-outline-secondary" (click)="addSpeaker()">New Speaker</button>
   </form>
-  <label>Video Link</label>
-  <input name="video_link" [(ngModel)]="newWebinar.video_link">
+  <img *ngIf="newSpeaker.img != ''" [src]="newSpeaker.img" alt="Speaker Image">
+  <label>Webinar Link</label>
+  <input name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
   <button class="btn btn-outline-success" (click)="stage2()">Quiz</button>
 </form>
 <form *ngIf="stage == 2">
@@ -68,7 +76,7 @@
   <p>Date and Time: {{newWebinar.datetime | date:'hh:mm a on MMMM dd y'}}</p>
   <p>Description: {{newWebinar.description}}</p>
   <p>Speaker: {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</p>
-  <p>Video Link: {{newWebinar.video_link}}</p>
+  <p>Webinar Link: {{newWebinar.webinar_link}}</p>
   <h4>Quiz:</h4>
   <h6>Please answer the following questions</h6>
   <div class="question" *ngFor="let question of newWebinar.quiz, let i = index">
@@ -94,7 +102,7 @@
       <th>Date and Time</th>
       <th>Description</th>
       <th>Speaker</th>
-      <th>Video Link</th>
+      <th>Webinar Link</th>
       <th>Users</th>
       <th>Actions</th>
     </tr>
@@ -105,7 +113,7 @@
       <td>{{webinar.datetime | date:'hh:mm a on MMMM dd y'}}</td>
       <td>{{webinar.description}}</td>
       <td>{{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}</td>
-      <td>{{webinar.video_link}}</td>
+      <td>{{webinar.webinar_link}}</td>
       <td>{{webinar.users.length}}</td>
       <td><button>View Quiz</button></td>
     </tr>
