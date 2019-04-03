@@ -9,6 +9,7 @@ import { MentorsService } from './http_services/mentors.service';
 import { NewslettersService } from './http_services/newsletters.service';
 import { PartnersService } from './http_services/partners.service';
 import { SpeakersService } from './http_services/speakers.service';
+import { FileUploadService } from './http_services/file-upload.service';
 //modules
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -41,7 +42,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { Pipe, PipeTransform } from '@angular/core';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @Pipe({ name: 'keys',  pure: false })
 
@@ -74,7 +75,7 @@ export class KeysPipe implements PipeTransform {
     AvailabilityComponent,
     KeysPipe,
     AdminMentorsComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +89,7 @@ export class KeysPipe implements PipeTransform {
       useFactory: adapterFactory
     })
   ],
-  providers: [WebinarsService,UsersService,MeetingsService,AccreditationsService,MentorsService,NewslettersService,PartnersService,SpeakersService ],
+  providers: [WebinarsService,UsersService,MeetingsService,AccreditationsService,MentorsService,NewslettersService,PartnersService,SpeakersService,FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

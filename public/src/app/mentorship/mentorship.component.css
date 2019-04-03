@@ -224,7 +224,6 @@ li{
     top: 10%;
     left: 25%;
     width: 700px;
-    height: 80vh;
     padding: 1rem 2rem;
     /* overflow: scroll; */
     /* text-align: left; */
@@ -267,10 +266,7 @@ li{
 }
 
 .form-submit{
-    position: absolute;
-    width: 17rem;
-    bottom: 1rem;
-    right: 1rem;
+    text-align: right;
     /* display: inline-block; */
 }
 .form-submit__h2{
@@ -281,7 +277,6 @@ li{
 .form-submit__button{
     text-align: center;
     width: 100%;
-    display: inline-block;
     margin: 0;
     height: 2rem;
     background-color: #627894;

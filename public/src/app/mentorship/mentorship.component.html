@@ -56,39 +56,12 @@
                 <input
                     type="text" 
                     class="form-input" 
-                    placeholder="Your Roles(s)" 
-                    name="newMentee.roles"  
-                    [(ngModel)]="newMentee.roles">
-                <input
-                    type="text" 
-                    class="form-input" 
                     placeholder="Organization(s)" 
                     name="newMentee.organizations"  
                     [(ngModel)]="newMentee.organizations">
 
-                <!-- arrange this to be in bottom right with absolute -->
-                <div class="form-submit">
-                    <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
-                    <button class="form-submit__button" (click)="submit()">Submit</button>
-                </div>
+                
             </form>
-        </div>
-        <div class="communicateCheckbox">
-            <h3>Please indicate the ways you are willing to be contacted by a mentee:</h3>
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('In Person')"> In Person
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('Email')"> Email 
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('By Phone')"> By Phone
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('Text')"> Text
-        </div>
-        <div class="becomeMentorTextarea">
-            <div class="becomeMentor__textarea" >
-                <h3>Please list in order of strength your specialties using comma separators:</h3>
-                <textarea name="" id="" cols="30" rows="5"></textarea>
-            </div>
-            <div class="becomeMentor__textarea">
-                <h3>Please describe any requirements you have for your mentees:</h3>
-                <textarea name="" id="" cols="30" rows="5"></textarea>
-            </div>
         </div>
         <div class="supportCheckbox">
             <h3>What kind of support are you willing to give?</h3>
@@ -97,8 +70,10 @@
             <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
             <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
         </div>
-        <div class="becomeMentor__calendar">
-            <button (click)="openCalendar()">Click for scheduling calendar</button>
+        <!-- arrange this to be in bottom right with absolute -->
+        <div class="form-submit">
+            <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
+            <button class="form-submit__button" (click)="submit()">Submit</button>
         </div>
     </div>
     <!-- end become a mentor -->

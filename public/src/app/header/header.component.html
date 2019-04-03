@@ -22,28 +22,28 @@
           </button>
         </div>
       </div>
-      <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="ml-auto navbar-nav navigation">
-          <li class="nav-item" [routerLink]="['/courses']">
-            <a class="nav-link"">Online Learning</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/mentorship']">
-            <a class="nav-link">Mentorship</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/resources']">
-            <a class="nav-link">Resources</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/blog']">
-            <a class="nav-link">Blog</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/support']">
-            <a class="nav-link">Support Us</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/about']">
-            <a class="nav-link">About</a>
-          </li>
-        </ul>
-      </div>
     </div>
-  </nav>
-</div>
+    <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="ml-auto navbar-nav navigation">
+        <li class="nav-item" [routerLinkActive]="['activated']">
+          <a class="nav-link" [routerLink]="['/courses']">Online Learning</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['activated']">
+          <a class="nav-link" [routerLink]="['/mentorship']">Mentorship</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['activated']">
+          <a class="nav-link" [routerLink]="['/resources']">Resources</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['activated']">
+          <a class="nav-link" [routerLink]="['/blog']">Blog</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['activated']">
+          <a class="nav-link" [routerLink]="['/support']">Support Us</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['activated']">
+          <a class="nav-link" [routerLink]="['/about']">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
