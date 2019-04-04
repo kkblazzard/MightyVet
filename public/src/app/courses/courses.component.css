@@ -1,6 +1,4 @@
-.top_image{
-    width: 100%;
-}
+
 /* left side */
 .left_filter{
     display: inline-block;
@@ -12,14 +10,6 @@
     border-radius: 5px;
     color: white;
 }
-
-/* main */
-.main_cards{
-    display: inline-block;
-    vertical-align: top;
-    width: 80%;
-}
-.main_cards *{
-    display: inline-block;
-    vertical-align: top;
+.main_cards .card {
+    width: 30%;
 }

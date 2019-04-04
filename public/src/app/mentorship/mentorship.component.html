@@ -168,14 +168,14 @@
     <!-- main content -->
     <main class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
         <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
-        <div class="main-info mb-3">
+        <div class="main-info mb-3 d-flex align-items-end flex-column">
             <h1>MightyVet is looking for some mighty mentors.</h1>
             <p>Rotating office hours will be held online with the deans of veterinary schools 
                 and other thought leaders from the veterinary industry. Ask questions of the 
                 veterinary community for a real-time feedback loop to evaluate your career 
                 options. You can schedule office hours with one of our featured members.
             </p>
-            <button class="text-center">Schedule with a Mentor</button>
+            <button class="text-center mt-auto">Schedule with a Mentor</button>
         </div>
     </main>
     <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
@@ -205,19 +205,19 @@
     <!-- end main body -->
 
     <!-- search bar -->
-    <form class="bar mb-3">
+    <div class="searchBar container my-3 p-0">
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">SEARCH COURSES</span>
+                <span class="input-group-text bg-dark text-light">SEARCH COURSES</span>
             </div>
-            <input type="text" class="form-control">
-            <button class="rounded-right"><i class="fa fa-search magnifying_glass"></i></button>
+            <input type="text" class="form-control" placeholder="Enter a course name" aria-label="coursesSearch" aria-describedby="coursesSearch">
+            <div class="input-group-append">
+                <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
+            </div>
         </div>
-    </form>
+    </div>
     <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-        <h4>
-            Refine results by:
-        </h4>
+        <h6>Refine results by:</h6>
         <div class="checkboxes">
         <input class="mr-1" type="checkbox" name="name" value="name">
         <label>Name</label>
@@ -240,18 +240,16 @@
                     <img src= "/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
                 </div>
                 <div class="mentor_header">
-                    <h5>{{mentor.title}}</h5>
-                    <h6>{{mentor.position}}</h6>
+                    <h4>{{mentor.title}}</h4>
+                    <h5>{{mentor.position}}</h5>
                 </div>
                 <p>{{mentor.description}}</p>
             </div>
         </div>
-        <button class="see_all">
-            <h1 class="see_all_h1">See All</h1>
-            <!-- ***************************************************** -->
-            <!-- THIS WILL LATER DISPLAY A TABLE OF ALL USERS???? -->
-            <!-- ***************************************************** -->
-        </button>
     </footer>
     <!-- end footer -->
 </div>
+<div class="text-center">
+  <button type="button" class="btn btn-light btn-lg">SEE ALL&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
+</div>
+
