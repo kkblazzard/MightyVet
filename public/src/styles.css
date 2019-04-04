@@ -28,19 +28,3 @@ h6{
 p{
     font-size: 16px;
 }
-/* search bar */
-#basic-addon1{
-    background: #565656;
-    border: 1px solid #565656;
-    box-sizing: border-box;
-    color: white;
-}
-.bar input{
-    border: .2rem solid #565656;
-}
-
-.bar button{
-    background: #565656;
-    border: 1px solid #565656;
-    box-sizing: border-box;
-}
