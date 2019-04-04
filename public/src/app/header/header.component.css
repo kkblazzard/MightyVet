@@ -60,7 +60,8 @@
 .navbar a{
     color: #395371;
 }
-.navbar li.nav-item {
+.navbar .nav-item {
+    cursor: pointer;
     padding:0;
 }
 .navbar .nav-item:hover{

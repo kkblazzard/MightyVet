@@ -1,0 +1,6 @@
+<div *ngIf="display">
+  <img [src]="this.model.img" [alt]="this.model.title+' '+this.model.firstName+' '+this.model.lastName">
+  <h6>{{this.model.title}} {{this.model.firstName}} {{this.model.lastName}}</h6>
+  <p>{{this.model.description}}</p>
+</div>
+<a (click)="displayChange()">{{model.title}} {{model.firstName}} {{model.lastName}}</a>

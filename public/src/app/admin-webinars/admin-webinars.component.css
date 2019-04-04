@@ -20,3 +20,6 @@ select{
 .question label{
     display: inline-block;
 }
+img{
+    height: 100px;
+}

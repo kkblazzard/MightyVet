@@ -2,8 +2,12 @@
 <form method="post">
   <label>Partner Name</label>
   <input name="name" type="text" [(ngModel)]="newPartner.partner.name">
-  <label>Partner Image</label>
-  <input name="img" type="text" [(ngModel)]="newPartner.partner.img">
+  <label *ngIf="!newPartner.partner.img" for="file">Choose Picture</label>
+  <input #imageInput
+    id="file"
+    type="file"
+    accept="image/*"
+    (change)="processFile(imageInput)">
   <label>Partner Link</label>
   <input name="link" type="text" [(ngModel)]="newPartner.partner.link">
   <label>Tier</label>

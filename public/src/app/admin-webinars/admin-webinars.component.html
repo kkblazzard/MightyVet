@@ -14,13 +14,11 @@
     accept="image/*"
     (change)="processFile2(imageInput2)">
   <label>Speaker</label>
-  <img *ngIf="newWebinar.img" [src]="newWebinar.img" alt="Picture">
   <select name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker" (ngModelChange)="getSpeakerImage()">
     <option></option>
     <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</option>
     <option value="new">New Speaker</option>
   </select>
-  <img *ngIf="speaker_image" [src]="speaker_image" alt="Speaker Image">
   <form class="speaker_form" *ngIf="newWebinar.speaker == 'new'">
     <label>Title</label>
     <select name="title" [(ngModel)]="newSpeaker.title">
@@ -40,10 +38,9 @@
         type="file"
         accept="image/*"
         (change)="processFile(imageInput)">
-    <img *ngIf="newSpeaker.img != ''" [src]="newSpeaker.img" alt="Speaker Image">
     <button class="btn btn-outline-secondary" (click)="addSpeaker()">New Speaker</button>
   </form>
-  <img *ngIf="newSpeaker.img != ''" [src]="newSpeaker.img" alt="Speaker Image">
+  <img *ngIf="speaker_image != ''" [src]="speaker_image" alt="Speaker Image">
   <label>Webinar Link</label>
   <input name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
   <button class="btn btn-outline-success" (click)="stage2()">Quiz</button>
@@ -116,6 +113,21 @@
       <td>{{webinar.webinar_link}}</td>
       <td>{{webinar.users.length}}</td>
       <td><button>View Quiz</button></td>
+    </tr>
+  </tbody>
+</table>
+<h2>All Speakers</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let speaker of speakers">
+      <td><app-speaker-details [model]="speaker"></app-speaker-details></td>
+      <td>Buttons will go here.</td>
     </tr>
   </tbody>
 </table>

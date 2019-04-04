@@ -4,4 +4,5 @@ module.exports=function(app){
     .post('/api/speakers/imageupload', controller.speakerImageUpload)
     .post('/api/webinars/imageupload', controller.webinarImageUpload)
     .post('/api/users/imageupload', controller.userImageUpload)
+    .post('/api/partners/imageupload', controller.partnerImageUpload)
 }
