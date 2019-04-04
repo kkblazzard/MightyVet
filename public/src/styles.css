@@ -6,15 +6,12 @@
 }
 h1{
     font-style: normal;
-    font-weight: 300;
-    font-size: 40px;
     line-height: normal;
     color: #395371;
 }
 h2{
     margin-top: 20px;
     font-weight: 600;
-    font-size: 26px;
     color: #395371;
 }
 h3{
@@ -22,7 +19,7 @@ h3{
     font-size: 26px;
     color: #395371;
 }
-h4{
+h6{
     color: #395371;
     font-size: 16px;
     letter-spacing: 0.03em;
@@ -40,11 +37,6 @@ p{
 }
 .bar input{
     border: .2rem solid #565656;
-}
-
-.magnifying_glass{
-    background: #565656;
-    color: white;
 }
 
 .bar button{
