@@ -1,46 +1,6 @@
 .top_image{
     width: 100%;
 }
-
-/* search bar */
-.bar{
-    width: 100%;
-    display: block;
-    margin: 1rem;
-}
-.search__button{
-    background: #565656;
-    border: 1px solid #565656;
-    box-sizing: border-box;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    color: white;
-    padding: .2rem 1rem;
-}
-.search_bar__input{
-    width: 70%;
-    border: .2rem solid #565656;
-}
-
-#magnifying_glass{
-    background: #565656;
-    /* padding: .2rem 1rem; */
-    color: white;
-    width: 1.4rem;
-    height: 1.4rem;
-}
-
-.magnifying_glass__button{
-    background: #565656;
-    border: 1px solid #565656;
-    box-sizing: border-box;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: white;
-    padding: .2rem 1rem;
-}
-
-
 /* left side */
 .left_filter{
     display: inline-block;
