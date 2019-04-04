@@ -1,17 +1,5 @@
-*{
-    box-sizing: border-box;
-    font-family: Montserrat;
-}
-.container{
-    width: 100vw;
-    background-color: white;
-    padding: 1rem;
-    margin: 0;
-    vertical-align: top;
-}
 
 /* main */
-
 .main-left, .main-right{
     height: 100%;
     margin: 1rem;
