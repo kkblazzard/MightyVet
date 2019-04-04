@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { WebinarsService } from '../http_services/webinars.service'
+import { WebinarsService } from '../http_services/webinars.service';
 
 @Component({
   selector: 'app-courses',
@@ -19,19 +19,19 @@ export class CoursesComponent implements OnInit {
 
   // setting static data as example
   course = {
-    title: "Veterinary Self-Worth and the Psychology of Money",
-    description: "Recognizing and embracing your self- worth is core to your success as a veterinarian. However, many veterinary professionals find it difficult",
-    link: "https://webinar-portal.net/webinars/vmt/registration_190307.php"
+    title: 'Veterinary Self-Worth and the Psychology of Money',
+    description: 'Recognizing and embracing your self- worth is core to your success as a veterinarian. However, many veterinary professionals find it difficult',
+    link: 'https://webinar-portal.net/webinars/vmt/registration_190307.php'
   };
 
   ngOnInit() {
     this.getAllCourses();
   }
-  getAllCourses(){
+  getAllCourses() {
     this._webinarsService.getWebinars()
-    .subscribe(courses=>{
-      console.log("received all courses",courses);
-      this.allCourses=courses;
+    .subscribe(courses => {
+      console.log('received all courses', courses);
+      this.allCourses = courses;
     });
-  };
+  }
 }
