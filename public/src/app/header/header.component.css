@@ -1,9 +1,5 @@
 /* global css */
 /* local css */
-.navbar{
-    margin: 0 0 20px 0;
-    padding: 0px;
-}
 .navigation{
     box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
 }
@@ -11,7 +7,6 @@
     margin-top: 10px;
 }
 .logo{
-    padding: 20px 20px 20px 0;
     max-width: 140px;
     cursor: pointer;
 }
@@ -88,9 +83,6 @@
     }
     .login{
         margin-left: 0;
-    }
-    .right-navbar {
-        margin-right: 20px;
     }
 }
 @media only screen and (max-width: 454px) {
