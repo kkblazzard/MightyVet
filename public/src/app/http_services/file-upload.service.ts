@@ -32,4 +32,12 @@ export class FileUploadService {
 
     return this._http.post('/api/users/imageupload', formData);
   }
+  public partnerUploadImage(image: File) {
+    console.log("http.service uploading partner image");
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this._http.post('/api/partners/imageupload', formData);
+  }
 }

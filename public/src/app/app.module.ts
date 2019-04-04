@@ -43,6 +43,7 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { Pipe, PipeTransform } from '@angular/core';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SpeakerDetailsComponent } from './speaker-details/speaker-details.component';
 
 @Pipe({ name: 'keys',  pure: false })
 
@@ -76,6 +77,7 @@ export class KeysPipe implements PipeTransform {
     KeysPipe,
     AdminMentorsComponent,
     NotFoundComponent,
+    SpeakerDetailsComponent,
   ],
   imports: [
     BrowserModule,

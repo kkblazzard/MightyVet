@@ -6,13 +6,23 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
 });
 
 var PartnerSchema = new mongoose.Schema({
-        name: String,
-        img: String, 
-        link: String, 
+        name: {type: String,
+                required: [true, "Please enter a name for the new partner."]
+        },
+        img: {type: String,
+                required: [true, "Please upload an image for the new partner."]
+        }, 
+        link: {type: String,
+                required: [true, "Please enter a link to the website of the new partner."]
+        },
 }, {timestamps:true})
 
 var PartnersSchema = new mongoose.Schema({
-        tier: Number, 
+        tier: {type: Number,
+                required: true,
+                min: 1,
+                max: 3
+        }, 
         partners: [PartnerSchema]
 }, {timestamps:true})
 
