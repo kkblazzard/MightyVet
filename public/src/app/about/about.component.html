@@ -16,8 +16,8 @@
   </div>
 </div>
 <!-- Board Members-->
-<div class="board-menbers">
-  <div class="container">
+<div class="board-members mt-5 mb-5">
+  <div class="container pt-5 pb-5">
     <h2>Board Members</h2>
     <div class="member d-flex justify-content-between">
       <div class="board-member-img">
@@ -58,15 +58,17 @@
   </div>
 </div>
 <!-- Partners-->
-<h1 class="header">Meet our Partners</h1>
-<div class="partners" *ngFor="let tiers of partners">
-  <div class="tier1" *ngIf="tiers.tier == 1">
-      <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
-  </div>
-  <div class="tier2" *ngIf="tiers.tier == 2">
-      <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
-  </div>
-  <div class="tier3" *ngIf="tiers.tier == 3">
-      <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+<div class="">
+  <h1 class="header">Meet our Partners</h1>
+  <div class="partners" *ngFor="let tiers of partners">
+    <div class="tier1" *ngIf="tiers.tier == 1">
+        <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+    </div>
+    <div class="tier2" *ngIf="tiers.tier == 2">
+        <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+    </div>
+    <div class="tier3" *ngIf="tiers.tier == 3">
+        <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+    </div>
   </div>
 </div>
