@@ -1,45 +1,39 @@
 
 <!-- Overview -->
-<div class="rect1 container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
+<div id="rect1" class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
   <div class="rect1-left">
-    <div class="rect1-card d-flex justify-content-start">
-      <div class="rect1-img align-self-center">
-        <img id="courses" alt="courses" [src]="imgSrc1" [routerLink]="['/courses']" (mouseover)="imgSrc1 = 'assets/img/home_page/green_courses.png'" (mouseout)="imgSrc1 = 'assets/img/home_page/courses.png'">
-      </div>
-      <div class="card-text">
-        <h5>FREE CE COURSES</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
+    <div class="media d-flex align-items-center mb-3">
+      <img id="courses" class="mr-3" alt="courses" [src]="imgSrc1" [routerLink]="['/courses']" (mouseover)="imgSrc1 = 'assets/img/home_page/green_courses.png'" (mouseout)="imgSrc1 = 'assets/img/home_page/courses.png'">
+      <div class="media-body">
+        <h5 class="my-1">FREE CE COURSES</h5>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
       </div>
     </div>
-    <div class="rect1-card d-flex justify-content-start">
-      <div class="rect1-img align-self-center">
-        <img id="mentorship" alt="mentorship" [routerLink]="['/mentorship']" [src]="imgSrc2" (mouseover)="imgSrc2 = 'assets/img/home_page/green_hands.png'" (mouseout)="imgSrc2 = 'assets/img/home_page/hands.png'">
-      </div>
-      <div class="card-text">
-        <h5>MENTORSHIP FROM INDUSTRY EXPERTS</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
+    <div class="media d-flex align-items-center mb-3">
+      <img id="mentorship" class="mr-3" alt="mentorship" [routerLink]="['/mentorship']" [src]="imgSrc2" (mouseover)="imgSrc2 = 'assets/img/home_page/green_hands.png'" (mouseout)="imgSrc2 = 'assets/img/home_page/hands.png'">
+      <div class="media-body">
+        <h5 class="my-1">FREE CE COURSES</h5>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
       </div>
     </div>
-    <div class="rect1-card d-flex justify-content-start">
-      <div class="rect1-img align-self-center">
-        <img id="resources" alt="resources" [routerLink]="['/resources']" [src]="imgSrc3" (mouseover)="imgSrc3 = 'assets/img/home_page/green_resources.png'" (mouseout)="imgSrc3 = 'assets/img/home_page/resources.png'">
+    <div class="media d-flex align-items-center mb-3">
+        <img id="resources" class="mr-3" alt="resources" [routerLink]="['/resources']" [src]="imgSrc3" (mouseover)="imgSrc3 = 'assets/img/home_page/green_resources.png'" (mouseout)="imgSrc3 = 'assets/img/home_page/resources.png'">
+        <div class="media-body">
+          <h5 class="my-1">FREE CE COURSES</h5>
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        </div>
       </div>
-      <div class="card-text">
-        <h5>ONLINE RESOURCES</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini</p>
-      </div>
-    </div>
   </div>
-  <div class="rect1-right">
+  <div class="rect1-right p-4 m-0 ">
     <h1>Free Support for the Veterinary Community</h1>
     <p>MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
   </div>
 </div>
 <!-- NewsLetter -->
-<div class="newsletter">
+<div id="newsletter" class="my-5 py-5">
   <div class="container d-flex flex-lg-row flex-sm-column flex-md-column justify-content-between">
     <div class="align-self-center">
-      <h5>GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</h5>
+      <h5 class="my-0 py-0">GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</h5>
     </div>
     <form class="form-inline" (submit)="submitNewsletter()">
       <input type="text" class="form-control" id="inlineFormInputName2" name="newsletter" type="text" [(ngModel)]="newsletter" placeholder="Email">
@@ -48,7 +42,7 @@
   </div>
 </div>
 <!-- Mission -->
-<div class="mightymission container">
+<div id="mighty-mission" class="container">
   <h2>A Mighty Mission</h2>
   <div class="d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
     <div class="mission-info mr-4">
@@ -64,7 +58,7 @@
   </div>
 </div>
 <!-- Courses -->
-<div class="courses">
+<div id="courses" class="my-5 py-5 bg-light">
   <div class="container">
     <h2>Available Courses</h2>
     <div class="courses-list d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
@@ -90,9 +84,9 @@
 </div>
 <!-- Mentors -->
 <div class="mentors container">
-  <h1>Mighty Mentors</h1>
   <div class="d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
-      <div class="mentors-info mr-4">
+    <div class="mentors-info mr-4">
+        <h2>Mighty Mentors</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
         <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
@@ -101,18 +95,18 @@
       <div class="mentors-img-list">
         <div class="d-flex justify-content-between mb-4">
           <div class="mentor-img mr-5">
-            <img src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
+            <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
           </div>
           <div class="mentor-img mr-5">
-            <img src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
+            <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
           </div>
         </div>
         <div class="d-flex justify-content-between">
           <div class="mentor-img mr-5">
-            <img src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
+            <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
           </div>
           <div class="mentor-img mr-5">
-            <img src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
+            <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg" alt="Dr. Steve Weinrauch">
           </div>
         </div>
       </div>

@@ -19,11 +19,6 @@
     margin-left: 5px;
     max-width: 32px;
 }
-.login a{
-    padding: 5px;
-    margin: 0 0 0 2px;
-    font-size: .8em;
-}
 #login{
     border: solid transparent 3px;
     border-radius: 5px;
