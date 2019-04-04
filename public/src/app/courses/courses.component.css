@@ -1,0 +1,25 @@
+.top_image{
+    width: 100%;
+}
+/* left side */
+.left_filter{
+    display: inline-block;
+    width: 15%;
+    margin-right: 5%;
+}
+.apply_button{
+    background: #627894;
+    border-radius: 5px;
+    color: white;
+}
+
+/* main */
+.main_cards{
+    display: inline-block;
+    vertical-align: top;
+    width: 80%;
+}
+.main_cards *{
+    display: inline-block;
+    vertical-align: top;
+}

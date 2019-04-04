@@ -1,2 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+:focus{
+    outline: 0;
+}
+h1{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: normal;
+    color: #395371;
+}
+h2{
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 26px;
+    color: #395371;
+}
+h3{
+    font-weight: 800;
+    font-size: 26px;
+    color: #395371;
+}
+h4{
+    color: #395371;
+    font-size: 16px;
+    letter-spacing: 0.03em;
+    font-weight: 800;
+}
+p{
+    font-size: 16px;
+}
+/* search bar */
+#basic-addon1{
+    background: #565656;
+    border: 1px solid #565656;
+    box-sizing: border-box;
+    color: white;
+}
+.bar input{
+    border: .2rem solid #565656;
+}
+
+.magnifying_glass{
+    background: #565656;
+    color: white;
+}
+
+.bar button{
+    background: #565656;
+    border: 1px solid #565656;
+    box-sizing: border-box;
+}
