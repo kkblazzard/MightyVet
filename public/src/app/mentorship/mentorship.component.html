@@ -50,59 +50,6 @@
         </div>
     </div>
 </div>
-<!-- background blurred modal -->
-<!-- <div (click)="closeModals()" id="blurryBackground"></div> -->
-
-<!-- calendar modal -->
-<!-- <div id="calendar">
-    <div class="closeCalendar">
-        <button class="closeModal__button" (click)="closeCalendar()">X</button>
-    </div>
-    <app-scheduling></app-scheduling>
-</div>
-end calendar modal
-
-become mentor modal
-<div id="becomeAMentor">
-    <div class="closeModal">
-        <button class="closeModal__button" (click)="closeModals()">X</button>
-    </div>
-    <div>
-        <h2 style="color: #395371;">Become a mentor</h2>
-
-        <form action="">
-            <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                {{newMenteeErrors.errors.firstName.message}}
-            </p>
-            <input type="text" class="form-input" placeholder="First Name" name="newMentor.firstName"
-                [(ngModel)]="newMentor.firstName">
-            <input type="text" class="form-input" placeholder="Last Name" name="newMentor.lastName"
-                [(ngModel)]="newMentor.lastName">
-            <input type="email" class="form-input" placeholder="Email" name="newMentor.email"
-                [(ngModel)]="newMentor.email">
-            <input type="text" class="form-input" placeholder="Zipcode" name="newMentor.zipcode"
-                [(ngModel)]="newMentor.zipcode">
-            <input type="text" class="form-input" placeholder="Your Title(s)" name="newMentor.titles"
-                [(ngModel)]="newMentor.titles">
-            <input type="text" class="form-input" placeholder="Organization(s)" name="newMentor.organizations"
-                [(ngModel)]="newMentor.organizations">
-
-
-        </form>
-    </div>
-    <div class="supportCheckbox">
-        <h3>What kind of support are you willing to give?</h3>
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')"> Mental Health
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> Financial Advice
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
-    </div>
-    arrange this to be in bottom right with absolute
-    <div class="form-submit">
-        <h2 class="form-submit__h2">Lets get started!</h2>
-        <button class="form-submit__button" (click)="submit()">Submit</button>
-    </div>
-</div> -->
 <!-- end become a mentor -->
 <div class="modal fade" id="applyForMentorship" tabindex="-1" role="dialog" aria-labelledby="applyForMentorship"
     aria-hidden="true">
@@ -158,47 +105,6 @@ become mentor modal
         </div>
     </div>
 </div>
-<!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                {{newMenteeErrors.errors.firstName.message}}
-            </p> -->
-<!-- <div class="form-row">
-                <input type="text" class="form-input col" placeholder="First Name" name="newMentee.firstName"
-                    [(ngModel)]="newMentee.firstName">
-                <input type="text" class="form-input col" placeholder="Last Name" name="newMentee.lastName"
-                    [(ngModel)]="newMentee.lastName">
-            </div>
-            <input type="email" class="form-input" placeholder="Email" name="newMentee.email"
-                [(ngModel)]="newMentee.email">
-            <input type="text" class="form-input" placeholder="Zipcode" name="newMentee.zipcode"
-                [(ngModel)]="newMentee.zipcode">
-            <input type="text" class="form-input" placeholder="Your Title(s)" name="newMentee.titles"
-                [(ngModel)]="newMentee.titles">
-            <input type="text" class="form-input" placeholder="Your Roles(s)" name="newMentee.roles"
-                [(ngModel)]="newMentee.roles">
-            <input type="text" class="form-input" placeholder="Organization(s)" name="newMentee.organizations"
-                [(ngModel)]="newMentee.organizations"> -->
-
-<!-- arrange this to be in bottom right with absolute -->
-<!-- <div class="form-submit">
-                <h2 class="form-submit__h2">Lets get started!</h2>
-                <button class="form-submit__button" (click)="submit()">Submit</button>
-            </div>
-        </form>
-    </div>
-    <div class="supportCheckbox">
-        <h3>What kind of support are you interested in? <span>(Please check all that apply)</span></h3>
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')"> Mental Health
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> Financial Advice
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
-        <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
-    </div>
-    <div class="specificMentor">
-        <h3>Is there a specific mentor you'd like to meet with?</h3>
-        <input type="text" placeholder="Full name of requested mentor">
-    </div>
-</div> -->
-<!-- end apply for mentorship -->
-
 <!-- main content -->
 <section id="section-schedule" class="py-4">
     <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
@@ -265,16 +171,8 @@ become mentor modal
     <div class="container mb-3">
         <h1 class="mb-3">Find a Mentor</h1>
         <div id="search-bar" class="input-group mb-3">
-            <!-- <div class="input-group-prepend">
-                <span class="input-group-text bg-dark border-dark text-light">SEARCH MENTORS</span>
-<<<<<<< HEAD
-            </div> -->
-            <input type="text" class="form-control border-dark" placeholder="" aria-label="coursesSearch" aria-describedby="coursesSearch">
-=======
-            </div>
             <input type="text" class="form-control border-dark" placeholder="" aria-label="coursesSearch"
                 aria-describedby="coursesSearch">
->>>>>>> 56ef54f2fd74a7ca9ba03b0fdd56ff3db61e965e
             <div class="input-group-append border-dark">
                 <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
             </div>
