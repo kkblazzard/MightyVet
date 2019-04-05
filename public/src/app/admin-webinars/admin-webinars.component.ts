@@ -65,6 +65,17 @@ export class AdminWebinarsComponent implements OnInit {
     let obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
     obs.subscribe(data => this.speaker = data);
   }  
+  closeModal(){
+    this.stage=1;
+    this.speaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
+    this.newSpeaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
+    this.newWebinar = {title: "", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
+    this.fileToUpload = {src: null, file: null};
+    this.fileToUpload2 = {src: null, file: null};
+    this.speaker_image = "";
+    this.newQuestions = 0;
+    this.newAnswers = 0;
+  }
   //3 next functions are to allow model binding with datetime-local input
   private parseDateToStringWithFormat(date: Date): string {
     let result: string;

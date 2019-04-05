@@ -37,6 +37,10 @@ export class AdminPartnersComponent implements OnInit {
       this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
     });
   }
+  closeModal(){
+    this.newPartner = {tier: 1, partner: {name: "", img: "", link: ""}};
+    this.fileToUpload = {src: null, file: null};
+  }
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();

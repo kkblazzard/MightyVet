@@ -248,9 +248,9 @@
 <!-- list of mentor cards -->
 <section id="mentors-cards" class="container">
     <h2 class="mb-3">MightVet Mentors</h2>
-    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-start flex-wrap">
+    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
         <!-- mentor card -->
-        <div class="card mentor flex-fill mr-3 mb-3" *ngFor="let mentor of featuredMentors">
+        <div class="card mentor mb-3" *ngFor="let mentor of featuredMentors">
             <div class="card-body d-flex justify-content-start">
                 <div id="mentor-img" class="p-0 mr-3">
                     <img src= "/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">

@@ -60,14 +60,14 @@
 <!-- Partners-->
 <div class="container">
   <h1>Meet our Partners</h1>
-  <div class="d-flex justify-content-between" *ngFor="let tiers of partners">
-    <div class="tier1" *ngIf="tiers.tier == 1">
+  <div *ngFor="let tiers of partners">
+    <div class="tier1 text-center" *ngIf="tiers.tier == 1">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
-    <div class="tier2" *ngIf="tiers.tier == 2">
+    <div class="tier2 text-center" *ngIf="tiers.tier == 2">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
-    <div class="tier3" *ngIf="tiers.tier == 3">
+    <div class="tier3 text-center" *ngIf="tiers.tier == 3">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
   </div>
