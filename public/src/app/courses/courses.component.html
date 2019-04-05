@@ -11,20 +11,31 @@
       <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
     </div>
   </div>
-  <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-end">
+  <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
     <h6>Refine results by:&nbsp;</h6>
-    <h6>Date:&nbsp;</h6>
-    <input type="datetime-local">
-    <h6>Area of Study:&nbsp;</h6>
-    <div class="checkboxes">
-      <input class="mr-1" type="checkbox" name="name" value="name">
-      <label>Management</label>
-      <input class="ml-1 mr-1" type="checkbox" name="speciality" value="speciality">
-      <label>Communication</label>
-      <input class="ml-1 mr-1" type="checkbox" name="mental_health" value="mental_health">
-      <label>Medical</label>
-      <input class="ml-1 mr-1" type="checkbox" name="career_advice" value="career_advice">
-      <label>Technical</label>
+    <div class="input-group date-filter">
+      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+      <div class="input-group-append">
+        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+      </div>
+    </div>
+    <div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input">
+        <label class="custom-control-label" for="checkbox1">Management</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input">
+        <label class="custom-control-label" for="checkbox2">Communication</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input">
+        <label class="custom-control-label" for="checkbox3">Medical</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input">
+        <label class="custom-control-label" for="checkbox4">Technical</label>
+      </div>
     </div>
   </div>
 </div>
