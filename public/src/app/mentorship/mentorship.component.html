@@ -166,7 +166,7 @@
 <!-- end apply for mentorship -->
 
 <!-- main content -->
-<section id="section-schedule" class="bg-light py-4">
+<section id="section-schedule" class="py-4">
     <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
         <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
         <div class="main-info mb-3 d-flex align-items-end flex-column">
@@ -217,13 +217,16 @@
     </div>
 </section>
 
-<!-- search bar -->
-<section id="mentor-search" class="mb-5 pt-5 pb-2 text-center">
-    <div class="container">
+
+<!-- list of mentor cards -->
+<section id="mentors-cards" class="bg-light py-5 m-0">
+    <!-- search bar -->
+    <div class="container mb-3">
+        <h1 class="mb-3">Find a Mentor</h1>
         <div id="search-bar" class="input-group mb-3">
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
                 <span class="input-group-text bg-dark border-dark text-light">SEARCH MENTORS</span>
-            </div>
+            </div> -->
             <input type="text" class="form-control border-dark" placeholder="" aria-label="coursesSearch" aria-describedby="coursesSearch">
             <div class="input-group-append border-dark">
                 <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
@@ -243,25 +246,22 @@
             </div>
         </div>
     </div>
-</section>
-
-<!-- list of mentor cards -->
-<section id="mentors-cards" class="container">
-    <h2 class="mb-3">MightVet Mentors</h2>
-    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
-        <!-- mentor card -->
-        <div class="card mentor mb-3" *ngFor="let mentor of featuredMentors">
-            <div class="card-body d-flex justify-content-start">
-                <div id="mentor-img" class="p-0 mr-3">
-                    <img src= "/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
+    <div class="container">
+        <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
+            <!-- mentor card -->
+            <div class="card mentor mb-3" *ngFor="let mentor of featuredMentors">
+                <div class="card-body d-flex justify-content-start">
+                    <div id="mentor-img" class="p-0 mr-3">
+                        <img src= "/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
+                    </div>
+                    <div class="mentor-header align-self-center">
+                        <h4>{{mentor.title}}</h4>
+                        <h6>{{mentor.position}}</h6>
+                    </div>
                 </div>
-                <div class="mentor-header align-self-center">
-                    <h4>{{mentor.title}}</h4>
-                    <h6>{{mentor.position}}</h6>
+                <div class="mx-4 mb-2">
+                    <p>{{mentor.description}}</p>
                 </div>
-            </div>
-            <div class="mx-4 mb-2">
-                <p>{{mentor.description}}</p>
             </div>
         </div>
     </div>
