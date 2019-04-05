@@ -2,7 +2,6 @@
     background: rgba(168, 201, 239, 0.62);
 }
 .mentor{
-    width: 48%;
     background: rgba(168, 201, 239, 0.62);
 }
 
@@ -129,15 +128,12 @@ textarea {
 
 @media only screen and (min-width:992px){
     .main-image{
-        width: 49%;
+        width: 48.6%;
     }
     .main-info{
-        width: 49%;
-    }
-    .benefits{
-        width: 49%;
+        width: 48.6%;
     }
     .mentor{
-        width: 47%;
+        width: 48.6%;
     }
 }

@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add a new partner</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -33,14 +33,12 @@
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
-                <option>4</option>
-                <option>5</option>
               </select>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
           <button class="btn btn-outline-primary" (click)="addPartner()">ADD NEW</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="closeModal()">CANCEL</button>
         </div>
       </form>
     </div>

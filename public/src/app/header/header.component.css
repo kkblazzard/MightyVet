@@ -5,8 +5,7 @@
 .collapse{
     margin-top: 10px;
 }
-.logo{
-    max-width: 140px;
+#logo img{
     cursor: pointer;
 }
 .dog{
@@ -69,31 +68,14 @@
     }
 }
 @media only screen and (max-width: 991px) {
+
     .navbar {
         background: #fff;
     }
-    .logo{
-        margin: 10px 20px;
+    #logo img{
+        margin-top: 0;
         height: 60px;
-        padding: 0;
-    }
-    .log-ctn{
-        padding: 0;
-    }
-    .login{
-        margin-left: 0;
     }
 }
 @media only screen and (max-width: 454px) {
-    .navbar {
-        background: #fff;
-    }
-    .logo{
-        margin: 10px 20px;
-        height: 60px;
-        padding: 0;
-    }
-    .right-navbar {
-        margin-right: 20px;
-    }
 }

@@ -1,6 +1,6 @@
 
 <!-- Overview -->
-<div id="rect1" class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between px-0">
+<div id="rect1" class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
   <div class="rect1-left mr-4">
     <div class="media d-flex align-items-center mb-3">
       <img id="courses" class="mr-5" alt="courses" [src]="imgSrc1" [routerLink]="['/courses']" (mouseover)="imgSrc1 = 'assets/img/home_page/green_courses.png'" (mouseout)="imgSrc1 = 'assets/img/home_page/courses.png'">
@@ -35,7 +35,7 @@
     <div class="align-self-center">
       <h5 class="my-0 py-0">GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</h5>
     </div>
-    <form class="form-inline mx-auto" (submit)="submitNewsletter()">
+    <form class="form-inline ml-auto" (submit)="submitNewsletter()">
       <input type="text" class="form-control" id="inlineFormInputName2" name="newsletter" type="text" [(ngModel)]="newsletter" placeholder="Email">
       <button type="submit" class="btn btn-info">Add me to the list</button>
     </form>
@@ -45,7 +45,7 @@
 <div id="mighty-mission" class="container">
   <h2 class="mb-4">A Mighty Mission</h2>
   <div class="d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
-    <div class="mission-info mr-4">
+    <div class="mission-info mr-4 mb-4">
       <h4 class="text-muted mb-2">Remembering Why We Do This</h4>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
       <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
