@@ -1,255 +1,273 @@
-<div class="container">
-    <!-- background blurred modal -->
-    <div (click)="closeModals()" id="blurryBackground"></div>
 
-    <!-- calendar modal -->
-    <div id="calendar">
-        <div class="closeCalendar">
-            <button class="closeModal__button" (click)="closeCalendar()">X</button>
-        </div>
-        <app-scheduling></app-scheduling>
+<!-- background blurred modal -->
+<div (click)="closeModals()" id="blurryBackground"></div>
+
+<!-- calendar modal -->
+<div id="calendar">
+    <div class="closeCalendar">
+        <button class="closeModal__button" (click)="closeCalendar()">X</button>
     </div>
-    <!-- end calendar modal -->
+    <app-scheduling></app-scheduling>
+</div>
+<!-- end calendar modal -->
 
-    <!-- become mentor modal -->
-    <div id="becomeAMentor">
-        <div class="closeModal">
-            <button class="closeModal__button" (click)="closeModals()">X</button>
-        </div>
-        <div>
-            <h2 style="color: #395371;">Become a mentor</h2>
-
-            <form action="">
-                <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                </p> -->
-                <input 
-                    type="text"  
-                    class="form-input" 
-                    placeholder="First Name" 
-                    name="newMentor.firstName" 
-                    [(ngModel)]="newMentor.firstName">
-                <input
-                    type="text"  
-                    class="form-input" 
-                    placeholder="Last Name" 
-                    name="newMentor.lastName"  
-                    [(ngModel)]="newMentor.lastName">
-                <input
-                    type="email" 
-                    class="form-input" 
-                    placeholder="Email" 
-                    name="newMentor.email"  
-                    [(ngModel)]="newMentor.email">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Zipcode" 
-                    name="newMentor.zipcode"  
-                    [(ngModel)]="newMentor.zipcode">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Your Title(s)" 
-                    name="newMentor.titles"  
-                    [(ngModel)]="newMentor.titles">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Organization(s)" 
-                    name="newMentor.organizations"  
-                    [(ngModel)]="newMentor.organizations">
-
-                
-            </form>
-        </div>
-        <div class="supportCheckbox">
-            <h3>What kind of support are you willing to give?</h3>
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')"> Mental Health
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> Financial Advice 
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
-        </div>
-        <!-- arrange this to be in bottom right with absolute -->
-        <div class="form-submit">
-            <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
-            <button class="form-submit__button" (click)="submit()">Submit</button>
-        </div>
+<!-- become mentor modal -->
+<div id="becomeAMentor">
+    <div class="closeModal">
+        <button class="closeModal__button" (click)="closeModals()">X</button>
     </div>
-    <!-- end become a mentor -->
+    <div>
+        <h2 style="color: #395371;">Become a mentor</h2>
 
-    <!-- apply for mentorship modal -->
-    <div id="applyForMentorship">
-        <div class="closeModal">
-            <button class="closeModal__button" (click)="closeModals()">X</button>
-        </div>
-        <div>
-            <h2 style="color: #395371;">Apply to be Mentored</h2>
+        <form action="">
+            <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                {{newMenteeErrors.errors.firstName.message}}
+            </p> -->
+            <input 
+                type="text"  
+                class="form-input" 
+                placeholder="First Name" 
+                name="newMentor.firstName" 
+                [(ngModel)]="newMentor.firstName">
+            <input
+                type="text"  
+                class="form-input" 
+                placeholder="Last Name" 
+                name="newMentor.lastName"  
+                [(ngModel)]="newMentor.lastName">
+            <input
+                type="email" 
+                class="form-input" 
+                placeholder="Email" 
+                name="newMentor.email"  
+                [(ngModel)]="newMentor.email">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Zipcode" 
+                name="newMentor.zipcode"  
+                [(ngModel)]="newMentor.zipcode">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Your Title(s)" 
+                name="newMentor.titles"  
+                [(ngModel)]="newMentor.titles">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Organization(s)" 
+                name="newMentor.organizations"  
+                [(ngModel)]="newMentor.organizations">
 
-            <form action="">
-                <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                </p> -->
-                <input 
-                    type="text"  
-                    class="form-input" 
-                    placeholder="First Name" 
-                    name="newMentee.firstName" 
-                    [(ngModel)]="newMentee.firstName">
-                <input
-                    type="text"  
-                    class="form-input" 
-                    placeholder="Last Name" 
-                    name="newMentee.lastName"  
-                    [(ngModel)]="newMentee.lastName">
-                <input
-                    type="email" 
-                    class="form-input" 
-                    placeholder="Email" 
-                    name="newMentee.email"  
-                    [(ngModel)]="newMentee.email">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Zipcode" 
-                    name="newMentee.zipcode"  
-                    [(ngModel)]="newMentee.zipcode">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Your Title(s)" 
-                    name="newMentee.titles"  
-                    [(ngModel)]="newMentee.titles">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Your Roles(s)" 
-                    name="newMentee.roles"  
-                    [(ngModel)]="newMentee.roles">
-                <input
-                    type="text" 
-                    class="form-input" 
-                    placeholder="Organization(s)" 
-                    name="newMentee.organizations"  
-                    [(ngModel)]="newMentee.organizations">
-
-                <!-- arrange this to be in bottom right with absolute -->
-                <div class="form-submit">
-                    <h2 class="form-submit__h2">Lets get started!</h2>
-                    <button class="form-submit__button" (click)="submit()">Submit</button>
-                </div>
-            </form>
-        </div>
-        <div class="communicateCheckbox">
-            <h3>Please indicate the ways you prefer to communicate with a mentor:</h3>
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('In Person')"> In Person
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('Email')"> Email 
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('By Phone')"> By Phone
-            <input type="checkbox" class="checkboxes" (click)="communicateBox('Text')"> Text
-        </div>
-        <div>
-            <h3>List your primary goals for mentoring relationship:</h3>
-            <textarea name="" id="" cols="50" rows="5"></textarea>
-        </div>
-        <div class="supportCheckbox">
-            <h3>What kind of support are you interested in? <span>(Please check all that apply)</span></h3>
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')"> Mental Health
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> Financial Advice 
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
-            <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
-        </div>
-        <div class="specificMentor">
-            <h3>Is there a specific mentor you'd like to meet with?</h3>
-            <input type="text" placeholder="Full name of requested mentor">
-        </div>
+            
+        </form>
     </div>
-    <!-- end apply for mentorship -->
+    <div class="supportCheckbox">
+        <h3>What kind of support are you willing to give?</h3>
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')"> Mental Health
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> Financial Advice 
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
+    </div>
+    <!-- arrange this to be in bottom right with absolute -->
+    <div class="form-submit">
+        <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
+        <button class="form-submit__button" (click)="submit()">Submit</button>
+    </div>
+</div>
+<!-- end become a mentor -->
 
-    <!-- main content -->
-    <main class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
+<!-- apply for mentorship modal -->
+<div id="applyForMentorship">
+    <div class="closeModal">
+        <button class="closeModal__button" (click)="closeModals()">X</button>
+    </div>
+    <div>
+        <h2 style="color: #395371;">Apply to be Mentored</h2>
+
+        <form action="">
+            <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                {{newMenteeErrors.errors.firstName.message}}
+            </p> -->
+            <input 
+                type="text"  
+                class="form-input" 
+                placeholder="First Name" 
+                name="newMentee.firstName" 
+                [(ngModel)]="newMentee.firstName">
+            <input
+                type="text"  
+                class="form-input" 
+                placeholder="Last Name" 
+                name="newMentee.lastName"  
+                [(ngModel)]="newMentee.lastName">
+            <input
+                type="email" 
+                class="form-input" 
+                placeholder="Email" 
+                name="newMentee.email"  
+                [(ngModel)]="newMentee.email">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Zipcode" 
+                name="newMentee.zipcode"  
+                [(ngModel)]="newMentee.zipcode">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Your Title(s)" 
+                name="newMentee.titles"  
+                [(ngModel)]="newMentee.titles">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Your Roles(s)" 
+                name="newMentee.roles"  
+                [(ngModel)]="newMentee.roles">
+            <input
+                type="text" 
+                class="form-input" 
+                placeholder="Organization(s)" 
+                name="newMentee.organizations"  
+                [(ngModel)]="newMentee.organizations">
+
+            <!-- arrange this to be in bottom right with absolute -->
+            <div class="form-submit">
+                <h2 class="form-submit__h2">Lets get started!</h2>
+                <button class="form-submit__button" (click)="submit()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="communicateCheckbox">
+        <h3>Please indicate the ways you prefer to communicate with a mentor:</h3>
+        <input type="checkbox" class="checkboxes" (click)="communicateBox('In Person')"> In Person
+        <input type="checkbox" class="checkboxes" (click)="communicateBox('Email')"> Email 
+        <input type="checkbox" class="checkboxes" (click)="communicateBox('By Phone')"> By Phone
+        <input type="checkbox" class="checkboxes" (click)="communicateBox('Text')"> Text
+    </div>
+    <div>
+        <h3>List your primary goals for mentoring relationship:</h3>
+        <textarea name="" id="" cols="50" rows="5"></textarea>
+    </div>
+    <div class="supportCheckbox">
+        <h3>What kind of support are you interested in? <span>(Please check all that apply)</span></h3>
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')"> Mental Health
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> Financial Advice 
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')"> Career Advice
+        <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')"> Technical or Surgical
+    </div>
+    <div class="specificMentor">
+        <h3>Is there a specific mentor you'd like to meet with?</h3>
+        <input type="text" placeholder="Full name of requested mentor">
+    </div>
+</div>
+<!-- end apply for mentorship -->
+
+<!-- main content -->
+<section id="section-schedule" class="bg-light py-4">
+    <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
         <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
         <div class="main-info mb-3 d-flex align-items-end flex-column">
-            <h1>MightyVet is looking for some mighty mentors.</h1>
-            <p>Rotating office hours will be held online with the deans of veterinary schools 
-                and other thought leaders from the veterinary industry. Ask questions of the 
-                veterinary community for a real-time feedback loop to evaluate your career 
-                options. You can schedule office hours with one of our featured members.
-            </p>
-            <button class="text-center mt-auto">Schedule with a Mentor</button>
-        </div>
-    </main>
-    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-        <div class="benefits mb-3 flex-column d-flex align-items-start">
-            <h2>The benefits of mentoring</h2>
-            <ul>
-                <li>Are you willing to connect with people?</li>
-                <li>Help with emotional health?</li>
-                <li>Give advice on financial or business matters?</li>
-                <li>Lorem Epsom</li>
-                <li>filler list</li>
-            </ul>
-            <button class="text-center mt-auto" (click)="applyToBeAMentor()">Apply to Become a Mentor</button>
-        </div>
-        <div class="benefits mb-3 flex-column d-flex align-items-start">
-            <h2>The benefits of having a mentor</h2>
-            <ul>
-                <li>Are you willing to connect with people?</li>
-                <li>Help with emotional health?</li>
-                <li>Give advice on financial or business matters?</li>
-                <li>Lorem Epsom</li>
-                <li>filler list</li>
-            </ul>
-            <button class="text-center" (click)="applyToBeMentored()">Find a Mentor</button>
+            <h2>MightyVet is looking for some mighty mentors.</h2>
+            <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to evaluate your career options. You can schedule office hours with one of our featured members.</p>
+            <button class="btn btn-success mt-auto">Schedule with a Mentor</button>
         </div>
     </div>
-    <!-- end main body -->
+</section>
 
-    <!-- search bar -->
-    <div class="searchBar container my-3 p-0">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text bg-dark text-light">SEARCH COURSES</span>
+<!-- benefits -->
+<section id="section-benefits" class="pt-4">
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div id="be-a-mentor" class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">The benefits of mentoring</h4>
+                </div>
+                <div class="card-body">
+                    <i class="fa fa-handshake-o fa-4x text-muted"></i>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Are you willing to connect with people?</li>
+                        <li>Help with emotional health?</li>
+                        <li>Give advice on financial or business matters?</li>
+                        <li>Lorem Epsom</li>
+                        <li>filler list</li>
+                    </ul>
+                    <button class="btn btn-block btn-outline-info" (click)="applyToBeAMentor()">Apply to Become a Mentor</button>
+                </div>
             </div>
-            <input type="text" class="form-control" placeholder="Enter a course name" aria-label="coursesSearch" aria-describedby="coursesSearch">
-            <div class="input-group-append">
+            <div id="find-a-mentor" class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">The benefits of having a mentor</h4>
+                </div>
+                <div class="card-body">
+                    <i class="fa fa-users fa-4x text-muted"></i>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Are you willing to connect with people?</li>
+                        <li>Help with emotional health?</li>
+                        <li>Give advice on financial or business matters?</li>
+                        <li>Lorem Epsom</li>
+                        <li>filler list</li>
+                    </ul>
+                    <button class="btn btn-block btn-outline-info" (click)="applyToBeMentored()">Find a Mentor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- search bar -->
+<section id="mentor-search" class="mb-5 pt-5 pb-2 text-center">
+    <div class="container">
+        <div id="search-bar" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark border-dark text-light">SEARCH MENTORS</span>
+            </div>
+            <input type="text" class="form-control border-dark" placeholder="" aria-label="coursesSearch" aria-describedby="coursesSearch">
+            <div class="input-group-append border-dark">
                 <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
             </div>
         </div>
-    </div>
-    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-        <h6>Refine results by:</h6>
-        <div class="checkboxes">
-        <input class="mr-1" type="checkbox" name="name" value="name">
-        <label>Name</label>
-        <input class="ml-1 mr-1" type="checkbox" name="speciality" value="speciality">
-        <label>Specialty</label>
-        <input class="ml-1 mr-1" type="checkbox" name="mental_health" value="mental_health">
-        <label>Mental Health</label>
-        <input class="ml-1 mr-1" type="checkbox" name="career_advice" value="career_advice">
-        <label>Career Advice</label>
+        <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-end">
+            <h6>Refine results by:</h6>
+            <div class="checkboxes">
+                <input class="mr-1" type="checkbox" name="name" value="name">
+                <label>Name</label>
+                <input class="ml-1 mr-1" type="checkbox" name="speciality" value="speciality">
+                <label>Specialty</label>
+                <input class="ml-1 mr-1" type="checkbox" name="mental_health" value="mental_health">
+                <label>Mental Health</label>
+                <input class="ml-1 mr-1" type="checkbox" name="career_advice" value="career_advice">
+                <label>Career Advice</label>
+            </div>
         </div>
     </div>
-    <!-- end search bar -->
+</section>
 
-    <!-- footer -->
-    <footer class="footer">
-        <h1 class="footer__header">MightVet Mentors</h1>
-        <div class="footer__mentors">
-            <div class="mentor" *ngFor="let mentor of featuredMentors">
-                <div>
+<!-- list of mentor cards -->
+<section id="mentors-cards" class="container">
+    <h2 class="mb-3">MightVet Mentors</h2>
+    <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-start flex-wrap">
+        <!-- mentor card -->
+        <div class="card mentor flex-fill mr-3 mb-3" *ngFor="let mentor of featuredMentors">
+            <div class="card-body d-flex justify-content-start">
+                <div id="mentor-img" class="p-0 mr-3">
                     <img src= "/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
                 </div>
-                <div class="mentor_header">
+                <div class="mentor-header align-self-center">
                     <h4>{{mentor.title}}</h4>
-                    <h5>{{mentor.position}}</h5>
+                    <h6>{{mentor.position}}</h6>
                 </div>
+            </div>
+            <div class="mx-4 mb-2">
                 <p>{{mentor.description}}</p>
             </div>
         </div>
-    </footer>
-    <!-- end footer -->
-</div>
-<div class="text-center">
-  <button type="button" class="btn btn-light btn-lg">SEE ALL&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
+    </div>
+</section>
+
+<div class="container text-center">
+  <button type="button" class="btn btn-block btn-light btn-lg">SEE ALL&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
 </div>
 
