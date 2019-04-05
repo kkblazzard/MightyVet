@@ -1,49 +1,51 @@
-<div class="container">
-  <nav class="navbar navbar-light navbar-expand-lg fixed-top d-flex justify-content-between mb-4">
-    <div>
-      <img class="logo" src="assets/img/nav-bar/logo.png" alt="MightyVet Logo" [routerLink]="['']">
-    </div>
-    <div>
-      <div class="ml-auto mb-2 d-flex align-items-end flex-column">
-        <div class="login" *ngIf="!loggedin">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a id="login" class="btn" [routerLink]="['/login']">LOG IN</a>
-          <a id="signup" class="btn btn-outline-info mr-3" [routerLink]="['/signup']">SIGN UP</a>
-          <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
-        </div>
-        <div class="profile" *ngIf="loggedin">
-          <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
+<nav class="container navbar navbar-light navbar-expand-lg fixed-top d-flex justify-content-between mb-4 px-0">
+  <!-- site-logo -->
+  <div id="logo">
+    <img src="assets/img/nav-bar/logo.png" alt="MightyVet Logo" [routerLink]="['']">
+  </div>
+
+  <div id="right-nav">
+    <!-- login & sign up buttons -->
+    <div class="ml-auto mb-2 d-flex align-items-end flex-column">
+      <div class="login" *ngIf="!loggedin">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a id="login" class="btn" [routerLink]="['/login']">LOG IN</a>
+        <a id="signup" class="btn btn-outline-info mr-3" [routerLink]="['/signup']">SIGN UP</a>
+        <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
       </div>
-      <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="ml-auto navbar-nav navigation">
-          <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Online Learning</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Mentorship</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Resources</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Blog</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Support Us</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">About</a>
-          </li>
-        </ul>
+      <div class="profile" *ngIf="loggedin">
+        <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
     </div>
-  </nav>
-</div>
+    <!-- nav bar -->
+    <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="ml-auto navbar-nav navigation">
+        <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
+          <a class="nav-link px-4 py-3">Online Learning</a>
+        </li>
+        <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']">
+          <a class="nav-link px-4 py-3">Mentorship</a>
+        </li>
+        <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']">
+          <a class="nav-link px-4 py-3">Resources</a>
+        </li>
+        <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']">
+          <a class="nav-link px-4 py-3">Blog</a>
+        </li>
+        <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']">
+          <a class="nav-link px-4 py-3">Support Us</a>
+        </li>
+        <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']">
+          <a class="nav-link px-4 py-3">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

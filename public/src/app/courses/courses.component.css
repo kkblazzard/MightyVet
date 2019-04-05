@@ -1,9 +1,10 @@
-
+/* jumbotron */
+#top_image {
+    width: 100%;
+}
 /* left side */
 .left_filter{
-    display: inline-block;
     width: 15%;
-    margin-right: 5%;
 }
 .apply_button{
     background: #627894;
