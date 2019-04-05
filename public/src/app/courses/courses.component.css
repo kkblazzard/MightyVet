@@ -2,14 +2,9 @@
 #top_image {
     width: 100%;
 }
-/* left side */
-.left_filter{
-    width: 15%;
-}
-.apply_button{
-    background: #627894;
-    border-radius: 5px;
-    color: white;
+
+.date-filter {
+    width: 200px;
 }
 @media only screen and (min-width: 768px){
     #course-cards .card {
