@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//services
+// services
 import { WebinarsService } from './http_services/webinars.service';
 import { UsersService } from './http_services/users.service';
 import { MeetingsService } from './http_services/meetings.service';
@@ -10,16 +10,16 @@ import { NewslettersService } from './http_services/newsletters.service';
 import { PartnersService } from './http_services/partners.service';
 import { SpeakersService } from './http_services/speakers.service';
 import { FileUploadService } from './http_services/file-upload.service';
-//modules
+// modules
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-//Fontawesome
+// Fontawesome
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-//components
+// components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
@@ -49,7 +49,7 @@ import { SpeakerDetailsComponent } from './speaker-details/speaker-details.compo
 
 export class KeysPipe implements PipeTransform {
     transform(value: any): any {
-        return Object.keys(value) 
+        return Object.keys(value);
     }
 }
 @NgModule({
@@ -91,7 +91,17 @@ export class KeysPipe implements PipeTransform {
       useFactory: adapterFactory
     })
   ],
-  providers: [WebinarsService,UsersService,MeetingsService,AccreditationsService,MentorsService,NewslettersService,PartnersService,SpeakersService,FileUploadService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    WebinarsService,
+    UsersService,
+    MeetingsService,
+    AccreditationsService,
+    MentorsService,
+    NewslettersService,
+    PartnersService,
+    SpeakersService,
+    FileUploadService
+  ]
 })
 export class AppModule { }
