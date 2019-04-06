@@ -16,7 +16,7 @@ export class MentorsService {
     console.log("http.service getting mentors seeking approval")
     return this._http.get(`/api/mentors/approvals`)
   }
-  addmentor(newMentor) {
+  addMentor(newMentor) {
     console.log("http.service addmentor", newMentor);
     return this._http.post('/api/mentors', newMentor);
   }

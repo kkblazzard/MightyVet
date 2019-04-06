@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../http_services/users.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
+import { MentorsService } from '../http_services/mentors.service'
 
 
 @Component({
@@ -11,33 +11,25 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 
 export class MentorshipComponent implements OnInit {
-    // communicating with mentor checkboxes on and off switches
-    inPersonBox = false;
-    EmailBox = false;
-    byPhoneBox = false;
-    textBox = false;
-
     // what kind of mentee support needed checkboxes on and off switches
     mentalHealthBox = false;
     financialAdviceBox = false;
     careerAdviceBox = false;
     technicalBox = false;
 
+    login: any = {
+        _id: "id should go here",
+        firstName:"Dorian",
+        lastName:"Latchague",
+        email:"dorian@mean.com",
+        state:"WA",
+        titles:"Other",
+        org:"Coding Dojo",
+    }
+    userInfo: any;
+    mentors: any;
 
-    // variables to hold modals
-    findMentorModal;
-    blurredModal;
-    becomeMentorModal;
-    scheduleWithMentorModal;
-    calendarModal;
-
-
-    login: any;
-    // mentors= [];
-
-    newMentor: any = {};
-    newMentee:any = {};
-    newMenteeErrors:any;
+    newMentor: any;
 
     // temp fake mentor data
     featuredMentors = [
@@ -174,50 +166,61 @@ export class MentorshipComponent implements OnInit {
 
 
     constructor(
-        private _UsersService: UsersService,
+        private _usersService: UsersService,
         private _route: ActivatedRoute,
-        private _router: Router
+        private _router: Router,
+        private _mentorsService: MentorsService
     ) { }
     
     // gets all information we need when the page loads.
     ngOnInit() {
-        // this.mentors = retrieveAllMentors();
+        this.getMentors();
         // this.featuredMentors = this.mentors[0-7];
-        this.findMentorModal = document.getElementById("applyForMentorship");
-        this.becomeMentorModal = document.getElementById("becomeAMentor");
-        this.blurredModal = document.getElementById("blurryBackground");
-        this.calendarModal = document.getElementById("calendar");
-        this.newMentee={
-            firstName:"",
-            lastName:"",
-            email:"",
-            zipcode:"",
-            titles:"",
-            organizations:"",
-            support: []
+        this.userInfo = { 
+            firstName: this.login.firstName,
+            lastName: this.login.lastName,
+            email: this.login.email,
+            state: this.login.state,
+            titles: this.login.titles,
+            org: this.login.org
         }
         this.newMentor={
-            firstName:"",
-            lastName:"",
-            email:"",
-            zipcode:"",
-            titles:"",
-            organizations:"",
+            user_id: this.login._id,
+            resume: "",
             support: []
         }
     }
-
-    // switches the appropiate checked box on or off for searching later
-    communicateBox(message: string){
-        if (message === "In Person"){
-            this.inPersonBox = !this.inPersonBox;
-        } else if (message === "Email"){
-            this.EmailBox = !this.EmailBox;
-        } else if (message === "By Phone"){
-            this.byPhoneBox = !this.byPhoneBox;
-        } else if (message === "Text"){
-            this.textBox = !this.textBox;
-        }
+    getMentors(){
+        let obs = this._mentorsService.getMentors();
+        obs.subscribe(data => this.mentors = data);
+    }
+    addMentor(){
+        let obs = this._usersService.userUpdate(this.login._id, this.userInfo)
+        obs.subscribe(data =>{
+            console.log(data);
+            if (data['errors']){
+                console.log("Something went wrong when updating user data")
+                //if user update failed
+            }
+            else{
+                console.log("Successfully updated user information")
+                let obs2 = this._mentorsService.addMentor(this.newMentor={})
+                obs2.subscribe(data =>{
+                    console.log(data);
+                    if (data['errors']){
+                        console.log("Something went wrong when adding new mentor")
+                        //if adding mentor failed
+                    }
+                    else{
+                        console.log("Successfully added new mentor")
+                    }
+                })
+            }
+        })
+    }
+    getUser(){
+        let obs = this._usersService.getUser(this.login._id);
+        obs.subscribe(data => this.login = data)
     }
 
     // switches the appropiate checked box on or off for searching later
@@ -244,77 +247,19 @@ export class MentorshipComponent implements OnInit {
         // keeps track of boxes checked when submitted
         console.log( 
             [
-                {"inPersonBox": this.inPersonBox}, 
-                {"emailBox": this.EmailBox}, 
-                {"byPhoneBox": this.byPhoneBox},
-                {"textBox": this.textBox},
                 {"mentalHealthBox": this.mentalHealthBox},
                 {"financialAdiveBox": this.financialAdviceBox},
                 {"careerAdviceBox": this.careerAdviceBox},
                 {"technicalBox": this.technicalBox}
             ]
         );
-        console.log(this.newMentee)
 
 
         // area that will eventually submit all data based on form input and checkboxes
         // 
         // 
         // 
-
-        // closesModals once complete or will return an error
-
-        this.closeModals()
-        // 
-        // 
-        this.newMentee={
-            firstName:"",
-            lastName:"",
-            email:"",
-            zipcode:"",
-            titles:"",
-            roles:"",
-            organizations:""
-          }
     }
-
-    // closes find a mentor modal
-    closeModals(){
-        this.findMentorModal.style.display = "none";
-        this.blurredModal.style.display = "none";
-        this.becomeMentorModal.style.display = "none";
-        this.calendarModal.style.display = "none";
-    }
-    
-    // opens blurred modal
-    openMentoredModal(){
-        this.findMentorModal.style.display = "block";
-        this.blurredModal.style.display = "block";
-    }
-    openBecomeAMentor(){
-        this.becomeMentorModal.style.display = "block";
-        this.blurredModal.style.display = "block";
-    }
-    openCalendar(){
-        this.calendarModal.style.display = "block";
-        this.blurredModal.style.display = "block";
-    }
-    closeCalendar(){
-        this.calendarModal.style.display = "none";
-    }
-    
-    // clears form and then opens mentored modal a
-    applyToBeMentored(){
-        // clear from to make sure the form is empty when opened
-        this.openMentoredModal();
-    }
-    applyToBeAMentor(){
-        this.openBecomeAMentor();
-    }
-
-
-
-
 
     /*
     retrieveAllMentors(){

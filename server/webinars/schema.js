@@ -13,6 +13,10 @@ var WebinarSchema = new mongoose.Schema({
                 required: [true, "Please enter a title."],
                 minlength: [true, "The title must be at least 5 characters long."]
         },
+        type: {
+                type: String,
+        }, //Live or Video
+
         datetime: {type: Date}
         ,
         description: {

@@ -22,7 +22,7 @@ export class AdminWebinarsComponent implements OnInit {
   newAnswers: number = 0;
   speaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
   stage: number = 1;
-  newWebinar: any = {title: "", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []}
+  newWebinar: any = {title: "", type: "Live", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []}
   webinars: any;
   speakers: any;
   newSpeaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""}
@@ -49,7 +49,7 @@ export class AdminWebinarsComponent implements OnInit {
       console.log(data);
       if (!data['errors']){
         this.getWebinars();
-        this.newWebinar = this.newWebinar = {title: "", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
+        this.newWebinar = this.newWebinar = {title: "", type: "Live", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
       }
     })
   }
@@ -65,11 +65,11 @@ export class AdminWebinarsComponent implements OnInit {
     let obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
     obs.subscribe(data => this.speaker = data);
   }  
-  closeModal(){
+  openModal(){
     this.stage=1;
     this.speaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
     this.newSpeaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
-    this.newWebinar = {title: "", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
+    this.newWebinar = {title: "", type: "Live", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
     this.fileToUpload = {src: null, file: null};
     this.fileToUpload2 = {src: null, file: null};
     this.speaker_image = "";
