@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add a new webinar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -16,7 +16,15 @@
             <input class="form-control" name="title" type="text" [(ngModel)]="newWebinar.title">
           </div>
           <div class="form-group">
-            <label>Date and Time</label>
+            <label>Live Webinar or Video</label>
+            <select class="form-control" name="type" [(ngModel)]="newWebinar.type">
+              <option value="Live">Live Webinar</option>
+              <option value="Video">Video</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label *ngIf="newWebinar.type == 'Live'">Date and Time</label>
+            <label *ngIf="newWebinar.type == 'Video'">Date and Time of Live Broadcast</label>
             <input class="form-control" name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
           </div>
           <div class="form-group">
@@ -73,8 +81,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-success" (click)="stage2()">QUIZ</button>
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="closeModal()">CANCEL</button>
+          <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">QUIZ</button>
+          <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CANCEL</button>
         </div>
       </form>
       <form *ngIf="stage == 2">
@@ -118,35 +127,39 @@
         <div class="modal-footer">
           <button class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
           <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="closeModal()">CANCEL</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CANCEL</button>
         </div>
       </form>
       <div *ngIf="stage == 3">
         <div class="modal-body">
           <h4>Title: {{newWebinar.title}}</h4>
+          <p>Type: {{newWebinar.type}}</p>
           <p>Date and Time: {{newWebinar.datetime | date:'hh:mm a on MMMM dd y'}}</p>
           <p>Description: {{newWebinar.description}}</p>
           <p>Speaker: {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</p>
           <p>Webinar Link: {{newWebinar.webinar_link}}</p>
-          <h4>Quiz:</h4>
-          <h6>Please answer the following questions</h6>
-          <div class="question" *ngFor="let question of newWebinar.quiz, let i = index">
-            <p>Question {{i+1}}: {{question.question}}</p>
-            <div>
-              <input id="'ra_'+i" type="radio">
-              <label [for]="'ra_'+i">{{question.right_answer}}</label>
+          <div *ngIf="newWebinar.type =='Video'">
+            <h4>Quiz:</h4>
+            <h6>Please answer the following questions</h6>
+            <div class="question" *ngFor="let question of newWebinar.quiz, let i = index">
+              <p>Question {{i+1}}: {{question.question}}</p>
+              <div>
+                <input id="'ra_'+i" type="radio">
+                <label [for]="'ra_'+i">{{question.right_answer}}</label>
+              </div>
+              <div *ngFor="let wrong_answer of question.wrong_answers, let in = index">
+                <input type="radio" [id]="'wa_'+i+'_'+in" />
+                <label [for]="'wa_'+i+'_'+in">{{wrong_answer}}</label>
+              </div>
             </div>
-            <div *ngFor="let wrong_answer of question.wrong_answers, let in = index">
-              <input type="radio" [id]="'wa_'+i+'_'+in" />
-              <label [for]="'wa_'+i+'_'+in">{{wrong_answer}}</label>
-            </div>
+            <button class="btn btn-outline-secondary">Calculate Quiz Result</button>
           </div>
-          <button class="btn btn-outline-secondary">Calculate Quiz Result</button>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
+          <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
+          <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
           <button class="btn btn-outline-success" (click)=addWebinar()>SUBMIT</button>
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal" (click)="closeModal()">CANCEL</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CANCEL</button>
         </div>
       </div>
     </div>
@@ -156,7 +169,7 @@
 <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
   <h4>All Webinars</h4>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addWebinarForm">ADD A WEBINAR</button>
+  <button type="button" class="btn btn-info" (click)="openModal()" data-toggle="modal" data-target="#addWebinarForm">ADD A WEBINAR</button>
 </div>
 <table class="table">
   <thead>
