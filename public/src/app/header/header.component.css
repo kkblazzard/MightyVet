@@ -35,8 +35,9 @@
     background-color: #92dac3;
     cursor: pointer;
 }
-.profile_img{
-    height: 35px;
+.profile{
+    margin-left:95%;
+    margin-bottom: 5px;
 }
 .navbar .nav-link{
     padding: 10px 15px;

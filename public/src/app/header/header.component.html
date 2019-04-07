@@ -127,6 +127,9 @@
           <a id="sign-up" class="btn btn-outline-info mr-3" (click)="open(signup)">SIGN UP</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
         </div>
+        <div class="profile" *ngIf="loggedin">
+          <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle"></i></a>
+          <!-- <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']"> -->
         <div class="profile" *ngIf="_authenticationsService.isLoggedIn()">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
