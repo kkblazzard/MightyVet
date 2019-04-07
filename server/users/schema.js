@@ -2,8 +2,6 @@ var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var AccreditationSchema = require('../accreditations/schema');
-
 var UserSchema = new mongoose.Schema({
         firstName: {
                 type: String,
@@ -46,7 +44,7 @@ var UserSchema = new mongoose.Schema({
         state: {
                 type: String, 
                 minlength: 2,
-                maxlength: 2,
+                maxlength: 5,
                 required: [true, "Please select a state."]
         },
 
@@ -54,12 +52,14 @@ var UserSchema = new mongoose.Schema({
                 default: null
         },
 
-        accreditations: {type: [AccreditationSchema]},  //list of accreditation ids
+        accreditations: [{type : mongoose.Schema.ObjectId, 
+                ref : 'accreditation'}],  //list of accreditation ids
 
-        mentors: {type: [String]}, //list of mentor ids
-
-        mentor_id: {type: String,
-                default: null
+        mentors: [{type : mongoose.Schema.ObjectId, 
+                ref : 'mentor'}], //list of mentor applications
+        mentor_id: {
+                type : mongoose.Schema.ObjectId, 
+                ref : 'mentor'
         } //mentor application and info
 
 }, {timestamps:true})

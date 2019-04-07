@@ -4,6 +4,6 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
         if(err){console.log(err);
         }
 });
-var MentorSchema = require('./schema')
+var MenteeSchema = require('./schema')
 
-module.exports=mongoose.model('mentor', MentorSchema);
+module.exports=mongoose.model('mentee', MenteeSchema);

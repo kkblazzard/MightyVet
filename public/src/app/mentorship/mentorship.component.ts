@@ -185,9 +185,8 @@ export class MentorshipComponent implements OnInit {
                 org: ""
             }
             this.newMentor={
-                user_id: null,
+                user: null,
                 resume: "",
-                support: []
             }
         }
         this.getMentors();
@@ -212,9 +211,8 @@ export class MentorshipComponent implements OnInit {
                     state: data['state']
                 };
                 this.newMentor= {
-                    user_id: this.userInfo._id,
+                    user: data['_id'],
                     resume: "",
-                    support: []
                 }
             }
         })
@@ -233,11 +231,6 @@ export class MentorshipComponent implements OnInit {
         this.modal = null;
         if (this.isLoggedIn()){
             this.getUserInfo();
-            this.newMentor={
-                user_id: this.userInfo._id,
-                resume: "",
-                support: []
-            }
         }
     }
     getMentors(){
@@ -245,7 +238,7 @@ export class MentorshipComponent implements OnInit {
         obs.subscribe(data => this.mentors = data);
     }
     addMentor(){
-        let obs = this._usersService.userUpdate(this.userInfo._id, this.userInfo)
+        let obs = this._usersService.userUpdate(this.newMentor.user, this.userInfo)
         obs.subscribe(data =>{
             console.log(data);
             if (data['errors']){
@@ -254,15 +247,15 @@ export class MentorshipComponent implements OnInit {
             }
             else{
                 console.log("Successfully updated user information")
-                let obs2 = this._mentorsService.addMentor(this.newMentor={})
-                obs2.subscribe(data =>{
-                    console.log(data);
+                let obs2 = this._mentorsService.addMentor(this.newMentor);
+                obs2.subscribe(data => {
                     if (data['errors']){
-                        console.log("Something went wrong when adding new mentor")
+                        console.log("Something went wrong when adding new mentor", data)
                         //if adding mentor failed
                     }
                     else{
                         console.log("Successfully added new mentor")
+                        this.modal.close();
                     }
                 })
             }

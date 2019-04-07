@@ -46,8 +46,7 @@ export class AdminWebinarsComponent implements OnInit {
   getWebinars(){
     let obs = this._webinarsService.getWebinars();
     obs.subscribe(data => this.webinars=data)}
-  addWebinar(){
-    this.newWebinar.speaker = this.speaker;
+  addNewWebinar(){
     let obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data =>{
       console.log(data);

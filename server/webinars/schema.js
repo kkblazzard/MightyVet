@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 
-var SpeakerSchema = require('../speakers/schema')
 var QuestionSchema = new mongoose.Schema({
         question:{type:String},
         right_answer:{type:String},
@@ -24,15 +23,15 @@ var WebinarSchema = new mongoose.Schema({
                 required: [true, "Please enter a description."],
                 minlength: [true, "The description must be at least 10 characters long."]
         },
-        users: {type: [String]}  //list of user ids
+        users: [{type : mongoose.Schema.ObjectId, 
+                ref : 'accreditation'}]  //list of user ids
         ,
-        speaker: {
-                type: SpeakerSchema,
+        speaker: {type : mongoose.Schema.ObjectId, 
+                ref : 'speaker',
                 required: [true, "Please choose a speaker or create a new one."]
         },
         img: {
-                type: String,
-                required: [true, "Please upload a picture."]
+                type: String
         },
         webinar_link: {
                 type: String,

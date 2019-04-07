@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { UsersService } from '../http_services/users.service'
 @Injectable({
   providedIn: 'root'
 })
 export class MentorsService {
 
   constructor(
+    private _usersService: UsersService,
     private _http: HttpClient
   ) { }
   getMentors(){ 
@@ -17,7 +19,6 @@ export class MentorsService {
     return this._http.get(`/api/mentors/approvals`)
   }
   addMentor(newMentor) {
-    console.log("http.service addmentor", newMentor);
     return this._http.post('/api/mentors', newMentor);
   }
   mentorUpdate(id, mentorUpdate) {

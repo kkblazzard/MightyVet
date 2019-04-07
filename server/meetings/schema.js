@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
-var UserSchema = require('../users/schema')
 
 var MeetingSchema = new mongoose.Schema({
-    mentee: UserSchema,
+    mentor: {type : mongoose.Schema.ObjectId, 
+        ref : 'mentor'},
+    mentee: {type : mongoose.Schema.ObjectId, 
+        ref : 'mentee'},
     datetime: {type: Date},
 }, {timestamps:true})
 
