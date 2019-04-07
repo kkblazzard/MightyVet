@@ -1,4 +1,7 @@
 /* local css */
+.errors{
+    color: red;
+}
 .close:focus{
     outline: 0;
 }

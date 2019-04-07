@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  states: any = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
   modal: any;
   loginInfo: TokenPayload;
   loginErrors: any;
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit {
       lastName:"",
       email: "",
       password: "",
-      state: "",
+      state: "AL",
       title: "Vet Tech",
       org: "",
     }
@@ -60,7 +61,7 @@ export class HeaderComponent implements OnInit {
       lastName:"",
       email: "",
       password: "",
-      state: "",
+      state: "AL",
       title: "Vet Tech",
       org: "",
     }
