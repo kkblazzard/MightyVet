@@ -1,4 +1,7 @@
 /* local css */
+.close:focus{
+    outline: 0;
+}
 .navigation{
     box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
 }
@@ -9,29 +12,25 @@
     margin-left: 5px;
     max-width: 32px;
 }
-#login{
+#log-in{
     border: solid transparent 3px;
     border-radius: 5px;
 }
-#login:hover{
+#log-in:hover{
     background-color: #7DA7D9;
     border: solid #7DA7D9 3px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
 }
-#signup{
+#sign-up{
     border: solid #92dac3 3px;
     border-radius: 5px;
 }
-#signup:hover{
+#sign-up:hover{
     color: white;
     background-color: #92dac3;
     cursor: pointer;
-}
-.profile{
-    margin-left:95%;
-    margin-bottom: 5px;
 }
 .profile_img{
     height: 35px;

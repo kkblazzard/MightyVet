@@ -4,11 +4,11 @@ aws.config.update({
     // Your SECRET ACCESS KEY from AWS should go here,
     // Never share it!
     // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
-    secretAccessKey: "put secretAccessKey here",
+    secretAccessKey: require('../secrets').aws_key,
     // Not working key, Your ACCESS KEY ID from AWS should go here,
     // Never share it!
     // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
-    accessKeyId: "putaccessKeyId here",
+    accessKeyId: require('../secrets').aws_keyid,
     region: 'us-west-1' // region of your bucket
 });
 

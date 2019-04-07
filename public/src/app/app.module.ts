@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // services
 import { WebinarsService } from './http_services/webinars.service';
 import { UsersService } from './http_services/users.service';
@@ -26,13 +27,11 @@ import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { MentorshipComponent } from './mentorship/mentorship.component';
 import { ResourcesComponent } from './resources/resources.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SupportComponent } from './support/support.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { HeaderComponent } from './header/header.component';
 import { BlogComponent } from './blog/blog.component';
-import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminComponent } from './admin/admin.component';
@@ -60,13 +59,11 @@ export class KeysPipe implements PipeTransform {
     CourseDetailComponent,
     MentorshipComponent,
     ResourcesComponent,
-    SignUpComponent,
     UserProfileComponent,
     SupportComponent,
     SchedulingComponent,
     HeaderComponent,
     BlogComponent,
-    LoginComponent,
     AboutComponent,
     FooterComponent,
     AdminComponent,
@@ -89,7 +86,8 @@ export class KeysPipe implements PipeTransform {
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    NgbModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [
