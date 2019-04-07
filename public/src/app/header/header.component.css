@@ -1,4 +1,13 @@
 /* local css */
+#profile_img i{
+    margin-right: 5px;
+    width: 32px;
+}
+a.link_text{
+    text-decoration: underline;
+    color: #395371;
+    cursor: pointer;
+}
 .errors{
     color: red;
 }
@@ -17,27 +26,28 @@
 }
 #log-in{
     border: solid transparent 3px;
-    border-radius: 5px;
+    cursor: pointer;
+}
+#logout{
+    border: solid #92dac3 3px;
+    cursor: pointer;
+}
+#logout:hover{
+    color: white;
+    background-color: #92dac3;
 }
 #log-in:hover{
     background-color: #7DA7D9;
     border: solid #7DA7D9 3px;
-    border-radius: 5px;
     color: white;
-    cursor: pointer;
 }
 #sign-up{
     border: solid #92dac3 3px;
-    border-radius: 5px;
+    cursor: pointer;
 }
 #sign-up:hover{
     color: white;
     background-color: #92dac3;
-    cursor: pointer;
-}
-.profile{
-    margin-left:95%;
-    margin-bottom: 5px;
 }
 .navbar .nav-link{
     padding: 10px 15px;

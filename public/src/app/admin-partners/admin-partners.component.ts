@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PartnersService } from '../http_services/partners.service';
-import { FileUploadService } from '../http_services/file-upload.service'
+import { FileUploadService } from '../http_services/file-upload.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -12,10 +13,13 @@ class ImageSnippet {
   styleUrls: ['./admin-partners.component.css']
 })
 export class AdminPartnersComponent implements OnInit {
+  @ViewChild("addPartner") partnerModal: ElementRef;
+  modal: any;
   partners: any;
   newPartner: any = {tier: 1, partner: {name: "", img: "", link: ""}};
   fileToUpload: ImageSnippet;
   constructor(
+    private _modalsService: NgbModal,
     private _filesUploadService: FileUploadService,
     private _partnersService: PartnersService,
     private _route: ActivatedRoute,
@@ -37,7 +41,11 @@ export class AdminPartnersComponent implements OnInit {
       this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
     });
   }
-  closeModal(){
+  openModal(){
+    this.modal = this._modalsService.open(this.partnerModal)
+    this.modal.result.then(()=>{}, () => this.closedModal())
+  }
+  closedModal(){
     this.newPartner = {tier: 1, partner: {name: "", img: "", link: ""}};
     this.fileToUpload = {src: null, file: null};
   }

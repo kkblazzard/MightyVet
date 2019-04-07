@@ -8,22 +8,6 @@
 .modal-dialog{
     max-width: 80%;
 }
-.modal-content{
-    background-color: #A8C9EF;
-    border: 3px solid #7DA7D9;
-    border-radius: 5px;
-    /* overflow: scroll; */
-    /* text-align: left; */
-}
-.modal-header{
-    border: none;
-}
-.modal-footer{
-    border: none;
-}
-.modal-header button{
-    color:  #A8C9EF;
-}
 .form-input{
     width: 45%;
     margin: .5rem 1.5rem .5rem 0;
@@ -31,63 +15,10 @@
     border-radius: 5px;
     text-align: center;
 }
-
-.form-submit{
-    text-align: right;
-    /* display: inline-block; */
-}
-.form-submit__h2{
-    display: block;
-    margin: 0 0 .5rem 0;
-    color: #627894;
-}
-.form-submit__button{
-    text-align: center;
-    width: 100%;
-    margin: 0;
-    height: 2rem;
-    background-color: #627894;
-    border-radius: 5px;
-    color: white;
-}
 textarea {
     resize: none;
     overflow: scroll;
 }
-
-.becomeMentor__calendar{
-    width: 300px;
-}
-
-.becomeMentor__textarea h3{
-    display: inline-block;
-    font-size: .5rem;
-    width: 90%;
-    text-align: center;
-}
-
-.becomeMentor__textarea{
-    margin-right: 1.5rem;
-    display: inline-block;
-    width: 45%;
-}
-
-#calendar{
-    display: none;
-    background-color: #A8C9EF;
-    mix-blend-mode: normal;
-    border: 3px solid #7DA7D9;
-    border-radius: 5px;
-    position: fixed;
-    z-index: 1035;
-    top: 10%;
-    left: 25%;
-    width: 700px;
-    height: 80vh;
-    padding: 1rem 2rem;
-    overflow: scroll;
-}
-
 /* media queries */
 
 @media only screen and (min-width:992px){
