@@ -1,72 +1,67 @@
-<div class="modal fade" id="becomeAMentor" tabindex="-1" role="dialog" aria-labelledby="becomeAMentor"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLabel">Become a mentor</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form>
-                <div class="modal-body container">
-                    <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+<ng-template #becomeAMentor>
+    <div class="modal-header">
+        <h2 class="modal-title">Become a mentor</h2>
+        <button type="button" class="close" (click)="modal.dismiss('click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body container">
+            <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
                     {{newMenteeErrors.errors.firstName.message}}
                     </p> -->
-                    <h6>Changing this information will also change your user information.</h6>
-                    <div class="form-row">
-                        <input type="text" class="form-control col" placeholder="First Name" name="userInfo.firstName"
-                            [(ngModel)]="userInfo.firstName">
-                        <input type="text" class="form-control col" placeholder="Last Name" name="userInfo.lastName"
-                            [(ngModel)]="userInfo.lastName">
-                    </div>
-                    <div class="form-row">
-                        <input type="email" class="form-control col" placeholder="Preferred Email" name="userInfo.email"
-                            [(ngModel)]="userInfo.email">
-                        <select class="form-control col" placeholder="State" name="userInfo.state"
-                        [(ngModel)]="userInfo.state">
-                            <option *ngFor="let state of states">{{state}}</option>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <select class="form-control col" placeholder="Your Title(s)" name="userInfo.titles"
-                            [(ngModel)]="userInfo.titles">
-                            <option>Vet Tech</option>
-                            <option>Receptionist</option>
-                            <option>Manager</option>
-                            <option>Veterinarian</option>
-                            <option>Student</option>
-                            <option>Other</option>
-                        </select>
-                        <input type="text" class="form-control col" placeholder="Organization(s)"
-                            name="userInfo.org" [(ngModel)]="userInfo.org">
-                    </div>
-                    <div>
-                        <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
-                        <textarea class="form-control" type="text" name="newMentor.resume"
-                        [(ngModel)]="newMentor.resume"></textarea>
-                    </div>
-                    <div>
-                        <h6>What kind of support are you willing to give? (Check all that apply)</h6>
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
-                        Mental Health
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')"> 
-                        Financial Advice
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')">
-                        Career Advice
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')">
-                        Technical or Surgical
-                    </div>
-                </div>
-                <!-- arrange this to be in bottom right with absolute -->
-                <div class="modal-footer">
-                    <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
-                    <button class="form-submit__button" (click)="submit()">Submit</button>
-                </div>
-            </form>
+            <h6>Changing this information will also change your user information.</h6>
+            <div class="form-row">
+                <input type="text" class="form-control col" placeholder="First Name" name="userInfo.firstName"
+                    [(ngModel)]="userInfo.firstName">
+                <input type="text" class="form-control col" placeholder="Last Name" name="userInfo.lastName"
+                    [(ngModel)]="userInfo.lastName">
+            </div>
+            <div class="form-row">
+                <input type="email" class="form-control col" placeholder="Preferred Email" name="userInfo.email"
+                    [(ngModel)]="userInfo.email">
+                <select class="form-control col" placeholder="State" name="userInfo.state" [(ngModel)]="userInfo.state">
+                    <option *ngFor="let state of states">{{state}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <select class="form-control col" placeholder="Your Title(s)" name="userInfo.title"
+                    [(ngModel)]="userInfo.title">
+                    <option>Vet Tech</option>
+                    <option>Receptionist</option>
+                    <option>Manager</option>
+                    <option>Veterinarian</option>
+                    <option>Student</option>
+                    <option>Other</option>
+                </select>
+                <input type="text" class="form-control col" placeholder="Organization(s)" name="userInfo.org"
+                    [(ngModel)]="userInfo.org">
+            </div>
+            <div>
+                <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
+                <textarea class="form-control" type="text" name="newMentor.resume"
+                    [(ngModel)]="newMentor.resume"></textarea>
+            </div>
+            <div>
+                <h6>What kind of support are you willing to give? (Check all that apply)</h6>
+                <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                Mental Health
+                <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')">
+                Financial Advice
+                <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')">
+                Career Advice
+                <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')">
+                Technical or Surgical
+            </div>
         </div>
-    </div>
-</div>
+        <!-- arrange this to be in bottom right with absolute -->
+        <div class="modal-footer">
+            <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
+            <button class="form-submit__button" (click)="submit()">Submit</button>
+        </div>
+    </form>
+</ng-template>
+
 <!-- end become a mentor -->
 <!-- <div class="modal fade" id="applyForMentorship" tabindex="-1" role="dialog" aria-labelledby="applyForMentorship"
     aria-hidden="true">
@@ -127,7 +122,9 @@
         <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
         <div class="main-info mb-3 d-flex align-items-end flex-column">
             <h2>MightyVet is looking for some mighty mentors.</h2>
-            <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to evaluate your career options. You can schedule office hours with one of our featured members.</p>
+            <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders
+                from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to
+                evaluate your career options. You can schedule office hours with one of our featured members.</p>
             <button class="btn btn-info mt-auto">Find a Mentor</button>
         </div>
     </div>
@@ -150,8 +147,8 @@
                         <li>Lorem Epsom</li>
                         <li>filler list</li>
                     </ul>
-                    <button class="btn btn-block btn-outline-info" data-toggle="modal"
-                        data-target="#becomeAMentor">Apply to Become a Mentor</button>
+                    <button class="btn btn-block btn-outline-info" (click)="open(becomeAMentor)">Apply to Become a
+                    Mentor</button>
                 </div>
             </div>
             <div id="find-a-mentor" class="card mb-4 shadow-sm">
@@ -209,7 +206,7 @@
             <div class="card mentor mb-3" *ngFor="let mentor of featuredMentors">
                 <div class="card-body d-flex justify-content-start">
                     <div id="mentor-img" class="p-0 mr-3">
-                        <img src= "/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
+                        <img src="/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
                     </div>
                     <div class="mentor-header align-self-center">
                         <h4>{{mentor.title}}</h4>

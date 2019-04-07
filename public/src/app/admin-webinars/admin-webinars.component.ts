@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebinarsService } from '../http_services/webinars.service';
 import { SpeakersService } from '../http_services/speakers.service';
-import { FileUploadService } from '../http_services/file-upload.service'
+import { FileUploadService } from '../http_services/file-upload.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 class ImageSnippet {
@@ -15,6 +16,8 @@ class ImageSnippet {
 })
 
 export class AdminWebinarsComponent implements OnInit {
+  @ViewChild('addWebinar') webinarModal: ElementRef;
+  modal: any;
   speaker_image: String = "";
   fileToUpload: ImageSnippet;
   fileToUpload2: ImageSnippet;
@@ -27,6 +30,7 @@ export class AdminWebinarsComponent implements OnInit {
   speakers: any;
   newSpeaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""}
   constructor(
+    private _modalsService: NgbModal,
     private _webinarsService: WebinarsService,
     private _speakersService: SpeakersService,
     private _filesUploadService: FileUploadService,
@@ -64,8 +68,12 @@ export class AdminWebinarsComponent implements OnInit {
     this.stage=3;
     let obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
     obs.subscribe(data => this.speaker = data);
-  }  
+  } 
   openModal(){
+    this.modal = this._modalsService.open(this.webinarModal)
+    this.modal.result.then(()=>{}, () => this.closedModal())
+  }
+  closedModal(){
     this.stage=1;
     this.speaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
     this.newSpeaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
