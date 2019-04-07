@@ -1,18 +1,25 @@
-h1, h2, h3, h4, h5, h6{
-    color: #395371;
-}
-/* rect1 */
-#rect1 .rect1-right{
-    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('/assets/img/home_page/splash_2.jpg');
+/* welcome */
+.jumbotron {
+    width: 100%;
+    height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/home.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    width: 100%;
+}
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
 }
 /* newsletter */
 #newsletter{
     background: rgba(168, 201, 239, 0.62);
 }
-#newsletter input {
-    width: 300px;
+#newsletter form {
+    width: 40%;
+}
+#courses_img img {
+    width: 100%;
 }
