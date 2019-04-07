@@ -8,11 +8,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let tentativeMentor of approvalMentors">
-      <td>{{mentor.user.firstName}} {{mentor.user.lastName}}</td>
+      <td>{{tentativeMentor.user.firstName}} {{tentativeMentor.user.lastName}}</td>
       <td>
         <button>View Application</button>
-        <button (click)="approveMentor(mentor._id)">Approve</button>
-        <button (click)="declineMentor(mentor._id)">Decline</button>
+        <button (click)="approveMentor(tentativeMentor._id)">Approve</button>
+        <button (click)="declineMentor(tentativeMentor._id)">Decline</button>
       </td>
     </tr>
   </tbody>

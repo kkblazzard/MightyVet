@@ -22,7 +22,7 @@ export class AdminMentorsComponent implements OnInit {
   }
   getApprovals(){
     let obs = this._mentorsService.getApprovals();
-    obs.subscribe(data => this.approvalMentors = data);
+    obs.subscribe(data =>  this.approvalMentors = data);
   }
   getMentors(){
     let obs = this._mentorsService.getMentors();

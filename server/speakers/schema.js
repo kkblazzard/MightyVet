@@ -6,6 +6,8 @@ var SpeakerSchema = new mongoose.Schema({
     lastName: String,
     img: String, 
     description: String,
+    webinars: [{type : mongoose.Schema.ObjectId, 
+        ref : 'webinar'}]
 }, {timestamps:true})
 
 module.exports = SpeakerSchema;
