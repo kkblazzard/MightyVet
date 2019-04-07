@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
-
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 var AccreditationSchema = require('../accreditations/schema');
+
 var UserSchema = new mongoose.Schema({
         firstName: {
                 type: String,
@@ -21,11 +23,14 @@ var UserSchema = new mongoose.Schema({
                 unique: [true, "This email address is already in use."]
         },
 
-        password: {
-                type: String, 
-                required: [true, "Please enter a password."], 
-                minlength: [3, "Your password must be 3 characters or longer."],
-                bcrypt: true 
+        password: { hash: {
+                        type: String, 
+                        required: [true, "Please enter a password."], 
+                },
+                salt: {
+                        type: String, 
+                        required: [true, "Please enter a password."], 
+                }
         },
 
         title: {
@@ -40,21 +45,43 @@ var UserSchema = new mongoose.Schema({
 
         state: {
                 type: String, 
-                length: 2,
+                minlength: 2,
+                maxlength: 2,
                 required: [true, "Please select a state."]
         },
 
-        picture: {type: String},
+        picture: {type: String,
+                default: null
+        },
 
         accreditations: {type: [AccreditationSchema]},  //list of accreditation ids
 
         mentors: {type: [String]}, //list of mentor ids
 
-        mentor_id: {type: String} //mentor application and info
+        mentor_id: {type: String,
+                default: null
+        } //mentor application and info
 
 }, {timestamps:true})
 
 UserSchema.plugin(uniqueValidator);
-UserSchema.plugin(require('mongoose-bcrypt'));
-
+UserSchema.methods.setPassword = function(password){
+        this.password.salt = crypto.randomBytes(16).toString('hex');
+        this.password.hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
+};
+UserSchema.methods.validPassword = function(password) {
+        var hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
+        return this.password.hash === hash;
+};
+UserSchema.methods.generateJwt = function() {
+        var expiry = new Date();
+        expiry.setDate(expiry.getDate() + 7);
+      
+        return jwt.sign({
+          _id: this._id,
+          email: this.email,
+          name: this.name,
+          exp: parseInt(expiry.getTime() / 1000),
+        }, require('../secrets').jwt); // DO NOT KEEP YOUR SECRET IN THE CODE!
+};
 module.exports = UserSchema;

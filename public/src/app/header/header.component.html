@@ -1,3 +1,112 @@
+<ng-template #login>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Log In</h2>
+        <button type="button" class="close" (click)="modal.dismiss('click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body container">
+          <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                      {{newMenteeErrors.errors.firstName.message}}
+                      </p> -->
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="Email" name="loginInfo.email" [(ngModel)]="loginInfo.email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password" name="loginInfo.password"
+              [(ngModel)]="loginInfo.password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="loggingIn()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #signup>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Sign Up</h2>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body container">
+          <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                      {{newMenteeErrors.errors.firstName.message}}
+                      </p> -->
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" placeholder="Preferred Email" name="newUser.email"
+              [(ngModel)]="newUser.email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password">
+          </div>
+          <div class="form-group">
+            <p *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password field is not
+              matching your Password field.</p>
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm">
+          </div>
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control col" placeholder="First Name" name="newUser.firstName"
+              [(ngModel)]="newUser.firstName">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName"
+              [(ngModel)]="newUser.lastName">
+          </div>
+          <div class="form-group">
+            <label>State</label>
+            <input type="text" class="form-control" placeholder="State" name="newUser.state"
+              [(ngModel)]="newUser.state">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <select class="form-control" placeholder="Your Title(s)" name="newUser.title" [(ngModel)]="newUser.title">
+              <option>Vet Tech</option>
+              <option>Receptionist</option>
+              <option>Manager</option>
+              <option>Veterinarian</option>
+              <option>Student</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Organization</label>
+            <input type="text" class="form-control" placeholder="Organization(s)" name="newUser.org"
+              [(ngModel)]="newUser.org">
+          </div>
+        </div>
+        <!-- arrange this to be in bottom right with absolute -->
+        <div class="modal-footer">
+          <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
+          <p
+            *ngIf="password_confirm != newUser.password || newUser.email == '' || newUser.password == '' || newUser.firstName == '' || newUser.lastName == '' || newUser.org == ''">
+            Please fill out every field correctly before submitting.</p>
+          <button
+            *ngIf="password_confirm != newUser.password || newUser.email == '' || newUser.password == '' || newUser.firstName == '' || newUser.lastName == '' || newUser.org == ''"
+            class="btn btn-secondary">Submit</button>
+          <button
+            *ngIf="password_confirm == newUser.password && newUser.email != '' && newUser.password != '' && newUser.firstName != '' && newUser.lastName != '' && newUser.org != ''"
+            class="btn btn-primary" (click)="register()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
 <nav class="navbar navbar-light navbar-expand-lg fixed-top mb-4">
   <div class="container d-flex justify-content-between">
     <!-- site-logo -->
@@ -7,21 +116,24 @@
     <div id="right-nav">
       <!-- login & sign up buttons -->
       <div class="ml-auto mb-2 d-flex align-items-end flex-column">
-        <div class="login" *ngIf="!loggedin">
+        <div class="login" *ngIf="!_authenticationsService.isLoggedIn()">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a id="login" class="btn" [routerLink]="['/login']">LOG IN</a>
-          <a id="signup" class="btn btn-outline-info mr-3" [routerLink]="['/signup']">SIGN UP</a>
+          <a id="log-in" class="btn" (click)="open(login)">LOG IN</a>
+          <a id="sign-up" class="btn btn-outline-info mr-3" (click)="open(signup)">SIGN UP</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
         </div>
-        <div class="profile" *ngIf="loggedin">
-          <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']">
+        <div class="profile" *ngIf="_authenticationsService.isLoggedIn()">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          <a [routerLink]="['/user']">
+            <img class="profile_img mr-2" alt="profile_img" src="assets/img/nav-bar/profile.png">
+          </a>
+          <a id="logout" class="btn btn-outline-info mr-3" (click)="_authenticationsService.logout()">LOG OUT</a>
         </div>
       </div>
       <!-- nav bar -->

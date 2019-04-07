@@ -6,19 +6,9 @@ import { HttpClient } from '@angular/common/http';
 export class UsersService {
 
   constructor(private _http: HttpClient) { }
-  // -------------------log&reg-----------------------
-  confirmLogin(user) {
-    console.log("http.service confirmLogin", user);
-    return this._http.post('/api/users/login', user);
-  }
-// -------------------users------------------------------
   getUsers() {
     console.log("http.service getting users");
     return this._http.get('/api/users');
-  }
-  addUser(newUser) {
-    console.log("http.service addUser", newUser);
-    return this._http.post('/api/users', newUser);
   }
   userUpdate(id, userUpdate) {
     console.log("http.service userupdate", userUpdate);
