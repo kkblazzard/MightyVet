@@ -23,8 +23,10 @@
                     <div class="form-row">
                         <input type="email" class="form-control col" placeholder="Preferred Email" name="userInfo.email"
                             [(ngModel)]="userInfo.email">
-                        <input type="text" class="form-control col" placeholder="State" name="userInfo.state"
-                            [(ngModel)]="userInfo.state">
+                        <select class="form-control col" placeholder="State" name="userInfo.state"
+                        [(ngModel)]="userInfo.state">
+                            <option *ngFor="let state of states">{{state}}</option>
+                        </select>
                     </div>
                     <div class="form-row">
                         <select class="form-control col" placeholder="Your Title(s)" name="userInfo.titles"

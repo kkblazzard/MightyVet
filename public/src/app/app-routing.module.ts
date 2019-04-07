@@ -5,8 +5,6 @@ import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { MentorshipComponent } from './mentorship/mentorship.component';
 import { ResourcesComponent } from './resources/resources.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SupportComponent } from './support/support.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
@@ -22,8 +20,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
-  {path: 'signup', component: SignUpComponent}, //do not change (to redirect to user) until login creation complete
-  {path: 'login', component: LoginComponent}, //do not change (to redirect to user) until login creation complete
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/details', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
