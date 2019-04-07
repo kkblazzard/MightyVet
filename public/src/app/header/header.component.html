@@ -14,7 +14,8 @@
                       </p> -->
           <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control" placeholder="Email" name="loginInfo.email" [(ngModel)]="loginInfo.email">
+            <input type="text" class="form-control" placeholder="Email" name="loginInfo.email"
+              [(ngModel)]="loginInfo.email">
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -53,7 +54,8 @@
             <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password">
           </div>
           <div class="form-group">
-            <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password field is not
+            <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm
+              Password field is not
               matching your Password field.</p>
             <label>Confirm Password</label>
             <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm">
@@ -70,8 +72,7 @@
           </div>
           <div class="form-group">
             <label>State</label>
-            <select class="form-control" placeholder="State" name="newUser.state"
-              [(ngModel)]="newUser.state">
+            <select class="form-control" placeholder="State" name="newUser.state" [(ngModel)]="newUser.state">
               <option *ngFor="let state of states">{{state}}</option>
             </select>
           </div>
@@ -130,39 +131,40 @@
         <div class="profile" *ngIf="loggedin">
           <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle"></i></a>
           <!-- <img class="profile_img" alt="profile_img" src="assets/img/nav-bar/profile.png" [routerLink]="['/user']"> -->
-        <div class="profile" *ngIf="_authenticationsService.isLoggedIn()">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a [routerLink]="['/user']">
-            <img class="profile_img mr-2" alt="profile_img" src="assets/img/nav-bar/profile.png">
-          </a>
-          <a id="logout" class="btn btn-outline-info mr-3" (click)="_authenticationsService.logout()">LOG OUT</a>
+          <div class="profile" *ngIf="_authenticationsService.isLoggedIn()">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a [routerLink]="['/user']">
+              <img class="profile_img mr-2" alt="profile_img" src="assets/img/nav-bar/profile.png">
+            </a>
+            <a id="logout" class="btn btn-outline-info mr-3" (click)="_authenticationsService.logout()">LOG OUT</a>
+          </div>
         </div>
-      </div>
-      <!-- nav bar -->
-      <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="ml-auto navbar-nav navigation">
-          <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Online Learning</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Mentorship</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Resources</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Blog</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">Support Us</a>
-          </li>
-          <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']">
-            <a class="nav-link px-4 py-3">About</a>
-          </li>
-        </ul>
+        <!-- nav bar -->
+        <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="ml-auto navbar-nav navigation">
+            <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
+              <a class="nav-link px-4 py-3">Online Learning</a>
+            </li>
+            <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']">
+              <a class="nav-link px-4 py-3">Mentorship</a>
+            </li>
+            <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']">
+              <a class="nav-link px-4 py-3">Resources</a>
+            </li>
+            <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']">
+              <a class="nav-link px-4 py-3">Blog</a>
+            </li>
+            <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']">
+              <a class="nav-link px-4 py-3">Support Us</a>
+            </li>
+            <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']">
+              <a class="nav-link px-4 py-3">About</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
