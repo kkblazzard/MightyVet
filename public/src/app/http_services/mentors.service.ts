@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { UsersService } from '../http_services/users.service'
 @Injectable({
   providedIn: 'root'
 })
 export class MentorsService {
 
   constructor(
+    private _usersService: UsersService,
     private _http: HttpClient
   ) { }
   getMentors(){ 
-    console.log("http.service getting all mentors")
+    console.log("http.service getting all mentors");
     return this._http.get(`/api/mentors`);
   }
   getApprovals(){
-    console.log("http.service getting mentors seeking approval")
-    return this._http.get(`/api/mentors/approvals`)
+    console.log("http.service getting mentors seeking approval");
+    return this._http.get(`/api/mentors/approvals`);
   }
-  addmentor(newMentor) {
-    console.log("http.service addmentor", newMentor);
+  getMentor(mentor_id){
+    console.log("http.service getting mentor");
+    return this._http.get('/api/mentors/'+mentor_id);
+  }
+  addMentor(newMentor) {
     return this._http.post('/api/mentors', newMentor);
   }
   mentorUpdate(id, mentorUpdate) {
@@ -26,7 +31,7 @@ export class MentorsService {
   }
   approveMentor(id){
     console.log("http.service approving mentor");
-    return this._http.put('/api/mentors/' + id, {set: {approval: true}});
+    return this._http.put('/api/mentors/' + id, {$set: {approval: true}});
   }
   declineMentee(id, mentee_id){
     console.log("http.service decline mentee");

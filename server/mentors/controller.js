@@ -1,17 +1,27 @@
 const Mentors=require('./models');
+const Users=require('../users/models');
 
 module.exports={
     mentorAll: (req, res)=>Mentors
-        .find({approval: true}).then(all=>console.log(all) || res.json(all))
+        .find({approval: true})
+        .populate('user')
+        .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
     mentorApprovals: (req, res)=>Mentors
-        .find({approval: false}).then(all=>console.log(all) || res.json(all))
+        .find({approval: false})
+        .populate('user')
+        .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
     mentorNew: (req, res) => {
         console.log("entered new controller", req.body);
         Mentors
         .create(req.body)
-        .then(anew=>console.log("created in controller",anew)|| res.json(anew))
+        .then(mentor=>{
+            console.log("created in controller", mentor)|| res.json(mentor)
+            Users.findByIdAndUpdate(req.body.user,{mentor_id: mentor._id})
+            .then(data => console.log("User mentor_id successfully updated:", data))
+            .catch(err=>console.log(err)|| res.json(err))
+        })
         .catch(err=>console.log(err) || res.json(err))
     },
     mentorRemove: (req, res) => Mentors
@@ -21,6 +31,7 @@ module.exports={
 
     mentorDetails:(req, res) => Mentors
         .findById(req.params.id)
+        .populate('user')
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
 

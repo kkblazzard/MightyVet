@@ -1,70 +1,25 @@
-.rect1{
-    margin-top: 30px;
-}
-.phone_btn{
-    background: #95D9C3;
-    color: #395371;
-    display: block;
-    margin-top: 10px;
-    margin-left: 60%;
-    width: 370px;
-    border-radius: 5px;
-}
-.phone_btn:hover{
-    background-color: #395371;
-    color: white;
-}
-.rect1-left{
-    display: inline-block;
-    width: 48%;
-    vertical-align: top;
-}
-.rect1-card img{
-    vertical-align: middle;
-}
-#resources{
-    margin-left: 10px;
-    margin-right: 56px;
-}
-#courses{
-    margin-right: 61px;
-}
-#mentorship{
-    margin-right: 55px;
-}
-.rect1-card .card-text{
-    display: inline-block;
-    width: 50%;
-}
-.card-text h5{
-    color: #395371;
-    font-size: 16px;
-    letter-spacing: 0.03em;
-    font-weight: 800;
-}
-.card-text p{
-    font-size: 17px;
-    line-height: 23px;
-}
-.rect1-right{
-    width: 48%;
-    height: 500px;
-    display: inline-block;
-    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('/assets/img/home_page/splash_2.jpg');
+/* welcome */
+.jumbotron {
+    width: 100%;
+    height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/home.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    vertical-align: top;
 }
-.rect1-right{
-    padding: 10px;
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
 }
-.rect1-right h1{
-    font-weight: normal;
-    color: #395371;
-    font-size: 46px;
+/* newsletter */
+#newsletter{
+    background: rgba(168, 201, 239, 0.62);
 }
-.rect1-right p{
-    font-size: 23px;
-    line-height: 36px;
+#newsletter form {
+    width: 40%;
+}
+#courses_img img {
+    width: 100%;
 }

@@ -1,13 +1,11 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
-
+.container-fluid{
+    padding: 0;
+}
 @media only screen and (max-width:991px){
-    .container{
-        padding-top: 100px;
-        max-width: 900px;
-        margin: 0;
-        padding-left: 30px;
-        padding-right: 30px;
+    .container-fluid{
+        padding-top: 80px;
     }
 }

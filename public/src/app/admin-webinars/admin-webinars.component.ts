@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebinarsService } from '../http_services/webinars.service';
 import { SpeakersService } from '../http_services/speakers.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Pipe, PipeTransform } from '@angular/core';
+import { FileUploadService } from '../http_services/file-upload.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
 @Component({
   selector: 'app-admin-webinars',
   templateUrl: './admin-webinars.component.html',
@@ -12,18 +16,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class AdminWebinarsComponent implements OnInit {
+  @ViewChild('addWebinar') webinarModal: ElementRef;
+  modal: any;
+  speaker_image: String = "";
+  fileToUpload: ImageSnippet;
+  fileToUpload2: ImageSnippet;
   newQuestions: number = 0;
   newAnswers: number = 0;
   speaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
   stage: number = 1;
-  newWebinar: any = {title: "", datetime: new Date(), description: "", speaker: "", video_link: "", quiz: []}
+  newWebinar: any = {title: "", type: "Live", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []}
   webinars: any;
   speakers: any;
   newSpeaker: any = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""}
   constructor(
-    public sanitizer: DomSanitizer,
+    private _modalsService: NgbModal,
     private _webinarsService: WebinarsService,
     private _speakersService: SpeakersService,
+    private _filesUploadService: FileUploadService,
     private _route: ActivatedRoute,
     private _router: Router
     ) { }
@@ -36,13 +46,14 @@ export class AdminWebinarsComponent implements OnInit {
   getWebinars(){
     let obs = this._webinarsService.getWebinars();
     obs.subscribe(data => this.webinars=data)}
-  addWebinar(){
-    this.newWebinar.speaker = this.speaker;
+  addNewWebinar(){
     let obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data =>{
       console.log(data);
-      this.getWebinars();
-      this.newWebinar = this.newWebinar = {title: "", datetime: new Date(), description: "", speaker: "", video_link: "", quiz: []};
+      if (!data['errors']){
+        this.getWebinars();
+        this.newWebinar = this.newWebinar = {title: "", type: "Live", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
+      }
     })
   }
   stage1(){
@@ -56,7 +67,22 @@ export class AdminWebinarsComponent implements OnInit {
     this.stage=3;
     let obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
     obs.subscribe(data => this.speaker = data);
-  }  
+  } 
+  openModal(){
+    this.modal = this._modalsService.open(this.webinarModal)
+    this.modal.result.then(()=>{}, () => this.closedModal())
+  }
+  closedModal(){
+    this.stage=1;
+    this.speaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
+    this.newSpeaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: ""};
+    this.newWebinar = {title: "", type: "Live", datetime: new Date(), description: "", speaker: "", webinar_link: "", quiz: []};
+    this.fileToUpload = {src: null, file: null};
+    this.fileToUpload2 = {src: null, file: null};
+    this.speaker_image = "";
+    this.newQuestions = 0;
+    this.newAnswers = 0;
+  }
   //3 next functions are to allow model binding with datetime-local input
   private parseDateToStringWithFormat(date: Date): string {
     let result: string;
@@ -111,7 +137,57 @@ export class AdminWebinarsComponent implements OnInit {
       console.log(data);
       this.getSpeakers();
       this.newWebinar.speaker = data['_id'];
+      this.fileToUpload.src="";
+      this.fileToUpload.file=null;
+      this.getSpeakerImage();
       this.newSpeaker = {title: "Dr.", firstName: "", lastName: "", description: "", img: "", webinars: []};
     })
+  }
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.fileToUpload = new ImageSnippet(event.target.result, file);
+      let obs = this._filesUploadService.speakerUploadImage(this.fileToUpload.file)
+      obs.subscribe(
+        (data) => {
+          this.newSpeaker.img = data['imageUrl'];
+        },
+        (err) => {
+        
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
+  processFile2(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.fileToUpload2 = new ImageSnippet(event.target.result, file);
+      let obs = this._filesUploadService.webinarUploadImage(this.fileToUpload2.file)
+      obs.subscribe(
+        (data) => {
+          this.newWebinar.img = data['imageUrl'];
+        },
+        (err) => {
+        
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
+  getSpeakerImage(){
+    if (this.newWebinar.speaker == "" || this.newWebinar.speaker == "new"){
+      this.speaker_image = "";
+    }
+    else{
+      let obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
+      obs.subscribe(data => this.speaker_image = data['img']);
+    }
   }
 }
