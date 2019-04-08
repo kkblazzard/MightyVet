@@ -49,9 +49,7 @@
         <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password">
       </div>
       <div class="form-group">
-        <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm
-          Password field is not
-          matching your Password field.</p>
+        <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password field is not matching your Password field.</p>
         <label>Confirm Password</label>
         <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm">
       </div>
@@ -127,7 +125,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle"></i></a>
+          <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle fa-3x"></i></a>
           <a id="logout" class="btn btn-outline-info mr-3" (click)="_authenticationsService.logout()">LOG OUT</a>
         </div>
         <!-- nav bar -->
