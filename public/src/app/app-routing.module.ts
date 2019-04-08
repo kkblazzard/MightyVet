@@ -17,6 +17,7 @@ import { AdminPartnersComponent } from './admin-partners/admin-partners.componen
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
@@ -33,7 +34,8 @@ const routes: Routes = [
     {path: "webinars", component: AdminWebinarsComponent},
     {path: "users", component: AdminUsersComponent},
     {path: "partners", component: AdminPartnersComponent},
-    {path: "mentors", component: AdminMentorsComponent}
+    {path: "mentors", component: AdminMentorsComponent},
+    {path: "newsletters", component: AdminNewsletterComponent}
   ]},
   {path:'**', component: NotFoundComponent},
 ];
