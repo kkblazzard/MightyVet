@@ -1,3 +1,75 @@
-<p>
-  user-profile works!
-</p>
+<div class="container">
+    <div class="row top">
+        <div class="col-4 user-info">
+            <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
+            <div class="user-info__image">
+                <div class="holder-image"></div>
+                <!-- <img src="" alt=""> -->
+                <div class="user-info__edit-section">
+                    <button (click)="jumpToEdit()" class="user-info__edit-button">edit profile</button>
+                </div>
+            </div>
+            <div class="user-info__events">
+                <h6 class="user-info__events-title">This Week</h6>
+            </div>
+            <div class="user-info__button clear-button__div">
+                <button>View All --></button>
+            </div>
+        </div>
+        <div class="col-8 messages" >
+            <div class="row inbox">
+                <h1 class="inbox-header">Inbox</h1>
+                <div class="inbox-content">
+                    <h2 class="inbox-content__header">New Mentor Request</h2>
+                    <div class="inbox__mentor-request">
+                        <div class="clear-button__div">
+                            <button>All Requests --></button>
+                        </div>
+                    </div>
+                    <h2 class="inbox-content__header">Messages</h2>
+                    <div class="inbox__messages">
+                        <div class="clear-button__div">
+                            <button>All Messages --></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row education">
+                <h1 class="education-header">Continuing Education</h1>
+                <div class="education-main">
+                    <div class="education-main__nav">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" (click)="continuingEducation('progress')" >CE Credit Progress</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" (click)="continuingEducation('courses_available')" >Courses Available</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" (click)="continuingEducation('courses_complete')" >Courses Complete</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="education-main__content align-middle">
+                        <div class="education-main__content-changeable" *ngIf=continuingEducationContent>
+                            <p>
+                                {{continuingEducationContent}}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row bottom">
+        <div id="Bot" class="col">
+            <h1>EDIT PROFILE SECTION</h1>
+        </div>
+        <div class="col">
+            <h1>ROW 2 COL 2</h1>
+        </div>
+    </div>
+    <button (click)="topFunction()" id="myBtn" title="Go to top">Top</button>
+</div>
