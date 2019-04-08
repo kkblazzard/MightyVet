@@ -51,6 +51,9 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err)),
     userDetails: (req, res) => Users
         .findById(req.params.id)
+        .populate('mentor_id')
+        .populate('accreditations')
+        .populate('accreditations.webinar')
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
     userUpdate: (req, res) => Users
