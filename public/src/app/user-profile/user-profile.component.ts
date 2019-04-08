@@ -35,6 +35,7 @@ export class UserProfileComponent implements OnInit {
     getUserInfo(){
         let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
         obs.subscribe(data => {
+            console.log(data);
             if (data['errors']){
                 alert("error");
                 console.log(data);

@@ -111,25 +111,67 @@
     <div id="right-nav">
       <!-- login & sign up buttons -->
       <div class="ml-auto mb-2 d-flex align-items-end flex-column">
-        <div class="login" *ngIf="!_authenticationsService.isLoggedIn()">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="login" *ngIf="!_authenticationsService.isLoggedIn()" ngbDropdown>
+          <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
             <span class="navbar-toggler-icon"></span>
           </button>
+          <div ngbDropdownMenu aria-labelledby="navbartoggle">
+            <ul class="ml-auto navbar-nav navigation">
+              <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Online Learning</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Mentorship</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Resources</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Blog</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Support Us</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">About</a>
+              </li>
+            </ul>
+          </div>
           <a id="log-in" class="btn" (click)="open('login')">LOG IN</a>
           <a id="sign-up" class="btn btn-outline-info mr-3" (click)="open('signup')">SIGN UP</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
         </div>
-        <div class="profile" *ngIf="_authenticationsService.isLoggedIn()">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="profile" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
+          <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
             <span class="navbar-toggler-icon"></span>
           </button>
+          <div ngbDropdownMenu aria-labelledby="navbartoggle">
+            <ul class="ml-auto navbar-nav navigation">
+              <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Online Learning</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Mentorship</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Resources</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Blog</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">Support Us</a>
+              </li>
+              <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                <a class="nav-link px-4 py-3">About</a>
+              </li>
+            </ul>
+          </div>
           <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle fa-3x"></i></a>
           <a id="logout" class="btn btn-outline-info mr-3" (click)="_authenticationsService.logout()">LOG OUT</a>
         </div>
         <!-- nav bar -->
-        <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="navbar-nav collapse navbar-collapse">
           <ul class="ml-auto navbar-nav navigation">
             <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
               <a class="nav-link px-4 py-3">Online Learning</a>
