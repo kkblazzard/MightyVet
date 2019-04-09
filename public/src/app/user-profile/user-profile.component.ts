@@ -47,6 +47,7 @@ export class UserProfileComponent implements OnInit {
                     lastName: data['lastName'],
                     email: data['email'],
                     title: data['title'],
+                    password: data['password'],
                     org: data['org'],
                     state: data['state']
                 };
@@ -66,6 +67,17 @@ export class UserProfileComponent implements OnInit {
     jumpToEdit() {
         document.body.scrollTop = 500; // For Safari
         document.documentElement.scrollTop = 500; // For Chrome, Firefox, IE and Opera
+    }
+
+    deleteUser(){
+        alert("delete account");
+    }
+    updateUser(){
+        console.log(
+            this.userInfo.email,
+            this.userInfo.password,
+            this.userInfo.username
+        )
     }
 
 }

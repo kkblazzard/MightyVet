@@ -58,16 +58,48 @@
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <div class="row bottom">
-        <div id="Bot" class="col">
-            <h1>EDIT PROFILE SECTION</h1>
+        <div id="Bot" class="col-5 edit-profile">
+            <h3 class="edit-profile__title">Settings</h3>
+            <form class="edit-profile__form">
+                <div class="form-row">
+                    <label class="form-label" for="">Update email address</label>
+                    <input 
+                        type="email" 
+                        class="form-input form-control col" 
+                        placeholder="enter email address" 
+                        name="userInfo.email"
+                        [(ngModel)]="userInfo.email">
+                </div>
+                <div class="form-row">
+                    <label class="form-label" for="">Update password</label>
+                    <input 
+                        type="password" 
+                        class="form-input form-control col" 
+                        placeholder="enter new password" 
+                        name="userInfo.password"
+                        [(ngModel)]="userInfo.password">
+                </div>
+                <div class="form-row">
+                    <label class="form-label" for="">Change username</label>
+                    <input 
+                        type="text" 
+                        class="form-input form-control col" 
+                        placeholder="change username" 
+                        name="userInfo.title"
+                        [(ngModel)]="userInfo.title">
+                </div>
+                <div class="modal-footer">
+                    <button class="delete" (click)="deleteUser()">delete account</button>
+                    <button class="saveChanges" (click)="updateUser()">save changes</button>
+                </div>
+            </form>
         </div>
-        <div class="col">
+        <div class="col-6">
             <h1>ROW 2 COL 2</h1>
         </div>
     </div>
