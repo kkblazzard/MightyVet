@@ -12,6 +12,10 @@ export class WebinarsService {
     console.log("http.service getting webinars");
     return this._http.get(`/api/webinars`);
   }
+  searchWebinars(){
+    console.log("http.service searching webinars");
+    return this._http.get(`/api/webinars/search`);
+  }
   addWebinar(newWebinar) {
     console.log("http.service addWebinar", newWebinar);
     return this._http.post('/api/webinars', newWebinar);

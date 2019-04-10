@@ -30,12 +30,16 @@
         <textarea class="form-control" name="description" [(ngModel)]="newWebinar.description"></textarea>
       </div>
       <div class="form-group">
-        <label *ngIf="!newWebinar.img" for="file">Choose a picture for your webinar</label>
+        <label for="file">Choose a picture for your webinar</label>
         <input class="form-control" #imageInput2 id="file" type="file" accept="image/*"
           (change)="processFile2(imageInput2)">
       </div>
-      <div *ngIf="speaker_image != ''" >
-        <img [src]="speaker_image" alt="Speaker Image">
+      <div *ngIf="fileToUpload2" class="img-preview-container">
+        <div *ngIf="fileToUpload2.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+        <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+        <img *ngIf="fileToUpload2.status === 'ok'" [src]="newWebinar.img" alt="Image Preview">
+      
       </div>
       <div class="form-group">
         <label>Webinar link</label>
@@ -50,6 +54,9 @@
             {{speaker.lastName}}</option>
           <option value="new">ADD A NEW SPEAKER</option>
         </select>
+        <div *ngIf="speaker_image != ''" >
+          <img [src]="speaker_image" alt="Speaker Image">
+        </div>
       </div>
       <form *ngIf="newWebinar.speaker == 'new'" class = "border p-4">
         <h5>Add a speaker</h5>
@@ -77,9 +84,16 @@
           <textarea class="form-control" name="description" [(ngModel)]="newSpeaker.description"></textarea>
         </div>
         <div class="form-group">
-          <label *ngIf="newSpeaker.img == ''" for="file">Choose a picture for your speaker</label>
+          <label for="file">Choose a picture for your speaker</label>
           <input #imageInput class="form-control" id="file" type="file" accept="image/*"
             (change)="processFile(imageInput)">
+        </div>
+        <div *ngIf="fileToUpload" class="img-preview-container">
+          <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+          <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+          <img *ngIf="fileToUpload.status === 'ok'" [src]="newSpeaker.img" alt="Image Preview">
+        
         </div>
         <button class="btn btn-sm btn-outline-secondary" (click)="addSpeaker()">ADD SPEAKER</button>
       </form>

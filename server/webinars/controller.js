@@ -1,8 +1,10 @@
 const Webinars=require('./models');
 const Speakers=require('../speakers/models')
 module.exports={
-    webinarAll: (req, res)=>Webinars
+    webinarAll: (req, res)  =>
+        Webinars
         .find()
+        .sort('-createdAt')
         .populate('speaker')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
@@ -17,7 +19,25 @@ module.exports={
         })
         .catch(err=>console.log(err) || res.json(err))
     },
-
+    webinarSearch: (req, res) => {
+        date = new Date();
+        date = date.setHours(date.getHours()+1)
+        console.log(date)
+        Webinars
+        .find({
+            $or:[ //don't post live webinars that have past
+                {type: "Video"},
+                {   
+                    type: "Live", 
+                    datetime: { $gt: date}
+                }
+            ]
+        })
+        .sort('-createdAt')
+        .populate('speaker')
+        .then(all=>console.log(all) || res.json(all))
+        .catch(err=>console.log(err)|| res.json(err))
+    },
     webinarRemove: (req, res) => Webinars
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted))
