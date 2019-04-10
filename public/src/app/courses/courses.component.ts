@@ -26,16 +26,16 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCourses();
-    this.featuredNumber = 7;
+    this.featuredNumber = 5;
   }
   getAllCourses() {
-    this._webinarsService.getWebinars()
+    this._webinarsService.searchWebinars()
     .subscribe(courses => {
       console.log('received all courses', courses);
       this.allCourses = courses;
     });
   }
   seeMore(){
-    this.featuredNumber += 8;
+    this.featuredNumber += 6;
   }
 }
