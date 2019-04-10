@@ -203,18 +203,18 @@
     <div class="container">
         <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
             <!-- mentor card -->
-            <div class="card mentor mb-3" *ngFor="let mentor of featuredMentors">
+            <div class="card mentor mb-3" *ngFor="let mentor of mentors | search: featuredNumber"> <!-- search pipe to limit the amount of displayed data-->
                 <div class="card-body d-flex justify-content-start">
                     <div id="mentor-img" class="p-0 mr-3">
-                        <img src="/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
+                        <img [src]="mentor.user.picture" [alt]="mentor.user.firstName +'s image'">
                     </div>
                     <div class="mentor-header align-self-center">
-                        <h4>{{mentor.title}}</h4>
-                        <h6>{{mentor.position}}</h6>
+                        <h4>{{mentor.user.firstName}} {{mentor.user.lastName}}</h4>
+                        <h6>{{mentor.user.title}}, {{mentor.user.org}}</h6>
                     </div>
                 </div>
                 <div class="mx-4 mb-2">
-                    <p>{{mentor.description}}</p>
+                    <p>{{mentor.resume}}</p>
                 </div>
             </div>
         </div>
@@ -222,6 +222,6 @@
 </section>
 
 <div class="container text-center">
-    <button type="button" class="btn btn-block btn-light btn-lg">SEE ALL&nbsp;&nbsp;<i
+    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i
             class="fa fa-chevron-down"></i></button>
 </div>

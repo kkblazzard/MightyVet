@@ -41,59 +41,8 @@
 </div>
 <section id="course-cards" class="container">
   <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
-    <div class="card mb-4">
-      <img src="../../assets/img/courses/courseimg1.png" class="card-img-top" alt="course image">
-      <div class="card-body">
-        <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">{{course.description}}</p>
-        <a class="card-link" [routerLink]="['/courses/details']">READ MORE&nbsp;&nbsp;<i
-            class="fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <!-- static dummy cards for now -->
-    <div class="card mb-4">
-      <img src="../../assets/img/courses/courseimg2.png" class="card-img-top" alt="course image">
-      <div class="card-body">
-        <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">{{course.description}}</p>
-        <a class="card-link" [routerLink]="['/courses/details']">READ MORE&nbsp;&nbsp;<i
-            class="fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <div class="card mb-4">
-      <img src="../../assets/img/courses/courseimg3.png" class="card-img-top" alt="course image">
-      <div class="card-body">
-        <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">{{course.description}}</p>
-        <a class="card-link" [routerLink]="['/courses/details']">READ MORE&nbsp;&nbsp;<i
-            class="fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <div class="card mb-4">
-      <img src="../../assets/img/courses/courseimg4.png" class="card-img-top" alt="course image">
-      <div class="card-body">
-        <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">{{course.description}}</p>
-        <a class="card-link" [routerLink]="['/courses/details']">READ MORE&nbsp;&nbsp;<i
-            class="fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <div class="card mb-4">
-      <img src="../../assets/img/courses/courseimg5.png" class="card-img-top" alt="course image">
-      <div class="card-body">
-        <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">{{course.description}}</p>
-        <a class="card-link" [routerLink]="['/courses/details']">READ MORE&nbsp;&nbsp;<i
-            class="fa fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <div class="card mb-4">
-      <img src="../../assets/img/courses/courseimg6.png" class="card-img-top" alt="course image">
+    <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4">  <!-- search pipe to limit number of entries -->
+      <img [src]="course.img" class="card-img-top" alt="Course Image">
       <div class="card-body">
         <h5 class="card-title">{{course.title}}</h5>
         <p class="card-text">{{course.description}}</p>
@@ -103,7 +52,7 @@
     </div>
   </div>
   <div class="text-center">
-      <button type="button" class="btn btn-light btn-lg">SEE ALL&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
+      <button type="button" class="btn btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
   </div>
 </section>
 <!-- search bar

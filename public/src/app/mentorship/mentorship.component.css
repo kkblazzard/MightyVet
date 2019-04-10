@@ -4,7 +4,9 @@
 .mentor:hover {
     background: rgba(168, 201, 239, 0.50);
 }
-
+#mentor-img img{
+    width: 176px;
+}
 .modal-dialog{
     max-width: 80%;
 }
