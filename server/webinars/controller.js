@@ -15,21 +15,23 @@ module.exports={
         .create(req.body)
         .then(anew => {
             console.log("created in controller",anew)|| res.json(anew)
-            Speakers.findByIdAndUpdate(req.body.speaker,{$push: {_id: anew._id}})
+            Speakers.findByIdAndUpdate(req.body.speaker,{$push: { webinars: anew._id}
+            })
+            .then(Speakers => console.log("Succesfully updated speaker webinars", speaker))
+            .catch(err=>console.log(err)|| res.json(err))
         })
         .catch(err=>console.log(err) || res.json(err))
     },
     webinarSearch: (req, res) => {
         date = new Date();
-        date = date.setHours(date.getHours()+1)
-        console.log(date)
+        date = date.setHours(date.getHours()-2);
         Webinars
         .find({
             $or:[ //don't post live webinars that have past
                 {type: "Video"},
                 {   
                     type: "Live", 
-                    datetime: { $gt: date}
+                    datetime: { $gte: date }
                 }
             ]
         })

@@ -62,7 +62,7 @@ export class MentorshipComponent implements OnInit {
             }
         }
         this.getMentors();
-        this.featuredNumber = 7;
+        this.featuredNumber = 8;
     }
     isLoggedIn(){
         return this._authenticationsService.isLoggedIn();

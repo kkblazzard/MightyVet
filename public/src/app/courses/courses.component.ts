@@ -26,7 +26,7 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCourses();
-    this.featuredNumber = 5;
+    this.featuredNumber = 6;
   }
   getAllCourses() {
     this._webinarsService.searchWebinars()
