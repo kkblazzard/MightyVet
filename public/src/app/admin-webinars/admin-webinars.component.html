@@ -63,20 +63,20 @@
         <hr />
         <div class="row">
           <div class="form-group col">
-            <label>First name</label>
-            <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
-          </div>
-          <div class="form-group col">
-            <label>Last name</label>
-            <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
-          </div>
-          <div class="form-group col">
             <label>Title</label>
             <select class="form-control" name="title" [(ngModel)]="newSpeaker.title">
               <option>Dr.</option>
               <option>Mr.</option>
               <option>Ms.</option>
             </select>
+          </div>
+          <div class="form-group col">
+            <label>First name</label>
+            <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
+          </div>
+          <div class="form-group col">
+            <label>Last name</label>
+            <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
           </div>
         </div>
         <div class="form-group">
