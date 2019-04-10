@@ -74,6 +74,7 @@ export class AdminWebinarsComponent implements OnInit {
     obs.subscribe(data => this.webinars = data );
   }
   addNewWebinar() {
+    this.newWebinar.datetime += this.newWebinar.datetime.getTimezoneOffset() * 60000;
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
       console.log(data);
@@ -128,8 +129,7 @@ export class AdminWebinarsComponent implements OnInit {
 
   public set dateTimeLocal(v: string) {
     const actualParsedDate = v ? new Date(v) : new Date();
-    const normalizedParsedDate = new Date(actualParsedDate.getTime() + (actualParsedDate.getTimezoneOffset() * 60000));
-    this.newWebinar.datetime = normalizedParsedDate;
+    this.newWebinar.datetime = actualParsedDate;
   }
 
   public get dateTimeLocal(): string {
