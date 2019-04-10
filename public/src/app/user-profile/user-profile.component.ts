@@ -49,7 +49,8 @@ export class UserProfileComponent implements OnInit {
                     title: data['title'],
                     password: data['password'],
                     org: data['org'],
-                    state: data['state']
+                    state: data['state'],
+                    picture: data['picture']
                 };
                 console.log(this.userInfo)
             }

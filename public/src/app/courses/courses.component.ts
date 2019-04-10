@@ -16,7 +16,7 @@ export class CoursesComponent implements OnInit {
   ) { }
 
   allCourses: any;
-
+  featuredNumber: number;
   // setting static data as example
   course = {
     title: 'Veterinary Self-Worth and the Psychology of Money',
@@ -26,6 +26,7 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCourses();
+    this.featuredNumber = 7;
   }
   getAllCourses() {
     this._webinarsService.getWebinars()
@@ -33,5 +34,8 @@ export class CoursesComponent implements OnInit {
       console.log('received all courses', courses);
       this.allCourses = courses;
     });
+  }
+  seeMore(){
+    this.featuredNumber += 8;
   }
 }

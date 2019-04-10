@@ -52,6 +52,20 @@ export class KeysPipe implements PipeTransform {
         return Object.keys(value);
     }
 }
+
+@Pipe({ name: 'search', pure: true })
+
+export class SearchPipe implements PipeTransform {
+    transform(value: Array<any>, num): Array<any> {
+      if (value){
+        return value.slice(0, num);
+      }
+      else{
+        return new Array<any>();
+      }
+    }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +87,7 @@ export class KeysPipe implements PipeTransform {
     AdminUsersComponent,
     AvailabilityComponent,
     KeysPipe,
+    SearchPipe,
     AdminMentorsComponent,
     NotFoundComponent,
     SpeakerDetailsComponent,

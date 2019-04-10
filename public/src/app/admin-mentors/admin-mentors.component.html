@@ -35,9 +35,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let tentativeMentor of approvalMentors">
-      <td>{{tentativeMentor.user.firstName}} {{tentativeMentor.user.lastName}}</td>
+      <td><a (click)="openModal(tentativeMentor._id)">{{tentativeMentor.user.firstName}} {{tentativeMentor.user.lastName}}</a></td>
       <td>
-        <button class="btn btn-primary" (click)="openModal(tentativeMentor._id)">View Application</button>
         <button class="btn btn-success" (click)="approveMentor(tentativeMentor._id)">Approve</button>
         <button class="btn btn-danger" (click)="declineMentor(tentativeMentor._id)">Decline</button>
       </td>
