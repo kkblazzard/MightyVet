@@ -25,10 +25,16 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err))
     },
     mentorRemove: (req, res) => Mentors
-        .findByIdAndDelete(req.params.id)
-        .then(deleted=>console.log("deleted") ||res.json(deleted))
-        .catch(err=>console.log(err) || res.json(err)),
-
+        .findById(req.params.id)
+        .then( data => {
+            Users.findByIdAndUpdate(data.user, {$set: {mentor_id:null}})
+            .then(user=>console.log("deleted") ||res.json(user))
+            .catch(err=>console.log(err) || res.json(err));
+            Mentors.findByIdAndDelete(req.params.id)
+            .then(deleted=>console.log("deleted") ||res.json(deleted))
+            .catch(err=>console.log(err) || res.json(err));
+        })
+        .catch(err => console.log(err) || res.json(err)),
     mentorDetails:(req, res) => Mentors
         .findById(req.params.id)
         .populate('user')

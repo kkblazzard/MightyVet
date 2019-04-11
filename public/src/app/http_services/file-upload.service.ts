@@ -9,7 +9,6 @@ export class FileUploadService {
   constructor(private _http: HttpClient) { }
 
   public speakerUploadImage(image: File) {
-    console.log("http.service uploading speaker image");
     const formData = new FormData();
 
     formData.append('image', image);

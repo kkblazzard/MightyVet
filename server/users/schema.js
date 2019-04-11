@@ -49,7 +49,7 @@ var UserSchema = new mongoose.Schema({
         },
 
         picture: {type: String,
-                default: null
+                default: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"
         },
 
         accreditations: [{type : mongoose.Schema.ObjectId, 
@@ -57,6 +57,7 @@ var UserSchema = new mongoose.Schema({
 
         mentors: [{type : mongoose.Schema.ObjectId, 
                 ref : 'mentor'}], //list of mentor applications
+                
         mentor_id: {
                 type : mongoose.Schema.ObjectId, 
                 ref : 'mentor'

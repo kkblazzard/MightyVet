@@ -43,14 +43,17 @@ module.exports={
     .catch(err => console.log(err) || res.json(err))
     },
     userAll: (req, res)=> Users
-        .find().then(all=>console.log(all) || res.json(all))
+        .find()
+        .select('-password')
+        .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
     userRemove: (req, res) => Users
         .findByIdAndDelete(req.params.id)
-        .then(deleted=>console.log("deleted") ||res.json(deleted))
+        .then(deleted=>console.log("deleted") ||res.json(deleted.select("-password")))
         .catch(err=>console.log(err) || res.json(err)),
     userDetails: (req, res) => Users
         .findById(req.params.id)
+        .select('-password')
         .populate('mentor_id')
         .populate('accreditations')
         .populate('accreditations.webinar')

@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   loginErrors: any;
   newUser: TokenPayload;
   password_confirm: String;
-  registerErrors:any;
+  registerErrors: any;
   //element refs
   @ViewChild('login') login: ElementRef
   @ViewChild('signup') signup: ElementRef
@@ -31,8 +31,8 @@ export class HeaderComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    this.loginInfo = { email: "",
-    password: ""}
+    this.loginInfo = { email: '',
+    password: ''}
     this.newUser = {
       firstName:"",
       lastName:"",
@@ -42,21 +42,23 @@ export class HeaderComponent implements OnInit {
       title: "Vet Tech",
       org: "",
     }
-    this.password_confirm = "";
-    this.loginSubscription = this._eventsService.openLogin().subscribe(()=>{
-      this.open("login");
+    this.password_confirm = '';
+    this.loginSubscription = this._eventsService.openLogin().subscribe(() => {
+      this.open('login');
     });
-    this.signUpSubscription = this._eventsService.openSignup().subscribe(()=>{
-      this.open("signup");
+    this.signUpSubscription = this._eventsService.openSignup().subscribe(() => {
+      this.open('signup');
     });
   }
   open(content) {
-    if(content == 'login'){
+    if(content === 'login') {
+    // log in modal
       this.modal = this._modalService.open(this.login);
-      this.modal_string = "login";
+      this.modal_string = 'login';
     }
-    else if(content == 'signup'){
-      this.modal = this._modalService.open(this.signup);
+    else {
+      // sign up modal
+      this.modal = this._modalService.open(this.signup, {size: 'lg'});
       this.modal_string = "signup";
     }
     this.modal.result.then(()=>{}, () => this.closedModal())

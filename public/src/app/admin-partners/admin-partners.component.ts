@@ -5,6 +5,8 @@ import { FileUploadService } from '../http_services/file-upload.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
   constructor(public src: string, public file: File) {}
 }
 @Component({
@@ -13,7 +15,7 @@ class ImageSnippet {
   styleUrls: ['./admin-partners.component.css']
 })
 export class AdminPartnersComponent implements OnInit {
-  @ViewChild("addPartner") partnerModal: ElementRef;
+  @ViewChild("addNewPartner") partnerModal: ElementRef;
   modal: any;
   partners: any;
   newPartner: any = {tier: 1, partner: {name: "", img: "", link: ""}};
@@ -47,7 +49,7 @@ export class AdminPartnersComponent implements OnInit {
   }
   closedModal(){
     this.newPartner = {tier: 1, partner: {name: "", img: "", link: ""}};
-    this.fileToUpload = {src: null, file: null};
+    this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
   }
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];

@@ -1,37 +1,49 @@
 <ng-template #addWebinar>
   <div class="modal-header">
-    <h5 class="modal-title">Add a new webinar</h5>
+    <h3 class="modal-title">Add a new webinar</h3>
     <button type="button" class="close" (click)="modal.dismiss('click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <form *ngIf="stage == 1">
     <div class="modal-body justify-content-between">
-      <h3>Webinar Info</h3>
-      <div class="form-group">
-        <label>Title</label>
-        <input class="form-control" name="title" type="text" [(ngModel)]="newWebinar.title">
-      </div>
-      <div class="form-group">
-        <label>Live Webinar or Video</label>
-        <select class="form-control" name="type" [(ngModel)]="newWebinar.type">
-          <option value="Live">Live Webinar</option>
-          <option value="Video">Video</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label *ngIf="newWebinar.type == 'Live'">Date and Time</label>
-        <label *ngIf="newWebinar.type == 'Video'">Date and Time of Live Broadcast</label>
-        <input class="form-control" name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
+      <div class= "row">
+        <div class="form-group col">
+          <label>Webinar title</label>
+          <input class="form-control" name="title" type="text" [(ngModel)]="newWebinar.title">
+        </div>
+        <div class="form-group col">
+          <label>Live webinar or video</label>
+          <select class="form-control" name="type" [(ngModel)]="newWebinar.type">
+            <option value="Live">Live webinar</option>
+            <option value="Video">Video</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label *ngIf="newWebinar.type == 'Live'">Date and time</label>
+          <label *ngIf="newWebinar.type == 'Video'">Date and time of live broadcast</label>
+          <input class="form-control" name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
+        </div>
       </div>
       <div class="form-group">
         <label>Description</label>
         <textarea class="form-control" name="description" [(ngModel)]="newWebinar.description"></textarea>
       </div>
       <div class="form-group">
-        <label *ngIf="!newWebinar.img" for="file">Choose a Picture for your Webinar</label>
+        <label for="file">Choose a picture for your webinar</label>
         <input class="form-control" #imageInput2 id="file" type="file" accept="image/*"
           (change)="processFile2(imageInput2)">
+      </div>
+      <div *ngIf="fileToUpload2" class="img-preview-container">
+        <div *ngIf="fileToUpload2.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+        <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+        <img *ngIf="fileToUpload2.status === 'ok'" [src]="newWebinar.img" alt="Image Preview">
+      
+      </div>
+      <div class="form-group">
+        <label>Webinar link</label>
+        <input class="form-control" name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
       </div>
       <div class="form-group">
         <label>Speaker</label>
@@ -40,45 +52,54 @@
           <option></option>
           <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}}
             {{speaker.lastName}}</option>
-          <option value="new">New Speaker</option>
+          <option value="new">ADD A NEW SPEAKER</option>
         </select>
+        <div *ngIf="speaker_image != ''" >
+          <img [src]="speaker_image" alt="Speaker Image">
+        </div>
       </div>
-      <form *ngIf="newWebinar.speaker == 'new'">
-        <div class="form-group">
-          <label>Speaker Title</label>
-          <select class="form-control" name="title" [(ngModel)]="newSpeaker.title">
-            <option>Dr.</option>
-            <option>Mr.</option>
-            <option>Ms.</option>
-          </select>
+      <form *ngIf="newWebinar.speaker == 'new'" class = "border p-4">
+        <h5>Add a speaker</h5>
+        <hr />
+        <div class="row">
+          <div class="form-group col">
+            <label>Title</label>
+            <select class="form-control" name="title" [(ngModel)]="newSpeaker.title">
+              <option>Dr.</option>
+              <option>Mr.</option>
+              <option>Ms.</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <label>First name</label>
+            <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
+          </div>
+          <div class="form-group col">
+            <label>Last name</label>
+            <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
+          </div>
         </div>
         <div class="form-group">
-          <label>Speaker First Name</label>
-          <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
-        </div>
-        <div class="form-group">
-          <label>Speaker Last Name</label>
-          <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
-        </div>
-        <div class="form-group">
-          <label>Speaker Description</label>
+          <label>Speaker description</label>
           <textarea class="form-control" name="description" [(ngModel)]="newSpeaker.description"></textarea>
         </div>
         <div class="form-group">
-          <label *ngIf="newSpeaker.img == ''" for="file">Choose a Picture for your Speaker</label>
+          <label for="file">Choose a picture for your speaker</label>
           <input #imageInput class="form-control" id="file" type="file" accept="image/*"
             (change)="processFile(imageInput)">
         </div>
-        <button class="btn btn-outline-secondary" (click)="addSpeaker()">New Speaker</button>
+        <div *ngIf="fileToUpload" class="img-preview-container">
+          <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+          <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+          <img *ngIf="fileToUpload.status === 'ok'" [src]="newSpeaker.img" alt="Image Preview">
+        
+        </div>
+        <button class="btn btn-sm btn-outline-secondary" (click)="addSpeaker()">ADD SPEAKER</button>
       </form>
-      <img *ngIf="speaker_image != ''" [src]="speaker_image" alt="Speaker Image">
-      <div class="form-group">
-        <label>Webinar Link</label>
-        <input class="form-control" name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
-      </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">QUIZ</button>
+      <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button>
       <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
@@ -94,32 +115,32 @@
           <input class="form-control" [name]="question.question+'_'+i" type="text" [(ngModel)]="question.question">
         </div>
         <div class="form-group">
-          <label>Correct Answer</label>
+          <label>Correct answer</label>
           <input class="form-control" [name]="question.right_answer+'_'+i" type="text"
             [(ngModel)]="question.right_answer">
         </div>
         <div class="form-group">
-          <label>Wrong Answers</label>
+          <label>Wrong answers</label>
           <input class="form-control"
             *ngFor="let wrong_answer of question.wrong_answers | keys; let in = index; trackBy:keys"
             [name]="question.wrong_answers[wrong_answer]+'_'+i+'_'+in" type="text"
             [(ngModel)]="question.wrong_answers[wrong_answer]">
         </div>
-        <button class="btn btn-outline-primary" (click)="addAnswer(i)">Add Wrong Answer</button>
+        <button class="btn btn-outline-primary" (click)="addAnswer(i)">Add wrong answer</button>
         <button *ngIf="question.wrong_answers.length > 1" class="btn btn-outline-danger"
-          (click)="deleteAnswer(i)">Delete Wrong Answer</button>
-        <button class="btn btn-outline-danger" (click)="deleteQuestion(i)">Delete Question</button>
+          (click)="deleteAnswer(i)">Delete wrong answer</button>
+        <button class="btn btn-outline-danger" (click)="deleteQuestion(i)">Delete question</button>
       </div>
       <div class="form-group">
-        <label>Number of New Questions</label>
+        <label>Number of new questions</label>
         <input class="form-control" type="number" name="newQuestions" [(ngModel)]="newQuestions">
       </div>
       <div class="form-group">
-        <label>Number of Wrong Answers per New Question</label>
+        <label>Number of wrong answers per new question</label>
         <input class="form-control" type="number" name="newAnswers" [(ngModel)]="newAnswers">
       </div>
-      <button class="btn btn-outline-primary" (click)="addMultipleQuestions()">Add Multiple Questions</button>
-      <button class="btn btn-outline-primary" (click)="addQuestion()">Add One Question</button>
+      <button class="btn btn-outline-primary" (click)="addMultipleQuestions()">ADD MULTIPLE QUESTIONS</button>
+      <button class="btn btn-outline-primary" (click)="addQuestion()">ADD ONE QUESTION</button>
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
@@ -134,7 +155,7 @@
       <p>Date and Time: {{newWebinar.datetime | date:'hh:mm a on MMMM dd y'}}</p>
       <p>Description: {{newWebinar.description}}</p>
       <p>Speaker: {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}</p>
-      <p>Webinar Link: {{newWebinar.webinar_link}}</p>
+      <p>Webinar link: {{newWebinar.webinar_link}}</p>
       <div *ngIf="newWebinar.type =='Video'">
         <h4>Quiz:</h4>
         <h6>Please answer the following questions</h6>
@@ -149,13 +170,13 @@
             <label [for]="'wa_'+i+'_'+in">{{wrong_answer}}</label>
           </div>
         </div>
-        <button class="btn btn-outline-secondary">Calculate Quiz Result</button>
+        <button class="btn btn-outline-secondary">Calculate quiz result</button>
       </div>
     </div>
     <div class="modal-footer">
       <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
       <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
-      <button class="btn btn-outline-success" (click)=addNewWebinar()>SUBMIT</button>
+      <button class="btn btn-outline-success" type="button" (click)="addNewWebinar()">SUBMIT</button>
       <button class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </div>
@@ -164,8 +185,7 @@
 <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
   <h4>All Webinars</h4>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-info" (click)="openModal()">ADD
-    A WEBINAR</button>
+  <button type="button" class="btn btn-info" (click)="openModal()">ADD A WEBINAR</button>
 </div>
 <table class="table">
   <thead>
@@ -187,7 +207,7 @@
       <td>{{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}</td>
       <td>{{webinar.webinar_link}}</td>
       <td>{{webinar.users.length}}</td>
-      <td><button>View Quiz</button></td>
+      <td><button class="btn btn-sm btn-outline-secondary">VIEW QUIZ</button></td>
     </tr>
   </tbody>
 </table>

@@ -23,3 +23,7 @@ select{
 img{
     height: 100px;
 }
+.img-preview{
+    height: 100px;
+    width: 100px;
+}

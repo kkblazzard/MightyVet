@@ -7,6 +7,9 @@
     vertical-align: center;
     text-align: center;
 }
+.holder-image img{
+    width: 176px;
+}
 
 .holder-image img{
     width: 176px;
