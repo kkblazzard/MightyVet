@@ -23,6 +23,10 @@ a.link_text{
     margin-left: 5px;
     max-width: 32px;
 }
+#donate{
+    border: solid transparent 3px;
+    cursor: pointer;
+}
 #log-in{
     border: solid transparent 3px;
     cursor: pointer;
