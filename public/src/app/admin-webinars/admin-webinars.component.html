@@ -99,15 +99,18 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button>
-      <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
+      <!-- Removing stage 2 for MVP 1 -->
+      <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button> -->
+      <!-- <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
+      <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </form>
-  <form *ngIf="stage == 2">
+  <!-- Removing stage 2 for MVP 1 -->
+  <!-- <form *ngIf="stage == 2">
     <div class="modal-body">
       <h3>Quiz</h3>
-      <!-- indexes are needed to differenciate the inputs as they are being added, trackBy and keysPipe to make sure the double nested loop don't mess with two-way model binding-->
+      indexes are needed to differenciate the inputs as they are being added, trackBy and keysPipe to make sure the double nested loop don't mess with two-way model binding
       <div class="card" *ngFor="let question of newWebinar.quiz; let i = index">
 
         <div class="form-group">
@@ -147,7 +150,7 @@
       <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
-  </form>
+  </form> -->
   <div *ngIf="stage == 3">
     <div class="modal-body">
       <h4>Title: {{newWebinar.title}}</h4>
@@ -174,8 +177,10 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
-      <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
+      <!-- Removing stage 2 for MVP 1 -->
+      <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
+      <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button> -->
+      <button class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
       <button class="btn btn-outline-success" type="button" (click)="addNewWebinar()">SUBMIT</button>
       <button class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>

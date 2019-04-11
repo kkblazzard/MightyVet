@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthenticationService, TokenPayload } from '../http_services/authentication.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from '../http_services/events.service';
+import { NewslettersService } from '../http_services/newsletters.service';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   newUser: TokenPayload;
   password_confirm: String;
   registerErrors: any;
+  newsletter: boolean;
   //element refs
   @ViewChild('login') login: ElementRef
   @ViewChild('signup') signup: ElementRef
@@ -27,10 +29,12 @@ export class HeaderComponent implements OnInit {
     private _eventsService: EventsService,
     private _modalService:  NgbModal,
     private _authenticationsService: AuthenticationService,
+    private _newslettersService: NewslettersService,
     private _route: ActivatedRoute,
     private _router: Router) { }
 
   ngOnInit() {
+    this.newsletter = false;
     this.loginInfo = { email: '',
     password: ''}
     this.newUser = {
@@ -86,6 +90,7 @@ export class HeaderComponent implements OnInit {
     })
   }
   closedModal(){
+    this.newsletter = false;
     this.modal = null;
     this.modal_string = null;
     this.loginInfo = { email: "",
@@ -109,9 +114,19 @@ export class HeaderComponent implements OnInit {
         this.registerErrors = data;
       }
       else{
+        if (this.newsletter = true){
+          let obs2 = this._newslettersService.addNewsletter({email:this.newUser.email});
+          obs2.subscribe(data => console.log(data), err => console.log(err), ()=>{
+            this.modal.close();
+            this.closedModal();
+            this._router.navigateByUrl('/user');
+          })
+        }
+        else{
         this.modal.close();
         this.closedModal();
         this._router.navigateByUrl('/user');
+        }
       }
     });
   }

@@ -48,13 +48,16 @@ module.exports={
     webinarDetails:(req, res) => Webinars
         .findById(req.params.id)
         .populate('speaker')
-        .populate('accreditation')
+        .populate('users')
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
 
     webinarUpdate: (req, res) => Webinars
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
-        .catch(err=>console.log(err) || res.json(err))
-        
+        .catch(err=>console.log(err) || res.json(err)),
+    signUp: (req, res) => Webinars
+    .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
+    .then(updated =>console.log("updated",updated)||res.json(updated))
+    .catch(err=>console.log(err) || res.json(err))
 }
