@@ -204,7 +204,7 @@
         <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
             <!-- mentor card -->
             <div class="card mentor mb-3" *ngFor="let mentor of mentors | search: featuredNumber"> <!-- search pipe to limit the amount of displayed data-->
-                <div class="card-body d-flex justify-content-start">
+                <div class="card-body d-flex justify-content-start" [routerLink]="['/mentorship', mentor._id]">
                     <div id="mentor-img" class="p-0 mr-3">
                         <img [src]="mentor.user.picture" [alt]="mentor.user.firstName +'s image'">
                     </div>

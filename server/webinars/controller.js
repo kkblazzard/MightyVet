@@ -57,7 +57,7 @@ module.exports={
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
     signUp: (req, res) => Webinars
-    .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
-    .then(updated =>console.log("updated",updated)||res.json(updated))
-    .catch(err=>console.log(err) || res.json(err))
+        .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
+        .then(updated =>console.log("updated",updated)||res.json(updated))
+        .catch(err=>console.log(err) || res.json(err))
 }
