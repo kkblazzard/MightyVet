@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
                     password: data['password'],
                     org: data['org'],
                     state: data['state'],
-                    picture: data['picture']
+                    picture: data['picture'],
                 };
                 console.log(this.userInfo)
             }
@@ -66,18 +66,21 @@ export class UserProfileComponent implements OnInit {
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
     jumpToEdit() {
-        document.body.scrollTop = 500; // For Safari
-        document.documentElement.scrollTop = 500; // For Chrome, Firefox, IE and Opera
+        document.body.scrollTop = 900; // For Safari
+        document.documentElement.scrollTop = 900; // For Chrome, Firefox, IE and Opera
     }
 
     deleteUser(){
         alert("delete account");
     }
+
+    // this will eventually go and update the userInfo after some validations.
     updateUser(){
         console.log(
             this.userInfo.email,
             this.userInfo.password,
-            this.userInfo.username
+            this.userInfo.username,
+            this.userInfo.picture
         )
     }
 
