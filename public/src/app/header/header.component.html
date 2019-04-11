@@ -106,8 +106,13 @@
             <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm" required>
           </div>
         </div>
-  
-        <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
+        <div class="d-flex align-items-between">
+          <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
+          <div class="form-group ml-auto">
+            <label>Sign up for our newsletter</label>
+            <input class="ml-1" type="checkbox" [(ngModel)]="newsletter">
+          </div>
+        </div>
       </div>
       <!-- arrange this to be in bottom right with absolute -->
       <div class="modal-footer">

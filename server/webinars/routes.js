@@ -6,5 +6,6 @@ module.exports=function(app){
     .post('/api/webinars', controller.webinarNew)
     .get('/api/webinars/:id', controller.webinarDetails)
     .put('/api/webinars/:id', controller.webinarUpdate)
+    .put('/api/webinars/signup/:id', controller.signUp)
     .delete('/api/webinars/:id', controller.webinarRemove)
 }

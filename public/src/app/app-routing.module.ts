@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
   {path: 'courses', component: CoursesComponent},
-  {path: 'courses/details', component: CourseDetailComponent},
+  {path: 'courses/:id', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
   {path: 'mentorship/schedule', component: SchedulingComponent},
   {path: 'mentorship/schedule/:date', component: AvailabilityComponent},
