@@ -14,7 +14,6 @@ export class CourseDetailComponent implements OnInit {
   id: string;
   course: any;
   isSignedUp: boolean;
-  noCourse: boolean;
   constructor(
     private _route: ActivatedRoute,
     private _webinarsService: WebinarsService,
@@ -26,7 +25,6 @@ export class CourseDetailComponent implements OnInit {
 
   ngOnInit() {
     this.isSignedUp = false;
-    this.noCourse = false;
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
       this.getWebinar();
@@ -41,9 +39,6 @@ export class CourseDetailComponent implements OnInit {
       console.log(data);
       this.course = data;
       this.checkSignUp();
-      if (!this.course._id){
-        this.noCourse = true;
-      }
     }),
     (err)=>{
       console.log(err);

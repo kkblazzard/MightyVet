@@ -56,7 +56,7 @@ var UserSchema = new mongoose.Schema({
                 ref : 'accreditation'}],  //list of accreditation ids
 
         mentors: [{type : mongoose.Schema.ObjectId, 
-                ref : 'mentor'}], //list of mentor applications
+                ref : 'mentee'}], //list of mentor applications
                 
         mentor_id: {
                 type : mongoose.Schema.ObjectId, 

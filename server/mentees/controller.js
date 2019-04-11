@@ -5,26 +5,15 @@ module.exports={
     menteeAll: (req, res)=>Mentees
         .find({approval: true}).then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
-    menteeApprovals: (req, res)=>Mentees
-        .find({approval: false}).then(all=>console.log(all) || res.json(all))
-        .catch(err=>console.log(err)|| res.json(err)),
     menteeNew: (req, res) => {
         console.log("entered new controller", req.body);
-        var id = req.body.user_id;
-        delete req.body.user_id;
-        Users.findById(id)
-        .then(user => {
-            req.body.user = user;
-            console.log(req.body);
-            Mentees
-            .create(req.body)
-            .then(mentee=>{
-                console.log("created in controller", mentee)|| res.json(mentee)
-                Users.findByIdAndUpdate(id,{mentor_id: mentor._id},{runValidators:true})
-                .then(data => console.log("User mentor_id successfully updated:", data))
-                .catch(err=>console.log(err)|| res.json(err))
-            })
-            .catch(err=>console.log(err) || res.json(err))
+        Mentees    
+        .create(req.body)
+        .then(mentee=>{
+            console.log("created in controller", mentee)|| res.json(mentee)
+            Users.findByIdAndUpdate(mentee.user,{$push: {mentee: mentee._id}})
+            .then(data => console.log("User mentor_id successfully updated:", data))
+            .catch(err=>console.log(err)|| res.json(err))
         })
         .catch(err=>console.log(err) || res.json(err))
     },
