@@ -63,7 +63,7 @@
           </div>
           <div class="form-group col">
             <label>Last Name</label>
-            <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName" [(ngModel)]="newUser.lastName"  equired>
+            <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName" [(ngModel)]="newUser.lastName" required>
           </div>
           <div class="form-group col">
             <label>Title</label>
@@ -110,7 +110,7 @@
           <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
           <div class="form-group ml-auto">
             <label>Sign up for our newsletter</label>
-            <input class="ml-1" type="checkbox" [(ngModel)]="newsletter">
+            <input class="ml-1" type="checkbox" name="newsletter" [(ngModel)]="newsletter">
           </div>
         </div>
       </div>

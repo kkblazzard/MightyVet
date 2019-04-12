@@ -57,7 +57,7 @@ export class KeysPipe implements PipeTransform {
 @Pipe({ name: 'search', pure: true })
 
 export class SearchPipe implements PipeTransform {
-    transform(value: Array<any>, num): Array<any> {
+    transform(value: Array<any>, num: number): Array<any> {
       if (value){
         return value.slice(0, num);
       }
@@ -67,6 +67,16 @@ export class SearchPipe implements PipeTransform {
     }
 }
 
+@Pipe({ name: 'slice', pure: true })
+
+export class SlicePipe implements PipeTransform {
+  transform(value: string, num: number): string {
+    if (value.length > num){
+      return value.slice(0, num)+"...";
+    }
+    return value;
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,6 +99,7 @@ export class SearchPipe implements PipeTransform {
     AvailabilityComponent,
     KeysPipe,
     SearchPipe,
+    SlicePipe,
     AdminMentorsComponent,
     NotFoundComponent,
     SpeakerDetailsComponent,
