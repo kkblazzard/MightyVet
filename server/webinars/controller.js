@@ -8,7 +8,13 @@ module.exports={
         .populate('speaker')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
-
+    webinarFeatured: (req, res) =>
+        Webinars
+        .find()
+        .sort('-createdAt')
+        .limit(4)    
+        .then(all=>console.log(all) || res.json(all))
+        .catch(err=>console.log(err)|| res.json(err)),
     webinarNew: (req, res) => {
         console.log("entered new controller", req.body);
         Webinars

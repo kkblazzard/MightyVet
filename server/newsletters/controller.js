@@ -1,8 +1,10 @@
 const Newsletters=require('./models');
 
 module.exports={
-    newsletterAll: (req, res)=>Newsletters
-        .find().then(all=>console.log(all) || res.json(all))
+    newsletterAll: (req, res) =>
+        Newsletters
+        .find()
+        .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
 
     newsletterNew: (req, res) => {

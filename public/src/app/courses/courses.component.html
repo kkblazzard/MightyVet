@@ -44,8 +44,8 @@
     <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4">  <!-- search pipe to limit number of entries -->
       <img [src]="course.img" class="card-img-top" alt="Course Image">
       <div class="card-body">
-        <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">{{course.description}}</p>
+        <h5 class="card-title">{{course.title | slice: 40}}</h5>
+        <p class="card-text">{{course.description | slice: 100}}</p>
         <a class="card-link" [routerLink]="['/courses',course._id]">READ MORE&nbsp;&nbsp;<i
             class="fa fa-arrow-right"></i></a>
       </div>
