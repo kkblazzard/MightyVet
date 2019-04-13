@@ -53,6 +53,18 @@ export class KeysPipe implements PipeTransform {
         return Object.keys(value);
     }
 }
+@Pipe({ name: 'mentorsearch', pure: true })
+
+export class MentorSearchPipe implements PipeTransform {
+    transform(value: Array<any>, search: any): Array<any> {
+      if (value){
+        return value.slice(0, search['featuredNumber']);
+      }
+      else{
+        return new Array<any>();
+      }
+    }
+}
 
 @Pipe({ name: 'search', pure: true })
 
@@ -99,6 +111,7 @@ export class SlicePipe implements PipeTransform {
     AvailabilityComponent,
     KeysPipe,
     SearchPipe,
+    MentorSearchPipe,
     SlicePipe,
     AdminMentorsComponent,
     NotFoundComponent,

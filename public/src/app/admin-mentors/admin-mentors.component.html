@@ -14,8 +14,15 @@
           <p>Title: {{mentorApplication.user.title}}</p>
           <p>Organization: {{mentorApplication.user.org}}</p>
           <p>State: {{mentorApplication.user.state}}</p>
-          <h6>Resume</h6>
+          <h6>Resume:</h6>
           <p>{{mentorApplication.resume}}</p>
+          <h6>Support:</h6>
+          <ul>
+            <li *ngIf="mentorApplication.support.mental_health">Mental Health</li>
+            <li *ngIf="mentorApplication.support.financial_advice">Financial Advice</li>
+            <li *ngIf="mentorApplication.support.career_advice">Career Advice</li>
+            <li *ngIf="mentorApplication.support.technical_advice">Technical Advice</li>
+          </ul>
       </div>
       <!-- arrange this to be in bottom right with absolute -->
       <div class="modal-footer">

@@ -41,7 +41,7 @@ var WebinarSchema = new mongoose.Schema({
         quiz: {
                 type: [QuestionSchema],
                 minlength: [3, "Your quiz should have at least 3 questions."]
-        }
+        },
 }, {timestamps:true})
 
 module.exports = WebinarSchema;

@@ -14,24 +14,13 @@ import { EventsService }  from '../http_services/events.service';
 })
 
 export class MentorshipComponent implements OnInit {
-    // what kind of mentee support needed checkboxes on and off switches
-
-    mentalHealthBox = false;
-    financialAdviceBox = false;
-    careerAdviceBox = false;
-    technicalBox = false;
-    // form info
-    states: any = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
+    states: any;
     userInfo: any;
     mentors: any;
     newMentor: any;
-    //element refs
     @ViewChild('becomeAMentor') becomeAMentor: ElementRef
-
-    featuredNumber: number;
-
     modal: any;
-
+    searchBar: any;
     constructor(
         private _eventsService: EventsService,
         private _usersService: UsersService,
@@ -58,11 +47,25 @@ export class MentorshipComponent implements OnInit {
             }
             this.newMentor={
                 user: null,
+                support: { mental_health: false,
+                    financial_advice: false,
+                    career_advice: false,
+                    technical_advice: false },
                 resume: "",
             }
         }
+        this.searchBar = {
+            featuredNumber: 8,
+            bar: "",
+            name: true,
+            title: false,
+            mental_health: false,
+            financial_advice: false,
+            career_advice: false,
+            technical_advice: false
+        }
+        this.states =  [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
         this.getMentors();
-        this.featuredNumber = 8;
     }
     isLoggedIn(){
         return this._authenticationsService.isLoggedIn();
@@ -84,7 +87,11 @@ export class MentorshipComponent implements OnInit {
                 };
                 this.newMentor= {
                     user: data['_id'],
-                    resume: "",
+                    support: {mental_health: false,
+                    financial_advice: false,
+                    career_advice: false,
+                    technical_advice: false },
+                    resume: ""
                 }
             }
         })
@@ -133,46 +140,8 @@ export class MentorshipComponent implements OnInit {
             }
         })
     }
-
-    // switches the appropiate checked box on or off for searching later
-    supportBox(message:string){
-        if (message === "Mental Health"){
-            this.mentalHealthBox = !this.mentalHealthBox;
-        } else if (message === "Financial Advice"){
-            this.financialAdviceBox = !this.financialAdviceBox;
-        } else if (message === "Career Advice"){
-            this.careerAdviceBox = !this.careerAdviceBox;
-        } else if (message === "Technical or Surgical"){
-            this.technicalBox = !this.technicalBox;
-        }
-    }
-
-    // action when form is submitted
-    submit(){
-        // this will keep all the form data
-        // 
-        // 
-        // 
-
-
-        // keeps track of boxes checked when submitted
-        console.log( 
-            [
-                {"mentalHealthBox": this.mentalHealthBox},
-                {"financialAdiveBox": this.financialAdviceBox},
-                {"careerAdviceBox": this.careerAdviceBox},
-                {"technicalBox": this.technicalBox}
-            ]
-        );
-
-
-        // area that will eventually submit all data based on form input and checkboxes
-        // 
-        // 
-        // 
-    }
     seeMore(){
-        this.featuredNumber += 8;
+        this.searchBar.featuredNumber += 8;
     }
     
     /*
