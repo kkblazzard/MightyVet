@@ -3,8 +3,10 @@
         <div class="col-4 user-info">
             <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
             <div class="user-info__image">
-                <div class="holder-image"></div>
-                <!-- <img src="" alt=""> -->
+                <div class="holder-image">
+                    <img class="profile-picture" *ngIf=!userInfo.picture src="../../assets/userDefault.jpeg" alt="Profile Picture">
+                    <img class="profile-picture" *ngIf=userInfo.picture [src]="userInfo.picture" alt="Profile Picture">
+                </div>
                 <div class="user-info__edit-section">
                     <button (click)="jumpToEdit()" class="user-info__edit-button">edit profile</button>
                 </div>
@@ -23,16 +25,30 @@
                     <h2 class="inbox-content__header">New Mentor Request</h2>
                     <div class="inbox__mentor-request">
                         <div class="clear-button__div">
-                            <button>All Requests --></button>
+                            <button (click)="allRequests()">All Requests --></button>
                         </div>
+
+                    <!-- displays all the users requests -->
+                    <div *ngIf="userInfo.requests">
+                        <div class="requests" ngFor="request in userInfo.requests">
+                            {{request}}
+                        </div>
+                    </div>
+
                     </div>
                     <h2 class="inbox-content__header">Messages</h2>
                     <div class="inbox__messages">
                         <div class="clear-button__div">
-                            <button>All Messages --></button>
+                            <button (click)="allMessages()">All Messages --></button>
                         </div>
                     </div>
 
+                    <!-- display all the users messages -->
+                    <div *ngIf="userInfo.messages">
+                        <div class="messages" ngFor="message in userInfo.messages">
+                            {{message}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row education">
@@ -53,9 +69,7 @@
                     </div>
                     <div class="education-main__content align-middle">
                         <div class="education-main__content-changeable" *ngIf=continuingEducationContent>
-                            <p>
-                                {{continuingEducationContent}}
-                            </p>
+                            <p>{{continuingEducationContent}}</p>
                         </div>
                     </div>
                 </div>
@@ -93,6 +107,15 @@
                         name="userInfo.title"
                         [(ngModel)]="userInfo.title">
                 </div>
+                <div class="form-row">
+                    <label class="form-label" for="">Image Url</label>
+                    <input 
+                        type="text" 
+                        class="form-input form-control col" 
+                        placeholder="change image Url" 
+                        name="userInfo.picture"
+                        [(ngModel)]="userInfo.picture">
+                </div>
                 <div class="modal-footer">
                     <button class="delete" (click)="deleteUser()">delete account</button>
                     <button class="saveChanges" (click)="updateUser()">save changes</button>
@@ -100,7 +123,30 @@
             </form>
         </div>
         <div class="col-6">
-            <h1>ROW 2 COL 2</h1>
+            <div class="row">
+                <h1>Alerts</h1>
+                <form class="alerts__form">
+                    <div class="form-row">
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for="">Send Email When You Receive a New Message or Mentor Request</label>
+                    </div>
+                    <div class="form-row">
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for="">Send When You Receive a New Message or Mentor Request</label>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <h1>Profile Status</h1>
+                <form class="profile-status__form">
+                    <div class="form-row">
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for=""> Active (Public)</label>
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for="">Not Active (Hidden)</label>
+                    </div>
+                </form>              
+            </div>
         </div>
     </div>
     <button (click)="topFunction()" id="myBtn" title="Go to top">Top</button>

@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { MentorshipComponent } from './mentorship/mentorship.component';
+import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SupportComponent } from './support/support.component';
@@ -22,8 +23,9 @@ const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
   {path: 'courses', component: CoursesComponent},
-  {path: 'courses/details', component: CourseDetailComponent},
+  {path: 'courses/:id', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
+  {path: 'mentorship/:id', component: MentorDetailsComponent},
   {path: 'mentorship/schedule', component: SchedulingComponent},
   {path: 'mentorship/schedule/:date', component: AvailabilityComponent},
   {path: 'resources', component: ResourcesComponent},

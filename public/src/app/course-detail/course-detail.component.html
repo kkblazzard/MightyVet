@@ -1,22 +1,35 @@
-<h1>Title of the Course</h1>
-
-<img class="top_image" src="../../assets/img/course_details/maintop.png" alt="top image">
-
-<div class="main_left">
-
-</div>
-<h3> title of the course </h3>
-<p>course descriptions</p>
-
-<h5>What you will learn in this course</h5>
-<ul>
-  <li>thing1</li>
-  <li>thing2</li>
-  <li>thing3</li>
-</ul>
-
-<p>related courses</p>
-
-<div class="main_right">
-  <button>Sign up</button>
+<div *ngIf="course">
+  <div *ngIf="course._id">
+    <div class="container">
+      <h1>{{course.title}}</h1>
+    </div>
+    <img id="course_img" class="jumbotron jumbotron-fluid border-top border-bottom py-0" [src]="course.img" alt="Course Image">
+    <div class="container d-flex">
+      <div>
+        <h3>{{course.title}}</h3>
+        <p>{{course.description}}</p>
+        <h6>What you will learn in this course:</h6>
+        <ul>
+          <li>thing1</li>
+          <li>thing2</li>
+          <li>thing3</li>
+        </ul>
+        <p>Related courses:</p>
+        </div>
+      <div class="ml-auto">
+        <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
+        <button *ngIf="isSignedUp" class="btn btn-secondary">You are signed up for this class</button>
+        <h6>Class Date & Time</h6>
+        <p>{{course.datetime | date:"MMM-dd-y, HH:MMa z"}}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="noCourse" class="container d-flex justify-content-center pt-5">
+    <i class="fa fa-paw fa-5x mr-3 text-info"></i>
+    <div class="text-info">
+      <h1>Whoops... How did you end up here?</h1>
+      <h3>We couldn't find the course you were looking for</h3>
+      <button class="btn btn-outline-info" [routerLink]="['/courses']">Return to Courses</button>
+    </div>
+  </div>
 </div>

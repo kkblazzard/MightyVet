@@ -6,7 +6,11 @@ import { FileUploadService } from '../http_services/file-upload.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
+
 class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
+
   constructor(public src: string, public file: File) {}
 }
 @Component({
@@ -18,7 +22,8 @@ class ImageSnippet {
 export class AdminWebinarsComponent implements OnInit {
   @ViewChild('addWebinar') webinarModal: ElementRef;
   modal: any;
-  speaker_image: String = '';
+  speaker_image: String;
+  speakerPreview: String;
   fileToUpload: ImageSnippet;
   fileToUpload2: ImageSnippet;
   newQuestions = 0;
@@ -37,10 +42,31 @@ export class AdminWebinarsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
     ) { }
+    
+  private onSuccess() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'ok';
+  }
+  private onError() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'fail';
+    this.fileToUpload.src = '';
+  }
+  private onSuccess2() {
+    this.fileToUpload2.pending = false;
+    this.fileToUpload2.status = 'ok';
+  }
 
+  private onError2() {
+    this.fileToUpload2.pending = false;
+    this.fileToUpload2.status = 'fail';
+    this.fileToUpload2.src = '';
+  }
+  
   ngOnInit() {
     this.getWebinars();
     this.getSpeakers();
+    this.speaker_image = '';
   }
 
   getWebinars() {
@@ -48,12 +74,13 @@ export class AdminWebinarsComponent implements OnInit {
     obs.subscribe(data => this.webinars = data );
   }
   addNewWebinar() {
+    this.newWebinar.datetime += this.newWebinar.datetime.getTimezoneOffset() * 60000;
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
       console.log(data);
       if (!data['errors']) {
         this.getWebinars();
-        this.newWebinar = {title: '', type: 'Live', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
+        this.modal.dismiss("form completed")
       }
     });
   }
@@ -77,9 +104,10 @@ export class AdminWebinarsComponent implements OnInit {
     this.stage = 1;
     this.speaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
+    this.speakerPreview = null;
     this.newWebinar = {title: '', type: 'Live', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
-    this.fileToUpload = {src: null, file: null};
-    this.fileToUpload2 = {src: null, file: null};
+    this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
+    this.fileToUpload2 = {src: null, file: null, pending: false, status: 'init'};
     this.speaker_image = '';
     this.newQuestions = 0;
     this.newAnswers = 0;
@@ -101,8 +129,7 @@ export class AdminWebinarsComponent implements OnInit {
 
   public set dateTimeLocal(v: string) {
     const actualParsedDate = v ? new Date(v) : new Date();
-    const normalizedParsedDate = new Date(actualParsedDate.getTime() + (actualParsedDate.getTimezoneOffset() * 60000));
-    this.newWebinar.datetime = normalizedParsedDate;
+    this.newWebinar.datetime = actualParsedDate;
   }
 
   public get dateTimeLocal(): string {
@@ -139,8 +166,7 @@ export class AdminWebinarsComponent implements OnInit {
       console.log(data);
       this.getSpeakers();
       this.newWebinar.speaker = data['_id'];
-      this.fileToUpload.src = '';
-      this.fileToUpload.file = null;
+      this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
       this.getSpeakerImage();
       this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
     });
@@ -148,19 +174,20 @@ export class AdminWebinarsComponent implements OnInit {
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-
     reader.addEventListener('load', (event: any) => {
       this.fileToUpload = new ImageSnippet(event.target.result, file);
       const obs = this._filesUploadService.speakerUploadImage(this.fileToUpload.file);
       obs.subscribe(
         (data) => {
+          this.onSuccess();
           this.newSpeaker.img = data['imageUrl'];
         },
         (err) => {
+          this.onError();
           console.log(err);
-        });
+        })
     });
-
+      
     reader.readAsDataURL(file);
   }
   processFile2(imageInput: any) {
@@ -173,14 +200,16 @@ export class AdminWebinarsComponent implements OnInit {
       const obs = this._filesUploadService.webinarUploadImage(this.fileToUpload2.file);
       obs.subscribe(
         (data) => {
+          this.onSuccess2()
           this.newWebinar.img = data['imageUrl'];
         },
         (err) => {
+          this.onError2()
           console.log(err);
-        });
+        })
     });
-
     reader.readAsDataURL(file);
+
   }
   getSpeakerImage() {
     if (this.newWebinar.speaker === '' || this.newWebinar.speaker === 'new' ) {

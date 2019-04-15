@@ -1,7 +1,9 @@
-<section id="section-welcome" class="container jumbotron d-flex justify-content-end">
-  <div id="welcome-text" class="mr-3 p-5 text-light">
-      <h1 class="text-light">Free Support for the Veterinary Community</h1>
-      <p class="mb-0">MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
+<section id="section-welcome" class="container">
+  <div class="jumbotron d-flex justify-content-end">
+    <div id="welcome-text" class="mr-3 p-5 text-light">
+        <h1 class="text-light">Free Support for the Veterinary Community</h1>
+        <p class="mb-0">MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
+    </div>
   </div>
 </section>
 
@@ -85,21 +87,9 @@
   <div class="container">
     <h2>Available Courses</h2>
     <div class="courses-list d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
-      <div class="course-info mr-4">
-          <h5>Course Title</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-      </div>
-      <div class="course-info mr-4">
-          <h5>Course Title</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-      </div>
-      <div class="course-info mr-4">
-          <h5>Course Title</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-      </div>
-      <div class="course-info">
-          <h5>Course Title</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+      <div *ngFor="let course of featuredCourses" class="course-info col-lg pl-0">
+          <a [routerLink]="['/courses', course._id]"><h5>{{course.title | slice: 40}}</h5></a>
+          <a [routerLink]="['/courses', course._id]"><p>{{course.description | slice: 100}}</p></a>
       </div>
     </div>
     <button class="btn btn-info" [routerLink]="['/courses']">View All Courses</button>

@@ -44,79 +44,21 @@
             </div>
             <div>
                 <h6>What kind of support are you willing to give? (Check all that apply)</h6>
-                <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health" name="mentalHealthBox">
                 Mental Health
-                <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')">
+                <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.financial_advice" name="financialAdviceBox">
                 Financial Advice
-                <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')">
+                <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.career_advice" name="careerAdviceBox">
                 Career Advice
-                <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')">
+                <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice" name="technicalAdviceBox">
                 Technical or Surgical
             </div>
         </div>
-        <!-- arrange this to be in bottom right with absolute -->
         <div class="modal-footer">
-            <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
             <button (click)="addMentor()">Submit</button>
         </div>
     </form>
 </ng-template>
-
-<!-- end become a mentor -->
-<!-- <div class="modal fade" id="applyForMentorship" tabindex="-1" role="dialog" aria-labelledby="applyForMentorship"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLabel">Apply to be mentored</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form>
-                <div class="modal-body container">
-                    <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                    </p>
-                    <div class="form-row">
-                        <input type="text" class="form-input col" placeholder="First Name" name="newMentee.firstName"
-                            [(ngModel)]="newMentee.firstName">
-                        <input type="text" class="form-input col" placeholder="Last Name" name="newMentee.lastName"
-                            [(ngModel)]="newMentee.lastName">
-                    </div>
-                    <div class="form-row">
-                        <input type="email" class="form-input col" placeholder="Email" name="newMentee.email"
-                            [(ngModel)]="newMentee.email">
-                        <input type="text" class="form-input col" placeholder="Zipcode" name="newMentee.zipcode"
-                            [(ngModel)]="newMentee.zipcode">
-                    </div>
-                    <div class="form-row">
-                        <input type="text" class="form-input col" placeholder="Your Roles(s)" name="newMentee.roles"
-                            [(ngModel)]="newMentee.roles">
-                        <input type="text" class="form-input col" placeholder="Organization(s)"
-                            name="newMentee.organizations" [(ngModel)]="newMentee.organizations">
-                    </div>
-                    <div>
-                        <h6>What kind of support are you interested in?</h6>
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
-                        Mental Health
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Financial Advice')">
-                        Financial Advice
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Career Advice')">
-                        Career Advice
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Technical or Surgical')">
-                        Technical or Surgical
-                    </div>  
-                </div>
-                <div class="modal-footer">
-                    <h2 class="form-submit__h2">Lets get started!</h2>
-                    <button class="form-submit__button" (click)="submit()">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
-<!-- main content -->
 <section id="section-schedule" class="py-4">
     <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
         <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
@@ -125,96 +67,60 @@
             <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders
                 from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to
                 evaluate your career options. You can schedule office hours with one of our featured members.</p>
-            <button class="btn btn-info mt-auto">Find a Mentor</button>
+            <button class="btn btn-outline-info mt-auto" (click)="open(becomeAMentor)">Apply to Become a
+            Mentor</button>
         </div>
     </div>
 </section>
-
-<!-- benefits -->
-<section id="section-benefits" class="pt-4">
-    <div class="container">
-        <div class="card-deck mb-3 text-center">
-            <div id="be-a-mentor" class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">The benefits of mentoring</h4>
-                </div>
-                <div class="card-body">
-                    <i class="fa fa-handshake-o fa-4x text-muted"></i>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>Are you willing to connect with people?</li>
-                        <li>Help with emotional health?</li>
-                        <li>Give advice on financial or business matters?</li>
-                        <li>Lorem Epsom</li>
-                        <li>filler list</li>
-                    </ul>
-                    <button class="btn btn-block btn-outline-info" (click)="open(becomeAMentor)">Apply to Become a
-                    Mentor</button>
-                </div>
-            </div>
-            <div id="find-a-mentor" class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">The benefits of having a mentor</h4>
-                </div>
-                <div class="card-body">
-                    <i class="fa fa-users fa-4x text-muted"></i>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>Are you willing to connect with people?</li>
-                        <li>Help with emotional health?</li>
-                        <li>Give advice on financial or business matters?</li>
-                        <li>Lorem Epsom</li>
-                        <li>filler list</li>
-                    </ul>
-                    <!-- <button class="btn btn-block btn-outline-info" data-toggle="modal"
-                        data-target="#applyForMentorship">Find a Mentor</button> -->
-                    <button class="btn btn-block btn-outline-info">Find a Mentor</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 
 <!-- list of mentor cards -->
-<section id="mentors-cards" class="bg-light py-5 m-0">
+<section class="bg-light py-5 m-0">
     <!-- search bar -->
     <div class="container mb-3">
         <h1 class="mb-3">Find a Mentor</h1>
         <div id="search-bar" class="input-group mb-3">
             <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch"
-                aria-describedby="coursesSearch">
+                aria-describedby="coursesSearch" [(ngModel)]="searchBar.bar">
             <div class="input-group-append border-dark">
                 <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
             </div>
         </div>
-        <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-end">
-            <h6>Refine results by:&nbsp;</h6>
+        <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
+            <h6>Refine results by :&nbsp;</h6>
             <div class="checkboxes">
-                <input class="mr-1" type="checkbox" name="name" value="name">
+                <input class="mr-1" type="checkbox" name="name" [(ngModel)]="searchBar.name">
                 <label>Name</label>
-                <input class="ml-1 mr-1" type="checkbox" name="speciality" value="speciality">
-                <label>Specialty</label>
-                <input class="ml-1 mr-1" type="checkbox" name="mental_health" value="mental_health">
+                <input class="ml-1 mr-1" type="checkbox" name="title" [(ngModel)]="searchBar.title">
+                <label>Title</label>
+            </div>
+            <h6>Advice:&nbsp;</h6>
+            <div class="checkboxes">
+                <input class="ml-1 mr-1" type="checkbox" name="mental_health" [(ngModel)]="searchBar.mental_health">
                 <label>Mental Health</label>
-                <input class="ml-1 mr-1" type="checkbox" name="career_advice" value="career_advice">
+                <input class="ml-1 mr-1" type="checkbox" name="financial_advice" [(ngModel)]="searchBar.financial_advice">
+                <label>Financial Advice</label>
+                <input class="ml-1 mr-1" type="checkbox" name="career_advice" [(ngModel)]="searchBar.career_advice">
                 <label>Career Advice</label>
+                <input class="ml-1 mr-1" type="checkbox" name="technical_advice" [(ngModel)]="searchBar.technical_advice">
+                <label>Technical Advice</label>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
             <!-- mentor card -->
-            <div class="card mentor mb-3" *ngFor="let mentor of featuredMentors">
-                <div class="card-body d-flex justify-content-start">
+            <div class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar"> <!-- search pipe to limit the amount of displayed data-->
+                <div class="card-body d-flex justify-content-start" [routerLink]="['/mentorship', mentor._id]">
                     <div id="mentor-img" class="p-0 mr-3">
-                        <img src="/assets/mentor-images/{{mentor.image}}" alt="{{mentor.name}} image">
+                        <img [src]="mentor.user.picture" [alt]="mentor.user.firstName +'s image'">
                     </div>
                     <div class="mentor-header align-self-center">
-                        <h4>{{mentor.title}}</h4>
-                        <h6>{{mentor.position}}</h6>
+                        <h4>{{mentor.user.firstName}} {{mentor.user.lastName}}</h4>
+                        <h6>{{mentor.user.title}}, {{mentor.user.org}}</h6>
                     </div>
                 </div>
                 <div class="mx-4 mb-2">
-                    <p>{{mentor.description}}</p>
+                    <p>{{mentor.resume | slice: 100 }}</p>
                 </div>
             </div>
         </div>
@@ -222,6 +128,6 @@
 </section>
 
 <div class="container text-center">
-    <button type="button" class="btn btn-block btn-light btn-lg">SEE ALL&nbsp;&nbsp;<i
+    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i
             class="fa fa-chevron-down"></i></button>
 </div>

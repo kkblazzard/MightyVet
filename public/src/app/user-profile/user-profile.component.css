@@ -1,14 +1,15 @@
 /*  Delete Later */
 .holder-image{
-    width: 181px;
-    height: 243px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
-    background-color: black;
     border: 2px solid black;
     vertical-align: center;
     text-align: center;
 }
-
+.profile-picture{
+    width: 100%;
+}
 
 /* Shared Classes */
 .clear-button__div button{

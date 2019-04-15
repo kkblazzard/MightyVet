@@ -30,12 +30,16 @@
         <textarea class="form-control" name="description" [(ngModel)]="newWebinar.description"></textarea>
       </div>
       <div class="form-group">
-        <label *ngIf="!newWebinar.img" for="file">Choose a picture for your webinar</label>
+        <label for="file">Choose a picture for your webinar</label>
         <input class="form-control" #imageInput2 id="file" type="file" accept="image/*"
           (change)="processFile2(imageInput2)">
       </div>
-      <div *ngIf="speaker_image != ''" >
-        <img [src]="speaker_image" alt="Speaker Image">
+      <div *ngIf="fileToUpload2" class="img-preview-container">
+        <div *ngIf="fileToUpload2.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+        <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+        <img *ngIf="fileToUpload2.status === 'ok'" [src]="newWebinar.img" alt="Image Preview">
+      
       </div>
       <div class="form-group">
         <label>Webinar link</label>
@@ -50,19 +54,14 @@
             {{speaker.lastName}}</option>
           <option value="new">ADD A NEW SPEAKER</option>
         </select>
+        <div *ngIf="speaker_image != ''" >
+          <img [src]="speaker_image" alt="Speaker Image">
+        </div>
       </div>
       <form *ngIf="newWebinar.speaker == 'new'" class = "border p-4">
         <h5>Add a speaker</h5>
         <hr />
         <div class="row">
-          <div class="form-group col">
-            <label>First name</label>
-            <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
-          </div>
-          <div class="form-group col">
-            <label>Last name</label>
-            <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
-          </div>
           <div class="form-group col">
             <label>Title</label>
             <select class="form-control" name="title" [(ngModel)]="newSpeaker.title">
@@ -71,29 +70,47 @@
               <option>Ms.</option>
             </select>
           </div>
+          <div class="form-group col">
+            <label>First name</label>
+            <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
+          </div>
+          <div class="form-group col">
+            <label>Last name</label>
+            <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
+          </div>
         </div>
         <div class="form-group">
           <label>Speaker description</label>
           <textarea class="form-control" name="description" [(ngModel)]="newSpeaker.description"></textarea>
         </div>
         <div class="form-group">
-          <label *ngIf="newSpeaker.img == ''" for="file">Choose a picture for your speaker</label>
+          <label for="file">Choose a picture for your speaker</label>
           <input #imageInput class="form-control" id="file" type="file" accept="image/*"
             (change)="processFile(imageInput)">
+        </div>
+        <div *ngIf="fileToUpload" class="img-preview-container">
+          <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+          <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+          <img *ngIf="fileToUpload.status === 'ok'" [src]="newSpeaker.img" alt="Image Preview">
+        
         </div>
         <button class="btn btn-sm btn-outline-secondary" (click)="addSpeaker()">ADD SPEAKER</button>
       </form>
     </div>
     <div class="modal-footer">
-      <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button>
-      <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
+      <!-- Removing stage 2 for MVP 1 -->
+      <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button> -->
+      <!-- <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
+      <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </form>
-  <form *ngIf="stage == 2">
+  <!-- Removing stage 2 for MVP 1 -->
+  <!-- <form *ngIf="stage == 2">
     <div class="modal-body">
       <h3>Quiz</h3>
-      <!-- indexes are needed to differenciate the inputs as they are being added, trackBy and keysPipe to make sure the double nested loop don't mess with two-way model binding-->
+      indexes are needed to differenciate the inputs as they are being added, trackBy and keysPipe to make sure the double nested loop don't mess with two-way model binding
       <div class="card" *ngFor="let question of newWebinar.quiz; let i = index">
 
         <div class="form-group">
@@ -133,7 +150,7 @@
       <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
-  </form>
+  </form> -->
   <div *ngIf="stage == 3">
     <div class="modal-body">
       <h4>Title: {{newWebinar.title}}</h4>
@@ -160,8 +177,10 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
-      <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
+      <!-- Removing stage 2 for MVP 1 -->
+      <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
+      <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button> -->
+      <button class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
       <button class="btn btn-outline-success" type="button" (click)="addNewWebinar()">SUBMIT</button>
       <button class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>

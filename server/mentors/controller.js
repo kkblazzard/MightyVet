@@ -25,16 +25,33 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err))
     },
     mentorRemove: (req, res) => Mentors
-        .findByIdAndDelete(req.params.id)
-        .then(deleted=>console.log("deleted") ||res.json(deleted))
-        .catch(err=>console.log(err) || res.json(err)),
-
+        .findById(req.params.id)
+        .then( data => {
+            Users.findByIdAndUpdate(data.user, {$set: {mentor_id:null}})
+            .then(user=>console.log("deleted") ||res.json(user))
+            .catch(err=>console.log(err) || res.json(err));
+            Mentors.findByIdAndDelete(req.params.id)
+            .then(deleted=>console.log("deleted") ||res.json(deleted))
+            .catch(err=>console.log(err) || res.json(err));
+        })
+        .catch(err => console.log(err) || res.json(err)),
     mentorDetails:(req, res) => Mentors
         .findById(req.params.id)
         .populate('user')
+        .populate('mentees')
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
-
+    signUp: (req, res) => Mentors
+    .findByIdAndUpdate(req.params.id,{$push: {mentees: req.body._id}},{new: true})
+    .then(mentor =>{
+        console.log("updated mentor with mentee", mentor);
+        Users.findByIdAndUpdate(req.body.user, {$push: {mentors: req.body._id}}, {new: true})
+        .then(user => {
+            console.log("updated user with mentor", user);
+        })
+        .catch(err=>console.log(err) || res.json(err));
+    })
+    .catch(err=>console.log(err) || res.json(err)),
     mentorUpdate: (req, res) => Mentors
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
