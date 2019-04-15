@@ -53,7 +53,9 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
     this.card.removeEventListener('change', this.cardHandler);
     this.card.destroy();
   }
-
+  closeModal(click){
+    this._header.modal.close(click)
+  }
   onChange({ error }) {
     if (error) {
       this.error = error.message;
@@ -75,9 +77,10 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
       
       this._paymentsService.makePayment(token,this.extraData)
     
-      this._header.modal.close()
+      this.closeModal('click')
       this._header.open("paymentSuccess");
     }
+    
   }
   ngOnInit() {
 

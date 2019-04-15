@@ -77,3 +77,6 @@ form.checkout {
   .field{
     width:100%;
   }
+  .close:focus{
+    outline: 0;
+}
