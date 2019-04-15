@@ -44,6 +44,11 @@ a.link_text{
     border: solid #7DA7D9 3px;
     color: white;
 }
+#donate:hover{
+    background-color: #7DA7D9;
+    border: solid #7DA7D9 3px;
+    color: white;
+}
 #sign-up{
     border: solid #92dac3 3px;
     cursor: pointer;

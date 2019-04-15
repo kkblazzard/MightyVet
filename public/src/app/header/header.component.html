@@ -185,9 +185,9 @@
             </ul>
           </div>
           <a id="log-in" class="btn" (click)="open('login')">LOG IN</a>
-          <a id="sign-up" class="btn btn-outline-info mr-3" (click)="open('signup')">SIGN UP</a>
+          <a id="sign-up" class="btn btn-outline-info mx-1" (click)="open('signup')">SIGN UP</a>
+          <a id="donate" class="btn" (click)="open('donate')">DONATE</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
-          <a id="donate" class="btn btn-outline-info mr-3" (click)="open('donate')">Donate</a>
         </div>
         <div class="profile" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
           <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
@@ -216,7 +216,8 @@
             </ul>
           </div>
           <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle fa-3x"></i></a>
-          <a id="logout" class="btn btn-outline-info mr-3" (click)="_authenticationsService.logout()">LOG OUT</a>
+          <a id="donate" class="btn" (click)="open('donate')">DONATE</a>
+          <a id="logout" class="btn btn-outline-info ml-1" (click)="_authenticationsService.logout()">LOG OUT</a>
         </div>
         <!-- nav bar -->
         <div class="navbar-nav collapse navbar-collapse">
