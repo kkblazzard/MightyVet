@@ -21,7 +21,7 @@ require('./server/meetings/routes')(app);
 require('./server/webinars/routes')(app);
 require('./server/mentors/routes')(app);
 require('./server/newsletters/routes')(app);
-require('/server/payments/routes')(app);
+require('./server/payments/routes')(app);
 
 app.all("*", (req,res,next) => {
     res.sendFile(path.resolve("./public/dist/public/index.html"))
