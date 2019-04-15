@@ -1,8 +1,14 @@
-<div class="jumbotron jumbotron-fluid border-top border-bottom py-0">
-  <img id="top_image" src="../../assets/img/courses/hero.png" alt="puppy in arms">
-</div>
+<section id="courses-welcome" class="container">
+  <div class="jumbotron d-flex justify-content-start align-items-end">
+    <div id="welcome-text" class="mr-3 p-5 text-light">
+        <h1 class="text-light">Find your perfect course</h1>
+        <p class="mb-0">MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
+    </div>
+  </div>
+</section>
+
 <!-- search bar -->
-<div class="container mb-3">
+<section id="search-bar" class="container mb-3">
   <h1 class="mb-3">Browse Courses</h1>
   <div id="search-bar" class="input-group mb-3">
     <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch"
@@ -11,7 +17,9 @@
       <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
     </div>
   </div>
-  <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
+</section>
+<!-- search filters -->
+<section id="search-filters" class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
     <h6>Refine results by:&nbsp;</h6>
     <div class="input-group date-filter">
       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
@@ -37,8 +45,9 @@
         <label class="custom-control-label" for="checkbox4">Technical</label>
       </div>
     </div>
-  </div>
-</div>
+
+</section>
+
 <section id="course-cards" class="container">
   <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
     <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4">  <!-- search pipe to limit number of entries -->
