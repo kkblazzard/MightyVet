@@ -33,6 +33,10 @@ export class MentorsService {
     console.log("http.service approving mentor");
     return this._http.put('/api/mentors/' + id, {$set: {approval: true}});
   }
+  signUp(id: string, mentee: object){
+    console.log("http.service adding new mentee");
+    return this._http.put('/api/mentors/signup/'+id, mentee);
+  }
   declineMentee(id, mentee_id){
     console.log("http.service decline mentee");
     return this._http.put('/api/mentors/decline_mentee'+id, {mentee_id: mentee_id})

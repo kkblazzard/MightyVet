@@ -63,7 +63,7 @@
           </div>
           <div class="form-group col">
             <label>Last Name</label>
-            <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName" [(ngModel)]="newUser.lastName"  equired>
+            <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName" [(ngModel)]="newUser.lastName" required>
           </div>
           <div class="form-group col">
             <label>Title</label>
@@ -110,7 +110,7 @@
           <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
           <div class="form-group ml-auto">
             <label>Sign up for our newsletter</label>
-            <input class="ml-1" type="checkbox" [(ngModel)]="newsletter">
+            <input class="ml-1" type="checkbox" name="newsletter" [(ngModel)]="newsletter">
           </div>
         </div>
       </div>
@@ -129,6 +129,17 @@
       </div>
     </form>
 
+</ng-template>
+
+<ng-template #donate>
+  <div>
+  <app-donation ></app-donation>
+</div>
+</ng-template>
+<ng-template #paymentSuccess>
+<div>
+    <p>Donation Sucessful</p>
+  </div>
 </ng-template>
 
 <!-- navbar starts here -->
@@ -170,7 +181,7 @@
           <a id="log-in" class="btn" (click)="open('login')">LOG IN</a>
           <a id="sign-up" class="btn btn-outline-info mr-3" (click)="open('signup')">SIGN UP</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
-          <a id="donate" class="btn btn-outline-info mr-3" [routerLink]="['/support']">Donate</a>
+          <a id="donate" class="btn btn-outline-info mr-3" (click)="open('donate')">Donate</a>
         </div>
         <div class="profile" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
           <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>

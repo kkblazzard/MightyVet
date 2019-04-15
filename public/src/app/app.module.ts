@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // services
 import { WebinarsService } from './http_services/webinars.service';
@@ -39,11 +39,12 @@ import { AdminPartnersComponent } from './admin-partners/admin-partners.componen
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AvailabilityComponent } from './availability/availability.component';
-import { Pipe, PipeTransform } from '@angular/core';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SpeakerDetailsComponent } from './speaker-details/speaker-details.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
+import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
+import { DonationComponent } from './donation/donation.component';
 
 @Pipe({ name: 'keys',  pure: false })
 
@@ -52,11 +53,23 @@ export class KeysPipe implements PipeTransform {
         return Object.keys(value);
     }
 }
+@Pipe({ name: 'mentorsearch', pure: true })
+
+export class MentorSearchPipe implements PipeTransform {
+    transform(value: Array<any>, search: any): Array<any> {
+      if (value){
+        return value.slice(0, search['featuredNumber']);
+      }
+      else{
+        return new Array<any>();
+      }
+    }
+}
 
 @Pipe({ name: 'search', pure: true })
 
 export class SearchPipe implements PipeTransform {
-    transform(value: Array<any>, num): Array<any> {
+    transform(value: Array<any>, num: number): Array<any> {
       if (value){
         return value.slice(0, num);
       }
@@ -66,6 +79,16 @@ export class SearchPipe implements PipeTransform {
     }
 }
 
+@Pipe({ name: 'slice', pure: true })
+
+export class SlicePipe implements PipeTransform {
+  transform(value: string, num: number): string {
+    if (value.length > num){
+      return value.slice(0, num)+"...";
+    }
+    return value;
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,10 +111,14 @@ export class SearchPipe implements PipeTransform {
     AvailabilityComponent,
     KeysPipe,
     SearchPipe,
+    MentorSearchPipe,
+    SlicePipe,
     AdminMentorsComponent,
     NotFoundComponent,
     SpeakerDetailsComponent,
     AdminNewsletterComponent,
+    MentorDetailsComponent,
+    DonationComponent,
   ],
   imports: [
     BrowserModule,

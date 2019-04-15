@@ -8,7 +8,13 @@ module.exports={
         .populate('speaker')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
-
+    webinarFeatured: (req, res) =>
+        Webinars
+        .find()
+        .sort('-createdAt')
+        .limit(4)    
+        .then(all=>console.log(all) || res.json(all))
+        .catch(err=>console.log(err)|| res.json(err)),
     webinarNew: (req, res) => {
         console.log("entered new controller", req.body);
         Webinars
@@ -57,7 +63,7 @@ module.exports={
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
     signUp: (req, res) => Webinars
-    .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
-    .then(updated =>console.log("updated",updated)||res.json(updated))
-    .catch(err=>console.log(err) || res.json(err))
+        .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
+        .then(updated =>console.log("updated",updated)||res.json(updated))
+        .catch(err=>console.log(err) || res.json(err))
 }
