@@ -1,0 +1,233 @@
+/*  Delete Later */
+.holder-image{
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    border: 2px solid black;
+    vertical-align: center;
+    text-align: center;
+}
+.profile-picture{
+    width: 100%;
+}
+
+/* Shared Classes */
+.clear-button__div button{
+    font-size: 100%;
+    font-family: inherit;
+    background-color: white;
+    padding: 0;
+    border: 0;
+    margin-right: 5.1rem;
+    outline-style: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: normal;
+    color: #395371;
+    text-align: right;
+}
+.clear-button__div{
+    text-align: right;
+}
+
+
+/* All */
+*{
+    font-family: Montserrat;
+    box-sizing: border-box;
+}
+
+
+/* General Layout */
+.top{
+    border-bottom: 3px solid rgba(143, 194, 255, 0.5);
+    padding-bottom: 3rem;
+}
+.bottom{
+    padding-top: 3rem;
+}
+
+
+/* User Info section */
+.user-info{
+    background-color: #A8C9EF;
+    border-radius: 5px;
+}
+.user-info__greeting{
+    color: #395371;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: normal;
+    text-align: center;
+    margin: 1rem auto;
+}
+.user-info__edit-section{
+    text-align: right;
+    margin: 0;
+}
+
+/* removes default button background and outline when clicked on */
+.user-info__edit-button{
+    font-size: 100%;
+    font-family: inherit;
+    background-color: #A8C9EF;
+    padding: 0;
+    border: 0;
+    margin-right: 5.1rem;
+    outline-style: none;
+}
+
+.user-info__edit-button:hover,
+.user-info__edit-button:focus{
+    color: white;
+}
+
+.user-info__events-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    text-align: center;
+    color: #395371;
+    margin: 1rem auto;
+}
+
+.user-info__button button{
+    text-align: right;
+    background-color: #A8C9EF;
+}
+
+
+/* user messages section */
+.messages{
+    padding-left: 10rem;
+}
+.inbox-header{
+    display: block;
+    width: 100%;
+}
+
+.inbox-content{
+    display: block;
+    width: 100%;
+    border: 2px solid #395371;
+}
+.inbox-content__header{
+    height: 54px;
+}
+.inbox-content__header{
+    background-color: #95D9C3;
+    color: #000000;
+    vertical-align: center;
+    text-align: left;
+    height: 56px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: normal;
+    padding-left: 2rem; 
+    padding-top: 1rem
+}
+
+.inbox-header, .education-header{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: #395371;
+}
+.inbox-header{
+    margin-bottom: 2rem;
+}
+.education-header{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/*  Continuing Education section */
+.education-main{
+    width: 100%;
+}
+
+.nav-item{
+    background: #A8C9EF;
+    mix-blend-mode: normal;
+    border-radius: 5px 5px 0 0;
+    margin-left: 1.61rem;
+}
+.nav-link{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav-item + .nav-item{
+    background: #95D9C3;
+}
+.education-main__content{
+    background: #A8C9EF;
+    mix-blend-mode: normal;
+    border-radius: 5px 0 5px 5px;
+    height: 250px;
+    width: 100%;
+}
+.education-main__content-changeable{
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
+    width: 100%
+}
+
+/* edit profile */
+
+.edit-profile__title{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: normal;
+    color: #395371;
+}
+
+.form-label{
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.form-input{
+    background: #ECECEC;
+    border-radius: 5px;
+    /* margin-bottom: 1rem; */
+}
+
+.delete{
+    background: #627894;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+    width: 40%;
+}
+
+.saveChanges{
+    width: 40%;
+    background: #A8C9EF;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
