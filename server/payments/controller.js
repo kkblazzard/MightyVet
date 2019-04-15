@@ -1,5 +1,5 @@
 const Doner=require('./models');
-import {secrets} from ('../');
+// import {secrets} from ('../');
 module.exports={
     donerAdd: (req, res) => {
     var doner = new Doner(req.body);

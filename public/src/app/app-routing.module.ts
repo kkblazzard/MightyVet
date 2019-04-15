@@ -19,6 +19,7 @@ import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
+
 const routes: Routes = [
   {path: "", pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
