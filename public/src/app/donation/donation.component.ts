@@ -39,13 +39,8 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
   constructor(private cd: ChangeDetectorRef, 
-<<<<<<< HEAD
-    private _header: HeaderComponent
-    ) { }
-=======
     private _header: HeaderComponent,
     private _paymentsService: PaymentsService) { }
->>>>>>> 0aef0ff03a3981d945799be35acc5acc0f89606c
   
   ngAfterViewInit() {
     this.card = elements.create('card');
