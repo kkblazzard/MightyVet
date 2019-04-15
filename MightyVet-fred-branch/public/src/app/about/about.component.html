@@ -1,0 +1,74 @@
+<!-- Mission -->
+<div id="mighty-mission" class="container">
+  <h1>A Mighty Mission</h1>
+  <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
+    <div class="mr-4">
+      <h3>Remembering Why We Do This</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+      <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
+      <p>Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam. Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
+    </div>
+    <div id="mission-video">
+      <h6>Hear Sophia's Story</h6>
+      <iframe width="550px" height="350px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+<!-- Board Members-->
+<div id="board-members" class="my-5 bg-light">
+  <div class="container py-5">
+    <h2>Board Members</h2>
+    <div class="member my-4 d-flex justify-content-between">
+      <div class="mr-4">
+        <img src="/assets/img/about_page/Weinrauch.jpg" alt="Dr. Steve Weinrauch">
+      </div>
+      <div>
+        <h4>Dr. Steve Weinrauch, Founder</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+    <div class="member my-4 d-flex justify-content-between">
+      <div class="mr-4">
+        <img src="/assets/img/about_page/Kipperman.jpg" alt="Dr. Barry Kipperman">
+      </div>
+      <div>
+        <h4>Dr. Barry Kipperman, Board President</h4>
+        <p>Dr. Kipperman grew up in New York, and feels the TV show Seinfeld drew heavily from his own life experiences. He is board certified in internal medicine and is staff internist and founder of a 24-hour referral/emergency practice in the San Francisco Bay area. After 26 years in practice, Dr. Kipperman decided to devote the remainder of his career to animal welfare and ethics. He received a master’s degree in animal welfare, ethics and law in 2017 from the University of Edinburgh, and is pursuing board certification in animal welfare. He teaches veterinary ethics at the University of California at Davis School of Veterinary Medicine, and animal welfare and ethics for the University of Missouri. In addition to serving on the MightyVet board, Dr. Kipperman serves on the Board of Directors of the Humane Society Veterinary Medical Association. His research interests include the influence of economics on animal welfare and veterinarian well-being, and the ethical dilemmas and moral stress faced by veterinarians.</p>
+      </div>
+    </div>
+    <div class="member my-4 d-flex justify-content-between">
+      <div class="mr-4">
+        <img src="/assets/img/about_page/Strong.jpg" alt="Dr. Laura Strong">
+      </div>
+      <div>
+        <h4>Dr. Laura Strong, Board Vice President & Secretary</h4>
+        <p>Dr. Strong spent 30 years at the helm of her own comprehensive veterinary hospital, where she oversaw a team of six veterinarians, 30 team members, and the wellbeing of thousands of pets and their families. Laura has served as a trusted advisor for educational institutions and field-related businesses, including Lincoln Memorial University’s College of Veterinary Medicine, Trupanion, Purdue University’s Veterinary Technology Distance Learning program, and the JBOgle Animal Shelter. She is now Director of University Relations at Community Veterinary Partners and part of the Clinical Outreach Team for Lincoln Memorial University CVM. Dr. Strong earned her doctorate from Purdue University and recently completed the requirements to become a Certified Compassion Fatigue Professional (CCFP).</p>
+      </div>
+    </div>
+    <div class="member my-4 d-flex justify-content-between">
+      <div class="mr-4">
+        <img src="/assets/img/about_page/Dollar.jpg" alt="Chris Dollar">
+      </div> 
+      <div>
+        <h4>Chris Dollar, Board Treasurer</h4>
+        <p>Mr. Dollar is currently SVP and President, Global Software and Services at Covetrus – a company formed out of the recent Henry Schein Animal Health and Vets First Choice merger. Prior to the formation of Covetrus, Dollar was President of Global Animal Health Practice Solutions at Henry Schein. A senior technology executive who has driven growth and profitability for multibillion-dollar Fortune 500 public companies, Dollar spent 17 years in technology product management and general management, working in numerous leadership roles at McKesson Corporation. He received his bachelor’s degree from Missouri State University.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Partners-->
+<div class="container">
+  <h1>Meet our Partners</h1>
+  <div *ngFor="let tiers of partners">
+    <div class="tier1 text-center" *ngIf="tiers.tier == 1">
+        <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+    </div>
+    <div class="tier2 text-center" *ngIf="tiers.tier == 2">
+        <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+    </div>
+    <div class="tier3 text-center" *ngIf="tiers.tier == 3">
+        <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
+    </div>
+  </div>
+</div>

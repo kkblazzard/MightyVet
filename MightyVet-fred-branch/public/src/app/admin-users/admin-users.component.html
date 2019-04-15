@@ -1,0 +1,23 @@
+
+<h4>All Users</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Title and Org</th>
+      <th>State</th>
+      <th>Mentor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.title}} at {{user.org}}</td>
+      <td>{{user.state}}</td>
+      <td *ngIf="user.mentor_id">Yes</td>
+      <td *ngIf="!user.mentor_id">No</td>
+    </tr>
+  </tbody>
+</table>

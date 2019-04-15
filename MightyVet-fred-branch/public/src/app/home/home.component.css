@@ -1,0 +1,28 @@
+/* welcome */
+.jumbotron {
+    width: 100%;
+    height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/home.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
+}
+/* newsletter */
+#newsletter{
+    background: rgba(168, 201, 239, 0.62);
+}
+#newsletter form {
+    width: 40%;
+}
+#courses_img img {
+    width: 100%;
+}
+a p{
+    color: black;
+}

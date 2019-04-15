@@ -1,0 +1,10 @@
+.nav .nav-item:hover{
+    background-color: #7DA7D9;
+}
+.nav .nav-item:hover a{
+    color: #fff;
+}
+.nav .activated{
+    background-color: #7DA7D9;
+    color: #fff;
+}
