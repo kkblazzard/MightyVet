@@ -33,7 +33,6 @@
                             <button>All Messages --></button>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="row education">
@@ -101,7 +100,30 @@
             </form>
         </div>
         <div class="col-6">
-            <h1>ROW 2 COL 2</h1>
+            <div class="row">
+                <h1>Alerts</h1>
+                <form class="alerts__form">
+                    <div class="form-row">
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for="">Send Email When You Receive a New Message or Mentor Request</label>
+                    </div>
+                    <div class="form-row">
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for="">Send When You Receive a New Message or Mentor Request</label>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <h1>Profile Status</h1>
+                <form class="profile-status__form">
+                    <div class="form-row">
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for=""> Active (Public)</label>
+                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
+                        <label for="">Not Active (Hidden)</label>
+                    </div>
+                </form>              
+            </div>
         </div>
     </div>
     <button (click)="topFunction()" id="myBtn" title="Go to top">Top</button>

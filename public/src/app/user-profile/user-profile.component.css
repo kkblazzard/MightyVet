@@ -11,6 +11,9 @@
     width: 176px;
 }
 
+.holder-image img{
+    width: 176px;
+}
 
 /* Shared Classes */
 .clear-button__div button{
