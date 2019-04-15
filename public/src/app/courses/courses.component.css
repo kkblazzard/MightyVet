@@ -15,10 +15,6 @@
     height: 210px;
     border-bottom: 5px solid #7290cd;
 }
-#search-filters {
-    background: #ccc;
-    border: 1px solid red;
-}
 
 .date-filter {
     width: 200px;
