@@ -4,7 +4,8 @@
             <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
             <div class="user-info__image">
                 <div class="holder-image">
-                    <img [src]="userInfo.picture" alt="Profile Picture">
+                    <img class="profile-picture" *ngIf=!userInfo.picture src="../../assets/userDefault.jpeg" alt="Profile Picture">
+                    <img class="profile-picture" *ngIf=userInfo.picture [src]="userInfo.picture" alt="Profile Picture">
                 </div>
                 <div class="user-info__edit-section">
                     <button (click)="jumpToEdit()" class="user-info__edit-button">edit profile</button>
@@ -24,13 +25,28 @@
                     <h2 class="inbox-content__header">New Mentor Request</h2>
                     <div class="inbox__mentor-request">
                         <div class="clear-button__div">
-                            <button>All Requests --></button>
+                            <button (click)="allRequests()">All Requests --></button>
                         </div>
+
+                    <!-- displays all the users requests -->
+                    <div *ngIf="userInfo.requests">
+                        <div class="requests" ngFor="request in userInfo.requests">
+                            {{request}}
+                        </div>
+                    </div>
+
                     </div>
                     <h2 class="inbox-content__header">Messages</h2>
                     <div class="inbox__messages">
                         <div class="clear-button__div">
-                            <button>All Messages --></button>
+                            <button (click)="allMessages()">All Messages --></button>
+                        </div>
+                    </div>
+
+                    <!-- display all the users messages -->
+                    <div *ngIf="userInfo.messages">
+                        <div class="messages" ngFor="message in userInfo.messages">
+                            {{message}}
                         </div>
                     </div>
                 </div>
@@ -53,9 +69,7 @@
                     </div>
                     <div class="education-main__content align-middle">
                         <div class="education-main__content-changeable" *ngIf=continuingEducationContent>
-                            <p>
-                                {{continuingEducationContent}}
-                            </p>
+                            <p>{{continuingEducationContent}}</p>
                         </div>
                     </div>
                 </div>
@@ -92,6 +106,15 @@
                         placeholder="change username" 
                         name="userInfo.title"
                         [(ngModel)]="userInfo.title">
+                </div>
+                <div class="form-row">
+                    <label class="form-label" for="">Image Url</label>
+                    <input 
+                        type="text" 
+                        class="form-input form-control col" 
+                        placeholder="change image Url" 
+                        name="userInfo.picture"
+                        [(ngModel)]="userInfo.picture">
                 </div>
                 <div class="modal-footer">
                     <button class="delete" (click)="deleteUser()">delete account</button>
