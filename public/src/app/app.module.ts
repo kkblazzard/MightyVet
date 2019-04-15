@@ -11,6 +11,7 @@ import { NewslettersService } from './http_services/newsletters.service';
 import { PartnersService } from './http_services/partners.service';
 import { SpeakersService } from './http_services/speakers.service';
 import { FileUploadService } from './http_services/file-upload.service';
+import { PaymentsService } from './http_services/payments.service';
 // modules
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -143,7 +144,8 @@ export class SlicePipe implements PipeTransform {
     NewslettersService,
     PartnersService,
     SpeakersService,
-    FileUploadService
+    FileUploadService,
+    PaymentsService,
   ]
 })
 export class AppModule { }

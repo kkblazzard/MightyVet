@@ -8,6 +8,8 @@ import {
   ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HeaderComponent } from '../header/header.component';
+import { PaymentsService } from '../http_services/payments.service';
+
 
 @Component({
   selector: 'app-donation',
@@ -31,19 +33,14 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
     "address_line2": "",
     "address_state": "",
     "address_zip": "",
-    //company references for charge
-    "data-name":"MightyVet",
-    "data-description":"Donation",
-    "data-amount":(this.amount *100),
-    "data-locale":"auto",
-    "data-zip-code":true,
-    "data-billing-address":true,
-    "data-cvc":true,
-    "data-currency":"USD",
+    "amount":(this.amount*100),
+    
     
 
   }
-  constructor(private cd: ChangeDetectorRef, private _header: HeaderComponent) { }
+  constructor(private cd: ChangeDetectorRef, 
+    private _header: HeaderComponent,
+    private _paymentsService: PaymentsService) { }
   
   ngAfterViewInit() {
     this.card = elements.create('card');
@@ -75,6 +72,9 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
+      
+      this._paymentsService.makePayment(token,this.extraData)
+    
       this._header.modal.close()
       this._header.open("paymentSuccess");
     }
