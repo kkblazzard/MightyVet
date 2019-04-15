@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // services
 import { WebinarsService } from './http_services/webinars.service';
@@ -39,12 +39,12 @@ import { AdminPartnersComponent } from './admin-partners/admin-partners.componen
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AvailabilityComponent } from './availability/availability.component';
-import { Pipe, PipeTransform } from '@angular/core';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SpeakerDetailsComponent } from './speaker-details/speaker-details.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
+import { DonationComponent } from './donation/donation.component';
 
 @Pipe({ name: 'keys',  pure: false })
 
@@ -118,6 +118,7 @@ export class SlicePipe implements PipeTransform {
     SpeakerDetailsComponent,
     AdminNewsletterComponent,
     MentorDetailsComponent,
+    DonationComponent,
   ],
   imports: [
     BrowserModule,
