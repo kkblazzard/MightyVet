@@ -131,6 +131,17 @@
 
 </ng-template>
 
+<ng-template #donate>
+  <div>
+  <app-donation ></app-donation>
+</div>
+</ng-template>
+<ng-template #paymentSuccess>
+<div>
+    <p>Donation Sucessful</p>
+  </div>
+</ng-template>
+
 <!-- navbar starts here -->
 <nav class="navbar navbar-light navbar-expand-lg fixed-top mb-4">
   <div class="container d-flex justify-content-between">
@@ -170,6 +181,7 @@
           <a id="log-in" class="btn" (click)="open('login')">LOG IN</a>
           <a id="sign-up" class="btn btn-outline-info mr-3" (click)="open('signup')">SIGN UP</a>
           <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
+          <a id="donate" class="btn btn-outline-info mr-3" (click)="open('donate')">Donate</a>
         </div>
         <div class="profile" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
           <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>

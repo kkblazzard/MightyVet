@@ -7,10 +7,9 @@
     vertical-align: center;
     text-align: center;
 }
-.holder-image img{
-    width: 176px;
+.profile-picture{
+    width: 100%;
 }
-
 
 /* Shared Classes */
 .clear-button__div button{
