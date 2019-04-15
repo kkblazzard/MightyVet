@@ -7,7 +7,7 @@ import {
   ElementRef,
   ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HeaderComponent } from '../header/header.component';
+// import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-donation',
@@ -43,7 +43,9 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
     
 
   }
-  constructor(private cd: ChangeDetectorRef, private _header: HeaderComponent) { }
+  constructor(private cd: ChangeDetectorRef, 
+    // private _header: HeaderComponent
+    ) { }
   
   ngAfterViewInit() {
     this.card = elements.create('card');
@@ -75,8 +77,8 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
-      this._header.modal.close()
-      this._header.open("paymentSuccess");
+      // this._header.modal.close()
+      // this._header.open("paymentSuccess");
     }
   }
   ngOnInit() {
