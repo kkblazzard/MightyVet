@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
   loginSubscription: Subscription;
   signUpSubscription: Subscription;
+  donateSubscription: Subscription;
+  paymentSuccessSubscription: Subscription;
   states: any = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
   modal_string: String;
   modal: any;
@@ -22,9 +24,14 @@ export class HeaderComponent implements OnInit {
   password_confirm: String;
   registerErrors: any;
   newsletter: boolean;
+  extraData={
+
+  }
   //element refs
   @ViewChild('login') login: ElementRef
   @ViewChild('signup') signup: ElementRef
+  @ViewChild('donate') donate: ElementRef
+  @ViewChild('paymentSuccess') paymentSuccess: ElementRef
   constructor(
     private _eventsService: EventsService,
     private _modalService:  NgbModal,
@@ -53,6 +60,12 @@ export class HeaderComponent implements OnInit {
     this.signUpSubscription = this._eventsService.openSignup().subscribe(() => {
       this.open('signup');
     });
+    this.donateSubscription = this._eventsService.openDonate().subscribe(() => {
+      this.open('donate');
+    });
+    this.paymentSuccessSubscription = this._eventsService.openPaymentSuccess().subscribe(() => {
+      this.open('donate');
+    });
   }
   open(content) {
     if(content === 'login') {
@@ -60,10 +73,20 @@ export class HeaderComponent implements OnInit {
       this.modal = this._modalService.open(this.login);
       this.modal_string = 'login';
     }
-    else {
+    else if(content === 'signup'){
       // sign up modal
       this.modal = this._modalService.open(this.signup, {size: 'lg'});
       this.modal_string = "signup";
+    }
+    else if(content === 'paymentSuccess'){
+      // sign up modal
+      this.modal = this._modalService.open(this.paymentSuccess, {size: 'lg'});
+      this.modal_string = "paymentSuccess";
+    }
+    else {
+      // sign up modal
+      this.modal = this._modalService.open(this.donate, {size: 'lg'});
+      this.modal_string = "donate";
     }
     this.modal.result.then(()=>{}, () => this.closedModal())
   }
