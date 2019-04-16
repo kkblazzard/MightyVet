@@ -13,7 +13,7 @@ import { SpeakersService } from './http_services/speakers.service';
 import { FileUploadService } from './http_services/file-upload.service';
 import { PaymentsService } from './http_services/payments.service';
 // modules
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -47,45 +47,88 @@ import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.co
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
 import { DonationComponent } from './donation/donation.component';
 
-@Pipe({ name: 'keys',  pure: false })
+@Pipe({ name: 'keys', pure: false })
 
 export class KeysPipe implements PipeTransform {
-    transform(value: any): any {
-        return Object.keys(value);
-    }
+  transform(value: any): any {
+    return Object.keys(value);
+  }
 }
-@Pipe({ name: 'mentorsearch', pure: true })
+@Pipe({ name: 'mentorsearch', pure: false })
 
 export class MentorSearchPipe implements PipeTransform {
-    transform(value: Array<any>, search: any): Array<any> {
-      if (value){
-        return value.slice(0, search['featuredNumber']);
+  transform(value: Array<any>, search: any): Array<any> {
+    console.log(arguments);
+    if (value) {
+      if (search.bar) {
+        var strings = search.bar.toLowerCase().split(" ");
+        value = value.sort((x, y) => {
+          var count_x = 0;
+          var count_y = 0;
+          for (let j = 0; j < strings.length; j++) {
+            if (x.user.firstName.toLowerCase().includes(strings[j])) {
+              count_x++;
+            }
+            if (x.user.lastName.toLowerCase().includes(strings[j])){
+              count_x++;
+            }
+            if (x.user.title.toLowerCase().includes(strings[j])){
+              count_x++;
+            }
+            if (x.user.org.toLowerCase().includes(strings[j])){
+              count_x++;
+            }
+            if (x.resume.toLowerCase().includes(strings[j])){
+              count_x++;
+            }
+            if (y.user.firstName.toLowerCase().includes(strings[j])) {
+              count_y++;
+            }
+            if (y.user.lastName.toLowerCase().includes(strings[j])){
+              count_y++;
+            }
+            if (y.user.title.toLowerCase().includes(strings[j])){
+              count_y++;
+            }
+            if (y.user.org.toLowerCase().includes(strings[j])){
+              count_y++;
+            }
+            if (y.resume.toLowerCase().includes(strings[j])){
+              count_y++;
+            }
+          }
+          console.log(count_x);
+          console.log(count_y);
+          return count_x == count_y ? 0 : count_x > count_y ? -1 : 1;
+        })
       }
-      else{
-        return new Array<any>();
-      }
+      return value.slice(0, search.featuredNumber);
     }
+    else {
+      return new Array<any>();
+    }
+  }
 }
 
 @Pipe({ name: 'search', pure: true })
 
 export class SearchPipe implements PipeTransform {
-    transform(value: Array<any>, num: number): Array<any> {
-      if (value){
-        return value.slice(0, num);
-      }
-      else{
-        return new Array<any>();
-      }
+  transform(value: Array<any>, num: number): Array<any> {
+    if (value) {
+      return value.slice(0, num);
     }
+    else {
+      return new Array<any>();
+    }
+  }
 }
 
 @Pipe({ name: 'slice', pure: true })
 
 export class SlicePipe implements PipeTransform {
   transform(value: string, num: number): string {
-    if (value.length > num){
-      return value.slice(0, num)+"...";
+    if (value.length > num) {
+      return value.slice(0, num) + "...";
     }
     return value;
   }
