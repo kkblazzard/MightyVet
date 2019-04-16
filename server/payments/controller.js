@@ -1,21 +1,21 @@
-const Doner=require('./models');
+const Donor=require('./models');
 // import {secrets} from ('../');
 module.exports={
-    donerAdd: (req, res) => {
-    var doner = new Doner(req.body);
+    donorAdd: (req, res) => {
+    var doner = new Donor(req.body);
     doner.save()
-    .then(data=>console.log("doner added to db", data) || res.json(data))
+    .then(data=>console.log("donor added to db", data) || res.json(data))
     .catch(err => console.log(err) || res.json(err))
     },
-    donerAll: (req, res)=> Doner
+    donorAll: (req, res)=> Donor
         .find()
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
-    donerRemove: (req, res) => Doners
+    donorRemove: (req, res) => Donors
         .findByIdAndDelete(req.params.id)
-        .then(deleted=>console.log("doner deleted") ||res.json(deleted))
+        .then(deleted=>console.log("donor deleted") ||res.json(deleted))
         .catch(err=>console.log(err) || res.json(err)),
-    donerDetails: (req, res) => Doners
+    donorDetails: (req, res) => Doners
         .findById(req.params.id)
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
@@ -23,7 +23,7 @@ module.exports={
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
-    donerPayments: (req, res) => {
+    donorPayments: (req, res) => {
         console.log("payment controller hit",req.body);
         // var stripe = require("stripe")(secrets.pubKey);
         // stripe.charges.create({
@@ -34,7 +34,7 @@ module.exports={
         // }, function(err, charge) {
         // // asynchronously called
         // });
-        console.log("doner payment charge var from stripe", charge)
+        console.log("donor payment charge var from stripe", charge)
         // .then(payment=>console.log("paid", payment || res.json(payment))
         // .catch(err=>console.log("payment errors", err) || res.json(err)),
     },

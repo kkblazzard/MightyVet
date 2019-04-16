@@ -6,5 +6,5 @@ mongoose.connect('mongodb://localhost:27017/MightyVet', function(err){
         }
 });
 
-var DonerSchema = require('./schema')
-module.exports=mongoose.model('doner', DonerSchema);
+var DonorSchema = require('./schema')
+module.exports=mongoose.model('donor', DonorSchema);

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var DonerSchema = new mongoose.Schema({
+var DonorSchema = new mongoose.Schema({
         name: {
                 type: String,
                 required: [true, "Please enter a first name."],
@@ -32,4 +32,4 @@ var DonerSchema = new mongoose.Schema({
 }, {timestamps:true})
 
 
-module.exports = DonerSchema;
+module.exports = DonorSchema;

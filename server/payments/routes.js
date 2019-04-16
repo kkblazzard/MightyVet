@@ -1,10 +1,10 @@
 const controller=require('./controller');
 module.exports=function(app){
     app
-    .get('/api/doner', controller.donerAll)
-    .post('/api/doner', controller.donerAdd)
-    .get('/api/doner/:id', controller.donerDetails)
-    .put('/api/doner/:id', controller.donerUpdate)
-    .delete('/api/doner/:id', controller.donerRemove)
-    .post('/api/doner/payment',controller.donerPayments)
+    .get('/api/donor', controller.donorAll)
+    .post('/api/donor', controller.donorAdd)
+    .get('/api/donor/:id', controller.donorDetails)
+    .put('/api/donor/:id', controller.donorUpdate)
+    .delete('/api/donor/:id', controller.donorRemove)
+    .post('/api/donor/payment',controller.donorPayments)
 }
