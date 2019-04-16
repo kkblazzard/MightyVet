@@ -61,7 +61,7 @@ export class MentorSearchPipe implements PipeTransform {
     console.log(arguments);
     if (value) {
       if (search.bar) {
-        var strings = search.bar.toLowerCase().split(" ");
+        var strings = search.bar.toLowerCase().split(' ');
         value = value.sort((x, y) => {
           var count_x = 0;
           var count_y = 0;
@@ -99,12 +99,11 @@ export class MentorSearchPipe implements PipeTransform {
           }
           console.log(count_x);
           console.log(count_y);
-          return count_x == count_y ? 0 : count_x > count_y ? -1 : 1;
-        })
+          return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
+        });
       }
       return value.slice(0, search.featuredNumber);
-    }
-    else {
+    } else {
       return new Array<any>();
     }
   }
@@ -116,8 +115,7 @@ export class SearchPipe implements PipeTransform {
   transform(value: Array<any>, num: number): Array<any> {
     if (value) {
       return value.slice(0, num);
-    }
-    else {
+    } else {
       return new Array<any>();
     }
   }
