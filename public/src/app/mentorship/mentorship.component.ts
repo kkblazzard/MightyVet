@@ -33,6 +33,16 @@ export class MentorshipComponent implements OnInit {
     
     // gets all information we need when the page loads.
     ngOnInit() {
+        this.searchBar = {
+            featuredNumber: 8,
+            bar: "",
+            name: true,
+            title: false,
+            mental_health: false,
+            financial_advice: false,
+            career_advice: false,
+            technical_advice: false
+        }
         if (this.isLoggedIn()){
             this.getUserInfo()
         }
@@ -53,16 +63,6 @@ export class MentorshipComponent implements OnInit {
                     technical_advice: false },
                 resume: "",
             }
-        }
-        this.searchBar = {
-            featuredNumber: 8,
-            bar: "",
-            name: true,
-            title: false,
-            mental_health: false,
-            financial_advice: false,
-            career_advice: false,
-            technical_advice: false
         }
         this.states =  [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
         this.getMentors();
