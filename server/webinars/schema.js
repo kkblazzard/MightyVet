@@ -32,7 +32,6 @@ var WebinarSchema = new mongoose.Schema({
         },
         img: {
                 type: String,
-                require: [true, "Please upload an image."]
         },
         webinar_link: {
                 type: String,
