@@ -10,7 +10,6 @@ import { ExcelsService } from '../http_services/excels.service';
 })
 export class AdminUsersComponent implements OnInit {
   users: any;
-  @ViewChild('downloadZipLink') private downloadZipLink: ElementRef;
   constructor(
     private _excelsService: ExcelsService,
     private _usersService: UsersService,
@@ -20,7 +19,6 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
-    // this.excelPrompt();
   }
 
   getUsers(){
@@ -28,13 +26,7 @@ export class AdminUsersComponent implements OnInit {
     obs.subscribe(data => this.users=data)
   }
 
-  excelPrompt(){
-  let obs = this._excelsService.userExcels();
-  obs.subscribe(data => {
-    const link = this.downloadZipLink.nativeElement;
-    console.log(data);
-    link.href = data['file_url'];
-    link.download = "users.zip";
-    });
+  exportAsXLSX():void {
+    this._excelsService.exportAsExcelFile(this.users, 'users');
   }
 }
