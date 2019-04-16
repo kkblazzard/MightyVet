@@ -38,7 +38,9 @@ export class CourseDetailComponent implements OnInit {
     obs.subscribe((data)=>{
       console.log(data);
       this.course = data;
-      this.checkSignUp();
+      if (this.course.users){
+        this.checkSignUp();
+      }
     }),
     (err)=>{
       console.log(err);

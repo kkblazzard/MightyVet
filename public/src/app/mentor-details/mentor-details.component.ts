@@ -38,7 +38,9 @@ export class MentorDetailsComponent implements OnInit {
     obs.subscribe((data)=>{
       console.log(data);
       this.mentor = data;
-      this.checkMentee();
+      if (data['mentees']){
+        this.checkMentee();
+      } 
     }),
     (err)=>{
       console.log(err);

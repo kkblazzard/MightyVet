@@ -19,8 +19,9 @@ import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
+
 const routes: Routes = [
-  {path: "", pathMatch: 'full', component: HomeComponent},
+  {path: '', pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/:id', component: CourseDetailComponent},
@@ -30,16 +31,16 @@ const routes: Routes = [
   {path: 'mentorship/schedule/:date', component: AvailabilityComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'support', component: SupportComponent},
-  {path: "blog", component: BlogComponent},
-  {path: "about", component: AboutComponent},
-  {path: "admin", component: AdminComponent, children:[
-    {path: "webinars", component: AdminWebinarsComponent},
-    {path: "users", component: AdminUsersComponent},
-    {path: "partners", component: AdminPartnersComponent},
-    {path: "mentors", component: AdminMentorsComponent},
-    {path: "newsletters", component: AdminNewsletterComponent}
+  {path: 'blog', component: BlogComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'admin', component: AdminComponent, children: [
+    {path: 'webinars', component: AdminWebinarsComponent},
+    {path: 'users', component: AdminUsersComponent},
+    {path: 'partners', component: AdminPartnersComponent},
+    {path: 'mentors', component: AdminMentorsComponent},
+    {path: 'newsletters', component: AdminNewsletterComponent}
   ]},
-  {path:'**', component: NotFoundComponent},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
