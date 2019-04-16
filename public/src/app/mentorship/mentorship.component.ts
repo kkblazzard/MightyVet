@@ -36,8 +36,6 @@ export class MentorshipComponent implements OnInit {
         this.searchBar = {
             featuredNumber: 8,
             bar: "",
-            name: true,
-            title: false,
             mental_health: false,
             financial_advice: false,
             career_advice: false,
