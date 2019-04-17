@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
-
-:focus{
+/* Move font to global css file */
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+:focus {
     outline: 0;
 }
 h1, h2, h3, h4, h5 {
@@ -16,3 +19,8 @@ h6 {
 p{
     font-size: 1.1em;
 }
+@media only screen and (max-width: 991px) {
+    .container-fluid {
+        position: fixed;
+    }
+} 

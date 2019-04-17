@@ -17,24 +17,24 @@ export class CoursesComponent implements OnInit {
 
   allCourses: any;
   featuredNumber: number;
-  // setting static data as example
-  course = {
-    title: 'Veterinary Self-Worth and the Psychology of Money',
-    description: 'Recognizing and embracing your self- worth is core to your success as a veterinarian. However, many veterinary professionals find it difficult',
-    link: 'https://webinar-portal.net/webinars/vmt/registration_190307.php'
-  };
 
   ngOnInit() {
     this.getAllCourses();
     this.featuredNumber = 6;
   }
   getAllCourses() {
+    // why is this searchWebinars, not getWebinars?
     this._webinarsService.searchWebinars()
     .subscribe(courses => {
       console.log('received all courses', courses);
       this.allCourses = courses;
     });
   }
+
+  // searchCourse(){
+
+  // }
+
   seeMore(){
     this.featuredNumber += 6;
   }
