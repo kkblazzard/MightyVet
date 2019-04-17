@@ -1,4 +1,3 @@
-
 <!-- login form -->
 <ng-template #login>
   <div class="modal-header">
@@ -14,8 +13,8 @@
                   </p> -->
       <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" placeholder="Email" name="loginInfo.email"
-          [(ngModel)]="loginInfo.email"  required>
+        <input type="text" class="form-control" placeholder="Email" name="loginInfo.email" [(ngModel)]="loginInfo.email"
+          required>
       </div>
       <div class="form-group">
         <label>Password</label>
@@ -32,97 +31,100 @@
 
 
 
-
+<!-- signup form -->
 <ng-template #signup>
-    <div class="modal-header">
-      <h2 class="modal-title">Sign Up</h2>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <form>
-      <div class="modal-body container">
-        <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                    </p> -->
-        <div class="row">
-          <div class="form-group col">
-            <label>First Name</label>
-            <input type="text" class="form-control col" placeholder="First Name" name="newUser.firstName" [(ngModel)]="newUser.firstName" required>
-          </div>
-          <div class="form-group col">
-            <label>Last Name</label>
-            <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName" [(ngModel)]="newUser.lastName" required>
-          </div>
-          <div class="form-group col">
-            <label>Title</label>
-            <select class="form-control" placeholder="Your Title(s)" name="newUser.title" [(ngModel)]="newUser.title">
-              <option>Vet Tech</option>
-              <option>Receptionist</option>
-              <option>Manager</option>
-              <option>Veterinarian</option>
-              <option>Student</option>
-              <option>Other</option>
-            </select>
-          </div>
+  <div class="modal-header">
+    <h2 class="modal-title">Sign Up</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form>
+    <div class="modal-body container">
+      <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                  {{newMenteeErrors.errors.firstName.message}}
+                  </p> -->
+      <div class="row">
+        <div class="form-group col">
+          <label>First Name</label>
+          <input type="text" class="form-control col" placeholder="First Name" name="newUser.firstName"
+            [(ngModel)]="newUser.firstName" required>
         </div>
-   
-        <div class="row">
-          <div class="form-group col">
-            <label>Email</label>
-            <input type="email" class="form-control" placeholder="Preferred Email" name="newUser.email" [(ngModel)]="newUser.email" required>
-          </div>
-          <div class="form-group col">
-            <label>State</label>
-            <select class="form-control" placeholder="State" name="newUser.state" [(ngModel)]="newUser.state" required>
-              <option *ngFor="let state of states">{{state}}</option>
-            </select>
-          </div>
-          <div class="form-group col">
-            <label>Organization</label>
-            <input type="text" class="form-control" placeholder="Organization(s)" name="newUser.org" [(ngModel)]="newUser.org" required>
-          </div>
+        <div class="form-group col">
+          <label>Last Name</label>
+          <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName"
+            [(ngModel)]="newUser.lastName" required>
         </div>
-  
-        <div class="row">
-          <div class="form-group col">
-            <label>Password</label>
-            <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password" required>
-          </div>
-          <div class="form-group col">
-            <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password field is not matching your Password field.</p>
-            <label>Confirm Password</label>
-            <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm" required>
-          </div>
-        </div>
-        <div class="d-flex align-items-between">
-          <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
-          <div class="form-group ml-auto">
-            <label>Sign up for our newsletter</label>
-            <input class="ml-1" type="checkbox" name="newsletter" [(ngModel)]="newsletter">
-          </div>
+        <div class="form-group col">
+          <label>Title</label>
+          <select class="form-control" placeholder="Your Title(s)" name="newUser.title" [(ngModel)]="newUser.title">
+            <option>Vet Tech</option>
+            <option>Receptionist</option>
+            <option>Manager</option>
+            <option>Veterinarian</option>
+            <option>Student</option>
+            <option>Other</option>
+          </select>
         </div>
       </div>
-      <!-- arrange this to be in bottom right with absolute -->
-      <div class="modal-footer">
-        <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
-        <p
-          *ngIf="password_confirm != newUser.password || newUser.email == '' || newUser.password == '' || newUser.firstName == '' || newUser.lastName == '' || newUser.org == ''">
-          Please fill out every field correctly before submitting.</p>
-        <button
-          *ngIf="password_confirm != newUser.password || newUser.email == '' || newUser.password == '' || newUser.firstName == '' || newUser.lastName == '' || newUser.org == ''"
-          class="btn btn-secondary">Submit</button>
-        <button
-          *ngIf="password_confirm == newUser.password && newUser.email != '' && newUser.password != '' && newUser.firstName != '' && newUser.lastName != '' && newUser.org != ''"
-          class="btn btn-primary" (click)="register()">Submit</button>
+      <div class="row">
+        <div class="form-group col">
+          <label>Email</label>
+          <input type="email" class="form-control" placeholder="Preferred Email" name="newUser.email"
+            [(ngModel)]="newUser.email" required>
+        </div>
+        <div class="form-group col">
+          <label>State</label>
+          <select class="form-control" placeholder="State" name="newUser.state" [(ngModel)]="newUser.state" required>
+            <option *ngFor="let state of states">{{state}}</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Organization</label>
+          <input type="text" class="form-control" placeholder="Organization(s)" name="newUser.org"
+            [(ngModel)]="newUser.org" required>
+        </div>
       </div>
-    </form>
 
+      <div class="row">
+        <div class="form-group col">
+          <label>Password</label>
+          <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password" required>
+        </div>
+        <div class="form-group col">
+          <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password
+            field is not matching your Password field.</p>
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm" required>
+        </div>
+      </div>
+      <div class="d-flex align-items-between">
+        <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
+        <div class="form-group ml-auto">
+          <label>Sign up for our newsletter</label>
+          <input class="ml-1" type="checkbox" name="newsletter" [(ngModel)]="newsletter">
+        </div>
+      </div>
+    </div>
+    <!-- arrange this to be in bottom right with absolute -->
+    <div class="modal-footer">
+      <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
+      <p
+        *ngIf="password_confirm != newUser.password || newUser.email == '' || newUser.password == '' || newUser.firstName == '' || newUser.lastName == '' || newUser.org == ''">
+        Please fill out every field correctly before submitting.</p>
+      <button
+        *ngIf="password_confirm != newUser.password || newUser.email == '' || newUser.password == '' || newUser.firstName == '' || newUser.lastName == '' || newUser.org == ''"
+        class="btn btn-secondary">Submit</button>
+      <button
+        *ngIf="password_confirm == newUser.password && newUser.email != '' && newUser.password != '' && newUser.firstName != '' && newUser.lastName != '' && newUser.org != ''"
+        class="btn btn-primary" (click)="register()">Submit</button>
+    </div>
+  </form>
 </ng-template>
 
-
+<!-- donation form stuff -->
 <ng-template #donate>
-  <app-donation ></app-donation>
+  <app-donation></app-donation>
 </ng-template>
 
 <ng-template #paymentSuccess>
@@ -133,16 +135,17 @@
 
 
 <!-- navbar starts here -->
-<nav class="navbar navbar-light navbar-expand-lg fixed-top mb-4">
+<nav id="navbar" class="mb-1 navbar navbar-expand-lg navbar-light">
   <div class="container d-flex justify-content-between">
     <!-- site-logo -->
-    <a id="logo" [routerLink]="['/']">
+    <a id="logo" [routerLink]="['/']" class="navbar-brand">
       <img src="assets/img/nav-bar/logo.png" alt="MightyVet Logo">
     </a>
     <div id="right-nav">
       <!-- login & sign up buttons -->
       <div class="ml-auto mb-2 d-flex align-items-end flex-column">
-        <div class="login" *ngIf="!_authenticationsService.isLoggedIn()" ngbDropdown>
+        <div class="login mb-3" *ngIf="!_authenticationsService.isLoggedIn()" ngbDropdown>
+
           <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -168,12 +171,15 @@
               </li>
             </ul>
           </div>
-          <a id="log-in" class="btn" (click)="open('login')">LOG IN</a>
-          <a id="sign-up" class="btn btn-outline-info mx-1" (click)="open('signup')">SIGN UP</a>
-          <a id="donate" class="btn" (click)="open('donate')">DONATE</a>
-          <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
+
+          <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button>
+          <button class="btn btn-sm btn-outline-info ml-2" (click)="open('signup')">SIGN UP</button>
+          <button class="btn btn-sm btn-outline-secondary ml-2" (click)="open('login')">LOG IN</button>
+          <a class="ml-2" [routerLink]="['/admin']">
+            <img id="dog" alt="dog" src="assets/img/nav-bar/dog.png">
+          </a>
         </div>
-        <div class="profile" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
+        <div class="profile mb-3" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
           <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -199,11 +205,11 @@
               </li>
             </ul>
           </div>
-          <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle fa-3x"></i></a>
-          <a id="donate" class="btn" (click)="open('donate')">DONATE</a>
-          <a id="logout" class="btn btn-outline-info ml-1" (click)="_authenticationsService.logout()">LOG OUT</a>
+
+          <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button>
+          <button class="btn btn-sm btn-outline-secondary ml-2" [routerLink]="['/user']"><i class="fa fa-user mr-2"></i>Profile</button>
+          <button class="btn btn-sm btn-outline-secondary ml-2" (click)="_authenticationsService.logout()"><i class="fa fa-sign-out mr-2"></i>Logout</button>
         </div>
-        <!-- nav bar -->
         <div class="navbar-nav collapse navbar-collapse">
           <ul class="ml-auto navbar-nav navigation">
             <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
