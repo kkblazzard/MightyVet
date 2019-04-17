@@ -14,6 +14,8 @@ import { EventsService }  from '../http_services/events.service';
 })
 
 export class MentorshipComponent implements OnInit {
+    user_errors: any;
+    mentor_errors: any;
     states: any;
     userInfo: any;
     mentors: any;
@@ -106,6 +108,8 @@ export class MentorshipComponent implements OnInit {
     }
     closedModal(){
         this.modal = null;
+        this.user_errors = null;
+        this.mentor_errors = null;
         if (this.isLoggedIn()){
             this.getUserInfo();
         }
@@ -115,23 +119,20 @@ export class MentorshipComponent implements OnInit {
         obs.subscribe(data => this.mentors = data);
     }
     addMentor(){
+        this.user_errors = null;
+        this.mentor_errors = null;
         let obs = this._usersService.userUpdate(this.newMentor.user, this.userInfo)
         obs.subscribe(data =>{
-            console.log(data);
             if (data['errors']){
-                console.log("Something went wrong when updating user data")
-                //if user update failed
+                this.user_errors = data['errors'];
             }
             else{
-                console.log("Successfully updated user information")
                 let obs2 = this._mentorsService.addMentor(this.newMentor);
-                obs2.subscribe(data => {
-                    if (data['errors']){
-                        console.log("Something went wrong when adding new mentor", data)
-                        //if adding mentor failed
+                obs2.subscribe(data2 => {
+                    if (data2['errors']){
+                        this.mentor_errors = data2['errors'];
                     }
                     else{
-                        console.log("Successfully added new mentor")
                         this.modal.close();
                     }
                 })
@@ -141,14 +142,6 @@ export class MentorshipComponent implements OnInit {
     seeMore(){
         this.searchBar.featuredNumber += 8;
     }
-    
-    /*
-    searchBar(search_data){
-        use a service to loop through for anything that matches the string
-        elimante extra searches based on checkboxes
-    }
-    */
-
 
 
 

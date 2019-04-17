@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit {
   states: any = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other'];
   modal_string: String;
   modal: any;
+  signup_errors: any;
+  login_errors: any;
   loginInfo: TokenPayload;
-  loginErrors: any;
   newUser: TokenPayload;
   password_confirm: String;
-  registerErrors: any;
   newsletter: boolean;
   extraData = {
 
@@ -99,10 +99,12 @@ export class HeaderComponent implements OnInit {
     }
   }
   loggingIn() {
+    this.login_errors = null;
     const obs = this._authenticationsService.login(this.loginInfo);
     obs.subscribe( data => {
       if (data['errors']) {
-        this.loginErrors = data;
+        console.log(data);
+        this.login_errors = data['errors'];
       } else {
         this.modal.close();
         this.closedModal();
@@ -110,6 +112,8 @@ export class HeaderComponent implements OnInit {
     });
   }
   closedModal() {
+    this.login_errors = null;
+    this.signup_errors = null;
     this.newsletter = false;
     this.modal = null;
     this.modal_string = null;
@@ -129,23 +133,22 @@ export class HeaderComponent implements OnInit {
     this.password_confirm = '';
   }
   register() {
+    this.signup_errors = null;
     const obs = this._authenticationsService.register(this.newUser);
     obs.subscribe(data => {
       if (data['errors']) {
-        console.log(data);
-        this.registerErrors = data;
+        console.log(data['errors']);
+        this.signup_errors = data['errors'];
       } else {
         if (this.newsletter = true) {
           const obs2 = this._newslettersService.addNewsletter({ email: this.newUser.email });
           obs2.subscribe( data => console.log(data), err => console.log(err), () => {
             this.modal.close();
             this.closedModal();
-            this._router.navigateByUrl('/user');
           });
         } else {
           this.modal.close();
           this.closedModal();
-          this._router.navigateByUrl('/user');
         }
       }
     });
