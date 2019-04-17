@@ -14,7 +14,7 @@
     <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch"
       aria-describedby="coursesSearch">
     <div class="input-group-append border-dark">
-      <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
+      <button (click)="searchCourse()" class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
     </div>
   </div>
   <!-- search filters -->
@@ -43,8 +43,8 @@
 
 <section id="course-cards" class="container">
   <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
-    <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4">  <!-- search pipe to limit number of entries -->
-      <img [src]="course.img" class="card-img-top" alt="Course Image">
+    <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4 cardheight">  <!-- search pipe to limit number of entries -->
+      <img [src]="course.img" class="card-img" alt="Course Image">
       <div class="card-body">
         <h5 class="card-title">{{course.title | slice: 40}}</h5>
         <p class="card-text">{{course.description | slice: 100}}</p>
