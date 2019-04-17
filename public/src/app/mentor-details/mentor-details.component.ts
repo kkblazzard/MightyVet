@@ -21,7 +21,7 @@ export class MentorDetailsComponent implements OnInit {
     private _authenticationsService: AuthenticationService,
     private _menteesService: MenteesService,
     private _router: Router,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.isMentee = false;
@@ -29,46 +29,45 @@ export class MentorDetailsComponent implements OnInit {
       this.id = params.id;
       this.getMentor();
     }),
-    (err) => {
-      console.log(err);
-    }
+      (err) => {
+        console.log(err);
+      }
   }
-  getMentor(){
+  getMentor() {
     let obs = this._mentorsService.getMentor(this.id);
-    obs.subscribe((data)=>{
+    obs.subscribe((data) => {
       console.log(data);
       this.mentor = data;
       this.checkMentee();
     }),
-    (err)=>{
-      console.log(err);
-    }
+    (err) => {
+        console.log(err);
+      }
   }
-  checkMentee(){
-    for(let mentee of this.mentor.mentees){
-      if(mentee.user == this._authenticationsService.getUserDetails()._id){
+  checkMentee() {
+    for (let mentee of this.mentor.mentees) {
+      if (mentee.user === this._authenticationsService.getUserDetails()._id) {
         this.isMentee = true;
       }
     }
   }
-  signUp(){
-    if (!this._authenticationsService.isLoggedIn()){
+  signUp() {
+    if (!this._authenticationsService.isLoggedIn()) {
       this._eventsService.sendLogin();
-    }
-    else{
-      let obs = this._menteesService.addMentee({user: this._authenticationsService.getUserDetails()._id, mentor: this.id})
+    } else {
+      let obs = this._menteesService.addMentee({ user: this._authenticationsService.getUserDetails()._id, mentor: this.id });
       obs.subscribe(data => {
-        console.log("successfully created new mentee", data);
+        console.log('successfully created new mentee', data);
         let obs2 = this._mentorsService.signUp(this.id, data);
         obs2.subscribe(data2 => {
-          console.log("successfully added new mentee to mentor", data2);
+          console.log('successfully added new mentee to mentor', data2);
           this.getMentor();
         },
-        err =>{
-          console.log("something went wrong:", err);
-        })
+          err => {
+            console.log('something went wrong:', err);
+          });
       }), err => {
-        console.log("something went wrong:", err);
+        console.log('something went wrong:', err);
       }
     }
   }
