@@ -1,67 +1,71 @@
-.navbar{
-    padding: 10px 25px;
+/* local css */
+#profile_img i{
+    margin-right: 15px;
+}
+a.link_text{
+    text-decoration: underline;
+    color: #395371;
+    cursor: pointer;
+}
+.errors{
+    color: red;
+}
+.close:focus{
+    outline: 0;
 }
 .navigation{
     box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
 }
-.right-navbar{
-    margin: 0;
-    padding: 0;
-}
 .collapse{
     margin-top: 10px;
 }
-.logo{
-    height: inherit;
-    cursor: pointer;
-}
 .dog{
     margin-left: 5px;
-    height:35px;
+    max-width: 32px;
 }
-.login a{
-    padding: 5px;
-    margin: 0 2px;
-}
-#login{
+#donate{
     border: solid transparent 3px;
-    border-radius: 5px;
-}
-#login:hover{
-    background-color: #7DA7D9;
-    border: solid #7DA7D9 3px;
-    border-radius: 5px;
-    color: white;
     cursor: pointer;
 }
-#signup{
-    border: solid #92dac3 3px;
-    border-radius: 5px;
+#log-in{
+    border: solid transparent 3px;
+    cursor: pointer;
 }
-#signup:hover{
+#logout{
+    border: solid #92dac3 3px;
+    cursor: pointer;
+}
+#logout:hover{
     color: white;
     background-color: #92dac3;
+}
+#log-in:hover{
+    background-color: #7DA7D9;
+    border: solid #7DA7D9 3px;
+    color: white;
+}
+#donate:hover{
+    background-color: #7DA7D9;
+    border: solid #7DA7D9 3px;
+    color: white;
+}
+#sign-up{
+    border: solid #92dac3 3px;
     cursor: pointer;
 }
-.profile{
-    margin-left:95%;
-    margin-bottom: 5px;
+#sign-up:hover{
+    color: white;
+    background-color: #92dac3;
 }
-.profile_img{
-    height: 35px;
-}
-.navbar li{
-    padding: 10px;
-}
-.navbar{
-    margin: 0px;
-    background-color: white;
+.navbar .nav-link{
+    padding: 10px 15px;
 }
 .navbar a{
     color: #395371;
 }
-.navbar .nav-item{
-    font-size: 16px;
+.navbar .nav-item {
+    cursor: pointer;
+    padding:0;
 }
 .navbar .nav-item:hover{
     background-color: #7DA7D9;
@@ -69,51 +73,25 @@
 .navbar .nav-item:hover a{
     color: white;
 }
-img:focus{
-    outline: 0;
+.navbar .activated{
+    background-color: #7DA7D9;
+}
+.navbar .activated a{
+    color: white;
 }
 @media only screen and (min-width: 992px) {
     .navbar{
         position: relative;
+
     }
 }
 @media only screen and (max-width: 991px) {
-    .logo{
-        margin-right: 10px;
-        height: 70px;
+
+    .navbar {
+        background: #fff;
     }
-    .logo-ctn{
-        width: 100px;
-        display: inline-block;
-    }
-    .log-ctn{
-        padding: 0;
-    }
-    .login{
-        margin-left: 0;
-    }
-}
-@media only screen and (max-width: 454px) {
-    .logo-ctn{
-        padding: 0;
-        width: 60px;
-    }
-    .logo{
-        height: 50px;
-    }
-    .login a{
-    font-size: 12px;
-    }
-    .dog{
-    height: 25px;
-    }
-    .navbar-toggler{
-    height: 30px;
-    width: 35px;
-    padding: 0;
-    }
-    .navbar-toggler-icon{
-    height: 20px;
-    width: 20px;
+    #logo img{
+        margin-top: 0;
+        height: 60px;
     }
 }

@@ -1,0 +1,6 @@
+<h4>Newsletter Email List</h4>
+<textarea class="form-control mb-3" #userInput>{{email}}</textarea>
+<div *ngIf="alert" class="alert alert-success mb-3">
+    <p>Textbox successfully copied!</p>
+</div>
+<button class="btn btn-outline-primary" (click)="copyInputMessage(userInput)" value="Click to Copy">Copy from Textbox</button>

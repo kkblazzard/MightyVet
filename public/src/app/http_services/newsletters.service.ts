@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
 export class NewslettersService {
 
   constructor(private _http: HttpClient) { }
-  getNewsletters(){
+  getNewsletters() {
       return this._http.get(`/api/newsletters`);
   }
   addNewsletter(newNewsletter) {

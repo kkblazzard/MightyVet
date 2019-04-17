@@ -12,7 +12,18 @@ select{
 }
 .question{
     padding: 10px;
-    border: solid green 2px;
-    border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+.question input{
+    display: inline-block;
+}
+.question label{
+    display: inline-block;
+}
+img{
+    height: 100px;
+}
+.img-preview{
+    height: 100px;
+    width: 100px;
 }

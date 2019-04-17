@@ -1,10 +1,10 @@
 var mongoose = require('mongoose')
 
-var WebinarSchema = require('../webinars/schema')
-
 var AccreditationSchema = new mongoose.Schema({
-        user_id: String, 
-        webinar_id: {type: WebinarSchema}, 
+        user: {type : mongoose.Schema.ObjectId, 
+                ref : 'user'}, 
+        webinar: {type : mongoose.Schema.ObjectId, 
+                ref : 'webinar'}, 
         credit_received: {type: Boolean, default:false}
 }, {timestamps:true})
 

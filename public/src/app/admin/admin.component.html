@@ -1,18 +1,24 @@
-<nav class="navbar navbar-light navbar-expand-sm">
-  <span class="navbar-brand">Admin Navigation</span>
-  <ul class="navbar-nav collapse navbar-collapse">
-    <li class="nav-item" [routerLink]="['/admin', 'partners']">
-      <a class="nav-link">Partners</a>
+<div class="container">
+  <h2 class="mb-3">👋 Welcome to the Admin Panel</h2>
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+      <a class="nav-link p-3" [routerLink]="['/admin', 'partners']" [routerLinkActive]="['activated']">Partners</a>
     </li>
-    <li class="nav-item" [routerLink]="['/admin', 'webinars']">
-      <a class="nav-link">Webinars</a>
+    <li class="nav-item">
+      <a class="nav-link p-3" [routerLink]="['/admin', 'webinars']" [routerLinkActive]="['activated']">Webinars</a>
     </li>
-    <li class="nav-item" [routerLink]="['/admin', 'mentors']">
-      <a class="nav-link">Mentors</a>
+    <li class="nav-item">
+      <a class="nav-link p-3" [routerLink]="['/admin', 'mentors']" [routerLinkActive]="['activated']">Mentors</a>
     </li>
-    <li class="nav-item" [routerLink]="['/admin', 'users']">
-      <a class="nav-link">Users</a>
+    <li class="nav-item">
+      <a class="nav-link p-3" [routerLink]="['/admin', 'users']" [routerLinkActive]="['activated']">Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link p-3" [routerLink]="['/admin', 'newsletters']" [routerLinkActive]="['activated']">Newsletter</a>
     </li>
   </ul>
-</nav>
-<router-outlet></router-outlet>
+  <div id="admin-pages">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

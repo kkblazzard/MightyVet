@@ -1,4 +1,38 @@
-<h2>Mentors Waiting for Approval</h2>
+<ng-template #applicationViewer>
+  <div class="modal-header">
+      <h2 class="modal-title">Mentor Application Viewer</h2>
+      <button type="button" class="close" (click)="modal.dismiss('click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <form>
+      <div class="modal-body container">
+          <h6>User Information</h6>
+          <p>First Name: {{mentorApplication.user.firstName}}</p>
+          <p>Last Name: {{mentorApplication.user.lastName}}</p>
+          <p>Email: {{mentorApplication.user.email}}</p>
+          <p>Title: {{mentorApplication.user.title}}</p>
+          <p>Organization: {{mentorApplication.user.org}}</p>
+          <p>State: {{mentorApplication.user.state}}</p>
+          <h6>Resume:</h6>
+          <p>{{mentorApplication.resume}}</p>
+          <h6>Support:</h6>
+          <ul>
+            <li *ngIf="mentorApplication.support.mental_health">Mental Health</li>
+            <li *ngIf="mentorApplication.support.financial_advice">Financial Advice</li>
+            <li *ngIf="mentorApplication.support.career_advice">Career Advice</li>
+            <li *ngIf="mentorApplication.support.technical_advice">Technical Advice</li>
+          </ul>
+      </div>
+      <!-- arrange this to be in bottom right with absolute -->
+      <div class="modal-footer">
+          <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
+          <button class="btn btn-success" (click)="approveMentor(mentorApplication._id)">Approve Application</button>
+          <button class="btn btn-danger" (click)="declineMentor(mentorApplication._id)">Decline Application</button>
+      </div>
+  </form>
+</ng-template>
+<h4>Mentors Waiting for Approval</h4>
 <table class="table">
   <thead>
     <tr>
@@ -8,27 +42,28 @@
   </thead>
   <tbody>
     <tr *ngFor="let tentativeMentor of approvalMentors">
-      <td>{{mentor.user.firstName}} {{mentor.user.lastName}}</td>
+      <td><a (click)="openModal(tentativeMentor._id)">{{tentativeMentor.user.firstName}} {{tentativeMentor.user.lastName}}</a></td>
       <td>
-        <button>View Application</button>
-        <button (click)="approveMentor(mentor._id)">Approve</button>
-        <button (click)="declineMentor(mentor._id)">Decline</button>
+        <button class="btn btn-success" (click)="approveMentor(tentativeMentor._id)">Approve</button>
+        <button class="btn btn-danger" (click)="declineMentor(tentativeMentor._id)">Decline</button>
       </td>
     </tr>
   </tbody>
 </table>
-<h2>All Mentors</h2>
+<h4>All Mentors</h4>
 <table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>Mentees</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let mentor of mentors">
       <td>{{mentor.user.firstName}} {{mentor.user.lastName}}</td>
       <td>{{mentor.mentees.length}}</td>
+      <td><button class="btn btn-danger" (click)="declineMentor(mentor._id)">Delete</button></td>
     </tr>
   </tbody>
 </table>

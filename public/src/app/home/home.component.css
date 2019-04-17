@@ -1,151 +1,28 @@
-.row{
-    padding-left: 40px;
-    padding-right: 40px;
-}
-img:focus{
-    outline: 0;
-}
-.rect1{
-    margin-top: 30px;
-}
-.rect1-card img{
-    vertical-align: middle;
-    cursor: pointer;
-}
-#resources{
-    margin-left: 10px;
-    margin-right: 56px;
-}
-#courses{
-    margin-left: 2px;
-    margin-right: 59px;
-}
-#mentorship{
-    margin-right: 55px;
-}
-.rect1-card .card-text{
-    display: inline-block;
-    width: 50%;
-    vertical-align: middle;
-}
-.card-text h5{
-    color: #395371;
-    font-size: 16px;
-    letter-spacing: 0.03em;
-    font-weight: 800;
-}
-.card-text p{
-    font-size: 17px;
-    line-height: 23px;
-}
-.rect1-right{
-    display: inline-block;
-    background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('/assets/img/home_page/splash_2.jpg');
+/* welcome */
+.jumbotron {
+    width: 100%;
+    height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/home.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
 }
-.rect1-right{
-    padding: 10px;
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
 }
-.rect1-right h1{
-    font-weight: normal;
-    color: #395371;
-    font-size: 46px;
-}
-.rect1-right p{
-    font-size: 23px;
-    line-height: 36px;
-}
-.newsletter{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-top: 30px;
+/* newsletter */
+#newsletter{
     background: rgba(168, 201, 239, 0.62);
 }
-.newsletter span{
-    letter-spacing: -1px;
-    vertical-align: middle;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 2.1;
-    padding-right: 0;
+#newsletter form {
+    width: 40%;
 }
-.newsletter form{
-    margin: 0;
-    padding: 0;
-    height: inherit;
-    vertical-align: middle;
+#courses_img img {
+    width: 100%;
 }
-.newsletter button{
-    vertical-align: middle;
-    display: inline-block;
-    border: none;
-    height: inherit;
-    background: #89CEB8;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: normal;
-    text-align: center;
-}
-.newsletter input{
-    vertical-align: middle;
-    height: inherit;
-    mix-blend-mode: normal;
-    opacity: 0.9;
-    border: 3px solid #A8C9EF;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-h1{
-    margin-top: 20px;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 40px;
-    line-height: normal;
-    color: #395371;
-}
-h2{
-    margin-top: 10px;
-    font-weight: 600;
-    font-size: 26px;
-    color: #395371;
-}
-.mightymission{
-    padding-bottom: 15px;
-}
-.video{
-    margin-top: 20px;
-    vertical-align: top;
-    display: inline-block;
-}
-.available-courses{
-    background: rgba(229, 229, 229, 0.4);
-    padding-bottom: 15px;
-}
-.available-courses button{
-    margin-left: 15px;
-}
-button{
-    display: block;
-    border: none;
-    padding: 10px;
-    background: #A8C9EF;
-    border-radius: 5px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: normal;
-    text-align: center;
-    letter-spacing: 0.06em;
-}
-p{
-    font-size: 16px;
-    line-height: normal;
-    letter-spacing: 0.03em;
-}
-.mighty-mentors{
-    padding-bottom: 15px;
+a p{
+    color: black;
 }

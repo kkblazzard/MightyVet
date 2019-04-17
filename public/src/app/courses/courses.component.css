@@ -1,65 +1,38 @@
-.top_image{
+/* welcome */
+.jumbotron {
     width: 100%;
+    height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/courses/hero.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 2rem 2rem;
+}
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 700px;
+    height: 210px;
+    border-bottom: 5px solid #7290cd;
 }
 
-/* search bar */
-.bar{
-    width: 100%;
-    display: block;
-    margin: 1rem;
+.date-filter {
+    width: 200px;
 }
-.search__button{
-    background: #565656;
-    border: 1px solid #565656;
-    box-sizing: border-box;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    color: white;
-    padding: .2rem 1rem;
+@media only screen and (min-width: 768px){
+    #course-cards .card {
+        width: 48.6%;
+    }
 }
-.search_bar__input{
-    width: 70%;
-    border: .2rem solid #565656;
+@media only screen and (min-width: 992px){
+    #course-cards .card {
+        width: 32%;
+    }
 }
 
-#magnifying_glass{
-    background: #565656;
-    /* padding: .2rem 1rem; */
-    color: white;
-    width: 1.4rem;
-    height: 1.4rem;
+.cardheight{
+    height: 500px!important;
 }
-
-.magnifying_glass__button{
-    background: #565656;
-    border: 1px solid #565656;
-    box-sizing: border-box;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: white;
-    padding: .2rem 1rem;
-}
-
-
-/* left side */
-.left_filter{
-    display: inline-block;
-    width: 15%;
-    margin-right: 5%;
-}
-.apply_button{
-    background: #627894;
-    border-radius: 5px;
-    color: white;
-}
-
-/* main */
-.main_cards{
-    display: inline-block;
-    vertical-align: top;
-    width: 80%;
-}
-.main_cards *{
-    display: inline-block;
-    vertical-align: top;
+.card-img{
+    height: 45%!important;
 }

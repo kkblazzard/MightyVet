@@ -1,5 +1,6 @@
 
-<h2>All Users</h2>
+<h4>All Users</h4>
+<a class="btn btn-primary" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o"></i>Download User Information into an Excel File</a>
 <table class="table">
   <thead>
     <tr>
@@ -15,9 +16,9 @@
       <td>{{user.firstName}} {{user.lastName}}</td>
       <td>{{user.email}}</td>
       <td>{{user.title}} at {{user.org}}</td>
-      <td>{{partner.state}}</td>
-      <td *ngIf="partner.mentor">Yes</td>
-      <td *ngIf="!partner.mentor">No</td>
+      <td>{{user.state}}</td>
+      <td *ngIf="user.mentor_id">Yes</td>
+      <td *ngIf="!user.mentor_id">No</td>
     </tr>
   </tbody>
 </table>

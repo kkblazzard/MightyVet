@@ -1,20 +1,56 @@
-<h2>New Partners Form</h2>
-<form method="post">
-  <label>Partner Name</label>
-  <input name="name" type="text" [(ngModel)]="newPartner.partner.name">
-  <label>Partner Image</label>
-  <input name="img" type="text" [(ngModel)]="newPartner.partner.img">
-  <label>Partner Link</label>
-  <input name="link" type="text" [(ngModel)]="newPartner.partner.link">
-  <label>Tier</label>
-  <select name="tier" [(ngModel)]="newPartner.tier">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-  </select>
-  <button class="btn btn-outline-success" (click)="addPartner()">New Partner</button>
-</form>
-<h2>All Partners</h2>
+<!-- Modal - Add New Partner Form -->
+<ng-template #addNewPartner>
+  <div class="modal-header">
+    <h5 class="modal-title">Add a new partner</h5>
+    <button type="button" class="close" (click)="modal.dismiss('click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form method="post">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="partnerName">Partner name</label>
+        <input name="name" type="text" [(ngModel)]="newPartner.partner.name" class="form-control" id="partnerName"
+          placeholder="Enter a name">
+      </div>
+      <div class="form-group">
+        <label *ngIf="!newPartner.partner.img" for="file">Choose picture</label>
+        <input #imageInput class="form-control" id="file" type="file" accept="image/*"
+          (change)="processFile(imageInput)">
+      </div>
+      <div *ngIf="fileToUpload" class="img-preview-container">
+        <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+        <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+
+        <img *ngIf="fileToUpload.status === 'ok'" [src]="newPartner.partner.img" alt="Image Preview">
+      </div>
+      <div class="form-group">
+        <label for="link">Partner link</label>
+        <input name="link" type="text" [(ngModel)]="newPartner.partner.link" class="form-control" id="link"
+          placeholder="Enter a link">
+      </div>
+      <div class="form-group">
+        <label for="tier">Tier</label>
+        <select class="form-control" id="tier" name="tier" [(ngModel)]="newPartner.tier">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-primary" (click)="addPartner()">ADD NEW</button>
+      <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
+    </div>
+  </form>
+</ng-template>
+
+<!-- Table -->
+<div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
+  <h4>All Partners</h4>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-info" (click)="openModal()">ADD A PARTNER</button>
+</div>
 <table class="table">
   <thead>
     <tr>
