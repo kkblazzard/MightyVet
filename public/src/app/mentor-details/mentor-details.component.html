@@ -9,8 +9,8 @@
       </p>
       <div class="row">
         <div class="col-sm-10">
-          <h1 class="">{{mentor.user.firstName}} {{mentor.user.lastName}}</h1>
-          <h5>{{mentor.user.title}}</h5>
+          <h1>{{mentor.user.firstName}} {{mentor.user.lastName}}</h1>
+          <h5 class="mb-4">{{mentor.user.title}}</h5>
           <button type="button" class="btn btn-info mr-1"><i class="fa fa-comments mr-2"></i>Send me a message</button>
           <button *ngIf="!isMentee" type="button" class="btn btn-success" (click)="signUp()"><i class="fa fa-handshake-o mr-2"></i>Become my mentee</button>
           <br>
@@ -27,14 +27,13 @@
             <li class="list-group-item text-right"><span class="pull-left"><strong>Organization: </strong></span>
               {{mentor.user.org}}</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Areas of support: </strong></span>
-              <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health">Mental Health</span>
-              <span class="badge badge-info mr-1" *ngIf="mentor.support.financial_advice">Financial Advice</span>
-              <span class="badge badge-info mr-1" *ngIf="mentor.support.career_advice">Career Advice</span>
-              <span class="badge badge-info mr-1" *ngIf="mentor.support.technical_advice">Technical Advice</span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health"> Mental Health </span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.financial_advice"> Financial Advice </span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.career_advice"> Career Advice </span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.technical_advice"> Technical Advice </span>
             </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Joined: </strong></span>
-              2.13.2019
-            </li>
+              2.13.2020</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen: </strong></span>
               2.13.2020</li>
           </ul>
