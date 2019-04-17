@@ -4,6 +4,7 @@ import { AuthenticationService, TokenPayload } from '../http_services/authentica
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from '../http_services/events.service';
 import { NewslettersService } from '../http_services/newsletters.service';
+import { UsersService } from '../http_services/users.service';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   newUser: TokenPayload;
   password_confirm: String;
   newsletter: boolean;
+  admin: boolean = false;
   // extraData = {
 
   // };
@@ -37,6 +39,7 @@ export class HeaderComponent implements OnInit {
     private _modalService: NgbModal,
     private _authenticationsService: AuthenticationService,
     private _newslettersService: NewslettersService,
+    private _usersService: UsersService,
     private _route: ActivatedRoute,
     private _router: Router) { }
 
@@ -62,6 +65,7 @@ export class HeaderComponent implements OnInit {
     this.signUpSubscription = this._eventsService.openSignup().subscribe(() => {
       this.open('signup');
     });
+    this.isAdmin();
     // this.donateSubscription = this._eventsService.openDonate().subscribe(() => {
     //   this.open('donate');
     // });
@@ -113,6 +117,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   closedModal() {
+    this.isAdmin();
     this.login_errors = null;
     this.signup_errors = null;
     this.newsletter = false;
@@ -141,17 +146,25 @@ export class HeaderComponent implements OnInit {
         console.log(data['errors']);
         this.signup_errors = data['errors'];
       } else {
-        if (this.newsletter = true) {
+        if (this.newsletter === true) {
           const obs2 = this._newslettersService.addNewsletter({ email: this.newUser.email });
           obs2.subscribe( data => console.log(data), err => console.log(err), () => {
             this.modal.close();
             this.closedModal();
-          });
+          })
         } else {
           this.modal.close();
           this.closedModal();
         }
       }
     });
+  }
+  isAdmin(){
+    if (this._authenticationsService.isLoggedIn()){
+      let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
+      obs.subscribe(data => {
+        this.admin = data['admin'];
+      }, err => { this.admin = false }
+    )}
   }
 }

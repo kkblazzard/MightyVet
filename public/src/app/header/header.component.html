@@ -168,6 +168,8 @@
             (click)="open('signup')">SIGN UP</button>
           <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
             (click)="open('login')">LOG IN</button>
+          <button *ngIf="admin" class="btn btn-sm btn-outline-secondary ml-2"
+            [routerLink]="['/admin']"><i class="fa fa-cogs mr-2"></i>Admin</button>
           <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
             [routerLink]="['/user']"><i class="fa fa-user mr-2"></i>Profile</button>
           <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
@@ -199,9 +201,9 @@
                 </li>
               </ul>
             </div>
-            <a class="ml-2" [routerLink]="['/admin']">
+            <div class="ml-2 d-inline">
               <img id="dog" alt="dog" src="assets/img/nav-bar/dog.png">
-            </a>
+            </div>
           </div>
         </div>
         <div class="navbar-nav collapse navbar-collapse">
