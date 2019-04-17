@@ -21,6 +21,9 @@ textarea {
     resize: none;
     overflow: scroll;
 }
+.errors{
+    color: red;
+}
 /* media queries */
 
 @media only screen and (min-width:992px){

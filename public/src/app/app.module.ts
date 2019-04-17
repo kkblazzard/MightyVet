@@ -58,7 +58,6 @@ export class KeysPipe implements PipeTransform {
 
 export class MentorSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
-    console.log(arguments);
     if (value) {
       if (search.bar) {
         var strings = search.bar.toLowerCase().split(' ');
@@ -97,8 +96,6 @@ export class MentorSearchPipe implements PipeTransform {
               count_y++;
             }
           }
-          console.log(count_x);
-          console.log(count_y);
           return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
         });
       }

@@ -14,6 +14,7 @@ var WebinarSchema = new mongoose.Schema({
         },
         type: {
                 type: String,
+                required: [true, "Please select a type."]
         }, //Live or Video
 
         datetime: {type: Date}
@@ -32,6 +33,7 @@ var WebinarSchema = new mongoose.Schema({
         },
         img: {
                 type: String,
+                required: [true, "Please upload an image... It may take a bit of time to load."]
         },
         webinar_link: {
                 type: String,
