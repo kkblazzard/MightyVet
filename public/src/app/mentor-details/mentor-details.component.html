@@ -1,15 +1,52 @@
+<!-- start here -->
 <div *ngIf="mentor">
   <div *ngIf="mentor._id">
-    <div class="container d-flex">
-      <img id="mentor_img" [src]="mentor.user.picture" alt="Mentor Image">
-      <div>
-        <h3>{{mentor.user.firstName}} {{mentor.user.lastName}}</h3>
-        <h6>{{mentor.user.title}}, {{mentor.user.org}}</h6>
-        <p>{{mentor.resume}}</p>
+    <div class="container">
+      <p *ngIf="isMentee">
+        <ngb-alert [dismissible]="false">
+          <i class="fa fa-check mr-4"></i>You have already requested to become{{mentor.user.firstName}}'s mentee.
+        </ngb-alert>
+      </p>
+      <div class="row">
+        <div class="col-sm-10">
+          <h1 class="">{{mentor.user.firstName}} {{mentor.user.lastName}}</h1>
+          <h5>{{mentor.user.title}}</h5>
+          <button type="button" class="btn btn-info mr-1"><i class="fa fa-comments mr-2"></i>Send me a message</button>
+          <button *ngIf="!isMentee" type="button" class="btn btn-success" (click)="signUp()"><i class="fa fa-handshake-o mr-2"></i>Become my mentee</button>
+          <br>
         </div>
-      <div class="ml-auto">
-        <button *ngIf="!isMentee" class="btn btn-primary" (click)="signUp()">Become {{mentor.user.firstName}}'s mentee.</button>
-        <button *ngIf="isMentee" class="btn btn-secondary">You have already requested to become {{mentor.user.firstName}}'s mentee.</button>
+        <div class="col-sm-2 pull-right">
+          <img title="profile image" class="rounded-circle w-100" id="mentor_img" [src]="mentor.user.picture" alt="Mentor Image">
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-3">
+          <ul class="list-group">
+            <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Organization: </strong></span>
+              {{mentor.user.org}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Areas of support: </strong></span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health">Mental Health</span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.financial_advice">Financial Advice</span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.career_advice">Career Advice</span>
+              <span class="badge badge-info mr-1" *ngIf="mentor.support.technical_advice">Technical Advice</span>
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Joined: </strong></span>
+              2.13.2019
+            </li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen: </strong></span>
+              2.13.2020</li>
+          </ul>
+        </div>
+        <div class="col-sm-9" contenteditable="false">
+          <div class="panel panel-default">
+            <h3 class="panel-heading">{{mentor.user.firstName}}'s Bio</h3>
+            <div class="panel-body">
+                {{mentor.resume}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -22,3 +59,30 @@
     </div>
   </div>
 </div>
+
+
+<!-- <div *ngIf="mentor">
+  <div *ngIf="mentor._id">
+    <div class="container d-flex">
+      <img id="mentor_img" [src]="mentor.user.picture" alt="Mentor Image">
+      <div>
+        <h3>{{mentor.user.firstName}} {{mentor.user.lastName}}</h3>
+        <h6>{{mentor.user.title}}, {{mentor.user.org}}</h6>
+        <p>{{mentor.resume}}</p>
+      </div>
+      <div class="ml-auto">
+        <button *ngIf="!isMentee" class="btn btn-primary" (click)="signUp()">Become {{mentor.user.firstName}}'s
+          mentee.</button>
+        <button *ngIf="isMentee" class="btn btn-secondary">You have already requested to become{{mentor.user.firstName}}'s mentee.</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!mentor._id" class="container d-flex justify-content-center pt-5">
+    <i class="fa fa-paw fa-5x mr-3 text-info"></i>
+    <div class="text-info">
+      <h1>Whoops... How did you end up here?</h1>
+      <h3>We couldn't find the mentor you were looking for</h3>
+      <button class="btn btn-outline-info" [routerLink]="['/mentorship']">Return to Mentorship</button>
+    </div>
+  </div>
+</div> -->
