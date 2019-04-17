@@ -140,7 +140,7 @@
 </ng-template>
 
 <!-- donation form stuff -->
-<ng-template #donate>
+<!-- <ng-template #donate>
   <app-donation></app-donation>
 </ng-template>
 
@@ -148,11 +148,11 @@
   <div>
     <p>Donation Sucessful</p>
   </div>
-</ng-template>
+</ng-template> -->
 
 
 <!-- navbar starts here -->
-<nav id="navbar" class="mb-1 navbar navbar-expand-lg navbar-light">
+<nav id="navbar" class="mb-1 navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container d-flex justify-content-between">
     <!-- site-logo -->
     <a id="logo" [routerLink]="['/']" class="navbar-brand">
@@ -161,73 +161,48 @@
     <div id="right-nav">
       <!-- login & sign up buttons -->
       <div class="ml-auto mb-2 d-flex align-items-end flex-column">
-        <div class="login mb-3" *ngIf="!_authenticationsService.isLoggedIn()" ngbDropdown>
+        <div class="profile mb-3" ngbDropdown>
 
-          <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="navbartoggle">
-            <ul class="ml-auto navbar-nav navigation">
-              <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Online Learning</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Mentorship</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Resources</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Blog</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Support Us</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">About</a>
-              </li>
-            </ul>
+          <!-- <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button> -->
+          <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-info ml-2"
+            (click)="open('signup')">SIGN UP</button>
+          <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
+            (click)="open('login')">LOG IN</button>
+          <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
+            [routerLink]="['/user']"><i class="fa fa-user mr-2"></i>Profile</button>
+          <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
+            (click)="_authenticationsService.logout()"><i class="fa fa-sign-out mr-2"></i>Logout</button>
+          <br class="d-lg-none">
+          <div class="d-flex d-lg-inline mt-2 align-items-center">
+            <button class="navbar-toggler ml-auto" id="navbartoggle" ngbDropdownToggle>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="navbartoggle">
+              <ul class="navbar-nav navigation">
+                <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link px-4 py-3">Online Learning</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link px-4 py-3">Mentorship</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link px-4 py-3">Resources</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link px-4 py-3">Blog</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link px-4 py-3">Support Us</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link px-4 py-3">About</a>
+                </li>
+              </ul>
+            </div>
+            <a class="ml-2" [routerLink]="['/admin']">
+              <img id="dog" alt="dog" src="assets/img/nav-bar/dog.png">
+            </a>
           </div>
-
-          <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button>
-          <button class="btn btn-sm btn-outline-info ml-2" (click)="open('signup')">SIGN UP</button>
-          <button class="btn btn-sm btn-outline-secondary ml-2" (click)="open('login')">LOG IN</button>
-          <a class="ml-2" [routerLink]="['/admin']">
-            <img id="dog" alt="dog" src="assets/img/nav-bar/dog.png">
-          </a>
-        </div>
-        <div class="profile mb-3" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
-          <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="navbartoggle">
-            <ul class="ml-auto navbar-nav navigation">
-              <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Online Learning</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Mentorship</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Resources</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Blog</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Support Us</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">About</a>
-              </li>
-            </ul>
-          </div>
-
-          <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button>
-          <button class="btn btn-sm btn-outline-secondary ml-2" [routerLink]="['/user']"><i
-              class="fa fa-user mr-2"></i>Profile</button>
-          <button class="btn btn-sm btn-outline-secondary ml-2" (click)="_authenticationsService.logout()"><i
-              class="fa fa-sign-out mr-2"></i>Logout</button>
         </div>
         <div class="navbar-nav collapse navbar-collapse">
           <ul class="ml-auto navbar-nav navigation">

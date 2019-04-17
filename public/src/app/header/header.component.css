@@ -1,4 +1,7 @@
 /* local css */
+.navbar{
+    background-color: white;
+}
 .navbar .nav-link{
     padding: 10px 15px;
 }
@@ -37,5 +40,8 @@ a.link_text{
 }
 #dog{
     max-width: 28px;
+}
+.dropdown-toggle::after {
+    display:none;
 }
 
