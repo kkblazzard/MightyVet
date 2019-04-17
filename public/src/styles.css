@@ -4,6 +4,9 @@
 * {
     font-family: 'Montserrat', sans-serif;
 }
+body{
+    padding-top: 80px;
+}
 :focus {
     outline: 0;
 }
@@ -20,7 +23,4 @@ p{
     font-size: 1.1em;
 }
 @media only screen and (max-width: 991px) {
-    .container-fluid {
-        position: fixed;
-    }
 } 
