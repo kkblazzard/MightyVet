@@ -6,16 +6,15 @@ import { UsersService } from './http_services/users.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(private _httpService: UsersService){}
+export class AppComponent implements OnInit {
+  constructor(private _httpService: UsersService) {}
   userID: string;
 
-  ngOnInit(){
+  ngOnInit() {
     this.userID = localStorage.getItem('loginUserID');
-  };
-
-  clearLogin(){
+  }
+  clearLogin() {
     localStorage.clear();
-    this.userID = "";
+    this.userID = '';
   }
 }

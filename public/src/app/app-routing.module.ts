@@ -15,13 +15,13 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
-import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
+import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 
 const routes: Routes = [
-  {path: "", pathMatch: 'full', component: HomeComponent},
+  {path: '', pathMatch: 'full', component: HomeComponent},
   {path: 'user', component: UserProfileComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/:id', component: CourseDetailComponent},
@@ -31,20 +31,22 @@ const routes: Routes = [
   {path: 'mentorship/schedule/:date', component: AvailabilityComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'support', component: SupportComponent},
-  {path: "blog", component: BlogComponent},
-  {path: "about", component: AboutComponent},
-  {path: "admin", component: AdminComponent, children:[
-    {path: "webinars", component: AdminWebinarsComponent},
-    {path: "users", component: AdminUsersComponent},
-    {path: "partners", component: AdminPartnersComponent},
-    {path: "mentors", component: AdminMentorsComponent},
-    {path: "newsletters", component: AdminNewsletterComponent}
+  {path: 'blog', component: BlogComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'admin', component: AdminComponent, children: [
+    {path: 'webinars', component: AdminWebinarsComponent},
+    {path: 'users', component: AdminUsersComponent},
+    {path: 'partners', component: AdminPartnersComponent},
+    {path: 'mentors', component: AdminMentorsComponent},
+    {path: 'newsletters', component: AdminNewsletterComponent}
   ]},
-  {path:'**', component: NotFoundComponent},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })], //scrollpositionrestoration scrolls us back to the top everytime a route is activated
+  imports: [RouterModule.forRoot( routes, {
+    scrollPositionRestoration: 'enabled'
+  })], // scrollpositionrestoration scrolls us back to the top everytime a route is activated
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

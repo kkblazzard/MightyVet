@@ -6,3 +6,4 @@ bower_components/
 node_modules
 package-lock.json
 secrets.js
+payments.js

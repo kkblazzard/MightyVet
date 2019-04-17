@@ -15,26 +15,26 @@ export class HeaderComponent implements OnInit {
   signUpSubscription: Subscription;
   donateSubscription: Subscription;
   paymentSuccessSubscription: Subscription;
-  states: any = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
+  states: any = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other'];
   modal_string: String;
   modal: any;
+  signup_errors: any;
+  login_errors: any;
   loginInfo: TokenPayload;
-  loginErrors: any;
   newUser: TokenPayload;
   password_confirm: String;
-  registerErrors: any;
   newsletter: boolean;
-  extraData={
+  extraData = {
 
-  }
-  //element refs
+  };
+  // element refs
   @ViewChild('login') login: ElementRef
   @ViewChild('signup') signup: ElementRef
   @ViewChild('donate') donate: ElementRef
   @ViewChild('paymentSuccess') paymentSuccess: ElementRef
   constructor(
     private _eventsService: EventsService,
-    private _modalService:  NgbModal,
+    private _modalService: NgbModal,
     private _authenticationsService: AuthenticationService,
     private _newslettersService: NewslettersService,
     private _route: ActivatedRoute,
@@ -42,17 +42,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.newsletter = false;
-    this.loginInfo = { email: '',
-    password: ''}
+    this.loginInfo = {
+      email: '',
+      password: ''
+    };
     this.newUser = {
-      firstName:"",
-      lastName:"",
-      email: "",
-      password: "",
-      state: "AL",
-      title: "Vet Tech",
-      org: "",
-    }
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      state: 'AL',
+      title: 'Vet Tech',
+      org: '',
+    };
     this.password_confirm = '';
     this.loginSubscription = this._eventsService.openLogin().subscribe(() => {
       this.open('login');
@@ -68,87 +70,85 @@ export class HeaderComponent implements OnInit {
     });
   }
   open(content) {
-    if(content === 'login') {
-    // log in modal
+    if (content === 'login') {
+      // log in modal
       this.modal = this._modalService.open(this.login);
       this.modal_string = 'login';
-    }
-    else if(content === 'signup'){
+    } else if (content === 'signup') {
       // sign up modal
-      this.modal = this._modalService.open(this.signup, {size: 'lg'});
-      this.modal_string = "signup";
+      this.modal = this._modalService.open(this.signup, { size: 'lg' });
+      this.modal_string = 'signup';
+    } else if (content === 'paymentSuccess') {
+      // payment modal
+      this.modal = this._modalService.open(this.paymentSuccess, { size: 'lg' });
+      this.modal_string = 'paymentSuccess';
+    } else {
+      // donation modal
+      this.modal = this._modalService.open(this.donate, { size: 'lg' });
+      this.modal_string = 'donate';
     }
-    else if(content === 'paymentSuccess'){
-      // sign up modal
-      this.modal = this._modalService.open(this.paymentSuccess, {size: 'lg'});
-      this.modal_string = "paymentSuccess";
-    }
-    else {
-      // sign up modal
-      this.modal = this._modalService.open(this.donate, {size: 'lg'});
-      this.modal_string = "donate";
-    }
-    this.modal.result.then(()=>{}, () => this.closedModal())
+    this.modal.result.then(() => { }, () => this.closedModal());
   }
-  switch(){
-    if (this.modal_string == "login"){
+  switch() {
+    if (this.modal_string === 'login') {
       this.modal.close();
-      this.open("signup");
-    }
-    else if (this.modal_string == "signup"){
+      this.open('signup');
+    } else if (this.modal_string === 'signup') {
       this.modal.close();
-      this.open("login");
+      this.open('login');
     }
   }
-  loggingIn(){
-    let obs = this._authenticationsService.login(this.loginInfo);
-    obs.subscribe(data => {
-      if (data["errors"]){
-        this.loginErrors = data;
-      }
-      else{
+  loggingIn() {
+    this.login_errors = null;
+    const obs = this._authenticationsService.login(this.loginInfo);
+    obs.subscribe( data => {
+      if (data['errors']) {
+        console.log(data);
+        this.login_errors = data['errors'];
+      } else {
         this.modal.close();
         this.closedModal();
       }
-    })
+    });
   }
-  closedModal(){
+  closedModal() {
+    this.login_errors = null;
+    this.signup_errors = null;
     this.newsletter = false;
     this.modal = null;
     this.modal_string = null;
-    this.loginInfo = { email: "",
-    password: ""}
+    this.loginInfo = {
+      email: '',
+      password: ''
+    };
     this.newUser = {
-      firstName:"",
-      lastName:"",
-      email: "",
-      password: "",
-      state: "AL",
-      title: "Vet Tech",
-      org: "",
-    }
-    this.password_confirm = "";
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      state: 'AL',
+      title: 'Vet Tech',
+      org: '',
+    };
+    this.password_confirm = '';
   }
-  register(){
-    let observable = this._authenticationsService.register(this.newUser);
-    observable.subscribe(data => {
+  register() {
+    this.signup_errors = null;
+    const obs = this._authenticationsService.register(this.newUser);
+    obs.subscribe(data => {
       if (data['errors']) {
-        console.log(data);
-        this.registerErrors = data;
-      }
-      else{
-        if (this.newsletter = true){
-          let obs2 = this._newslettersService.addNewsletter({email:this.newUser.email});
-          obs2.subscribe(data => console.log(data), err => console.log(err), ()=>{
+        console.log(data['errors']);
+        this.signup_errors = data['errors'];
+      } else {
+        if (this.newsletter = true) {
+          const obs2 = this._newslettersService.addNewsletter({ email: this.newUser.email });
+          obs2.subscribe( data => console.log(data), err => console.log(err), () => {
             this.modal.close();
             this.closedModal();
-            this._router.navigateByUrl('/user');
-          })
-        }
-        else{
-        this.modal.close();
-        this.closedModal();
-        this._router.navigateByUrl('/user');
+          });
+        } else {
+          this.modal.close();
+          this.closedModal();
         }
       }
     });

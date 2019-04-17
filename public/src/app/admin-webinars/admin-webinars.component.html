@@ -11,6 +11,9 @@
         <div class="form-group col">
           <label>Webinar title</label>
           <input class="form-control" name="title" type="text" [(ngModel)]="newWebinar.title">
+          <div *ngIf="errors" class="errors">
+            <div *ngIf="errors.title">{{errors.title.message}}</div>
+          </div>
         </div>
         <div class="form-group col">
           <label>Live webinar or video</label>
@@ -18,32 +21,47 @@
             <option value="Live">Live webinar</option>
             <option value="Video">Video</option>
           </select>
+          <div *ngIf="errors" class="errors">
+            <div *ngIf="errors.type">{{errors.type.message}}</div>
+          </div>
         </div>
         <div class="form-group col">
-          <label *ngIf="newWebinar.type == 'Live'">Date and time</label>
+          <label *ngIf="newWebinar.type == 'Live' || newWebinar.type == ''">Date and time</label>
           <label *ngIf="newWebinar.type == 'Video'">Date and time of live broadcast</label>
           <input class="form-control" name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
+          <div *ngIf="errors" class="errors">
+            <div *ngIf="errors.datetime">{{errors.datetime.message}}</div>
+          </div>
         </div>
       </div>
       <div class="form-group">
         <label>Description</label>
         <textarea class="form-control" name="description" [(ngModel)]="newWebinar.description"></textarea>
+        <div *ngIf="errors" class="errors">
+            <div *ngIf="errors.description">{{errors.description.message}}</div>
+          </div>
       </div>
       <div class="form-group">
         <label for="file">Choose a picture for your webinar</label>
         <input class="form-control" #imageInput2 id="file" type="file" accept="image/*"
           (change)="processFile2(imageInput2)">
+        <div *ngIf="errors" class="errors">
+          <div *ngIf="errors.img">{{errors.img.message}}</div>
+        </div>
       </div>
       <div *ngIf="fileToUpload2" class="img-preview-container">
         <div *ngIf="fileToUpload2.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
         <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
         <img *ngIf="fileToUpload2.status === 'ok'" [src]="newWebinar.img" alt="Image Preview">
-      
+
       </div>
       <div class="form-group">
         <label>Webinar link</label>
         <input class="form-control" name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
+        <div *ngIf="errors" class="errors">
+          <div *ngIf="errors.webinar_link">{{errors.webinar_link.message}}</div>
+        </div>
       </div>
       <div class="form-group">
         <label>Speaker</label>
@@ -69,40 +87,58 @@
               <option>Mr.</option>
               <option>Ms.</option>
             </select>
+            <div *ngIf="speaker_errors" class="errors">
+              <div *ngIf="speaker_errors.title">{{speaker_errors.title.message}}</div>
+            </div>
           </div>
           <div class="form-group col">
             <label>First name</label>
             <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
+            <div *ngIf="speaker_errors" class="errors">
+              <div *ngIf="speaker_errors.firstName">{{speaker_errors.firstName.message}}</div>
+            </div>
           </div>
           <div class="form-group col">
             <label>Last name</label>
             <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
+            <div *ngIf="speaker_errors" class="errors">
+              <div *ngIf="speaker_errors.lastName">{{speaker_errors.lastName.message}}</div>
+            </div>
           </div>
         </div>
         <div class="form-group">
           <label>Speaker description</label>
           <textarea class="form-control" name="description" [(ngModel)]="newSpeaker.description"></textarea>
+          <div *ngIf="speaker_errors" class="errors">
+            <div *ngIf="speaker_errors.description">{{speaker_errors.description.message}}</div>
+          </div>
         </div>
         <div class="form-group">
           <label for="file">Choose a picture for your speaker</label>
           <input #imageInput class="form-control" id="file" type="file" accept="image/*"
             (change)="processFile(imageInput)">
+          <div *ngIf="speaker_errors" class="errors">
+            <div *ngIf="speaker_errors.img">{{speaker_errors.img.message}}</div>
+          </div>
         </div>
         <div *ngIf="fileToUpload" class="img-preview-container">
           <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
           <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
           <img *ngIf="fileToUpload.status === 'ok'" [src]="newSpeaker.img" alt="Image Preview">
-        
         </div>
         <button class="btn btn-sm btn-outline-secondary" (click)="addSpeaker()">ADD SPEAKER</button>
       </form>
+      <div *ngIf="errors" class="errors">
+        <div *ngIf="errors.speaker">{{errors.speaker.message}}</div>
+      </div>
     </div>
     <div class="modal-footer">
       <!-- Removing stage 2 for MVP 1 -->
       <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button> -->
       <!-- <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
-      <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button>
+      <button class="btn btn-outline-success" (click)="addNewWebinar()">Submit</button>
+      <!-- <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </form>
@@ -151,7 +187,7 @@
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </form> -->
-  <div *ngIf="stage == 3">
+  <!-- <div *ngIf="stage == 3">
     <div class="modal-body">
       <h4>Title: {{newWebinar.title}}</h4>
       <p>Type: {{newWebinar.type}}</p>
@@ -176,15 +212,15 @@
         <button class="btn btn-outline-secondary">Calculate quiz result</button>
       </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer"> -->
       <!-- Removing stage 2 for MVP 1 -->
       <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-danger" (click)="stage2()">GO BACK</button>
       <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-danger" (click)="stage1()">GO BACK</button> -->
-      <button class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
+      <!-- <button class="btn btn-outline-danger" (click)="stage1()">GO BACK</button>
       <button class="btn btn-outline-success" type="button" (click)="addNewWebinar()">SUBMIT</button>
       <button class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
-  </div>
+  </div> -->
 </ng-template>
 
 <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">

@@ -16,6 +16,9 @@ class ImageSnippet {
 })
 export class AdminPartnersComponent implements OnInit {
   @ViewChild("addNewPartner") partnerModal: ElementRef;
+  name_error: string;
+  img_error: string;
+  link_error: string;
   modal: any;
   partners: any;
   newPartner: any = {tier: 1, partner: {name: "", img: "", link: ""}};
@@ -38,9 +41,27 @@ export class AdminPartnersComponent implements OnInit {
   addPartner(){
     let obs = this._partnersService.addPartner(this.newPartner);
     obs.subscribe(data=>{
-      console.log(data);
+      this.name_error = null;
+      this.img_error = null;
+      this.link_error = null;
+      if (!data['errors']){
+        this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
+      }
+      else{
+        console.log(data['errors']);
+        if(data['errors'].partners){
+          if(data['errors'].partners.errors.name){
+            this.name_error = data['errors'].partners.errors.name.message;
+          }
+          if(data['errors'].partners.errors.img){
+            this.img_error = data['errors'].partners.errors.img.message;
+          }
+          if(data['errors'].partners.errors.link){
+            this.link_error = data['errors'].partners.errors.link.message;
+          }
+        }
+      }
       this.getPartners();
-      this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
     });
   }
   openModal(){

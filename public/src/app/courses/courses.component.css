@@ -1,6 +1,19 @@
-/* jumbotron */
-#top_image {
+/* welcome */
+.jumbotron {
     width: 100%;
+    height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/courses/hero.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 2rem 2rem;
+}
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 700px;
+    height: 210px;
+    border-bottom: 5px solid #7290cd;
 }
 
 .date-filter {
