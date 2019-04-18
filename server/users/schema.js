@@ -61,8 +61,9 @@ var UserSchema = new mongoose.Schema({
         mentor_id: {
                 type : mongoose.Schema.ObjectId, 
                 ref : 'mentor'
-        } //mentor application and info
-
+        }, //mentor application and info
+        admin: { type: Boolean,
+        default: false }
 }, {timestamps:true})
 
 UserSchema.plugin(uniqueValidator);

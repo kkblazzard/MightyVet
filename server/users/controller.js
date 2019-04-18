@@ -28,17 +28,23 @@ passport.use(new LocalStrategy({
 
 module.exports={
     userRegister: (req, res) => {
-    var user = new Users(req.body);
-
-    user.setPassword(req.body.password)
-    user.save()
+    Users.find({admin: true})
     .then(data => {
-        var token;
-        token = data.generateJwt();
-        res.status(200);
-        res.json({
-            "token" : token
-        });
+      var user = new Users(req.body);
+      user.setPassword(req.body.password);
+      if (data.length === 0){
+        user.admin = true;
+      }
+      user.save()
+      .then(data2 => {
+          var token;
+          token = data2.generateJwt();
+          res.status(200);
+          res.json({
+              "token" : token
+          });
+      })
+      .catch(err => console.log(err) || res.json(err))
     })
     .catch(err => console.log(err) || res.json(err))
     },
