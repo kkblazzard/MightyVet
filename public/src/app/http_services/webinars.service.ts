@@ -39,5 +39,9 @@ export class WebinarsService {
   deleteWebinar(id) {
     return this._http.delete('/api/webinars/' + id);
   }
+  findWebinar(title) {
+    console.log("http.service findWebinar", title);
+    return this._http.post('/api/webinars/find', title);
+  }
 }
 
