@@ -11,6 +11,8 @@ export interface UserDetails {
   title: string;
   org: string;
   state: string;
+  picture: string;
+  admin: boolean;
   exp: number;
   iat: number;
 }
@@ -27,6 +29,8 @@ export interface TokenPayload {
   title?: string;
   org?: string;
   state?: string;
+  picture?: string;
+  admin?: boolean;
 }
 
 @Injectable({
@@ -36,7 +40,7 @@ export interface TokenPayload {
 export class AuthenticationService {
   private token: string;
 
-  constructor(private _http: HttpClient, private router: Router) {}
+  constructor(private _http: HttpClient, private _router: Router) {}
 
   private saveToken(token: string): void {
     localStorage.setItem('mean-token', token);
@@ -72,9 +76,11 @@ export class AuthenticationService {
   public register(user: TokenPayload) {
     return this.request('post', 'register', user);
   }
-  
   public login(user: TokenPayload) {
     return this.request('post', 'login', user);
+  }
+  public profile() {
+    return this.request('get', 'profile');
   }
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
@@ -99,6 +105,7 @@ export class AuthenticationService {
   }
   public logout(): void {
     this.token = '';
+    this._router.navigateByUrl('/');
     window.localStorage.removeItem('mean-token');
   }
 }

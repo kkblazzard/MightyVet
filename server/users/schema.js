@@ -80,10 +80,17 @@ UserSchema.methods.generateJwt = function() {
         expiry.setDate(expiry.getDate() + 7);
       
         return jwt.sign({
-          _id: this._id,
-          email: this.email,
-          name: this.name,
-          exp: parseInt(expiry.getTime() / 1000),
+                _id: this._id,
+                email: this.email,
+                name: this.name,
+                firstName: this.firstName,
+                lastName: this.lastName,
+                title: this.title,
+                org: this.org,
+                state: this.state,
+                picture: this.picture,
+                admin: this.admin,
+                exp: parseInt(expiry.getTime() / 1000),
         }, require('../secrets').jwt); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 module.exports = UserSchema;
