@@ -1,16 +1,5 @@
-.mission-info {
-    margin-right: 20px;
-}
-.board-members{
-    margin: 30px 0;
-    padding: 30px 0;
-}
-.member{
-    margin: 20px 0;
-}
-.board-member-img {
-    margin-right: 20px;
-}
+
+/* Tier 1 - 3 */
 .tier1 img{
     height: 90px;
 }
@@ -19,4 +8,19 @@
 }
 .tier3 img{
     height: 40px;
+}
+
+
+/* Show more / Shoe less */
+.hide-show-mission {
+    height:257px;
+    overflow: hidden;
+}
+.hide-show-member-text {
+    height:136px;
+    overflow: hidden;
+}
+.show {
+    overflow: visible;
+    height: auto;
 }
