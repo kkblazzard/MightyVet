@@ -65,7 +65,6 @@ export class HeaderComponent implements OnInit {
     this.signUpSubscription = this._eventsService.openSignup().subscribe(() => {
       this.open('signup');
     });
-    this.isAdmin();
     // this.donateSubscription = this._eventsService.openDonate().subscribe(() => {
     //   this.open('donate');
     // });
@@ -117,7 +116,6 @@ export class HeaderComponent implements OnInit {
     });
   }
   closedModal() {
-    this.isAdmin();
     this.login_errors = null;
     this.signup_errors = null;
     this.newsletter = false;
@@ -158,13 +156,5 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
-  }
-  isAdmin(){
-    if (this._authenticationsService.isLoggedIn()){
-      let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
-      obs.subscribe(data => {
-        this.admin = data['admin'];
-      }, err => { this.admin = false }
-    )}
   }
 }

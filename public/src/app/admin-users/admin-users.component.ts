@@ -22,11 +22,53 @@ export class AdminUsersComponent implements OnInit {
   }
 
   getUsers(){
-    let obs = this._usersService.getUsers();
+    let obs = this._usersService.excelUsers();
     obs.subscribe(data => this.users=data)
   }
 
   exportAsXLSX():void {
-    this._excelsService.exportAsExcelFile(this.users, 'users');
+    var excelUsers = this.users;
+    excelUsers.map(x => {
+      if (x.mentors.length){
+        x.mentors.filter(y => {
+          return y.approval;
+        })
+        x.mentors.map(y => {
+          return `${y.user.firstName} ${y.user.firstName}`;
+        });
+        x.mentors.join(", ");
+      }
+      else{
+        x.mentors = ""
+      }
+      x.list_of_mentors = x.mentors;
+      delete x.mentors;
+      if (x.accreditations.length){
+        x.accreditations.map(y => {
+          return y.webinar.title;
+        });
+        x.accreditations.join(", ");
+      }
+      else{
+        x.webinars = "";
+      }
+      x.list_of_webinars = x.accreditations;
+      delete x.accreditations;
+      if (x.mentor_id){
+        if (x.mentor_id.approval){
+          x.mentor = "Yes";
+        }
+        else{
+          x.mentor = "Waiting for approval"
+        }
+      }
+      else{
+        x.mentor = "No";
+      }
+      delete x.mentor_id;
+      return x;
+    })
+    console.log(excelUsers);
+    this._excelsService.exportAsExcelFile(excelUsers, 'users');
   }
 }

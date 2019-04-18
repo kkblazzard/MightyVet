@@ -53,6 +53,22 @@ module.exports={
         .select('-password')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
+    userExcel: (req, res)=> Users
+    .find()
+    .select('-password')
+    .select('-admin')
+    .select('-_id')
+    .select('-__v')
+    .select('-updatedAt')
+    .select('-picture')
+    .populate('mentors')
+    .populate('mentors.mentor')
+    .populate('mentors.mentor.user')
+    .populate('accreditations')
+    .populate('accreditations.webinar')
+    .populate('mentor_id')
+    .then(all=>console.log(all) || res.json(all))
+    .catch(err=>console.log(err)|| res.json(err)),
     userRemove: (req, res) => Users
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted.select("-password")))
@@ -90,6 +106,21 @@ module.exports={
                 res.status(401).json(info);
             }   
         })(req, res);  
-    }
-          
+    },
+    userProfile: (req, res) => {
+
+      // If no user ID exists in the JWT return a 401
+      if (!req.payload._id) {
+        res.status(401).json({
+          "message" : "UnauthorizedError: private profile"
+        });
+      } else {
+        // Otherwise continue
+        User
+          .findById(req.payload._id)
+          .exec(function(err, user) {
+            res.status(200).json(user);
+          });
+      }
+    }   
 }

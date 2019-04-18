@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-    currentUser;
     userInfo;
     continuingEducationContent = "PROGRESS";
     constructor(
@@ -21,43 +20,14 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
         // make sure someone is logged in or move them back to homepage
-        if (this.isLoggedIn()) {
-            this.getUserInfo()
-        }
-        else {
-            this._route.navigate(['/']);
-        }
-
+        this.getUserInfo();
     }
     isLoggedIn() {
         return this._authenticationsService.isLoggedIn();
     }
     getUserInfo() {
-        let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
-        obs.subscribe(data => {
-            console.log(data);
-            if (data['errors']) {
-                alert("error");
-                console.log(data);
-            }
-            else {
-                // alert("got user info")
-                this.userInfo = {
-                    firstName: data['firstName'],
-                    lastName: data['lastName'],
-                    email: data['email'],
-                    title: data['title'],
-                    password: data['password'],
-                    org: data['org'],
-                    state: data['state'],
-                    picture: data['picture'],
-                };
-                console.log(this.userInfo)
-            }
-        })
+        this.userInfo = this._authenticationsService.getUserDetails();
     }
-
-
     continuingEducation(passedLink) {
         this.continuingEducationContent = passedLink.toUpperCase()
     }

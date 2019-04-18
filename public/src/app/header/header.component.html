@@ -168,7 +168,7 @@
             (click)="open('signup')">SIGN UP</button>
           <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
             (click)="open('login')">LOG IN</button>
-          <button *ngIf="admin" class="btn btn-sm btn-outline-secondary ml-2"
+          <button *ngIf="_authenticationsService.getUserDetails()?.admin" class="btn btn-sm btn-outline-secondary ml-2"
             [routerLink]="['/admin']"><i class="fa fa-cogs mr-2"></i>Admin</button>
           <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
             [routerLink]="['/user']"><i class="fa fa-user mr-2"></i>Profile</button>

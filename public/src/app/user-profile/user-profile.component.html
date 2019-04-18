@@ -4,8 +4,7 @@
             <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
             <div class="user-info__image">
                 <div class="holder-image">
-                    <img class="profile-picture" *ngIf=!userInfo.picture src="../../assets/userDefault.jpeg" alt="Profile Picture">
-                    <img class="profile-picture" *ngIf=userInfo.picture [src]="userInfo.picture" alt="Profile Picture">
+                    <img class="profile-picture" [src]="userInfo.picture" alt="Profile Picture">
                 </div>
                 <div class="user-info__edit-section">
                     <button (click)="jumpToEdit()" class="user-info__edit-button">edit profile</button>

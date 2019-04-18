@@ -71,30 +71,7 @@ export class MentorshipComponent implements OnInit {
         return this._authenticationsService.isLoggedIn();
     }
     getUserInfo(){
-        let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
-        obs.subscribe(data => {
-            if (data['errors']){
-                console.log(data);
-            }
-            else{
-                this.userInfo = {
-                    firstName: data['firstName'],
-                    lastName: data['lastName'],
-                    email: data['email'],
-                    title: data['title'],
-                    org: data['org'],
-                    state: data['state']
-                };
-                this.newMentor= {
-                    user: data['_id'],
-                    support: {mental_health: false,
-                    financial_advice: false,
-                    career_advice: false,
-                    technical_advice: false },
-                    resume: ""
-                }
-            }
-        })
+        this.userInfo = this._authenticationsService.getUserDetails();
     }
     open() {
         if (this.isLoggedIn()){

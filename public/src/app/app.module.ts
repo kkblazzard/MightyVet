@@ -12,6 +12,9 @@ import { PartnersService } from './http_services/partners.service';
 import { SpeakersService } from './http_services/speakers.service';
 import { FileUploadService } from './http_services/file-upload.service';
 import { PaymentsService } from './http_services/payments.service';
+import { AuthenticationService } from './http_services/authentication.service';
+import { AdminService } from './http_services/admin.service';
+import { LoginService } from './http_services/login.service';
 // modules
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -185,6 +188,9 @@ export class SlicePipe implements PipeTransform {
     FileUploadService,
     PaymentsService,
     NgbActiveModal,
+    AuthenticationService,
+    AdminService,
+    LoginService
   ]
 })
 export class AppModule { }
