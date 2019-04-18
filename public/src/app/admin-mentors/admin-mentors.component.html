@@ -27,8 +27,8 @@
       <!-- arrange this to be in bottom right with absolute -->
       <div class="modal-footer">
           <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
-          <button class="btn btn-success" (click)="approveMentor(mentorApplication._id)">Approve Application</button>
-          <button class="btn btn-danger" (click)="declineMentor(mentorApplication._id)">Decline Application</button>
+          <button class="btn btn-success" (click)="approveMentor(mentorApplication._id, 'modal')">Approve Application</button>
+          <button class="btn btn-danger" (click)="declineMentor(mentorApplication._id, 'modal')">Decline Application</button>
       </div>
   </form>
 </ng-template>
@@ -44,8 +44,8 @@
     <tr *ngFor="let tentativeMentor of approvalMentors">
       <td><a (click)="openModal(tentativeMentor._id)">{{tentativeMentor.user.firstName}} {{tentativeMentor.user.lastName}}</a></td>
       <td>
-        <button class="btn btn-success" (click)="approveMentor(tentativeMentor._id)">Approve</button>
-        <button class="btn btn-danger" (click)="declineMentor(tentativeMentor._id)">Decline</button>
+        <button class="btn btn-success" (click)="approveMentor(tentativeMentor._id, 'notModal')">Approve</button>
+        <button class="btn btn-danger" (click)="declineMentor(tentativeMentor._id, 'notModal')">Decline</button>
       </td>
     </tr>
   </tbody>

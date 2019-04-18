@@ -45,6 +45,14 @@ export class MentorshipComponent implements OnInit {
         }
         if (this.isLoggedIn()){
             this.getUserInfo()
+            this.newMentor={
+                user: this._authenticationsService.getUserDetails()._id,
+                support: { mental_health: false,
+                    financial_advice: false,
+                    career_advice: false,
+                    technical_advice: false },
+                resume: "",
+            }
         }
         else{
             this.userInfo = {
@@ -89,6 +97,14 @@ export class MentorshipComponent implements OnInit {
         this.mentor_errors = null;
         if (this.isLoggedIn()){
             this.getUserInfo();
+        }
+        this.newMentor={
+            user: null,
+            support: { mental_health: false,
+                financial_advice: false,
+                career_advice: false,
+                technical_advice: false },
+            resume: "",
         }
     }
     getMentors(){

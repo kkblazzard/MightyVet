@@ -37,24 +37,33 @@ export class AdminMentorsComponent implements OnInit {
   }
   getApprovals(){
     let obs = this._mentorsService.getApprovals();
-    obs.subscribe(data =>  this.approvalMentors = data);
+    obs.subscribe(data => this.approvalMentors = data);
   }
   getMentors(){
     let obs = this._mentorsService.getMentors();
     obs.subscribe(data => this.mentors = data);
   }
-  approveMentor(id){
+  approveMentor(id, str){
+    console.log(str);
     let obs = this._mentorsService.approveMentor(id);
     obs.subscribe(data => {
       this.getApprovals();
       this.getMentors();
+      if (str == 'modal'){
+        console.log("modal open")
+        this.modal.dismiss("application reviewed");
+      }
     })
   }
-  declineMentor(id){
+  declineMentor(id, str = null){
     let obs = this._mentorsService.deleteMentor(id);
     obs.subscribe(data => {
       this.getApprovals();
       this.getMentors();
+      if (str === 'modal'){
+        console.log("modal open")
+        this.modal.dismiss("application reviewed");
+      }
     });
   }
   openModal(id){
