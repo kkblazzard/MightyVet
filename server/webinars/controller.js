@@ -65,5 +65,13 @@ module.exports={
     signUp: (req, res) => Webinars
         .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
-        .catch(err=>console.log(err) || res.json(err))
+        .catch(err=>console.log(err) || res.json(err)),
+
+    webinarFind: (req, res)  =>
+        Webinars
+        .find({title:req.body.title})
+        .sort('-createdAt')
+        // .populate('speaker')
+        .then(all=>console.log(all) || res.json(all))
+        .catch(err=>console.log(err)|| res.json(err)),
 }

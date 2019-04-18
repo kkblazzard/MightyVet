@@ -17,6 +17,8 @@ export class CoursesComponent implements OnInit {
 
   allCourses: any;
   featuredNumber: number;
+  titleSearch: any;
+  searchError: any;
 
   ngOnInit() {
     this.getAllCourses();
@@ -31,11 +33,25 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  // searchCourse(){
-
-  // }
+  searchCourse(){
+    this._webinarsService.findWebinar({'title':{"$regex":this.titleSearch,"$options":"i"}})
+    .subscribe(course=>{
+      if(course['error']){
+        this.searchError=course['error'];
+        console.log(this.searchError);
+      }
+      else{
+        console.log
+        this.allCourses=course;
+      }
+    });
+  }
 
   seeMore(){
     this.featuredNumber += 6;
+  }
+
+  somethingChanged(){
+    console.log("type checkbox");
   }
 }
