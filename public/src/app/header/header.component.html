@@ -15,17 +15,13 @@
         <label>Email</label>
         <input type="text" class="form-control" placeholder="Email" name="loginInfo.email" [(ngModel)]="loginInfo.email"
           required>
-        <div *ngIf="login_errors" class="errors">
-          <div *ngIf="login_errors.email">{{login_errors.email.message}}</div>
-        </div>
+        <div *ngIf="login_errors?.email" class="errors">{{login_errors.email.message}}</div>
       </div>
       <div class="form-group">
         <label>Password</label>
         <input type="password" class="form-control" placeholder="Password" name="loginInfo.password"
           [(ngModel)]="loginInfo.password" required>
-        <div *ngIf="login_errors" class="errors">
-          <div *ngIf="login_errors.password">{{login_errors.password.message}}</div>
-        </div>
+        <div *ngIf="login_errors?.password" class="errors">{{login_errors.password.message}}</div>
       </div>
       <a class="link_text" (click)="switch()">Don't have an account? Click here to sign up!</a>
     </div>
@@ -52,25 +48,19 @@
           <label>First Name</label>
           <input type="text" class="form-control col" placeholder="First Name" name="newUser.firstName"
             [(ngModel)]="newUser.firstName" required>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.firstName">{{signup_errors.firstName.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.firstName" class="errors">{{signup_errors.firstName.message}}</div>
         </div>
         <div class="form-group col">
           <label>Last Name</label>
           <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName"
             [(ngModel)]="newUser.lastName" required>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.lastName">{{signup_errors.lastName.message}}</div>
-          </div>
+            <div *ngIf="signup_errors?.lastName" class="errors">{{signup_errors.lastName.message}}</div>
         </div>
         <div class="form-group col">
           <label>Email</label>
           <input type="email" class="form-control" placeholder="Preferred Email" name="newUser.email"
             [(ngModel)]="newUser.email" required>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.email">{{signup_errors.email.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.email" class="errors">{{signup_errors.email.message}}</div>
         </div>
       </div>
 
@@ -80,9 +70,7 @@
           <select class="form-control" placeholder="State" name="newUser.state" [(ngModel)]="newUser.state" required>
             <option *ngFor="let state of states">{{state}}</option>
           </select>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.state">{{signup_errors.state.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.state" class="errors">{{signup_errors.state.message}}</div>
         </div>
         <div class="form-group col">
           <label>Title</label>
@@ -94,17 +82,13 @@
             <option>Student</option>
             <option>Other</option>
           </select>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.title">{{signup_errors.title.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.title" class="errors">{{signup_errors.title.message}}</div>
         </div>
         <div class="form-group col">
           <label>Organization</label>
           <input type="text" class="form-control" placeholder="Organization(s)" name="newUser.org"
             [(ngModel)]="newUser.org" required>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.org">{{signup_errors.org.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.org" class="errors">{{signup_errors.org.message}}</div>
         </div>
       </div>
 
@@ -112,15 +96,13 @@
         <div class="form-group col">
           <label>Password</label>
           <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password" required>
-        </div>
-        <div *ngIf="signup_errors" class="errors">
-          <div *ngIf="signup_errors.password">{{signup_errors.lastName.password}}</div>
+          <div *ngIf="signup_errors?.password" class="errors">{{signup_errors.lastName.password}}</div>
         </div>
         <div class="form-group col">
           <label>Confirm Password</label>
           <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm" required>
-          <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password
-            field is not matching your Password field.</p>
+          <div class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password
+            field is not matching your Password field.</div>
         </div>
       </div>
       <div class="d-flex align-items-between">
