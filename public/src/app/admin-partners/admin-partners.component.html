@@ -39,9 +39,7 @@
           <option>2</option>
           <option>3</option>
         </select>
-        <div *ngIf="errors" class="errors">
-          <div *ngIf="errors.tier">{{errors.tier.message}}</div>
-        </div>
+        <div *ngIf="errors?.tier" class="errors">{{errors.tier.message}}</div>
       </div>
     </div>
     <div class="modal-footer">

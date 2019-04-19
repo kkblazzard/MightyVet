@@ -99,6 +99,38 @@ export class MentorSearchPipe implements PipeTransform {
               count_y++;
             }
           }
+          if (search.mental_health){
+            if (x.support.mental_health){
+              count_x += 10;
+            }
+            if (y.support.mental_health){
+              count_y += 10;
+            }
+          }
+          if (search.financial_advice){
+            if (x.support.financial_advice){
+              count_x += 10;
+            }
+            if (y.support.financial_advice){
+              count_y += 10;
+            }
+          }
+          if (search.career_advice){
+            if (x.support.career_advice){
+              count_x += 10;
+            }
+            if (y.support.career_advice){
+              count_y += 10;
+            }
+          }
+          if (search.technical_advice){
+            if (x.support.technical_advice){
+              count_x += 10;
+            }
+            if (y.support.technical_advice){
+              count_y += 10;
+            }
+          }
           return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
         });
       }

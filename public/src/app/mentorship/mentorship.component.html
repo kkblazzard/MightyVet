@@ -15,34 +15,26 @@
                 <div class="form-group col">
                     <input type="text" class="form-control" placeholder="First Name" name="userInfo.firstName"
                         [(ngModel)]="userInfo.firstName">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.firstName">{{user_errors.firstName.message}}</div>
-                    </div>
+                    <div *ngIf="user_errors?.firstName" class="errors">{{user_errors.firstName.message}}</div>
                 </div>
                 <div class="form-group col">
                     <input type="text" class="form-control" placeholder="Last Name" name="userInfo.lastName"
                         [(ngModel)]="userInfo.lastName">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.lastName">{{user_errors.lastName.message}}</div>
-                    </div>
+                    <div *ngIf="user_errors?.lastName" class="errors">{{user_errors.lastName.message}}</div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col">
                     <input type="email" class="form-control" placeholder="Preferred Email" name="userInfo.email"
                         [(ngModel)]="userInfo.email">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.email">{{user_errors.email.message}}</div>
-                    </div>
+                    <div *ngIf="user_errors?.email" class="errors">{{user_errors.email.message}}</div>
                 </div>
                 <div class="form-group col">
                     <select class="form-control" placeholder="State" name="userInfo.state"
                         [(ngModel)]="userInfo.state">
                         <option *ngFor="let state of states">{{state}}</option>
                     </select>
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.state">{{user_errors.state.message}}</div>
-                    </div>
+                    <div *ngIf="user_errors?.state" class="errors">{{user_errors.state.message}}</div>
                 </div>
             </div>
             <div class="row">
@@ -56,16 +48,12 @@
                         <option>Student</option>
                         <option>Other</option>
                     </select>
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.firstName">{{user_errors.title.message}}</div>
-                    </div>
+                    <div *ngIf="user_errors?.firstName">{{user_errors.title.message}}</div>
                 </div>
                 <div class="form-group col">
                     <input type="text" class="form-control" placeholder="Organization(s)" name="userInfo.org"
                         [(ngModel)]="userInfo.org">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.firstName">{{user_errors.org.message}}</div>
-                    </div>
+                    <div *ngIf="user_errors?.firstName" class="errors">{{user_errors.org.message}}</div>
                 </div>
             </div>
             <div>
@@ -73,9 +61,7 @@
                     <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
                     <textarea class="form-control" type="text" name="newMentor.resume"
                         [(ngModel)]="newMentor.resume"></textarea>
-                    <div *ngIf="mentor_errors" class="errors">
-                        <div *ngIf="mentor_errors.resume">{{mentor_errors.resume.message}}</div>
-                    </div>
+                    <div *ngIf="mentor_errors?.resume" class="errors">{{mentor_errors.resume.message}}</div>
                 </div>
             </div>
             <div>
@@ -93,9 +79,7 @@
                     <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
                         name="technicalAdviceBox">
                     Technical or Surgical
-                    <div *ngIf="mentor_errors" class="errors">
-                        <div *ngIf="mentor_errors.support">{{mentor_errors.support.message}}</div>
-                    </div>
+                    <div *ngIf="mentor_errors?.support">{{mentor_errors.support.message}}</div>
                 </div>
             </div>
         </div>
@@ -149,9 +133,9 @@
     <div class="container">
         <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
             <!-- mentor card -->
-            <div class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar">
+            <a class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar" [routerLink]="['/mentorship', mentor._id]">
                 <!-- search pipe to limit the amount of displayed data-->
-                <div class="card-body d-flex justify-content-start" [routerLink]="['/mentorship', mentor._id]">
+                <div class="card-body d-flex justify-content-start">
                     <div id="mentor-img" class="p-0 mr-3">
                         <img [src]="mentor.user.picture" [alt]="mentor.user.firstName +'s image'">
                     </div>
@@ -163,12 +147,11 @@
                 <div class="mx-4 mb-2">
                     <p>{{mentor.resume | slice: 100 }}</p>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </section>
 
 <div class="container text-center">
-    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i
-            class="fa fa-chevron-down"></i></button>
+    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
 </div>
