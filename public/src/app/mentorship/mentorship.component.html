@@ -1,92 +1,105 @@
 <ng-template #becomeAMentor>
-    <div class="modal-header">
-        <h2 class="modal-title">Become a mentor</h2>
-        <button type="button" class="close" (click)="modal.dismiss('click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div *ngIf="!application_submitted">
+        <div class="modal-header">
+            <h2 class="modal-title">Become a mentor</h2>
+            <button type="button" class="close" (click)="modal.dismiss('click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form>
+            <div class="modal-body container">
+                <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                        {{newMenteeErrors.errors.firstName.message}}
+                        </p> -->
+                <h6>Double check your information! Changing this information will also change your user information.</h6>
+                <div class="row">
+                    <div class="form-group col">
+                        <input type="text" class="form-control" placeholder="First Name" name="userInfo.firstName"
+                            [(ngModel)]="userInfo.firstName">
+                        <div *ngIf="user_errors?.firstName" class="errors">{{user_errors.firstName.message}}</div>
+                    </div>
+                    <div class="form-group col">
+                        <input type="text" class="form-control" placeholder="Last Name" name="userInfo.lastName"
+                            [(ngModel)]="userInfo.lastName">
+                        <div *ngIf="user_errors?.lastName" class="errors">{{user_errors.lastName.message}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <input type="email" class="form-control" placeholder="Preferred Email" name="userInfo.email"
+                            [(ngModel)]="userInfo.email">
+                        <div *ngIf="user_errors?.email" class="errors">{{user_errors.email.message}}</div>
+                    </div>
+                    <div class="form-group col">
+                        <select class="form-control" placeholder="State" name="userInfo.state"
+                            [(ngModel)]="userInfo.state">
+                            <option *ngFor="let state of states">{{state}}</option>
+                        </select>
+                        <div *ngIf="user_errors?.state" class="errors">{{user_errors.state.message}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <select class="form-control" placeholder="Your Title(s)" name="userInfo.title"
+                            [(ngModel)]="userInfo.title">
+                            <option>Vet Tech</option>
+                            <option>Receptionist</option>
+                            <option>Manager</option>
+                            <option>Veterinarian</option>
+                            <option>Student</option>
+                            <option>Other</option>
+                        </select>
+                        <div *ngIf="user_errors?.firstName">{{user_errors.title.message}}</div>
+                    </div>
+                    <div class="form-group col">
+                        <input type="text" class="form-control" placeholder="Organization(s)" name="userInfo.org"
+                            [(ngModel)]="userInfo.org">
+                        <div *ngIf="user_errors?.firstName" class="errors">{{user_errors.org.message}}</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
+                        <textarea class="form-control" type="text" name="newMentor.resume"
+                            [(ngModel)]="newMentor.resume"></textarea>
+                        <div *ngIf="mentor_errors?.resume" class="errors">{{mentor_errors.resume.message}}</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <h6>What kind of support are you willing to give? (Check all that apply)</h6>
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health"
+                            name="mentalHealthBox">
+                        Mental Health
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.financial_advice"
+                            name="financialAdviceBox">
+                        Financial Advice
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.career_advice"
+                            name="careerAdviceBox">
+                        Career Advice
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
+                            name="technicalAdviceBox">
+                        Technical or Surgical
+                        <div *ngIf="mentor_errors?.support">{{mentor_errors.support.message}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" (click)="addMentor()">Submit</button>
+            </div>
+        </form>
     </div>
-    <form>
+    <div *ngIf="application_submitted">
+        <div class="modal-header">
+            <h2>Thank you for submitting your application!</h2>
+        </div>
         <div class="modal-body container">
-            <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                    </p> -->
-            <h6>Double check your information! Changing this information will also change your user information.</h6>
-            <div class="row">
-                <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="First Name" name="userInfo.firstName"
-                        [(ngModel)]="userInfo.firstName">
-                    <div *ngIf="user_errors?.firstName" class="errors">{{user_errors.firstName.message}}</div>
-                </div>
-                <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Last Name" name="userInfo.lastName"
-                        [(ngModel)]="userInfo.lastName">
-                    <div *ngIf="user_errors?.lastName" class="errors">{{user_errors.lastName.message}}</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <input type="email" class="form-control" placeholder="Preferred Email" name="userInfo.email"
-                        [(ngModel)]="userInfo.email">
-                    <div *ngIf="user_errors?.email" class="errors">{{user_errors.email.message}}</div>
-                </div>
-                <div class="form-group col">
-                    <select class="form-control" placeholder="State" name="userInfo.state"
-                        [(ngModel)]="userInfo.state">
-                        <option *ngFor="let state of states">{{state}}</option>
-                    </select>
-                    <div *ngIf="user_errors?.state" class="errors">{{user_errors.state.message}}</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <select class="form-control" placeholder="Your Title(s)" name="userInfo.title"
-                        [(ngModel)]="userInfo.title">
-                        <option>Vet Tech</option>
-                        <option>Receptionist</option>
-                        <option>Manager</option>
-                        <option>Veterinarian</option>
-                        <option>Student</option>
-                        <option>Other</option>
-                    </select>
-                    <div *ngIf="user_errors?.firstName">{{user_errors.title.message}}</div>
-                </div>
-                <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Organization(s)" name="userInfo.org"
-                        [(ngModel)]="userInfo.org">
-                    <div *ngIf="user_errors?.firstName" class="errors">{{user_errors.org.message}}</div>
-                </div>
-            </div>
-            <div>
-                <div class="form-group">
-                    <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
-                    <textarea class="form-control" type="text" name="newMentor.resume"
-                        [(ngModel)]="newMentor.resume"></textarea>
-                    <div *ngIf="mentor_errors?.resume" class="errors">{{mentor_errors.resume.message}}</div>
-                </div>
-            </div>
-            <div>
-                <div class="form-group">
-                    <h6>What kind of support are you willing to give? (Check all that apply)</h6>
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health"
-                        name="mentalHealthBox">
-                    Mental Health
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.financial_advice"
-                        name="financialAdviceBox">
-                    Financial Advice
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.career_advice"
-                        name="careerAdviceBox">
-                    Career Advice
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
-                        name="technicalAdviceBox">
-                    Technical or Surgical
-                    <div *ngIf="mentor_errors?.support">{{mentor_errors.support.message}}</div>
-                </div>
-            </div>
+            <p>You will get a notification once it has been reviewed.</p>
         </div>
         <div class="modal-footer">
-            <button (click)="addMentor()">Submit</button>
+            <button class="btn-primary" (click)="modal.dismiss('close')">Close</button>
         </div>
-    </form>
+    </div>
 </ng-template>
 <section id="section-schedule" class="py-4">
     <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
@@ -96,7 +109,7 @@
             <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders
                 from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to
                 evaluate your career options. You can schedule office hours with one of our featured members.</p>
-            <button class="btn btn-outline-info mt-auto" (click)="open(becomeAMentor)">Apply to Become a
+            <button *ngIf="!isMentor" class="btn btn-outline-info mt-auto" (click)="open(becomeAMentor)">Apply to Become a
                 Mentor</button>
         </div>
     </div>

@@ -20,6 +20,8 @@ export class MentorshipComponent implements OnInit {
     userInfo: any;
     mentors: any;
     newMentor: any;
+    isMentor: boolean;
+    application_submitted: boolean;
     @ViewChild('becomeAMentor') becomeAMentor: ElementRef
     modal: any;
     searchBar: any;
@@ -35,6 +37,7 @@ export class MentorshipComponent implements OnInit {
     
     // gets all information we need when the page loads.
     ngOnInit() {
+        this.application_submitted = false;
         this.searchBar = {
             featuredNumber: 8,
             bar: "",
@@ -44,6 +47,7 @@ export class MentorshipComponent implements OnInit {
             technical_advice: false
         }
         if (this.isLoggedIn()){
+            this.isApplicationSubmitted();
             this.getUserInfo()
             this.newMentor={
                 user: this._authenticationsService.getUserDetails()._id,
@@ -76,7 +80,21 @@ export class MentorshipComponent implements OnInit {
         this.getMentors();
     }
     isLoggedIn(){
+        if(this._authenticationsService.isLoggedIn()){
+            this.isApplicationSubmitted();
+        }
         return this._authenticationsService.isLoggedIn();
+    }
+    isApplicationSubmitted(){
+        let obs = this._mentorsService.getApprovals();
+        obs.subscribe(data => {
+            console.log(data);
+            for(let mentor in data){
+                if(data[mentor].user._id === this._authenticationsService.getUserDetails()._id){
+                    this.application_submitted = true;
+                }
+            } 
+        })
     }
     getUserInfo(){
         this.userInfo = this._authenticationsService.getUserDetails();
@@ -109,7 +127,12 @@ export class MentorshipComponent implements OnInit {
     }
     getMentors(){
         let obs = this._mentorsService.getMentors();
-        obs.subscribe(data => this.mentors = data);
+        obs.subscribe(data => {
+            this.mentors = data;
+            if (this.mentors.find(x => x.user._id === this._authenticationsService.getUserDetails()._id)){
+                this.isMentor = true;
+            }
+        });
     }
     addMentor(){
         this.user_errors = null;
@@ -126,7 +149,7 @@ export class MentorshipComponent implements OnInit {
                         this.mentor_errors = data2['errors'];
                     }
                     else{
-                        this.modal.close();
+                        this.application_submitted = true;
                     }
                 })
             }
@@ -135,7 +158,6 @@ export class MentorshipComponent implements OnInit {
     seeMore(){
         this.searchBar.featuredNumber += 8;
     }
-
 
 
 }

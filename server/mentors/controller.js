@@ -43,27 +43,10 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err)),
     signUp: (req, res) => Mentors
     .findByIdAndUpdate(req.params.id,{$push: {mentees: req.body._id}},{new: true})
-    .then(mentor =>{
-        console.log("updated mentor with mentee", mentor);
-        Users.findByIdAndUpdate(req.body.user, {$push: {mentors: req.body._id}}, {new: true})
-        .then(user => {
-            console.log("updated user with mentor", user);
-        })
-        .catch(err=>console.log(err) || res.json(err));
-    })
+    .then(mentor => console.log(mentor) || res.json(mentor))
     .catch(err=>console.log(err) || res.json(err)),
     mentorUpdate: (req, res) => Mentors
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
-        .catch(err=>console.log(err) || res.json(err)),
-    
-    approveMentee: (req, res) => Mentors
-    .findByIdAndUpdate({_id: req.params.id, "mentees.id":req.body.mentee_id},{$set:{"mentees.$.approval":true}},{new: true})
-    .then(updated =>console.log("approved",updated)||res.json(updated))
-    .catch(err=>console.log(err) || res.json(err)),
-
-    declineMentee: (req, res) => Mentors
-    .findByIdAndUpdate(req.params.id, {$pull: {mentees: req.body.mentee_id}})
-    .then(updated =>console.log("decline",updated)||res.json(updated))
-    .catch(err=>console.log(err) || res.json(err)),
+        .catch(err=>console.log(err) || res.json(err))
 }

@@ -1,4 +1,5 @@
 <div class="container">
+    <h1>Profile Page</h1>
     <div class="row top">
         <div class="col-4 user-info">
             <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
@@ -17,52 +18,36 @@
                 <button>View All --></button>
             </div>
         </div>
-        <div class="col-8 messages" >
+        <div class="col-8 messages">
             <div class="row inbox">
-                <h1 class="inbox-header">Inbox</h1>
-                <div class="inbox-content">
-                    <h2 class="inbox-content__header">New Mentor Request</h2>
-                    <div class="inbox__mentor-request">
-                        <div class="clear-button__div">
-                            <button (click)="allRequests()">All Requests --></button>
-                        </div>
-
-                    <!-- displays all the users requests -->
-                    <div *ngIf="userInfo.requests">
-                        <div class="requests" ngFor="request in userInfo.requests">
-                            {{request}}
-                        </div>
-                    </div>
-
-                    </div>
-                    <h2 class="inbox-content__header">Messages</h2>
-                    <div class="inbox__messages">
-                        <div class="clear-button__div">
-                            <button (click)="allMessages()">All Messages --></button>
-                        </div>
-                    </div>
-
-                    <!-- display all the users messages -->
-                    <div *ngIf="userInfo.messages">
-                        <div class="messages" ngFor="message in userInfo.messages">
-                            {{message}}
-                        </div>
+                <h1 class="inbox-header">Your Mentors</h1>
+                <div class="mentors-img-list">
+                    <div class="d-flex justify-content-between mb-4">
+                        <a *ngFor="let mentor of userInfo?.mentors" class="mentor-img mr-5"
+                            [routerLink]="['/mentorship', mentor.mentor._id]">
+                            <img class="rounded-circle" width="100px" [src]="mentor.mentor.user.picture"
+                                [alt]="mentor.mentor.user.firstName + ' ' + mentor.mentor.user.lastName">
+                            <p>{{mentor.mentor.user.firstName}} {{mentor.mentor.user.lastName}}</p>
+                        </a>
+                        <button *ngIf="userInfo?.mentors?.length === 0" class="btn btn-primary"
+                            [routerLink]="['/mentorship']">Find a Mentor</button>
                     </div>
                 </div>
             </div>
             <div class="row education">
-                <h1 class="education-header">Continuing Education</h1>
+                <h1 class="education-header">Your Courses</h1>
                 <div class="education-main">
                     <div class="education-main__nav">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" (click)="continuingEducation('progress')" >CE Credit Progress</a>
+                        <ul class="nav">
+                            <li class="nav-item rounded-top">
+                                <a class="nav-link" (click)="continuingEducation('progress')">CE Credit Progress</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" (click)="continuingEducation('courses_available')" >Courses Available</a>
+                            <li class="nav-item rounded-top">
+                                <a class="nav-link" (click)="continuingEducation('current_courses')">Current Courses</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" (click)="continuingEducation('courses_complete')" >Courses Complete</a>
+                            <li class="nav-item rounded-top">
+                                <a class="nav-link" (click)="continuingEducation('courses_complete')">Courses
+                                    Completed</a>
                             </li>
                         </ul>
                     </div>
@@ -75,78 +60,58 @@
             </div>
         </div>
     </div>
-    <div class="row bottom">
-        <div id="Bot" class="col-5 edit-profile">
+    <div *ngIf="userInfo?.mentor_id" class="d-flex justify-content-between">
+        <h1 class="inbox-header">Your Mentees</h1>
+        <div class="mentees-img-list">
+            <div class="d-flex justify-content-between mb-4">
+                <a *ngFor="let mentee of userInfo.mentor_id.mentees" class="mentee-img mr-5">
+                    <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
+                        [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
+                    <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
+                </a>
+                <p *ngIf="userInfo?.mentees?.length === 0">You don't have any mentees yet.</p>
+            </div>
+        </div>
+        <h1 class="inbox-header">New Mentees</h1>
+        <div class="mentees-img-list">
+            <div class="d-flex justify-content-between mb-4">
+                <a *ngFor="let mentee of userInfo.mentor_id.mentees" class="mentee-img mr-5">
+                    <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
+                        [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
+                    <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
+                    <button class="btn btn-success" (click)="approveMentee(mentee._id)">Approve</button>
+                    <button class="btn btn-danger" (click)="declineMentee(mentee._id)">Decline</button>
+                </a>
+                <p *ngIf="userInfo?.mentees?.length === 0">You don't have any mentee requests yet.</p>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="d-flex justify-content-between">
+        <div id="Bot" class="edit-profile">
             <h3 class="edit-profile__title">Settings</h3>
             <form class="edit-profile__form">
                 <div class="form-row">
                     <label class="form-label" for="">Update email address</label>
-                    <input 
-                        type="email" 
-                        class="form-input form-control col" 
-                        placeholder="enter email address" 
-                        name="userInfo.email"
-                        [(ngModel)]="userInfo.email">
+                    <input type="email" class="form-input form-control col" placeholder="enter email address"
+                        name="userInfo.email" [(ngModel)]="userInfo.email">
                 </div>
                 <div class="form-row">
                     <label class="form-label" for="">Update password</label>
-                    <input 
-                        type="password" 
-                        class="form-input form-control col" 
-                        placeholder="enter new password" 
-                        name="userInfo.password"
-                        [(ngModel)]="userInfo.password">
+                    <input type="password" class="form-input form-control col" placeholder="enter new password"
+                        name="userInfo.password" [(ngModel)]="userInfo.password">
                 </div>
                 <div class="form-row">
                     <label class="form-label" for="">Change username</label>
-                    <input 
-                        type="text" 
-                        class="form-input form-control col" 
-                        placeholder="change username" 
-                        name="userInfo.title"
-                        [(ngModel)]="userInfo.title">
+                    <input type="text" class="form-input form-control col" placeholder="change username"
+                        name="userInfo.title" [(ngModel)]="userInfo.title">
                 </div>
-                <div class="form-row">
-                    <label class="form-label" for="">Image Url</label>
-                    <input 
-                        type="text" 
-                        class="form-input form-control col" 
-                        placeholder="change image Url" 
-                        name="userInfo.picture"
-                        [(ngModel)]="userInfo.picture">
-                </div>
-                <div class="modal-footer">
-                    <button class="delete" (click)="deleteUser()">delete account</button>
-                    <button class="saveChanges" (click)="updateUser()">save changes</button>
+                <div>
+                    <button class="saveChanges" (click)="updateUser()">Save Changes</button>
                 </div>
             </form>
         </div>
-        <div class="col-6">
-            <div class="row">
-                <h1>Alerts</h1>
-                <form class="alerts__form">
-                    <div class="form-row">
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
-                        <label for="">Send Email When You Receive a New Message or Mentor Request</label>
-                    </div>
-                    <div class="form-row">
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
-                        <label for="">Send When You Receive a New Message or Mentor Request</label>
-                    </div>
-                </form>
-            </div>
-            <div class="row">
-                <h1>Profile Status</h1>
-                <form class="profile-status__form">
-                    <div class="form-row">
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
-                        <label for=""> Active (Public)</label>
-                        <input type="checkbox" class="checkboxes" (click)="supportBox('Mental Health')">
-                        <label for="">Not Active (Hidden)</label>
-                    </div>
-                </form>              
-            </div>
+        <div>
+
         </div>
-    </div>
-    <button (click)="topFunction()" id="myBtn" title="Go to top">Top</button>
+    </div> -->
 </div>

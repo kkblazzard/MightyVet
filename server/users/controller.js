@@ -116,11 +116,14 @@ module.exports={
         });
       } else {
         // Otherwise continue
-        User
+        console.log(req.payload._id);
+        Users
           .findById(req.payload._id)
-          .exec(function(err, user) {
-            res.status(200).json(user);
-          });
+          .select('-password')
+          .populate([{path: 'accreditations', populate: {path: 'webinar'}},{path: 'mentors', populate: {path: 'mentor', populate: {path: 'user'}}},{path: 'mentor_id', populate: [{path: 'mentees', populate: {path: 'user', select: '-password'}}, {path: 'meetings', populate: {path: 'mentor', populate: {path: 'user', select: '-password'}}}]}])
+          .then(one=>console.log(one) || res.json(one))
+          .catch(err=>console.log(err) || res.json(err))
       }
     }   
 }
+// 
