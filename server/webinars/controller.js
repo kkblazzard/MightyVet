@@ -1,5 +1,6 @@
 const Webinars=require('./models');
-const Speakers=require('../speakers/models')
+const Speakers=require('../speakers/models');
+const Users = require('../users/models');
 module.exports={
     webinarAll: (req, res)  =>
         Webinars
@@ -62,9 +63,15 @@ module.exports={
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
+
     signUp: (req, res) => Webinars
-        .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
-        .then(updated =>console.log("updated",updated)||res.json(updated))
+        .findByIdAndUpdate(req.params.id, {$push:{users : req.body.accreditation_id}},{new: true})
+        .then(updated => {
+            console.log("updated",updated);
+            Users.findByIdAndUpdate(req.body.user_id, {$push:{accreditations: req.body.accreditation_id}})
+            .then(update => console.log("updated",update)||res.json(update))
+            .catch(err=>console.log(err) || res.json(err))
+        })
         .catch(err=>console.log(err) || res.json(err)),
 
     webinarFind: (req, res)  =>

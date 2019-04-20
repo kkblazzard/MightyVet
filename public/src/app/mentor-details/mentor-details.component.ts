@@ -14,6 +14,7 @@ export class MentorDetailsComponent implements OnInit {
   id: string;
   mentor: any;
   isMentee: boolean;
+  application: boolean;
   constructor(
     private _route: ActivatedRoute,
     private _mentorsService: MentorsService,
@@ -24,6 +25,7 @@ export class MentorDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.application = false;
     this.isMentee = false;
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
@@ -49,7 +51,12 @@ export class MentorDetailsComponent implements OnInit {
   checkMentee() {
     for (let mentee of this.mentor.mentees) {
       if (mentee.user === this._authenticationsService.getUserDetails()._id) {
-        this.isMentee = true;
+        if (!mentee.approval){
+          this.application = true;
+        }
+        else{
+          this.isMentee = true;
+        }
       }
     }
   }
@@ -63,7 +70,7 @@ export class MentorDetailsComponent implements OnInit {
         let obs2 = this._mentorsService.signUp(this.id, data);
         obs2.subscribe(data2 => {
           console.log('successfully added new mentee to mentor', data2);
-          this.getMentor();
+          this.isMentee = true;
         },
           err => {
             console.log('something went wrong:', err);

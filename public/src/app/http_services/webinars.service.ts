@@ -32,9 +32,9 @@ export class WebinarsService {
     console.log("http.service getting webinar", id);
     return this._http.get(`/api/webinars/${id}`);
   }
-  signUp(course_id, id){
-    console.log("http.service signing up", id);
-    return this._http.put(`/api/webinars/signup/${course_id}`, {id: id});
+  signUp(course_id, accreditation_id, user_id){
+    console.log("http.service signing up", accreditation_id);
+    return this._http.put(`/api/webinars/signup/${course_id}`, {accreditation_id: accreditation_id, user_id: user_id});
   }
   deleteWebinar(id) {
     return this._http.delete('/api/webinars/' + id);

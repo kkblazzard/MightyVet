@@ -2,18 +2,17 @@
 <div *ngIf="mentor">
   <div *ngIf="mentor._id">
     <div class="container">
-      <p *ngIf="isMentee">
-        <ngb-alert [dismissible]="false">
-          <i class="fa fa-check mr-4"></i>You have already requested to become{{mentor.user.firstName}}'s mentee.
-        </ngb-alert>
-      </p>
       <div class="row">
         <div class="col-sm-10">
           <h1>{{mentor.user.firstName}} {{mentor.user.lastName}}</h1>
           <h5 class="mb-4">{{mentor.user.title}}</h5>
           <button type="button" class="btn btn-info mr-1"><i class="fa fa-comments mr-2"></i>Send me a message</button>
-          <button *ngIf="!isMentee" type="button" class="btn btn-success" (click)="signUp()"><i class="fa fa-handshake-o mr-2"></i>Become my mentee</button>
-          <br>
+          <button *ngIf="!isMentee && !application" type="button" class="btn btn-success" (click)="signUp()"><i class="fa fa-handshake-o mr-2"></i>Become my mentee</button>
+          <p *ngIf="application" class="mt-3">
+            <ngb-alert [dismissible]="false">
+              <i class="fa fa-check mr-4"></i>You have requested to become {{mentor.user.firstName}}'s mentee. {{mentor.user.firstName}} is still reviewing your application.
+            </ngb-alert>
+          </p>
         </div>
         <div class="col-sm-2 pull-right">
           <img title="profile image" class="rounded-circle w-100" id="mentor_img" [src]="mentor.user.picture" alt="Mentor Image">
