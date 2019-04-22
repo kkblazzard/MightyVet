@@ -1,22 +1,31 @@
 /* local css */
-.navbar{
-    background-color: white;
+.text-link{
+    cursor: pointer;
 }
-.navbar .nav-link{
-    padding: 10px 15px;
+
+
+#logo {
+    width: 110px;
+    cursor: pointer;
 }
-.navbar a{
-    color: #395371;
+.navbar-collapse .nav-link {
+    padding: .6rem 1.5rem;
+}
+.navbar-collapse .navigation{
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
 }
 .navbar .nav-item {
     cursor: pointer;
-    padding:0;
 }
-.navbar .nav-item:hover{
-    background-color: #7DA7D9;
+.navbar .nav-item a{
+    color: #435c8e;
 }
-.navbar .nav-item:hover a{
-    color: white;
+.navbar .nav-item:hover {
+    background-color: rgb(233, 233, 233);
+}
+.navbar .nav-item a:hover {
+    color: #7DA7D9;
 }
 .navbar .activated{
     background-color: #7DA7D9;
@@ -24,19 +33,8 @@
 .navbar .activated a{
     color: white;
 }
-a.link_text{
-    text-decoration: underline;
-    color: #395371;
-    cursor: pointer;
-}
-.errors{
-    color: red;
-}
 .close:focus{
     outline: 0;
-}
-.navigation{
-    box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
 }
 #dog{
     max-width: 28px;
@@ -45,3 +43,19 @@ a.link_text{
     display:none;
 }
 
+@media only screen and (max-width:991px){
+    #logo {
+        width: 85px;
+    }
+}
+@media only screen and (max-width:576px){
+    #welcome-text h1 {
+        font-size: 2em;
+    }
+    #newsletter .flex-sm-column {
+        flex-direction: column;
+    }
+    #welcome-text p {
+        font-size: 1em;
+    }
+}

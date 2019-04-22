@@ -17,10 +17,10 @@ h1, h2, h3, h4, h5 {
 h6 {
     color: #395371;
     letter-spacing: 0.03em;
-    font-weight: 800;
+    font-weight: 600;
  }
 p{
     font-size: 1.1em;
 }
 @media only screen and (max-width: 991px) {
-} 
+}
