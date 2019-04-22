@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ComponentFixtureNoNgZone } from '@angular/core/testing';
+import { AuthenticationService } from '../http_services/authentication.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,12 +8,11 @@ import { ComponentFixtureNoNgZone } from '@angular/core/testing';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  newPartner: any = {tier: 1, partner: {name: "", img: "", link: ""}};
-  partners: any;
   constructor(
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _authenticationsService: AuthenticationService,
     ) { }
-  ngOnInit() {
+  ngOnInit() { 
   } 
 }

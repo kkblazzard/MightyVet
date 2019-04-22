@@ -2,86 +2,46 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../http_services/users.service';
 import { AuthenticationService } from '../http_services/authentication.service';
 import { Router } from '@angular/router';
-
+import { MenteesService } from '../http_services/mentees.service';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+    selector: 'app-user-profile',
+    templateUrl: './user-profile.component.html',
+    styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-    currentUser;
-    userInfo;
+    userInfo: any = {picture: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"};
     continuingEducationContent = "PROGRESS";
     constructor(
         private _authenticationsService: AuthenticationService,
+        private _menteesService: MenteesService,
         private _route: Router,
         private _usersService: UsersService
     ) { }
 
     ngOnInit() {
-        // make sure someone is logged in or move them back to homepage
-        if (this.isLoggedIn()){
-            this.getUserInfo()
-        } 
-        else {
-            this._route.navigate(['/']);
-        } 
-        
+        this.getUserInfo();
     }
-    isLoggedIn(){
-        return this._authenticationsService.isLoggedIn();
-    }
-    getUserInfo(){
-        let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
+    approveMentee(id){
+        let obs = this._menteesService.menteeApproval(id);
         obs.subscribe(data => {
             console.log(data);
-            if (data['errors']){
-                alert("error");
-                console.log(data);
-            }
-            else{
-                // alert("got user info")
-                this.userInfo = {
-                    firstName: data['firstName'],
-                    lastName: data['lastName'],
-                    email: data['email'],
-                    title: data['title'],
-                    password: data['password'],
-                    org: data['org'],
-                    state: data['state'],
-                    picture: data['picture'],
-                };
-                console.log(this.userInfo)
-            }
+            this.getUserInfo();
         })
     }
-
-
-    continuingEducation(passedLink){
-        this.continuingEducationContent = passedLink.toUpperCase()
+    declineMentee(id){
+        let obs = this._menteesService.menteeDecline(this.userInfo.mentor_id._id ,id);
+        obs.subscribe(data => {
+            console.log(data);
+            this.getUserInfo();
+        })
     }
-    topFunction() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    isLoggedIn() {
+        return this._authenticationsService.isLoggedIn();
     }
-    jumpToEdit() {
-        document.body.scrollTop = 900; // For Safari
-        document.documentElement.scrollTop = 900; // For Chrome, Firefox, IE and Opera
+    getUserInfo() {
+        let obs = this._authenticationsService.profile();
+        obs.subscribe(data => {this.userInfo = data; console.log(data)})
     }
-
-    deleteUser(){
-        alert("delete account");
-    }
-
     // this will eventually go and update the userInfo after some validations.
-    updateUser(){
-        console.log(
-            this.userInfo.email,
-            this.userInfo.password,
-            this.userInfo.username,
-            this.userInfo.picture
-        )
-    }
-
 }

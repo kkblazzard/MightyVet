@@ -15,14 +15,16 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminWebinarsComponent } from './admin-webinars/admin-webinars.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminPartnersComponent } from './admin-partners/admin-partners.component';
-import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component'
+import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
+import { AdminService } from './http_services/admin.service';
+import { LoginService } from './http_services/login.service';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomeComponent},
-  {path: 'user', component: UserProfileComponent},
+  {path: 'user', canActivate: [LoginService], component: UserProfileComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/:id', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
@@ -33,7 +35,7 @@ const routes: Routes = [
   {path: 'support', component: SupportComponent},
   {path: 'blog', component: BlogComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'admin', component: AdminComponent, children: [
+  {path: 'admin', component: AdminComponent, canActivate: [AdminService], children: [
     {path: 'webinars', component: AdminWebinarsComponent},
     {path: 'users', component: AdminUsersComponent},
     {path: 'partners', component: AdminPartnersComponent},
@@ -44,7 +46,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })], //scrollpositionrestoration scrolls us back to the top everytime a route is activated
+  imports: [RouterModule.forRoot( routes, {
+    scrollPositionRestoration: 'enabled'
+  })], // scrollpositionrestoration scrolls us back to the top everytime a route is activated
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

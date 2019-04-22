@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { PartnersService } from '../http_services/partners.service'
+import { PartnersService } from '../http_services/partners.service';
 
 @Component({
   selector: 'app-about',
@@ -9,6 +9,9 @@ import { PartnersService } from '../http_services/partners.service'
 })
 export class AboutComponent implements OnInit {
   partners: any;
+
+  show = [false, false, false, false, false];
+
   constructor(
     private _httpService: PartnersService,
     private _route: ActivatedRoute,
@@ -17,7 +20,8 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
     this.getPartners();
   }
-  getPartners(){
-    let obs = this._httpService.getPartners()
-    obs.subscribe(data=>this.partners=data)}
+  getPartners() {
+    const obs = this._httpService.getPartners();
+    obs.subscribe(data => this.partners = data);
+  }
 }

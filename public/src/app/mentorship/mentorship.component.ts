@@ -14,10 +14,14 @@ import { EventsService }  from '../http_services/events.service';
 })
 
 export class MentorshipComponent implements OnInit {
+    user_errors: any;
+    mentor_errors: any;
     states: any;
     userInfo: any;
     mentors: any;
     newMentor: any;
+    isMentor: boolean;
+    application_submitted: boolean;
     @ViewChild('becomeAMentor') becomeAMentor: ElementRef
     modal: any;
     searchBar: any;
@@ -33,6 +37,7 @@ export class MentorshipComponent implements OnInit {
     
     // gets all information we need when the page loads.
     ngOnInit() {
+        this.application_submitted = false;
         this.searchBar = {
             featuredNumber: 8,
             bar: "",
@@ -42,7 +47,16 @@ export class MentorshipComponent implements OnInit {
             technical_advice: false
         }
         if (this.isLoggedIn()){
+            this.isApplicationSubmitted();
             this.getUserInfo()
+            this.newMentor={
+                user: this._authenticationsService.getUserDetails()._id,
+                support: { mental_health: false,
+                    financial_advice: false,
+                    career_advice: false,
+                    technical_advice: false },
+                resume: "",
+            }
         }
         else{
             this.userInfo = {
@@ -66,33 +80,24 @@ export class MentorshipComponent implements OnInit {
         this.getMentors();
     }
     isLoggedIn(){
+        if(this._authenticationsService.isLoggedIn()){
+            this.isApplicationSubmitted();
+        }
         return this._authenticationsService.isLoggedIn();
     }
-    getUserInfo(){
-        let obs = this._usersService.getUser(this._authenticationsService.getUserDetails()._id);
+    isApplicationSubmitted(){
+        let obs = this._mentorsService.getApprovals();
         obs.subscribe(data => {
-            if (data['errors']){
-                console.log(data);
-            }
-            else{
-                this.userInfo = {
-                    firstName: data['firstName'],
-                    lastName: data['lastName'],
-                    email: data['email'],
-                    title: data['title'],
-                    org: data['org'],
-                    state: data['state']
-                };
-                this.newMentor= {
-                    user: data['_id'],
-                    support: {mental_health: false,
-                    financial_advice: false,
-                    career_advice: false,
-                    technical_advice: false },
-                    resume: ""
+            console.log(data);
+            for(let mentor in data){
+                if(data[mentor].user._id === this._authenticationsService.getUserDetails()._id){
+                    this.application_submitted = true;
                 }
-            }
+            } 
         })
+    }
+    getUserInfo(){
+        this.userInfo = this._authenticationsService.getUserDetails();
     }
     open() {
         if (this.isLoggedIn()){
@@ -106,33 +111,45 @@ export class MentorshipComponent implements OnInit {
     }
     closedModal(){
         this.modal = null;
+        this.user_errors = null;
+        this.mentor_errors = null;
         if (this.isLoggedIn()){
             this.getUserInfo();
+        }
+        this.newMentor={
+            user: null,
+            support: { mental_health: false,
+                financial_advice: false,
+                career_advice: false,
+                technical_advice: false },
+            resume: "",
         }
     }
     getMentors(){
         let obs = this._mentorsService.getMentors();
-        obs.subscribe(data => this.mentors = data);
+        obs.subscribe(data => {
+            this.mentors = data;
+            if (this.mentors.find(x => x.user._id === this._authenticationsService.getUserDetails()._id)){
+                this.isMentor = true;
+            }
+        });
     }
     addMentor(){
+        this.user_errors = null;
+        this.mentor_errors = null;
         let obs = this._usersService.userUpdate(this.newMentor.user, this.userInfo)
         obs.subscribe(data =>{
-            console.log(data);
             if (data['errors']){
-                console.log("Something went wrong when updating user data")
-                //if user update failed
+                this.user_errors = data['errors'];
             }
             else{
-                console.log("Successfully updated user information")
                 let obs2 = this._mentorsService.addMentor(this.newMentor);
-                obs2.subscribe(data => {
-                    if (data['errors']){
-                        console.log("Something went wrong when adding new mentor", data)
-                        //if adding mentor failed
+                obs2.subscribe(data2 => {
+                    if (data2['errors']){
+                        this.mentor_errors = data2['errors'];
                     }
                     else{
-                        console.log("Successfully added new mentor")
-                        this.modal.close();
+                        this.application_submitted = true;
                     }
                 })
             }
@@ -141,15 +158,6 @@ export class MentorshipComponent implements OnInit {
     seeMore(){
         this.searchBar.featuredNumber += 8;
     }
-    
-    /*
-    searchBar(search_data){
-        use a service to loop through for anything that matches the string
-        elimante extra searches based on checkboxes
-    }
-    */
-
-
 
 
 }

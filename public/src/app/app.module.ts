@@ -12,6 +12,9 @@ import { PartnersService } from './http_services/partners.service';
 import { SpeakersService } from './http_services/speakers.service';
 import { FileUploadService } from './http_services/file-upload.service';
 import { PaymentsService } from './http_services/payments.service';
+import { AuthenticationService } from './http_services/authentication.service';
+import { AdminService } from './http_services/admin.service';
+import { LoginService } from './http_services/login.service';
 // modules
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -58,7 +61,6 @@ export class KeysPipe implements PipeTransform {
 
 export class MentorSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
-    console.log(arguments);
     if (value) {
       if (search.bar) {
         var strings = search.bar.toLowerCase().split(' ');
@@ -97,8 +99,38 @@ export class MentorSearchPipe implements PipeTransform {
               count_y++;
             }
           }
-          console.log(count_x);
-          console.log(count_y);
+          if (search.mental_health){
+            if (x.support.mental_health){
+              count_x += 10;
+            }
+            if (y.support.mental_health){
+              count_y += 10;
+            }
+          }
+          if (search.financial_advice){
+            if (x.support.financial_advice){
+              count_x += 10;
+            }
+            if (y.support.financial_advice){
+              count_y += 10;
+            }
+          }
+          if (search.career_advice){
+            if (x.support.career_advice){
+              count_x += 10;
+            }
+            if (y.support.career_advice){
+              count_y += 10;
+            }
+          }
+          if (search.technical_advice){
+            if (x.support.technical_advice){
+              count_x += 10;
+            }
+            if (y.support.technical_advice){
+              count_y += 10;
+            }
+          }
           return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
         });
       }
@@ -188,6 +220,9 @@ export class SlicePipe implements PipeTransform {
     FileUploadService,
     PaymentsService,
     NgbActiveModal,
+    AuthenticationService,
+    AdminService,
+    LoginService
   ]
 })
 export class AppModule { }

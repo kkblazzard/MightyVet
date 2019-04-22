@@ -1,4 +1,13 @@
 <!-- page under construction template -->
+<ng-template #donate>
+  <app-donation></app-donation>
+</ng-template>
+
+<ng-template #paymentSuccess>
+  <div>
+    <p>Donation Sucessful</p>
+  </div>
+</ng-template>
 <div class="container d-flex justify-content-center pt-5">
   <i class="fa fa-paw fa-5x mr-3 text-info"></i>
   <div class="text-info">
@@ -6,4 +15,5 @@
     <h3>This page is under construction</h3>
     <button class="btn btn-outline-info" [routerLink]="['/']">Return to Home</button>
   </div>
+  <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button>
 </div>

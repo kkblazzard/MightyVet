@@ -21,6 +21,8 @@ class ImageSnippet {
 
 export class AdminWebinarsComponent implements OnInit {
   @ViewChild('addWebinar') webinarModal: ElementRef;
+  errors: any;
+  speaker_errors: any;
   modal: any;
   speaker_image: String;
   speakerPreview: String;
@@ -30,7 +32,7 @@ export class AdminWebinarsComponent implements OnInit {
   newAnswers = 0;
   speaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   stage = 1;
-  newWebinar: any = {title: '', type: 'Live', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
+  newWebinar: any = {title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
   webinars: any;
   speakers: any;
   newSpeaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
@@ -74,13 +76,19 @@ export class AdminWebinarsComponent implements OnInit {
     obs.subscribe(data => this.webinars = data );
   }
   addNewWebinar() {
-    this.newWebinar.datetime += this.newWebinar.datetime.getTimezoneOffset() * 60000;
+    this.errors = null;
+    var date = this.newWebinar.datetime;
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
-      console.log(data);
-      if (!data['errors']) {
+      this.newWebinar.datetime = date;
+      if (!data['errors']){
+        console.log(data);
         this.getWebinars();
         this.modal.dismiss("form completed")
+      }
+      else{
+        console.log(data['errors']);
+        this.errors = data['errors'];
       }
     });
   }
@@ -101,11 +109,13 @@ export class AdminWebinarsComponent implements OnInit {
     this.modal.result.then(() => {}, () => this.closedModal());
   }
   closedModal() {
+    this.errors = null;
+    this.speaker_errors = null;
     this.stage = 1;
     this.speaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.speakerPreview = null;
-    this.newWebinar = {title: '', type: 'Live', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
+    this.newWebinar = {title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
     this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
     this.fileToUpload2 = {src: null, file: null, pending: false, status: 'init'};
     this.speaker_image = '';
@@ -113,17 +123,17 @@ export class AdminWebinarsComponent implements OnInit {
     this.newAnswers = 0;
   }
   // 3 next functions are to allow model binding with datetime-local input
-  private parseDateToStringWithFormat(date: Date): string {
+  private parseDateToStringWithFormat(parsedDate: Date): string {
     let result: string;
-    let dd = date.getDate().toString();
-    let mm = (date.getMonth() + 1).toString();
-    let hh = date.getHours().toString();
-    let min = date.getMinutes().toString();
+    let dd = parsedDate.getDate().toString();
+    let mm = (parsedDate.getMonth() + 1).toString();
+    let hh = parsedDate.getHours().toString();
+    let min = parsedDate.getMinutes().toString();
     dd = dd.length === 2 ? dd : '0' + dd;
     mm = mm.length === 2 ? mm : '0' + mm;
     hh = hh.length === 2 ? hh : '0' + hh;
     min = min.length === 2 ? min : '0' + min;
-    result = [date.getFullYear(), '-', mm, '-', dd, 'T', hh, ':', min].join('');
+    result = [parsedDate.getFullYear(), '-', mm, '-', dd, 'T', hh, ':', min].join('');
     return result;
   }
 
@@ -161,14 +171,20 @@ export class AdminWebinarsComponent implements OnInit {
     obs.subscribe(data => this.speakers = data);
   }
   addSpeaker() {
+    this.speaker_errors = null;
     const obs = this._speakersService.addSpeaker(this.newSpeaker);
     obs.subscribe(data => {
-      console.log(data);
+      if (!data['errors']){
       this.getSpeakers();
       this.newWebinar.speaker = data['_id'];
       this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
       this.getSpeakerImage();
       this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
+      }
+      else{
+        console.log(data['errors']);
+        this.speaker_errors = data['errors'];
+      }
     });
   }
   processFile(imageInput: any) {

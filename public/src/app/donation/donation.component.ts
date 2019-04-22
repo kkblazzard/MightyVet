@@ -1,14 +1,7 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  ChangeDetectorRef
-} from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HeaderComponent } from '../header/header.component';
+import { SupportComponent } from '../support/support.component';
+import { AuthenticationService } from '../http_services/authentication.service';
 import { PaymentsService } from '../http_services/payments.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -27,24 +20,22 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
   error: string;
   amount: number;
   extraData = {
-    'email': '',
+    email: '',
     // billing info
-    'name': '',
-    'address_city': '',
-    'address_line1': '',
-    'address_line2': '',
-    'address_state': '',
-    'address_zip': '',
-    'amount': (this.amount * 100),
+    name: '',
+    address_city: '',
+    address_line1: '',
+    address_line2: '',
+    address_state: '',
+    address_zip: '',
+    amount: (this.amount * 100),
   };
   constructor(
     public activeModal: NgbActiveModal,
     private cd: ChangeDetectorRef,
-    private _header: HeaderComponent,
-    private _paymentsService: PaymentsService) {
-
-
-    }
+    private _support: SupportComponent,
+    private _authenticationsService: AuthenticationService,
+    private _paymentsService: PaymentsService) { }
 
   ngAfterViewInit() {
     this.card = elements.create('card');
@@ -79,12 +70,23 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this._paymentsService.makePayment(token, this.extraData);
 
-      this._header.modal.close();
-      this._header.open('paymentSuccess');
+      this._support.modal.close();
+      this._support.open('paymentSuccess');
     }
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.getUserInfo();
   }
 
+  getUserInfo(){
+    if (this._authenticationsService.isLoggedIn()){
+      this.extraData.email = this._authenticationsService.getUserDetails().email;
+      this.extraData.name = `${this._authenticationsService.getUserDetails().firstName} ${this._authenticationsService.getUserDetails().lastName}`;
+      this.extraData.address_state = this._authenticationsService.getUserDetails().state;
+    }
+  }
+  close(){
+    this._support.modal.close();
+  }
 }

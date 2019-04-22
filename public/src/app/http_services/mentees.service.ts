@@ -21,6 +21,14 @@ export class MenteesService {
     console.log("http.service Newsletterupdate", menteeUpdate);
     return this._http.put('/api/mentees/' + id, menteeUpdate);
   }
+  menteeApproval(mentee_id){
+    console.log("http.service approving mentee", mentee_id);
+    return this._http.put('/api/mentees/approve', {mentee_id: mentee_id});
+  }
+  menteeDecline(mentor_id, mentee_id){
+    console.log("http.service declining mentee", );
+    return this._http.put('/api/mentees/decline/'+mentor_id, {mentee_id: mentee_id});
+  }
   deleteMentee(id) {
     return this._http.delete('/api/mentees/' + id);
   }

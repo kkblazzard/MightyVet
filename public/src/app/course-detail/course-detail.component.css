@@ -1,5 +1,10 @@
 #course_img{
     max-height: 300px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: white;
+
+}
+.speakerimg{
+    max-width: 200px;
 }
