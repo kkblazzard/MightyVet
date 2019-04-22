@@ -64,25 +64,25 @@
         <h1 class="inbox-header">Your Mentees</h1>
         <div class="mentees-img-list">
             <div class="d-flex justify-content-between mb-4">
-                <a *ngFor="let mentee of userInfo.mentor_id.mentees" class="mentee-img mr-5">
+                <a *ngFor="let mentee of mentees" class="mentee-img mr-5">
                     <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
                         [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
                     <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
                 </a>
-                <p *ngIf="userInfo?.mentees?.length === 0">You don't have any mentees yet.</p>
+                <p *ngIf="mentees?.length === 0">You don't have any mentees yet.</p>
             </div>
         </div>
         <h1 class="inbox-header">New Mentees</h1>
         <div class="mentees-img-list">
             <div class="d-flex justify-content-between mb-4">
-                <a *ngFor="let mentee of userInfo.mentor_id.mentees" class="mentee-img mr-5">
+                <a *ngFor="let mentee of mentee_applications" class="mentee-img mr-5">
                     <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
                         [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
                     <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
                     <button class="btn btn-success" (click)="approveMentee(mentee._id)">Approve</button>
                     <button class="btn btn-danger" (click)="declineMentee(mentee._id)">Decline</button>
                 </a>
-                <p *ngIf="userInfo?.mentees?.length === 0">You don't have any mentee requests yet.</p>
+                <p *ngIf="mentee_applications?.length === 0">You don't have any new mentee requests.</p>
             </div>
         </div>
     </div>

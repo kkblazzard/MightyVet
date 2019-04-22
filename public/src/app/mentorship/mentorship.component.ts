@@ -129,6 +129,7 @@ export class MentorshipComponent implements OnInit {
         let obs = this._mentorsService.getMentors();
         obs.subscribe(data => {
             this.mentors = data;
+            this.mentors = this.mentors.filter(x => x.user._id !== this._authenticationsService.getUserDetails()._id);
             if (this.mentors.find(x => x.user._id === this._authenticationsService.getUserDetails()._id)){
                 this.isMentor = true;
             }
