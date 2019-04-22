@@ -5,10 +5,11 @@ import { AuthenticationService } from '../http_services/authentication.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { randomBytes } from 'crypto';
 
 export interface CalendarDate {
   mDate: moment.Moment;
-  selected?: boolean;
+  available?: boolean;
   today?: boolean;
 }
 @Component({
@@ -21,11 +22,9 @@ export class SchedulingComponent implements OnInit, OnChanges {
   id: string;
   mentor: any;
   currentDate = moment();
-  dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  dayNames = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
   weeks: CalendarDate[][] = [];
   sortedDates: CalendarDate[] = [];
-  @Input() selectedDates: CalendarDate[] = [];
-  @Output() onSelectDate = new EventEmitter<CalendarDate>();
   constructor(
     private _authenticationsService: AuthenticationService,
     private _mentorsService: MentorsService,
@@ -33,6 +32,7 @@ export class SchedulingComponent implements OnInit, OnChanges {
     private _route: ActivatedRoute,
     private _router: Router) { }
   ngOnInit() {
+    this.mentor = {user: {firstName : "Mentor"}};
     this.generateCalendar();
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
@@ -56,11 +56,15 @@ export class SchedulingComponent implements OnInit, OnChanges {
   getMentor() {
     let obs = this._mentorsService.getMentor(this.id);
     obs.subscribe((data) => {
+      console.log(data);
       if(data['errors']){
         this._router.navigateByUrl('/mentorship/'+this.id);
       }
       else{
         this.mentor = data;
+        if (data['availabilities']){
+          data['availabilities'] = data['availabilities'].filter(x => x.mentee === null && x.datetime > new Date());
+        }
         if (data['mentees']){
           this.checkMentee();
         }
@@ -92,32 +96,26 @@ export class SchedulingComponent implements OnInit, OnChanges {
     const firstOfMonth = moment(currentMoment).startOf('month').day();
     const firstDayOfGrid = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days');
     const start = firstDayOfGrid.date();
-    return _.range(start, start + 42)
+    var x = moment(currentMoment).month()
+    var y = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days').add(35, 'days').month();
+    return _.range(0, (x === y ? 42 : 35))
             .map((date: number): CalendarDate => {
-              const d = moment(firstDayOfGrid).date(date);
+              const d = moment(firstDayOfGrid).add(date, 'days');
               return {
                 today: this.isToday(d),
-                selected: this.isSelected(d),
+                available: this.isDayAvailable(d),
                 mDate: d,
               };
             });
   }
   isToday(date: moment.Moment): boolean {
-    return moment().isSame(moment(date), 'day');
+    return moment().startOf('day').format() === date.format();
   }
-
-  isSelected(date: moment.Moment): boolean {
-    return _.findIndex(this.selectedDates, (selectedDate) => {
-      return moment(date).isSame(selectedDate.mDate, 'day');
-    }) > -1;
-  }
-
   isSelectedMonth(date: moment.Moment): boolean {
-    return moment(date).isSame(this.currentDate, 'month');
+    return moment(date).month() === moment(this.currentDate).month();
   }
-
-  selectDate(date: CalendarDate): void {
-    this.onSelectDate.emit(date);
+  isDayAvailable(date: moment.Moment): boolean {
+    return true;
   }
   prevMonth(): void {
     this.currentDate = moment(this.currentDate).subtract(1, 'months');
@@ -127,24 +125,4 @@ export class SchedulingComponent implements OnInit, OnChanges {
     this.currentDate = moment(this.currentDate).add(1, 'months');
     this.generateCalendar();
   }
-  firstMonth(): void {
-    this.currentDate = moment(this.currentDate).startOf('year');
-    this.generateCalendar();
-  }
-
-  lastMonth(): void {
-    this.currentDate = moment(this.currentDate).endOf('year');
-    this.generateCalendar();
-  }
-
-  prevYear(): void {
-    this.currentDate = moment(this.currentDate).subtract(1, 'year');
-    this.generateCalendar();
-  }
-
-  nextYear(): void {
-    this.currentDate = moment(this.currentDate).add(1, 'year');
-    this.generateCalendar();
-  }
-
 }

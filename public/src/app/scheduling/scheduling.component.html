@@ -1,35 +1,29 @@
 <div class="container">
-  <h1>Availabilities</h1>
+  <h1>{{mentor.user.firstName}}'s' Availabilities</h1>
   <br>
   <div class="calendar">
     <div class="calendar-navs">
-      <div class="month-nav">
-        <button (click)="prevMonth()">&lt;</button>
-        <span class="p4">{{ currentDate.format('MMMM') }}</span>
-        <button (click)="nextMonth()">&gt;</button>
-      </div>
-      <div class="year-nav">
-        <button (click)="prevYear()">&lt;</button>
-        <span>{{ currentDate.format('YYYY') }}</span>
-        <button (click)="nextYear()">&gt;</button>
+      <div class="month-nav row text-center mb-2">
+        <button class="col" (click)="prevMonth()">&lt;</button>
+        <span class="p4 col-10">{{ currentDate.format('MMMM YYYY') }}</span>
+        <button class="col" (click)="nextMonth()">&gt;</button>
       </div>
     </div>
     <div class="month-grid">
-      <div class="day-names">
-        <div *ngFor="let name of dayNames" class="day-name p9">
+      <div class="day-names row">
+        <div *ngFor="let name of dayNames" class="day-name col py-2">
           {{ name }}
         </div>
       </div>
       <div class="weeks">
-        <div *ngFor="let week of weeks" class="week">
+        <div *ngFor="let week of weeks" class="week row">
           <ng-container *ngFor="let day of week">
-            <div class="week-date disabled" *ngIf="!isSelectedMonth(day.mDate)">
+            <div class="week-date notMonth col text-center" *ngIf="!isSelectedMonth(day.mDate)">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>
-            <div class="week-date enabled"
+            <div class="week-date col text-center"
                 *ngIf="isSelectedMonth(day.mDate)"
-                (click)="selectDate(day)"
-                [ngClass]="{ today: day.today, selected: day.selected }">
+                [ngClass]="{ 'today': day.today, 'available':day.available }">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>
           </ng-container>
