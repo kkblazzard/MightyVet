@@ -70,7 +70,7 @@ export class MentorDetailsComponent implements OnInit {
         let obs2 = this._mentorsService.signUp(this.id, data);
         obs2.subscribe(data2 => {
           console.log('successfully added new mentee to mentor', data2);
-          this.isMentee = true;
+          this.application = true;
         },
           err => {
             console.log('something went wrong:', err);

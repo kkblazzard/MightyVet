@@ -13,6 +13,7 @@
               <i class="fa fa-check mr-4"></i>You have requested to become {{mentor.user.firstName}}'s mentee. {{mentor.user.firstName}} is still reviewing your application.
             </ngb-alert>
           </p>
+          <button class="btn btn-primary" *ngIf="isMentee" [routerLink]="['/mentorship',id,'schedule']"><i class="fa fa-calendar mr-2"></i>Look at {{mentor.user.firstName}}'s availabilities</button>
         </div>
         <div class="col-sm-2 pull-right">
           <img title="profile image" class="rounded-circle w-100" id="mentor_img" [src]="mentor.user.picture" alt="Mentor Image">
