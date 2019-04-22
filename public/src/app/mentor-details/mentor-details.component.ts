@@ -49,13 +49,15 @@ export class MentorDetailsComponent implements OnInit {
       }
   }
   checkMentee() {
-    for (let mentee of this.mentor.mentees) {
-      if (mentee.user === this._authenticationsService.getUserDetails()._id) {
-        if (!mentee.approval){
-          this.application = true;
-        }
-        else{
-          this.isMentee = true;
+    if(this._authenticationsService.isLoggedIn()){
+      for (let mentee of this.mentor.mentees) {
+        if (mentee.user === this._authenticationsService.getUserDetails()._id) {
+          if (!mentee.approval){
+            this.application = true;
+          }
+          else{
+            this.isMentee = true;
+          }
         }
       }
     }

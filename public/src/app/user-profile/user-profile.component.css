@@ -1,4 +1,7 @@
 /*  Delete Later */
+.point{
+    cursor: pointer;
+}
 .holder-image{
     width: 180px;
     height: 180px;
