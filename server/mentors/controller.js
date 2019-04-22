@@ -39,6 +39,7 @@ module.exports={
         .findById(req.params.id)
         .populate('user')
         .populate('mentees')
+        .populate('availabilities')
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
     signUp: (req, res) => Mentors
