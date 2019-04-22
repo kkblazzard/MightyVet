@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MeetingsService } from '../http_services/meetings.service';
-import { UsersService } from '../http_services/users.service';
+import { MentorsService } from '../http_services/mentors.service';
+import { AuthenticationService } from '../http_services/authentication.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CalendarView, CalendarEvent } from 'angular-calendar';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -18,6 +18,8 @@ export interface CalendarDate {
 })
 
 export class SchedulingComponent implements OnInit, OnChanges {
+  id: string;
+  mentor: any;
   currentDate = moment();
   dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   weeks: CalendarDate[][] = [];
@@ -25,12 +27,22 @@ export class SchedulingComponent implements OnInit, OnChanges {
   @Input() selectedDates: CalendarDate[] = [];
   @Output() onSelectDate = new EventEmitter<CalendarDate>();
   constructor(
-    private _MeetingsService : MeetingsService,
-    private _UsersService : UsersService,
+    private _authenticationsService: AuthenticationService,
+    private _mentorsService: MentorsService,
+    private _meetingsService : MeetingsService,
     private _route: ActivatedRoute,
     private _router: Router) { }
   ngOnInit() {
     this.generateCalendar();
+    this._route.params.subscribe((params: Params) => {
+      this.id = params.id;
+      if(this._authenticationsService.isLoggedIn()){
+        this.getMentor();
+      }
+      else{
+        this._router.navigateByUrl('/mentorship/'+this.id);
+      }
+    })
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selectedDates &&
@@ -39,6 +51,33 @@ export class SchedulingComponent implements OnInit, OnChanges {
       // sort on date changes for better performance when range checking
       this.sortedDates = _.sortBy(changes.selectedDates.currentValue, (m: CalendarDate) => m.mDate.valueOf());
       this.generateCalendar();
+    }
+  }
+  getMentor() {
+    let obs = this._mentorsService.getMentor(this.id);
+    obs.subscribe((data) => {
+      if(data['errors']){
+        this._router.navigateByUrl('/mentorship/'+this.id);
+      }
+      else{
+        this.mentor = data;
+        if (data['mentees']){
+          this.checkMentee();
+        }
+      }
+    })
+  }
+  checkMentee() {
+    var isMentee = false;
+    for (let mentee of this.mentor.mentees) {
+      if (mentee.user === this._authenticationsService.getUserDetails()._id) {
+        if (mentee.approval){
+          isMentee = true;
+        }
+      }
+    }
+    if (!isMentee){
+      this._router.navigateByUrl('/mentorship/'+this.id);
     }
   }
   generateCalendar(): void {
@@ -107,10 +146,5 @@ export class SchedulingComponent implements OnInit, OnChanges {
     this.currentDate = moment(this.currentDate).add(1, 'year');
     this.generateCalendar();
   }
-  isMentor(id){
-    this._UsersService.getUser(id).subscribe(data=>{return data['mentor']})
-  }
-  getEvents(id){
-    return this._MeetingsService.getMeetings(id, this.isMentor(id));
-  }
+
 }
