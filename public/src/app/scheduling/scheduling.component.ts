@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ViewChild, OnChanges, OnInit, ElementRef, SimpleChanges } from '@angular/core';
 import { MeetingsService } from '../http_services/meetings.service';
 import { MentorsService } from '../http_services/mentors.service';
 import { AuthenticationService } from '../http_services/authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { randomBytes } from 'crypto';
 
 export interface CalendarDate {
   mDate: moment.Moment;
@@ -19,13 +19,30 @@ export interface CalendarDate {
 })
 
 export class SchedulingComponent implements OnInit, OnChanges {
+  @ViewChild('showAvailabilities') availabilities: ElementRef;
+  daily_meetings: any;
+  modal: any;
   id: string;
   mentor: any;
   currentDate = moment();
   dayNames = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
   weeks: CalendarDate[][] = [];
   sortedDates: CalendarDate[] = [];
+  date: moment.Moment;
+  placeholder_meetings = [{
+    mentee: null,
+    datetime: new Date("April 24, 2019 3:30:00")
+  },
+  {
+    mentee: null,
+    datetime: new Date("April 24, 2019 6:00:00")
+  },
+  {
+    mentee: null,
+    datetime: new Date("April 24, 2019 23:59:00")
+  }]
   constructor(
+    private _modalsService: NgbModal,
     private _authenticationsService: AuthenticationService,
     private _mentorsService: MentorsService,
     private _meetingsService : MeetingsService,
@@ -33,7 +50,6 @@ export class SchedulingComponent implements OnInit, OnChanges {
     private _router: Router) { }
   ngOnInit() {
     this.mentor = {user: {firstName : "Mentor"}};
-    this.generateCalendar();
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
       if(this._authenticationsService.isLoggedIn()){
@@ -53,21 +69,43 @@ export class SchedulingComponent implements OnInit, OnChanges {
       this.generateCalendar();
     }
   }
+  open(date: moment.Moment){
+    this.date = date;
+    this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
+    if(this.daily_meetings.length){
+      this.modal = this._modalsService.open(this.availabilities)
+      this.modal.result.then(() => { }, () => this.closedModal());
+    }
+  }
+  closedModal(){
+    this.mentor = {user: {firstName : "Mentor"}};
+    this._route.params.subscribe((params: Params) => {
+      this.id = params.id;
+      if(this._authenticationsService.isLoggedIn()){
+        this.getMentor();
+      }
+      else{
+        this._router.navigateByUrl('/mentorship/'+this.id);
+      }
+    })
+  }
   getMentor() {
     let obs = this._mentorsService.getMentor(this.id);
     obs.subscribe((data) => {
-      console.log(data);
       if(data['errors']){
         this._router.navigateByUrl('/mentorship/'+this.id);
       }
       else{
         this.mentor = data;
-        if (data['availabilities']){
-          data['availabilities'] = data['availabilities'].filter(x => x.mentee === null && x.datetime > new Date());
-        }
+        this.mentor['availabilities'] = this.placeholder_meetings;
+        // if (data['availabilities']){
+        //   data['availabilities'] = data['availabilities'].filter(x => x.mentee === null && x.datetime > new Date());
+        // }
         if (data['mentees']){
           this.checkMentee();
         }
+        console.log(this.mentor);
+        this.generateCalendar();
       }
     })
   }
@@ -95,7 +133,6 @@ export class SchedulingComponent implements OnInit, OnChanges {
   fillDates(currentMoment: moment.Moment): CalendarDate[] {
     const firstOfMonth = moment(currentMoment).startOf('month').day();
     const firstDayOfGrid = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days');
-    const start = firstDayOfGrid.date();
     var x = moment(currentMoment).month()
     var y = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days').add(35, 'days').month();
     return _.range(0, (x === y ? 42 : 35))
@@ -112,10 +149,15 @@ export class SchedulingComponent implements OnInit, OnChanges {
     return moment().startOf('day').format() === date.format();
   }
   isSelectedMonth(date: moment.Moment): boolean {
+    console.log(moment(date).month(), moment(this.currentDate).month());
     return moment(date).month() === moment(this.currentDate).month();
   }
   isDayAvailable(date: moment.Moment): boolean {
-    return true;
+    this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());
+    if(this.daily_meetings.length){
+      return true;
+    }
+    return false;
   }
   prevMonth(): void {
     this.currentDate = moment(this.currentDate).subtract(1, 'months');
