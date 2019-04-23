@@ -1,5 +1,5 @@
 const Meetings=require('./models');
-
+const Mentors = require('../mentors/models');
 module.exports={
     meetingAll: (req, res)=>Meetings
         .find().then(all=>console.log(all) || res.json(all))
@@ -9,7 +9,12 @@ module.exports={
         console.log("entered new controller", req.body);
         Meetings
         .create(req.body)
-        .then(anew=>console.log("created in controller",anew)|| res.json(anew))
+        .then(anew=>{
+            console.log("created in controller",anew);
+            Mentors.findByIdAndUpdate(req.body.mentor, {$push:{availabilities: anew._id}}, {new: true})
+            .then(updated => console.log("pushed to mentor", updated) || res.json(anew))
+            .catch(err=>console.log(err) || res.json(err))
+        })
         .catch(err=>console.log(err) || res.json(err))
     },
     meetingUpdate: (req, res) => Meetings
@@ -30,7 +35,5 @@ module.exports={
     menteeMeetings:(req,res)=> Meetings
         .find({mentee: req.params.id})
         .then(meetings=>console.log(meetings) || res.json(meetings))
-        .catch(err=>console.log(err) || res.json(err))
-
-
+        .catch(err=>console.log(err) || res.json(err)),
 }

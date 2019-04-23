@@ -29,18 +29,6 @@ export class SchedulingComponent implements OnInit, OnChanges {
   weeks: CalendarDate[][] = [];
   sortedDates: CalendarDate[] = [];
   date: moment.Moment;
-  placeholder_meetings = [{
-    mentee: null,
-    datetime: new Date("April 24, 2019 3:30:00")
-  },
-  {
-    mentee: null,
-    datetime: new Date("April 24, 2019 6:00:00")
-  },
-  {
-    mentee: null,
-    datetime: new Date("April 24, 2019 23:59:00")
-  }]
   constructor(
     private _modalsService: NgbModal,
     private _authenticationsService: AuthenticationService,
@@ -97,10 +85,9 @@ export class SchedulingComponent implements OnInit, OnChanges {
       }
       else{
         this.mentor = data;
-        this.mentor['availabilities'] = this.placeholder_meetings;
-        // if (data['availabilities']){
-        //   data['availabilities'] = data['availabilities'].filter(x => x.mentee === null && x.datetime > new Date());
-        // }
+        if (data['availabilities']){
+          data['availabilities'] = data['availabilities'].filter(x => !x.mentee && moment(x.datetime).isSameOrAfter(moment().subtract(1, "hours")));
+        }
         if (data['mentees']){
           this.checkMentee();
         }
@@ -149,7 +136,6 @@ export class SchedulingComponent implements OnInit, OnChanges {
     return moment().startOf('day').format() === date.format();
   }
   isSelectedMonth(date: moment.Moment): boolean {
-    console.log(moment(date).month(), moment(this.currentDate).month());
     return moment(date).month() === moment(this.currentDate).month();
   }
   isDayAvailable(date: moment.Moment): boolean {
