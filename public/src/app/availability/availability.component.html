@@ -1,52 +1,28 @@
 <ng-template #showAvailabilities>
   <div class="modal-header">
-    <h2 class="modal-title">Your availabilities on {{date.format('dddd, D MMMM, YYYY')}} </h2>
+    <h2 class="modal-title">Your schedule on {{date.format('dddd, D MMMM, YYYY')}} </h2>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
-        <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <form>
-    <div class="container modal-body d-flex justify-content-around">
-      <div>
-        <h3>AM</h3>
-        <p>6:00</p>
-        <p>6:30</p>
-        <p>7:00</p>
-        <p>7:30</p>
-        <p>8:00</p>
-        <p>8:30</p>
-        <p>9:00</p>
-        <p>9:30</p>
-        <p>10:00</p>
-        <p>10:30</p>
-        <p>11:00</p>
-        <p>11:30</p>
-      </div>
-      <div>
-        <h3>PM</h3>
-        <p>12:00</p>
-        <p>12:30</p>
-        <p>1:00</p>
-        <p>1:30</p>
-        <p>2:00</p>
-        <p>2:30</p>
-        <p>3:00</p>
-        <p>3:30</p>
-        <p>4:00</p>
-        <p>4:30</p>
-        <p>5:00</p>
-        <p>5:30</p>
-        <p>6:00</p>
-      </div>
+  <div class="container modal-body">
+    <div *ngFor="let daily_meeting of daily_meetings">
+      <p *ngIf="daily_meeting.mentee">Meeting with {{daily_meeting.mentee.firstName}}
+        {{daily_meeting.mentee.lastName}} at {{daily_meeting.datetime | date: "HH:mm"}}.</p>
+      <p *ngIf="!daily_meeting.mentee">{{daily_meeting.datetime | date: "HH:mm"}} is still available.</p>
     </div>
     <!-- arrange this to be in bottom right with absolute -->
     <div class="modal-footer">
-        <button class="btn btn-primary" (click)="modal.dismiss('click')">Save</button>
+      <form>
+        <h2>Adding Availabilities</h2>
+        <input type="time" name="newTime" [(ngModel)]="newTime">
+        <button class="btn btn-primary" (click)="newMeeting()">Add</button>
+      </form>
     </div>
-  </form>  
+  </div>
 </ng-template>
 <div class="container">
-  <h1>Your Availabilities</h1>
+  <h1>Your Schedule</h1>
   <br>
   <div class="calendar">
     <div class="calendar-navs">
@@ -65,13 +41,12 @@
       <div class="weeks">
         <div *ngFor="let week of weeks" class="week row">
           <ng-container *ngFor="let day of week">
-            <div class="week-date notMonth col text-center" *ngIf="!isSelectedMonth(day.mDate)" (click) = "open(day.mDate)">
+            <div class="week-date notMonth col text-center" *ngIf="!isSelectedMonth(day.mDate)"
+              (click)="open(day.mDate)">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>
-            <div class="week-date col text-center"
-                *ngIf="isSelectedMonth(day.mDate)"
-                (click) = "open(day.mDate)"
-                [ngClass]="{ 'today': day.today, 'available':day.available }">
+            <div class="week-date col text-center" *ngIf="isSelectedMonth(day.mDate)" (click)="open(day.mDate)"
+              [ngClass]="{ 'today': day.today, 'available':day.available }">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>
           </ng-container>

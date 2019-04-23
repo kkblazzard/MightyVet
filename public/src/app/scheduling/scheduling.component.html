@@ -7,7 +7,7 @@
   </div>
   <form>
     <div class="modal-body container">
-      <div *ngFor="let daily_meeting of daily_meetings">{{daily_meeting.datetime}}</div>
+      <div *ngFor="let daily_meeting of daily_meetings">{{daily_meeting.datetime | date: "HH:mm"}}</div>
     </div>
     <!-- arrange this to be in bottom right with absolute -->
     <div class="modal-footer">

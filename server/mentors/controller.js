@@ -37,9 +37,7 @@ module.exports={
         .catch(err => console.log(err) || res.json(err)),
     mentorDetails:(req, res) => Mentors
         .findById(req.params.id)
-        .populate('user')
-        .populate('mentees')
-        .populate('availabilities')
+        .populate([{path: 'user'},{path:'mentees'},{path:'availabilities'}])
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
     signUp: (req, res) => Mentors
