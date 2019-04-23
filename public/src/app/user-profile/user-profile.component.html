@@ -118,8 +118,8 @@
 
 <div class="container">
     <h1>Profile Page</h1>
-    <div class="row top">
-        <div class="col-4 user-info">
+    <div class="d-flex justify-content-between top">
+        <div class="user-info">
             <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
             <div class="user-info__image">
                 <div class="holder-image point" (click)="open('picture')">
@@ -136,7 +136,7 @@
                 <button>View All --></button>
             </div>
         </div>
-        <div class="col-8 messages">
+        <div class="messages">
             <div class="row inbox">
                 <h1 class="inbox-header">Your Mentors</h1>
                 <div class="mentors-img-list">
@@ -178,20 +178,20 @@
             </div>
         </div>
     </div>
-    <div *ngIf="userInfo?.mentor_id" class="d-flex justify-content-between">
-        <h1 class="inbox-header">Your Mentees</h1>
-        <div class="mentees-img-list">
+    <div *ngIf="userInfo?.mentor_id" class="d-flex justify-content-between mt-4">
+        <div class="mentees-img-list text-center">
+            <h1 class="inbox-header">Your Mentees</h1>
             <div class="d-flex justify-content-between mb-4">
                 <a *ngFor="let mentee of mentees" class="mentee-img mr-5">
                     <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
                         [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
                     <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
                 </a>
-                <p *ngIf="mentees?.length === 0">You don't have any mentees yet.</p>
+                <h6 *ngIf="mentees?.length === 0">You don't have any mentees yet.</h6>
             </div>
         </div>
-        <h1 class="inbox-header">New Mentees</h1>
-        <div class="mentees-img-list">
+        <div class="mentees-img-list text-center">
+            <h1 class="inbox-header">New Mentees</h1>
             <div class="d-flex justify-content-between mb-4">
                 <a *ngFor="let mentee of mentee_applications" class="mentee-img mr-5">
                     <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
@@ -200,9 +200,12 @@
                     <button class="btn btn-success" (click)="approveMentee(mentee._id)">Approve</button>
                     <button class="btn btn-danger" (click)="declineMentee(mentee._id)">Decline</button>
                 </a>
-                <p *ngIf="mentee_applications?.length === 0">You don't have any new mentee requests.</p>
+                <h6 *ngIf="mentee_applications?.length === 0">You don't have any new mentee requests.</h6>
             </div>
         </div>
+    </div>
+    <div *ngIf="userInfo?.mentor_id" class="text-center">
+        <button class="btn btn-primary" [routerLink]="['/user/avails']">Set Your Mentoring Availabilities</button>
     </div>
     <!-- <div class="d-flex justify-content-between">
         <div id="Bot" class="edit-profile">

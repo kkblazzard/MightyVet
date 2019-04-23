@@ -1,8 +1,30 @@
-.hours{
-    width: 40%;
-    display: inline-block;
-    vertical-align: top;
+/* * {
+    box-sizing: border-box;
+} */
+.available{
+    background-color: lightblue;
 }
-.hours a{
-    display: block;
+.notMonth .date-text{
+    opacity: .7;
+}
+.month-grid .day-names {
+    border-left: solid grey 2px;
+}
+.month-grid .week {
+    border-bottom: solid grey 2px;
+    border-left: solid grey 2px;
+}
+.month-grid .day-name {
+    border: solid grey 2px;
+    border-left: none;
+}
+
+.month-grid .week-date {
+    cursor: pointer;
+    padding: 20px;
+    border-right: solid grey 2px;
+}
+
+.today .date-text{
+    color: red;
 }

@@ -2,9 +2,10 @@
     box-sizing: border-box;
 } */
 .available{
+    cursor: pointer;
     background-color: lightblue;
 }
-.notMonth date-text{
+.notMonth .date-text{
     opacity: .7;
 }
 .month-grid .day-names {
@@ -24,6 +25,6 @@
     border-right: solid grey 2px;
 }
 
-.today {
-    background-color: green !important;
+.today .date-text{
+    color: red;
 }

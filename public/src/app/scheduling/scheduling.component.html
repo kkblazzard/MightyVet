@@ -1,5 +1,22 @@
+<ng-template #showAvailabilities>
+  <div class="modal-header">
+    <h2 class="modal-title">{{mentor.user.firstName}}'s availabilities on {{date.format('dddd, D MMMM, YYYY')}} </h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form>
+    <div class="modal-body container">
+      <div *ngFor="let daily_meeting of daily_meetings">{{daily_meeting.datetime}}</div>
+    </div>
+    <!-- arrange this to be in bottom right with absolute -->
+    <div class="modal-footer">
+        <button class="btn btn-danger" (click)="modal.dismiss('click')">Exit</button>
+    </div>
+  </form>  
+</ng-template>
 <div class="container">
-  <h1>{{mentor.user.firstName}}'s' Availabilities</h1>
+  <h1>{{mentor.user.firstName}}'s Availabilities</h1>
   <br>
   <div class="calendar">
     <div class="calendar-navs">
@@ -23,6 +40,7 @@
             </div>
             <div class="week-date col text-center"
                 *ngIf="isSelectedMonth(day.mDate)"
+                (click) = "open(day.mDate)"
                 [ngClass]="{ 'today': day.today, 'available':day.available }">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>

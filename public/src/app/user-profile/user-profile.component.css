@@ -35,12 +35,6 @@
 }
 
 
-/* All */
-*{
-    font-family: Montserrat;
-    box-sizing: border-box;
-}
-
 
 /* General Layout */
 .top{
@@ -56,6 +50,7 @@
 .user-info{
     background-color: #A8C9EF;
     border-radius: 5px;
+    width: 30%;
 }
 .user-info__greeting{
     color: #395371;
