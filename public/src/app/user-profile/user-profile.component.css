@@ -37,17 +37,17 @@
 
 
 /* General Layout */
-.top{
+/* .top{
     border-bottom: 3px solid rgba(143, 194, 255, 0.5);
     padding-bottom: 3rem;
 }
 .bottom{
     padding-top: 3rem;
-}
+} */
 
 
 /* User Info section */
-.user-info{
+/* .user-info{
     background-color: #A8C9EF;
     border-radius: 5px;
     width: 30%;
@@ -64,10 +64,10 @@
 .user-info__edit-section{
     text-align: right;
     margin: 0;
-}
+} */
 
 /* removes default button background and outline when clicked on */
-.user-info__edit-button{
+/* .user-info__edit-button{
     font-size: 100%;
     font-family: inherit;
     background-color: #A8C9EF;
@@ -95,7 +95,7 @@
 .user-info__button button{
     text-align: right;
     background-color: #A8C9EF;
-}
+} */
 
 
 /* user messages section */

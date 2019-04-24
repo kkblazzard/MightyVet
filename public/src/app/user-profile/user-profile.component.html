@@ -1,3 +1,4 @@
+<!-- Edit User Info modal -->
 <ng-template #edit>
     <div class="modal-header">
         <h2 class="modal-title">Edit Your Profile Information</h2>
@@ -84,6 +85,9 @@
         </div>
     </form>
 </ng-template>
+
+
+<!-- Edit User Photo modal -->
 <ng-template #picture>
     <div class="modal-header">
         <h2 class="modal-title">Edit Your Profile Image</h2>
@@ -93,7 +97,6 @@
     </div>
     <form>
         <div class="modal-body container">
-            <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
             <div class="holder-image">
                 <img *ngIf="!image" class="profile-picture" [src]="userInfo.picture" alt="Profile Picture">
                 <img *ngIf="image" class="profile-picture" [src]="image" alt="Profile Picture">
@@ -108,19 +111,31 @@
                 <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
             </div>
         </div>
-        <!-- arrange this to be in bottom right with absolute -->
         <div class="modal-footer">
-            <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
             <button class="btn btn-primary" (click)="editting()">Edit</button>
         </div>
     </form>
 </ng-template>
 
+<!-- Profile page  -->
 <div class="container">
-    <h1>Profile Page</h1>
-    <div class="d-flex justify-content-between top">
+    <h1>Welcome, {{userInfo.firstName}} {{userInfo.lastName}}!</h1>
+    <div class="d-flex justify-content-between">
+        <div id="user-profile-card" class="card w-25">
+            <img class="profile-picture" (click)="open('picture')" [src]="userInfo.picture" alt="Profile Picture">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+
+
+
+
+
+<!-- 
         <div class="user-info">
-            <h1 *ngIf=userInfo class="user-info__greeting">Hi {{userInfo.firstName}}!</h1>
             <div class="user-info__image">
                 <div class="holder-image point" (click)="open('picture')">
                     <img class="profile-picture" [src]="userInfo.picture" alt="Profile Picture">
@@ -133,9 +148,9 @@
                 <h6 class="user-info__events-title">This Week</h6>
             </div>
             <div class="user-info__button clear-button__div">
-                <button>View All --></button>
+                <button>View All</button>
             </div>
-        </div>
+        </div> -->
         <div class="messages">
             <div class="row inbox">
                 <h1 class="inbox-header">Your Mentors</h1>
