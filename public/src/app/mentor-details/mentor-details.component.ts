@@ -38,8 +38,12 @@ export class MentorDetailsComponent implements OnInit {
   getMentor() {
     let obs = this._mentorsService.getMentor(this.id);
     obs.subscribe((data) => {
-      console.log(data);
       this.mentor = data;
+      if(this._authenticationsService.isLoggedIn()){
+        if (this.mentor.user._id === this._authenticationsService.getUserDetails()._id){
+          this._router.navigateByUrl('/user');
+        }
+      }
       if (data['mentees']){
         this.checkMentee();
       } 
@@ -66,19 +70,26 @@ export class MentorDetailsComponent implements OnInit {
     if (!this._authenticationsService.isLoggedIn()) {
       this._eventsService.sendLogin();
     } else {
-      let obs = this._menteesService.addMentee({ user: this._authenticationsService.getUserDetails()._id, mentor: this.id });
-      obs.subscribe(data => {
-        console.log('successfully created new mentee', data);
-        let obs2 = this._mentorsService.signUp(this.id, data);
-        obs2.subscribe(data2 => {
-          console.log('successfully added new mentee to mentor', data2);
-          this.application = true;
-        },
-          err => {
-            console.log('something went wrong:', err);
-          });
-      }), err => {
-        console.log('something went wrong:', err);
+      if (this.mentor.user._id === this._authenticationsService.getUserDetails()._id){
+        this._router.navigateByUrl('/user');
+        return;
+      }
+      this.checkMentee();
+      if(!this.application && !this.isMentee){
+        let obs = this._menteesService.addMentee({ user: this._authenticationsService.getUserDetails()._id, mentor: this.id });
+        obs.subscribe(data => {
+          console.log('successfully created new mentee', data);
+          let obs2 = this._mentorsService.signUp(this.id, data);
+          obs2.subscribe(data2 => {
+            console.log('successfully added new mentee to mentor', data2);
+            this.application = true;
+          },
+            err => {
+              console.log('something went wrong:', err);
+            });
+        }), err => {
+          console.log('something went wrong:', err);
+        }
       }
     }
   }
