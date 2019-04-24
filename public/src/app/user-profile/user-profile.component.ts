@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FileUploadService } from '../http_services/file-upload.service';
 import { AuthenticationService } from '../http_services/authentication.service';
+import { UsersService } from '../http_services/users.service'
 import { Router } from '@angular/router';
 import { MenteesService } from '../http_services/mentees.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +19,7 @@ class ImageSnippet {
 export class UserProfileComponent implements OnInit {
     @ViewChild('edit') edit: ElementRef;
     @ViewChild('picture') picture: ElementRef;
+    img_error: string;
     image: string;
     editUser: any;
     newsletter: boolean;
@@ -29,6 +31,7 @@ export class UserProfileComponent implements OnInit {
     continuingEducationContent = "PROGRESS";
     fileToUpload: ImageSnippet;
     constructor(
+        private _usersService: UsersService,
         private _authenticationsService: AuthenticationService,
         private _filesUploadService: FileUploadService,
         private _menteesService: MenteesService,
@@ -116,6 +119,18 @@ export class UserProfileComponent implements OnInit {
                 for(let mentee of mentees){
                     mentee.approval ? this.mentees.push(mentee) : this.mentee_applications.push(mentee);
                 }
+            }
+        })
+    }
+    editImage(){
+        this.img_error = null;
+        let obs = this._usersService.updateImage(this.userInfo._id, this.image);
+        obs.subscribe(data => {
+            if (data['errors']){
+                this.img_error = data['errors'].picture.message;
+            }
+            else{
+                this.modal.dismiss('success');
             }
         })
     }

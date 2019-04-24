@@ -25,4 +25,7 @@ export class UsersService {
   deleteUser(id) {
     return this._http.delete('/api/users/' + id);
   }
+  updateImage(id, img_url){
+    return this._http.put('/api/users/img/'+id, {img: img_url});
+  }
 }
