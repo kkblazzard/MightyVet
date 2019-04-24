@@ -105,6 +105,7 @@
                 <label *ngIf="!image" for="file">Choose new picture</label>
                 <input #imageInput class="form-control" id="file" type="file" accept="image/*"
                     (change)="processFile(imageInput)">
+                <div *ngIf="img_error" class="text-danger"><small>{{img_error}}</small></div>
             </div>
             <div *ngIf="fileToUpload" class="img-preview-container">
                 <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>

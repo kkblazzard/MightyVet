@@ -123,6 +123,10 @@ module.exports={
           .then(one=>console.log(one) || res.json(one))
           .catch(err=>console.log(err) || res.json(err))
       }
-    }   
+    },
+    updateImage: (req, res) => Users
+    .findByIdAndUpdate(req.params.id,{$set:{picture: req.body.img}},{new: true, runValidators: true})
+    .then(updated =>console.log("updated",updated)||res.json(updated))
+    .catch(err=>console.log(err) || res.json(err)),
 }
 // 
