@@ -49,7 +49,8 @@ var UserSchema = new mongoose.Schema({
         },
 
         picture: {type: String,
-                default: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"
+                default: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png",
+                required: [true, "Please upload an image... It may take a bit of time to load."]
         },
 
         accreditations: [{type : mongoose.Schema.ObjectId, 
