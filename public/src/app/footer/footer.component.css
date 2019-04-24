@@ -1,10 +1,9 @@
 .bg-black {
     background-color: #212121;
 }
-
-@media only screen and (max-width:991px){
-    footer{
-        text-align: center;
+@media only screen and (min-width:992px){
+    .fixed-lg-width{
+        width: 250px;
     }
 }
 @media only screen and (max-width:576px){
