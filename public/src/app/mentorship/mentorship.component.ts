@@ -88,7 +88,6 @@ export class MentorshipComponent implements OnInit {
     isApplicationSubmitted(){
         let obs = this._mentorsService.getApprovals();
         obs.subscribe(data => {
-            console.log(data);
             for(let mentor in data){
                 if(data[mentor].user._id === this._authenticationsService.getUserDetails()._id){
                     this.application_submitted = true;
@@ -101,9 +100,14 @@ export class MentorshipComponent implements OnInit {
     }
     open() {
         if (this.isLoggedIn()){
-            this.getUserInfo()
-            this.modal = this._modalService.open(this.becomeAMentor);
-            this.modal.result.then(()=>{}, () => this.closedModal())
+            this.getUserInfo();
+            if (!this.mentors.find(x => x.user._id === this._authenticationsService.getUserDetails()._id)){
+                this.modal = this._modalService.open(this.becomeAMentor);
+                this.modal.result.then(()=>{}, () => this.closedModal())
+            }
+            else{
+                this.getMentors();
+            }
         }
         else{
             this._eventsService.sendLogin();
@@ -128,6 +132,7 @@ export class MentorshipComponent implements OnInit {
     getMentors(){
         let obs = this._mentorsService.getMentors();
         obs.subscribe(data => {
+            console.log(data);
             this.mentors = data;
             if (this._authenticationsService.isLoggedIn()){
                 if (this.mentors.find(x => x.user._id === this._authenticationsService.getUserDetails()._id)){
@@ -140,7 +145,7 @@ export class MentorshipComponent implements OnInit {
     addMentor(){
         this.user_errors = null;
         this.mentor_errors = null;
-        let obs = this._usersService.userUpdate(this.newMentor.user, this.userInfo)
+        let obs = this._usersService.userUpdate(this.userInfo._id, this.userInfo)
         obs.subscribe(data =>{
             if (data['errors']){
                 this.user_errors = data['errors'];
