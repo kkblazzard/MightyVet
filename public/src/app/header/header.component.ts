@@ -106,9 +106,9 @@ export class HeaderComponent implements OnInit {
     this.login_errors = null;
     const obs = this._authenticationsService.login(this.loginInfo);
     obs.subscribe( data => {
-      if (data['errors']) {
-        console.log(data);
-        this.login_errors = data['errors'];
+      console.log(data);
+      if (data['message']) {
+        this.login_errors = "We could not log you in. Please double-check your login information.";
       } else {
         this.modal.close();
         this.closedModal();
