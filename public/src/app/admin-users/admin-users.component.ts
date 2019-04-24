@@ -23,52 +23,107 @@ export class AdminUsersComponent implements OnInit {
 
   getUsers(){
     let obs = this._usersService.excelUsers();
-    obs.subscribe(data => this.users=data)
+    obs.subscribe(data => {
+      this.users=data;
+      this.users.map(x => {
+        if (x.mentors.length){
+          x.mentors = x.mentors.filter(y => {
+            return y.approval;
+          })
+          x.mentors = x.mentors.map(y => {
+            return `${y.mentor.user.firstName} ${y.mentor.user.lastName}`;
+          });
+          x.mentors = x.mentors.join(", ");
+        }
+        else{
+          x.mentors = "";
+        }
+        x.list_of_mentors = x.mentors;
+        delete x.mentors;
+        if (x.accreditations.length){
+          x.accreditations = x.accreditations.map(y => {
+            var title = y.webinar.title;
+            if(y.credit_received){
+              title += ': Completed'
+            }
+            else{
+              title += ': Not Completed'
+            }
+            return title;
+          });
+          x.accreditations = x.accreditations.join(", ");
+        }
+        else{
+          x.accreditations = "";
+        }
+        x.list_of_webinars = x.accreditations;
+        delete x.accreditations;
+        if (x.mentor_id){
+          if (x.mentor_id.approval){
+            x.mentor = "Yes";
+          }
+          else{
+            x.mentor = "Waiting for approval"
+          }
+        }
+        else{
+          x.mentor = "No";
+        }
+        delete x.mentor_id;
+        if(x.createdAt){
+          x.createdAt = x.createdAt.slice(0, 10);
+          x.created_on = x.createdAt;
+          delete x.createdAt;
+        }
+        return x;
+      })
+      console.log(this.users);
+    })
   }
 
   exportAsXLSX():void {
-    var excelUsers = this.users;
-    excelUsers.map(x => {
-      if (x.mentors.length){
-        x.mentors.filter(y => {
-          return y.approval;
-        })
-        x.mentors.map(y => {
-          return `${y.user.firstName} ${y.user.firstName}`;
-        });
-        x.mentors.join(", ");
-      }
-      else{
-        x.mentors = ""
-      }
-      x.list_of_mentors = x.mentors;
-      delete x.mentors;
-      if (x.accreditations.length){
-        x.accreditations.map(y => {
-          return y.webinar.title;
-        });
-        x.accreditations.join(", ");
-      }
-      else{
-        x.webinars = "";
-      }
-      x.list_of_webinars = x.accreditations;
-      delete x.accreditations;
-      if (x.mentor_id){
-        if (x.mentor_id.approval){
-          x.mentor = "Yes";
-        }
-        else{
-          x.mentor = "Waiting for approval"
-        }
-      }
-      else{
-        x.mentor = "No";
-      }
-      delete x.mentor_id;
-      return x;
-    })
-    console.log(excelUsers);
-    this._excelsService.exportAsExcelFile(excelUsers, 'users');
+    // var excelUsers = this.users;
+    // excelUsers.map(x => {
+    //   if (x.mentors.length){
+    //     x.mentors.filter(y => {
+    //       return y.approval;
+    //     })
+    //     x.mentors.map(y => {
+    //       return `${y.user.firstName} ${y.user.firstName}`;
+    //     });
+    //     x.mentors.join(", ");
+    //   }
+    //   else{
+    //     x.mentors = ""
+    //   }
+    //   x.list_of_mentors = x.mentors;
+    //   delete x.mentors;
+    //   if (x.accreditations.length){
+    //     x.accreditations.map(y => {
+    //       return y.webinar.title;
+    //     });
+    //     x.accreditations.join(", ");
+    //   }
+    //   else{
+    //     x.accreditations = "";
+    //   }
+    //   x.list_of_webinars = x.accreditations;
+    //   delete x.accreditations;
+    //   if (x.mentor_id){
+    //     if (x.mentor_id.approval){
+    //       x.mentor = "Yes";
+    //     }
+    //     else{
+    //       x.mentor = "Waiting for approval"
+    //     }
+    //   }
+    //   else{
+    //     x.mentor = "No";
+    //   }
+    //   delete x.mentor_id;
+    //   return x;
+    // })
+    // console.log(excelUsers);
+    this._excelsService.exportAsExcelFile(this.users, 'users');
   }
 }

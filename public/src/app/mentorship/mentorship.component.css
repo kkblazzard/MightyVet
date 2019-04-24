@@ -1,3 +1,17 @@
+.jumbotron {
+    width: 100%;
+    min-height: 500px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/kayla-farmer-1433741-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  #mentorship-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
+  }
 .mentor{
     background: rgba(168, 201, 239, 0.62);
 }

@@ -113,7 +113,7 @@
       <!-- Removing stage 2 for MVP 1 -->
       <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button> -->
       <!-- <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
-      <button class="btn btn-outline-success" (click)="addNewWebinar()">Submit</button>
+      <button class="btn btn-outline-primary" (click)="addNewWebinar()">SUBMIT</button>
       <!-- <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
@@ -202,7 +202,7 @@
 <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
   <h4>All Webinars</h4>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-info" (click)="openModal()">ADD A WEBINAR</button>
+  <button type="button" class="btn btn-primary" (click)="openModal()">ADD A WEBINAR</button>
 </div>
 <table class="table">
   <thead>

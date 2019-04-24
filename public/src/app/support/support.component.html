@@ -8,12 +8,13 @@
     <p>Donation Sucessful</p>
   </div>
 </ng-template>
-<div class="container d-flex justify-content-center pt-5">
-  <i class="fa fa-paw fa-5x mr-3 text-info"></i>
-  <div class="text-info">
-    <h1>Coming Soon</h1>
-    <h3>This page is under construction</h3>
-    <button class="btn btn-outline-info" [routerLink]="['/']">Return to Home</button>
+<section id="section-support" class="container">
+  <div class="jumbotron d-flex justify-content-end">
+    <div id="support-text" class="mr-3 p-5 text-light">
+        <h1 class="text-light">Ways to Support MightyVet</h1>
+        <p>As a non-profit, we rely partially on donations to keep the lights on. But there many ways you can support MightyVet’s mission. We are always grateful to receive alternate methods of support - things like time, services, or anything else. Please contact us at <a href="mailto:info@mightyvet.com">info@mightyvet.com</a> to let us know you’d like to help.</p>
+        <p>If you’d like to make a monetary donation now, use the button below!</p>
+        <button class="btn btn-primary" (click)="open('donate')">DONATE</button>
+    </div>
   </div>
-  <button class="btn btn-sm text-primary" (click)="open('donate')">DONATE</button>
-</div>
+</section>

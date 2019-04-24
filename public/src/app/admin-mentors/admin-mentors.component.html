@@ -61,7 +61,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let mentor of mentors">
-      <td>{{mentor.user.firstName}} {{mentor.user.lastName}}</td>
+      <td><a [routerLink]="['/mentorship', mentor._id]">{{mentor.user.firstName}} {{mentor.user.lastName}}</a></td>
       <td>{{mentor.mentees.length}}</td>
       <td><button class="btn btn-danger" (click)="declineMentor(mentor._id)">Delete</button></td>
     </tr>
