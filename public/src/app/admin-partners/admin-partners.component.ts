@@ -31,6 +31,15 @@ export class AdminPartnersComponent implements OnInit {
     private _router: Router
     ) { }
 
+  private onSuccess() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'ok';
+  }
+  private onError() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'fail';
+    this.fileToUpload.src = '';
+  }
   ngOnInit() {
     this.getPartners();
   }
@@ -75,20 +84,20 @@ export class AdminPartnersComponent implements OnInit {
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-
     reader.addEventListener('load', (event: any) => {
-
       this.fileToUpload = new ImageSnippet(event.target.result, file);
-      let obs = this._filesUploadService.partnerUploadImage(this.fileToUpload.file)
+      const obs = this._filesUploadService.partnerUploadImage(this.fileToUpload.file);
       obs.subscribe(
         (data) => {
+          this.onSuccess();
           this.newPartner.partner.img = data['imageUrl'];
         },
         (err) => {
-        
+          this.onError();
+          console.log(err);
         })
     });
-
+      
     reader.readAsDataURL(file);
   }
 }
