@@ -8,12 +8,8 @@ import { Input, Component, OnInit } from '@angular/core';
 })
 export class SpeakerDetailsComponent implements OnInit {
   @Input() model: any;
-  display: Boolean = false;
   constructor() { }
 
   ngOnInit() {
-  }
-  displayChange(){
-    this.display = !this.display;
   }
 }

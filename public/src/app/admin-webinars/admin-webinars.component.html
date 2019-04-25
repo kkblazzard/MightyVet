@@ -43,7 +43,7 @@
         <div *ngIf="fileToUpload2.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
         <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
-        <img *ngIf="fileToUpload2.status === 'ok'" [src]="newWebinar.img" alt="Image Preview">
+        <img *ngIf="fileToUpload2.status === 'ok'" class="img-preview" [src]="newWebinar.img" alt="Image Preview">
 
       </div>
       <div class="form-group">
@@ -103,7 +103,7 @@
           <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
           <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
-          <img *ngIf="fileToUpload.status === 'ok'" [src]="newSpeaker.img" alt="Image Preview">
+          <img *ngIf="fileToUpload.status === 'ok'" class="img-preview" [src]="newSpeaker.img" alt="Image Preview">
         </div>
         <button class="btn btn-sm btn-outline-secondary" (click)="addSpeaker()">ADD SPEAKER</button>
       </form>
@@ -237,7 +237,23 @@
   <tbody>
     <tr *ngFor="let speaker of speakers">
       <td>
-        <app-speaker-details [model]="speaker"></app-speaker-details>
+        <ng-template #popContent>
+            <div class="container">
+              <div class="img-ctn">
+                <img class="img-pop" [src]="speaker.img" [alt]="speaker.title+' '+speaker.firstName+' '+speaker.lastName">
+              </div>
+              <h5>About the Speaker</h5>
+              <p>{{speaker.description}}</p>
+            </div>
+          </ng-template>
+          <ng-template #popTitle>
+            <div class="container">
+              {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}
+            </div>
+          </ng-template>
+          <h6 triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="right">
+            {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}
+          </h6>
       </td>
       <td>Buttons will go here.</td>
     </tr>

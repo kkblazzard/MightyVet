@@ -105,7 +105,7 @@ export class AuthenticationService {
   }
   public logout(): void {
     this.token = '';
-    this._router.navigateByUrl('/');
     window.localStorage.removeItem('mean-token');
+    window.location.reload();
   }
 }

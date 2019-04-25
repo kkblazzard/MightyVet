@@ -20,10 +20,16 @@ select{
 .question label{
     display: inline-block;
 }
-img{
-    height: 100px;
-}
 .img-preview{
-    height: 100px;
-    width: 100px;
+    max-height: 100px;
+}
+h6{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.img-pop{
+    max-width: 200px;
+}
+td h6{
+    display: inline;
 }

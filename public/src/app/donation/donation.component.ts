@@ -81,9 +81,12 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getUserInfo(){
     if (this._authenticationsService.isLoggedIn()){
-      this.extraData.email = this._authenticationsService.getUserDetails().email;
-      this.extraData.name = `${this._authenticationsService.getUserDetails().firstName} ${this._authenticationsService.getUserDetails().lastName}`;
-      this.extraData.address_state = this._authenticationsService.getUserDetails().state;
+      let obs = this._authenticationsService.profile();
+      obs.subscribe(data =>{
+        this.extraData.email = data['email'];
+        this.extraData.name = `${data['firstName']} ${data['lastName']}`;
+        this.extraData.address_state = data['state']
+      })
     }
   }
   close(){
