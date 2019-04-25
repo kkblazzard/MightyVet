@@ -33,9 +33,9 @@
               <span class="badge badge-info mr-1" *ngIf="mentor.support.technical_advice"> Technical Advice </span>
             </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Joined: </strong></span>
-              2.13.2020</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen: </strong></span>
-              2.13.2020</li>
+              {{mentor.user.createdAt | date:'M.dd.yyyy'}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Mentor since: </strong></span>
+              {{mentor.updatedAt | date:'M.dd.yyyy'}}</li>
           </ul>
         </div>
         <div class="col-sm-9" contenteditable="false">

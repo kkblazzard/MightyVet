@@ -55,7 +55,7 @@
 <section id="course-cards" class="container">
   <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
     <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4 cardheight">  <!-- search pipe to limit number of entries -->
-      <img [src]="course.img" class="card-img" alt="Course Image">
+      <img [src]="course.img" class="card-img mt-2" alt="Course Image">
       <div class="card-body">
         <h5 class="card-title">{{course.title | slice: 40}}</h5>
         <p class="card-text">{{course.description | slice: 100}}</p>

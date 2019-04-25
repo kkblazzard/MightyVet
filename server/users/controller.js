@@ -61,12 +61,7 @@ module.exports={
     .select('-__v')
     .select('-updatedAt')
     .select('-picture')
-    .populate('mentors')
-    .populate('mentors.mentor')
-    .populate('mentors.mentor.user')
-    .populate('accreditations')
-    .populate('accreditations.webinar')
-    .populate('mentor_id')
+    .populate([{path: 'mentors', populate: {path: 'mentor', populate: {path: 'user'}}}, {path: 'accreditations', populate: {path: 'webinar'}}, {path: 'mentor_id'}])
     .then(all=>console.log(all) || res.json(all))
     .catch(err=>console.log(err)|| res.json(err)),
     userRemove: (req, res) => Users
@@ -82,7 +77,7 @@ module.exports={
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
     userUpdate: (req, res) => Users
-        .findByIdAndUpdate(req.params.id,req.body,{new: true})
+        .findByIdAndUpdate(req.params.id,req.body,{new: true, runValidators: true, context: 'query'})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
     userLogin: (req, res) => {

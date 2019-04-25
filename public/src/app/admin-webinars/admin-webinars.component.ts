@@ -78,6 +78,10 @@ export class AdminWebinarsComponent implements OnInit {
   addNewWebinar() {
     this.errors = null;
     var date = this.newWebinar.datetime;
+    if(this.newWebinar.speaker === 'new' || this.newWebinar.speaker === ''){
+      var temp = this.newWebinar.speaker;
+      this.newWebinar.speaker = null;
+    }
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
       this.newWebinar.datetime = date;
@@ -87,6 +91,7 @@ export class AdminWebinarsComponent implements OnInit {
         this.modal.dismiss("form completed")
       }
       else{
+        this.newWebinar.speaker = temp;
         console.log(data['errors']);
         this.errors = data['errors'];
       }

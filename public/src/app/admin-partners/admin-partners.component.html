@@ -15,7 +15,7 @@
           <div *ngIf="name_error" class="text-danger"><small>{{name_error}}</small></div>
       </div>
       <div class="form-group">
-        <label *ngIf="!newPartner.partner.img" for="file">Choose picture</label>
+        <label for="file">Choose picture</label>
         <input #imageInput class="form-control" id="file" type="file" accept="image/*"
           (change)="processFile(imageInput)">
       <div *ngIf="img_error" class="text-danger"><small>{{img_error}}</small></div>
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline-primary" (click)="addPartner()">ADD NEW</button>
+      <button class="btn btn-outline-primary" (click)="addPartner()">SUBMIT</button>
       <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </form>
@@ -53,7 +53,7 @@
 <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
   <h4>All Partners</h4>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-info" (click)="openModal()">ADD A PARTNER</button>
+  <button type="button" class="btn btn-primary" (click)="openModal()">ADD A PARTNER</button>
 </div>
 <table class="table">
   <thead>

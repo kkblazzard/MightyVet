@@ -11,31 +11,36 @@
                 <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
                         {{newMenteeErrors.errors.firstName.message}}
                         </p> -->
-                <h6>Double check your information! Changing this information will also change your user information.</h6>
+                <h6>Double check your information! Changing this information will also change your user information.
+                </h6>
                 <div class="row">
                     <div class="form-group col">
                         <input type="text" class="form-control" placeholder="First Name" name="userInfo.firstName"
                             [(ngModel)]="userInfo.firstName">
-                        <div *ngIf="user_errors?.firstName" class="text-danger"><small>{{user_errors.firstName.message}}</small></div>
+                        <div *ngIf="user_errors?.firstName" class="text-danger">
+                            <small>{{user_errors.firstName.message}}</small></div>
                     </div>
                     <div class="form-group col">
                         <input type="text" class="form-control" placeholder="Last Name" name="userInfo.lastName"
                             [(ngModel)]="userInfo.lastName">
-                        <div *ngIf="user_errors?.lastName" class="text-danger"><small>{{user_errors.lastName.message}}</small></div>
+                        <div *ngIf="user_errors?.lastName" class="text-danger">
+                            <small>{{user_errors.lastName.message}}</small></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <input type="email" class="form-control" placeholder="Preferred Email" name="userInfo.email"
                             [(ngModel)]="userInfo.email">
-                        <div *ngIf="user_errors?.email" class="text-danger"><small>{{user_errors.email.message}}</small></div>
+                        <div *ngIf="user_errors?.email" class="text-danger"><small>{{user_errors.email.message}}</small>
+                        </div>
                     </div>
                     <div class="form-group col">
                         <select class="form-control" placeholder="State" name="userInfo.state"
                             [(ngModel)]="userInfo.state">
                             <option *ngFor="let state of states">{{state}}</option>
                         </select>
-                        <div *ngIf="user_errors?.state" class="text-danger"><small>{{user_errors.state.message}}</small></div>
+                        <div *ngIf="user_errors?.state" class="text-danger"><small>{{user_errors.state.message}}</small>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -49,12 +54,14 @@
                             <option>Student</option>
                             <option>Other</option>
                         </select>
-                        <div *ngIf="user_errors?.title" class="text-danger"><small>{{user_errors.title.message}}</small></div>
+                        <div *ngIf="user_errors?.title" class="text-danger"><small>{{user_errors.title.message}}</small>
+                        </div>
                     </div>
                     <div class="form-group col">
                         <input type="text" class="form-control" placeholder="Organization(s)" name="userInfo.org"
                             [(ngModel)]="userInfo.org">
-                        <div *ngIf="user_errors?.firstName" class="text-danger"><small>{{user_errors.org.message}}</small></div>
+                        <div *ngIf="user_errors?.firstName" class="text-danger">
+                            <small>{{user_errors.org.message}}</small></div>
                     </div>
                 </div>
                 <div>
@@ -62,7 +69,8 @@
                         <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
                         <textarea class="form-control" type="text" name="newMentor.resume"
                             [(ngModel)]="newMentor.resume"></textarea>
-                        <div *ngIf="mentor_errors?.resume" class="text-danger"><small>{{mentor_errors.resume.message}}</small></div>
+                        <div *ngIf="mentor_errors?.resume" class="text-danger">
+                            <small>{{mentor_errors.resume.message}}</small></div>
                     </div>
                 </div>
                 <div>
@@ -80,7 +88,8 @@
                         <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
                             name="technicalAdviceBox">
                         Technical or Surgical
-                        <div *ngIf="mentor_errors?.support" class="text-danger"><small>{{mentor_errors.support.message}}</small></div>
+                        <div *ngIf="mentor_errors?.support" class="text-danger">
+                            <small>{{mentor_errors.support.message}}</small></div>
                     </div>
                 </div>
             </div>
@@ -101,19 +110,27 @@
         </div>
     </div>
 </ng-template>
-<section id="section-schedule" class="py-4">
-    <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-        <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
-        <div class="main-info mb-3 d-flex align-items-end flex-column">
-            <h2>MightyVet is looking for some mighty mentors.</h2>
+<section id="section-mentorship" class="container">
+    <div class="jumbotron d-flex justify-content-end">
+        <div id="mentorship-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
+            <h1 class="text-light">MightyVet is looking for some mighty mentors</h1>
             <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders
                 from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to
                 evaluate your career options. You can schedule office hours with one of our featured members.</p>
-            <button *ngIf="!isMentor" class="btn btn-outline-info mt-auto" (click)="open(becomeAMentor)">Apply to Become a
+            <button *ngIf="!isMentor" class="btn btn-primary mt-auto" (click)="open(becomeAMentor)">Apply to Become a
                 Mentor</button>
         </div>
     </div>
 </section>
+<!-- <section id="section-schedule" class="py-4">
+    <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
+        <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
+        <div class="main-info mb-3 d-flex align-items-end flex-column">
+            <h2></h2>
+            <
+        </div>
+    </div>
+</section> -->
 
 <!-- list of mentor cards -->
 <section class="bg-light py-5 m-0">
@@ -129,28 +146,39 @@
         </div>
         <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
             <h6>Refine results by :&nbsp;</h6>
-            <div class="checkboxes">
-                <input class="ml-1 mr-1" type="checkbox" name="mental_health" [(ngModel)]="searchBar.mental_health">
-                <label>Mental Health</label>
-                <input class="ml-1 mr-1" type="checkbox" name="financial_advice"
-                    [(ngModel)]="searchBar.financial_advice">
-                <label>Financial Advice</label>
-                <input class="ml-1 mr-1" type="checkbox" name="career_advice" [(ngModel)]="searchBar.career_advice">
-                <label>Career Advice</label>
-                <input class="ml-1 mr-1" type="checkbox" name="technical_advice"
-                    [(ngModel)]="searchBar.technical_advice">
-                <label>Technical Advice</label>
+            <div id="checkboxes">
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
+                        [(ngModel)]="searchBar.mental_health">
+                    <label class="custom-control-label" for="checkbox1">Mental Health</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
+                        [(ngModel)]="searchBar.financial_advice">
+                    <label class="custom-control-label" for="checkbox2">Financial Advice</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
+                        [(ngModel)]="searchBar.career_advice">
+                    <label class="custom-control-label" for="checkbox3">Career Advice</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline mr-0">
+                    <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+                        [(ngModel)]="searchBar.technical_advice">
+                    <label class="custom-control-label" for="checkbox4">Technical Advice</label>
+                </div>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
             <!-- mentor card -->
-            <a class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar" [routerLink]="['/mentorship', mentor._id]">
+            <a class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar"
+                [routerLink]="['/mentorship', mentor._id]">
                 <!-- search pipe to limit the amount of displayed data-->
                 <div class="card-body d-flex justify-content-start">
                     <div id="mentor-img" class="p-0 mr-3">
-                        <img [src]="mentor.user.picture" [alt]="mentor.user.firstName +'s image'">
+                        <img [src]="mentor.user.picture" alt="mentor image">
                     </div>
                     <div class="mentor-header align-self-center">
                         <h4>{{mentor.user.firstName}} {{mentor.user.lastName}}</h4>
@@ -166,5 +194,6 @@
 </section>
 
 <div class="container text-center">
-    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
+    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i
+            class="fa fa-chevron-down"></i></button>
 </div>
