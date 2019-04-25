@@ -62,82 +62,79 @@ export class KeysPipe implements PipeTransform {
 export class MentorSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
     if (value) {
-      if (search.bar) {
-        var strings = search.bar.toLowerCase().split(' ');
-        value = value.sort((x, y) => {
-          var count_x = 0;
-          var count_y = 0;
-          for (let j = 0; j < strings.length; j++) {
-            if (x.user.firstName.toLowerCase().includes(strings[j])) {
-              count_x++;
-            }
-            if (x.user.lastName.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (x.user.title.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (x.user.org.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (x.resume.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (y.user.firstName.toLowerCase().includes(strings[j])) {
-              count_y++;
-            }
-            if (y.user.lastName.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
-            if (y.user.title.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
-            if (y.user.org.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
-            if (y.resume.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
+      var strings = search.bar.toLowerCase().split(' ');
+      value = value.sort((x, y) => {
+        var count_x = 0;
+        var count_y = 0;
+        for (let j = 0; j < strings.length; j++) {
+          if (x.user.firstName.toLowerCase().includes(strings[j])) {
+            count_x++;
           }
-          if (search.mental_health){
-            if (x.support.mental_health){
-              count_x += 10;
-            }
-            if (y.support.mental_health){
-              count_y += 10;
-            }
+          if (x.user.lastName.toLowerCase().includes(strings[j])) {
+            count_x++;
           }
-          if (search.financial_advice){
-            if (x.support.financial_advice){
-              count_x += 10;
-            }
-            if (y.support.financial_advice){
-              count_y += 10;
-            }
+          if (x.user.title.toLowerCase().includes(strings[j])) {
+            count_x++;
           }
-          if (search.career_advice){
-            if (x.support.career_advice){
-              count_x += 10;
-            }
-            if (y.support.career_advice){
-              count_y += 10;
-            }
+          if (x.user.org.toLowerCase().includes(strings[j])) {
+            count_x++;
           }
-          if (search.technical_advice){
-            if (x.support.technical_advice){
-              count_x += 10;
-            }
-            if (y.support.technical_advice){
-              count_y += 10;
-            }
+          if (x.resume.toLowerCase().includes(strings[j])) {
+            count_x++;
           }
-          return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
-        });
-      }
+          if (y.user.firstName.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.user.lastName.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.user.title.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.user.org.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.resume.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+        }
+        if (search.mental_health) {
+          if (x.support.mental_health) {
+            count_x += 10;
+          }
+          if (y.support.mental_health) {
+            count_y += 10;
+          }
+        }
+        if (search.financial_advice) {
+          if (x.support.financial_advice) {
+            count_x += 10;
+          }
+          if (y.support.financial_advice) {
+            count_y += 10;
+          }
+        }
+        if (search.career_advice) {
+          if (x.support.career_advice) {
+            count_x += 10;
+          }
+          if (y.support.career_advice) {
+            count_y += 10;
+          }
+        }
+        if (search.technical_advice) {
+          if (x.support.technical_advice) {
+            count_x += 10;
+          }
+          if (y.support.technical_advice) {
+            count_y += 10;
+          }
+        }
+        return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
+      });
       return value.slice(0, search.featuredNumber);
-    } else {
-      return new Array<any>();
     }
+    return [];
   }
 }
 

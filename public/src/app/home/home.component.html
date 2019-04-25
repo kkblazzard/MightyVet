@@ -13,10 +13,10 @@
     <div class="align-self-center text-center">
       <h5>GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</h5>
     </div>
-    <form class="input-group m-0 p-0" (submit)="submitNewsletter()">
+    <form class="input-group m-0 p-0 align-self-center" (submit)="submitNewsletter()">
       <input type="text" class="form-control" id="inlineFormInputName2" name="newsletter" type="text" [(ngModel)]="newsletter" placeholder="Email">
       <div class="input-group-append d-block">
-        <button type="submit" class="btn btn-info">Add me to the list</button>
+        <button type="submit" class="btn btn-primary">Add me to the list</button>
       </div>
     </form>
   </div>
@@ -24,11 +24,11 @@
 
 <!-- Overview -->
 <div id="overview" class="container">
-  <div class="d-flex flex-lg-row flex-sm-column flex-md-column justify-content-between mb-5">
+  <div class="d-flex flex-lg-row justify-content-between mb-5">
     <div class="media d-flex align-items-center mr-5">
       <!-- <img id="courses" class="mr-5" alt="courses" [src]="imgSrc1" [routerLink]="['/courses']" (mouseover)="imgSrc1 = 'assets/img/home_page/green_courses.png'" (mouseout)="imgSrc1 = 'assets/img/home_page/courses.png'"> -->
       <div class="media-body">
-        <h4 class="my-1 mb-3">FREE CE COURSES</h4>
+        <h4 class="my-1 mb-3">Free CE Courses</h4>
         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
         <button class="btn btn-outline-info btn-sm" [routerLink]="['/courses']">Learn More&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
@@ -37,24 +37,24 @@
         <img alt="cat" src='../../assets/img/stock_photos/cat_home.jpg'>
     </div>
   </div>
-  <div class="d-flex flex-lg-row flex-sm-column flex-md-column justify-content-between mb-5">
+  <div class="d-flex flex-lg-row justify-content-between mb-5">
     <div id="courses_img" class="mr-5">
         <img alt="puppy" src='../../assets/img/stock_photos/puppy_home.jpg'>
     </div>
     <div class="media d-flex align-items-center">
       <!-- <img id="mentorship" class="ml-5" alt="mentorship" [routerLink]="['/mentorship']" [src]="imgSrc2" (mouseover)="imgSrc2 = 'assets/img/home_page/green_hands.png'" (mouseout)="imgSrc2 = 'assets/img/home_page/hands.png'"> -->
       <div class="media-body">
-        <h4 class="my-1 mb-3">FREE CE COURSES</h4>
+        <h4 class="my-1 mb-3">Free Mentorship</h4>
         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
         <button class="btn btn-outline-info btn-sm" [routerLink]="['/mentorship']">Learn More&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
     </div>
   </div>
-  <div class="d-flex flex-lg-row flex-sm-column flex-md-column justify-content-between mb-5">
+  <div class="d-flex flex-lg-row justify-content-between mb-5">
     <div class="media d-flex align-items-center mr-5">
       <!-- <img id="resources" class="mr-5" alt="resources" [routerLink]="['/resources']" [src]="imgSrc3" (mouseover)="imgSrc3 = 'assets/img/home_page/green_resources.png'" (mouseout)="imgSrc3 = 'assets/img/home_page/resources.png'"> -->
       <div class="media-body ">
-        <h4 class="my-1 mb-1">FREE CE COURSES</h4>
+        <h4 class="my-1 mb-1">Free Resources</h4>
         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
         <button class="btn btn-outline-info btn-sm" [routerLink]="['/resources']">Learn More&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
