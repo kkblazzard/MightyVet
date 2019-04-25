@@ -22,7 +22,7 @@
     color: #435c8e;
 }
 .navbar .nav-item:hover {
-    background-color: rgb(233, 233, 233);
+    background-color: #5a5a5a;
 }
 .navbar .nav-item a:hover {
     color: #7DA7D9;
@@ -32,6 +32,7 @@
 }
 .navbar .activated a{
     color: white;
+    text-shadow: 0px 0px 2px #5a5a5a;
 }
 .close:focus{
     outline: 0;

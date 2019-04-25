@@ -120,135 +120,107 @@
 
 <!-- Profile page  -->
 <div class="container">
-    <h1>Welcome, {{userInfo.firstName}} {{userInfo.lastName}}!</h1>
-    <div class="d-flex justify-content-between">
-        <div id="user-profile-card" class="card w-25">
-            <img class="profile-picture" (click)="open('picture')" [src]="userInfo.picture" alt="Profile Picture">
+    <div class="d-flex justify-content-between mb-4">
+        <div id="user-profile-left" class="card border-primary">
+            <img class="profile-picture w-100" (click)="open('picture')" [src]="userInfo.picture" alt="Profile Picture">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h3 class="card-title">{{userInfo.firstName}} {{userInfo.lastName}}</h3>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th class="p-0 text-center border-top-0"><i class="fa fa-envelope-o"></i></th>
+                            <td class="p-0 border-top-0">{{userInfo.email}}</td>
+                        </tr>
+                        <tr>
+                            <th class="p-0 text-center border-top-0"><i class="fa fa-map-marker"></i></th>
+                            <td class="p-0 border-top-0">{{userInfo.state}}</td>
+                        </tr>
+                        <tr>
+                            <th class="p-0 text-center border-top-0"><i class="fa fa-address-card-o"></i></th>
+                            <td class="p-0 border-top-0">{{userInfo.title}}</td>
+                        </tr>
+                        <tr>
+                            <th class="p-0 text-center border-top-0"><i class="fa fa-building-o"></i></th>
+                            <td class="p-0 border-top-0">{{userInfo.org}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+                <button (click)="open('edit')" class="btn btn-sm btn-outline-secondary btn-block"><i class="fa fa-pencil mr-2"></i>Edit User Profile</button>
+                <button *ngIf="userInfo?.mentor_id" [routerLink]="['/user/avails']" class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-calendar mr-2"></i>Set Mentoring Availabilities</button>
             </div>
         </div>
-
-
-
-
-
-<!-- 
-        <div class="user-info">
-            <div class="user-info__image">
-                <div class="holder-image point" (click)="open('picture')">
-                    <img class="profile-picture" [src]="userInfo.picture" alt="Profile Picture">
-                </div>
-                <div class="user-info__edit-section">
-                    <button (click)="open('edit')" class="user-info__edit-button">edit profile</button>
-                </div>
-            </div>
-            <div class="user-info__events">
-                <h6 class="user-info__events-title">This Week</h6>
-            </div>
-            <div class="user-info__button clear-button__div">
-                <button>View All</button>
-            </div>
-        </div> -->
-        <div class="messages">
-            <div class="row inbox">
-                <h1 class="inbox-header">Your Mentors</h1>
-                <div class="mentors-img-list">
-                    <div class="d-flex justify-content-between mb-4">
-                        <a *ngFor="let mentor of userInfo?.mentors" class="mentor-img mr-5"
-                            [routerLink]="['/mentorship', mentor.mentor._id]">
-                            <img class="rounded-circle" width="100px" [src]="mentor.mentor.user.picture"
-                                [alt]="mentor.mentor.user.firstName + ' ' + mentor.mentor.user.lastName">
-                            <p>{{mentor.mentor.user.firstName}} {{mentor.mentor.user.lastName}}</p>
-                        </a>
-                        <button *ngIf="userInfo?.mentors?.length === 0" class="btn btn-primary"
-                            [routerLink]="['/mentorship']">Find a Mentor</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row education">
-                <h1 class="education-header">Your Courses</h1>
-                <div class="education-main">
-                    <div class="education-main__nav">
-                        <ul class="nav">
-                            <li class="nav-item rounded-top">
-                                <a class="nav-link" (click)="continuingEducation('progress')">CE Credit Progress</a>
-                            </li>
-                            <li class="nav-item rounded-top">
-                                <a class="nav-link" (click)="continuingEducation('current_courses')">Current Courses</a>
-                            </li>
-                            <li class="nav-item rounded-top">
-                                <a class="nav-link" (click)="continuingEducation('courses_complete')">Courses
-                                    Completed</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="education-main__content align-middle">
-                        <div class="education-main__content-changeable" *ngIf=continuingEducationContent>
-                            <p>{{continuingEducationContent}}</p>
+        <div id="user-profile-right">
+            <div id="your-mentors-card" class="card mb-4 border-success">
+                <div class="card-header bg-success border-success">Your Mentors</div>
+                <div class="card-body">
+                    <div class="mentors-img-list">
+                        <div class="d-flex justify-content-between mb-4">
+                            <a *ngFor="let mentor of userInfo?.mentors" class="mentor-img mr-5" 
+                                [routerLink]="['/mentorship', mentor.mentor._id]">
+                                <img class="rounded-circle" width="100px" [src]="mentor.mentor.user.picture"
+                                    [alt]="mentor.mentor.user.firstName + ' ' + mentor.mentor.user.lastName">
+                                <p>{{mentor.mentor.user.firstName}} {{mentor.mentor.user.lastName}}</p>
+                            </a>
+                            <button class="btn btn-primary" [routerLink]="['/mentorship']">Find a Mentor</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div *ngIf="userInfo?.mentor_id" class="d-flex justify-content-between mt-4">
-        <div class="mentees-img-list text-center">
-            <h1 class="inbox-header">Your Mentees</h1>
-            <div class="d-flex justify-content-between mb-4">
-                <a *ngFor="let mentee of mentees" class="mentee-img mr-5">
-                    <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
-                        [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
-                    <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
-                </a>
-                <h6 *ngIf="mentees?.length === 0">You don't have any mentees yet.</h6>
-            </div>
-        </div>
-        <div class="mentees-img-list text-center">
-            <h1 class="inbox-header">New Mentees</h1>
-            <div class="d-flex justify-content-between mb-4">
-                <a *ngFor="let mentee of mentee_applications" class="mentee-img mr-5">
-                    <img class="rounded-circle" width="100px" [src]="mentee.user.picture"
-                        [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
-                    <p>{{mentee.user.firstName}} {{mentee.user.lastName}}</p>
-                    <button class="btn btn-success" (click)="approveMentee(mentee._id)">Approve</button>
-                    <button class="btn btn-danger" (click)="declineMentee(mentee._id)">Decline</button>
-                </a>
-                <h6 *ngIf="mentee_applications?.length === 0">You don't have any new mentee requests.</h6>
+            <div id="continue-education-card" class="card border-success">
+                <div class="card-header bg-success border-success">Continuing Education</div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CE Credit Progress</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Current Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Courses Completed</a>
+                        </li>
+                    </ul>
+                    <div class="p-5">
+                        <p>{{continuingEducationContent}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="userInfo?.mentor_id" class="text-center">
-        <button class="btn btn-primary" [routerLink]="['/user/avails']">Set Your Mentoring Availabilities</button>
+    <!-- mentor section -->
+    <div *ngIf="userInfo?.mentor_id" class="card border-primary">
+        <div class="d-flex justify-content-between p-4">
+            <div id="mentee-list" class="border-right pr-4 mr-4 w-50">
+                <div class="border-bottom pb-2 mb-4">Your Mentees</div>
+                <div class="d-flex justify-content-start flex-wrap">
+                    <div id="mentee-img" class="card border-info mr-2 mb-2" *ngFor="let mentee of mentees">
+                        <a class="m-2 text-center">
+                            <img class="rounded-circle w-100" [src]="mentee.user.picture"
+                                [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
+                            <span>{{mentee.user.firstName}} {{mentee.user.lastName}}</span>
+                        </a>
+                    </div>
+                    <h6 *ngIf="mentees?.length === 0">You don't have any mentees yet.</h6>
+                </div>
+            </div>
+            <div id="pending-mentees" class="w-50">
+                <div class="border-bottom pb-2 mb-4">New Mentee Requests</div>
+                <div class="d-flex justify-content-start flex-wrap">
+                    <div id="mentee-img" class="card border-info mr-2 mb-2" *ngFor="let mentee of mentee_applications">
+                        <a class="m-2 text-center">
+                            <img class="rounded-circle w-100 mb-2" [src]="mentee.user.picture"
+                                [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
+                            <span>{{mentee.user.firstName}} {{mentee.user.lastName}}</span>
+                            <div class="btn-group w-100" role="group">
+                                <button class="btn btn-sm btn-success" (click)="approveMentee(mentee._id)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm btn-danger" (click)="declineMentee(mentee._id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            </div>
+                        </a>
+                    </div>
+                    <h6 *ngIf="mentee_applications?.length === 0">You don't have any new mentee requests.</h6>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- <div class="d-flex justify-content-between">
-        <div id="Bot" class="edit-profile">
-            <h3 class="edit-profile__title">Settings</h3>
-            <form class="edit-profile__form">
-                <div class="form-row">
-                    <label class="form-label" for="">Update email address</label>
-                    <input type="email" class="form-input form-control col" placeholder="enter email address"
-                        name="userInfo.email" [(ngModel)]="userInfo.email">
-                </div>
-                <div class="form-row">
-                    <label class="form-label" for="">Update password</label>
-                    <input type="password" class="form-input form-control col" placeholder="enter new password"
-                        name="userInfo.password" [(ngModel)]="userInfo.password">
-                </div>
-                <div class="form-row">
-                    <label class="form-label" for="">Change username</label>
-                    <input type="text" class="form-input form-control col" placeholder="change username"
-                        name="userInfo.title" [(ngModel)]="userInfo.title">
-                </div>
-                <div>
-                    <button class="saveChanges" (click)="updateUser()">Save Changes</button>
-                </div>
-            </form>
-        </div>
-        <div>
-
-        </div>
-    </div> -->
 </div>
