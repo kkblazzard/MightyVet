@@ -17,7 +17,10 @@ export class NewslettersService {
     console.log("http.service Newsletterupdate", newsletterUpdate);
     return this._http.put('/api/newsletters/' + id, newsletterUpdate);
   }
-  deleteNewsletter(id) {
-    return this._http.delete('/api/newsletters/' + id);
+  deleteNewsletter(email) {
+    return this._http.delete('/api/newsletters/' + email);
+  }
+  checkNewsletter(email) {
+    return this._http.get('/api/newsletters/email/'+email);
   }
 }

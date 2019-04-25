@@ -18,6 +18,9 @@ var UserSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: [true, "Please enter an email."],
+                validate: [function(email) {
+                        return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
+                }, "Please enter a valid email."],
                 unique: [true, "This email address is already in use."]
         },
 

@@ -1,6 +1,17 @@
-<div *ngIf="display">
-  <img [src]="this.model.img" [alt]="this.model.title+' '+this.model.firstName+' '+this.model.lastName">
-  <h6>{{this.model.title}} {{this.model.firstName}} {{this.model.lastName}}</h6>
-  <p>{{this.model.description}}</p>
-</div>
-<a (click)="displayChange()">{{model.title}} {{model.firstName}} {{model.lastName}}</a>
+<ng-template #popContent>
+  <div class="container">
+    <div class="img-ctn">
+      <img [src]="model.img" [alt]="model.title+' '+model.firstName+' '+model.lastName">
+    </div>
+    <h4>About the Speaker</h4>
+    <p>{{model.description}}</p>
+  </div>
+</ng-template>
+<ng-template #popTitle>
+  <div class="container">
+    {{model.title}} {{model.firstName}} {{model.lastName}}
+  </div>
+</ng-template>
+<h6 triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="left">
+  {{model.title}} {{model.firstName}} {{model.lastName}}
+</h6>

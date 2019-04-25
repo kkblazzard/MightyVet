@@ -41,7 +41,7 @@
             <div class="week-date col text-center"
                 *ngIf="isSelectedMonth(day.mDate)"
                 (click) = "open(day.mDate)"
-                [ngClass]="{ 'today': day.today, 'available':day.available }">
+                [ngClass]="{ 'today': day.today, 'available': day.available }">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>
           </ng-container>

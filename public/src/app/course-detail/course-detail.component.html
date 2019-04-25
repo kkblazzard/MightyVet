@@ -2,24 +2,24 @@
   <div *ngIf="course._id">
     <div class="container">
       <h1>{{course.title}}</h1>
-      <img id="course_img" class="jumbotron jumbotron-fluid border-top border-bottom py-0 rounded" [src]="course.img" alt="Course Image">
+      <img id="course_img" class="jumbotron jumbotron-fluid border-top border-bottom py-0 rounded" [src]="course.img"
+        alt="Course Image">
     </div>
     <div class="container d-flex justify-content-between flex-wrap">
       <div class="w-75 p-4">
         <h2>{{course.title}}</h2>
         <p class="m-3">{{course.description}}</p>
-        <h3>About the Speaker</h3>
-        <p>{{course.speaker.firstName}} {{course.speaker.lastName}}</p>
-        <p class="m-3">{{course.speaker.description}}</p>
-        <img class="speakerimg" [src]="course.speaker.img" alt="speaker's image">
       </div>
       <div class="p-4">
         <h4>Class Type</h4>
         <p>{{course.type}}</p>
         <h4>Class Date & Time</h4>
         <p>{{course.datetime | date:"MMM-dd-y, HH:MMa"}}</p>
+        <h4>Speaker</h4>
+        <app-speaker-details [model]="course.speaker"></app-speaker-details>
         <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
-        <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary"> Go to course</button></a>
+        <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary"> Go to
+            course</button></a>
       </div>
     </div>
   </div>

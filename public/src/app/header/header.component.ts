@@ -112,6 +112,7 @@ export class HeaderComponent implements OnInit {
       } else {
         this.modal.close();
         this.closedModal();
+        window.location.reload();
       }
     });
   }
@@ -149,10 +150,12 @@ export class HeaderComponent implements OnInit {
           obs2.subscribe( data => console.log(data), err => console.log(err), () => {
             this.modal.close();
             this.closedModal();
+            window.location.reload();
           })
         } else {
           this.modal.close();
           this.closedModal();
+          window.location.reload();
         }
       }
     });
