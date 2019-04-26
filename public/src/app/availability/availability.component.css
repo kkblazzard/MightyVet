@@ -4,22 +4,24 @@ table {
 .date-container:hover {
     box-shadow: 0px 0px 10px #ccc;
 }
+.past .date-text{
+    opacity: .5;
+}
 .date-text {
     width: 40px;
     height:40px;
     border-radius: 50%;
     line-height: 40px;
 }
-.today .date-text {
-    color: #fff;
-    border: 2px solid #38b9a4;
-    background: #38b9a4;
-    box-shadow: 0px 0px 5px #666;
-}
 .available .date-text {
     color: #fff;
     border: 2px solid #fe6564;
     background: #fe6564;
+    box-shadow: 0px 0px 5px #666;
+}
+
+.today .date-text {
+    border: 2px solid #38b9a4;
     box-shadow: 0px 0px 5px #666;
 }
 @media only screen and (max-width:576px){
