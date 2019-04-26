@@ -1,3 +1,4 @@
+<!-- Add Availabilities modal -->
 <ng-template #showAvailabilities>
   <div class="modal-header">
     <h2 class="modal-title">Your schedule on {{date.format('dddd, D MMMM, YYYY')}} </h2>
@@ -21,37 +22,46 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Availability page -->
 <div class="container">
-  <h1>Your Schedule</h1>
-  <br>
-  <div class="calendar">
-    <div class="calendar-navs">
-      <div class="month-nav row text-center mb-2">
-        <button class="col" (click)="prevMonth()">&lt;</button>
-        <span class="p4 col-10">{{ currentDate.format('MMMM YYYY') }}</span>
-        <button class="col" (click)="nextMonth()">&gt;</button>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Your Schedule</h1>
+    <button class="btn btn-outline-secondary" [routerLink]="['/user']">Back</button>
+  </div>
+  <hr />
+  <div class="d-flex justify-content-around align-items-center">
+    <button class="btn btn-lg btn-outline-success rounded-circle" (click)="prevMonth()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    <div class="w-75 card m-auto bg-white rounded-lg shadow">
+      <div class="card-header bg-white">
+        <h4 class="text-center text-success p-3">{{ currentDate.format('MMMM YYYY') }}</h4>
+      </div>
+      <div class="card-body">
+        <table class="table w-100">
+          <thead>
+            <tr>
+              <ng-container *ngFor="let name of dayNames">
+                <th class="text-center text-success border-0">{{ name }}</th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let week of weeks">
+              <tr>
+                <ng-container *ngFor="let day of week">
+                  <td class="date-container text-center bg-light border-0" *ngIf="!isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
+                    <div class="date-text m-auto">{{ day.mDate.date() }}</div>
+                  </td>
+                  <td class="date-container text-center border-0" [ngClass]="{ 'today': day.today, 'available': day.available }" *ngIf="isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
+                    <div class="date-text m-auto">{{ day.mDate.date() }}</div>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div class="month-grid">
-      <div class="day-names row">
-        <div *ngFor="let name of dayNames" class="day-name col py-2">
-          {{ name }}
-        </div>
-      </div>
-      <div class="weeks">
-        <div *ngFor="let week of weeks" class="week row">
-          <ng-container *ngFor="let day of week">
-            <div class="week-date notMonth col text-center" *ngIf="!isSelectedMonth(day.mDate)"
-              (click)="open(day.mDate)">
-              <span class="date-text">{{ day.mDate.date() }}</span>
-            </div>
-            <div class="week-date col text-center" *ngIf="isSelectedMonth(day.mDate)" (click)="open(day.mDate)"
-              [ngClass]="{ 'today': day.today, 'available':day.available }">
-              <span class="date-text">{{ day.mDate.date() }}</span>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
+    <button class="btn btn-lg btn-outline-success rounded-circle" (click)="nextMonth()"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
   </div>
 </div>

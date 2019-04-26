@@ -122,7 +122,9 @@
 <div class="container">
     <div class="d-flex justify-content-between mb-4">
         <div id="user-profile-left" class="card border-primary">
-            <img class="profile-picture w-100" (click)="open('picture')" [src]="userInfo.picture" alt="Profile Picture">
+            <div id="user-profile-img" class="p-5">
+                <img class="w-100" (click)="open('picture')" [src]="userInfo.picture" alt="Profile Picture">
+            </div>
             <div class="card-body">
                 <h3 class="card-title">{{userInfo.firstName}} {{userInfo.lastName}}</h3>
                 <table class="table">
@@ -242,7 +244,7 @@
                         <a class="m-2 text-center">
                             <img class="rounded-circle w-100" [src]="mentee.user.picture"
                                 [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
-                            <span>{{mentee.user.firstName}} {{mentee.user.lastName}}</span>
+                            <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
                         </a>
                     </div>
                     <h6 *ngIf="mentees?.length === 0">You don't have any mentees yet.</h6>
@@ -255,7 +257,7 @@
                         <a class="m-2 text-center">
                             <img class="rounded-circle w-100 mb-2" [src]="mentee.user.picture"
                                 [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
-                            <span>{{mentee.user.firstName}} {{mentee.user.lastName}}</span>
+                            <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
                             <div class="btn-group w-100" role="group">
                                 <button class="btn btn-sm btn-success" (click)="approveMentee(mentee._id)"><i
                                         class="fa fa-check" aria-hidden="true"></i></button>

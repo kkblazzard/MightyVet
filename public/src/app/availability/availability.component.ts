@@ -32,50 +32,50 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   constructor(
     private _modalsService: NgbModal,
     private _authenticationsService: AuthenticationService,
-    private _meetingsService : MeetingsService,
+    private _meetingsService: MeetingsService,
     private _route: ActivatedRoute,
     private _router: Router) { }
   ngOnInit() {
-    this.newTime = "";
+    this.newTime = '';
     this.getUserInfo();
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selectedDates &&
-        changes.selectedDates.currentValue &&
-        changes.selectedDates.currentValue.length  > 1) {
+      changes.selectedDates.currentValue &&
+      changes.selectedDates.currentValue.length > 1) {
       // sort on date changes for better performance when range checking
       this.sortedDates = _.sortBy(changes.selectedDates.currentValue, (m: CalendarDate) => m.mDate.valueOf());
       this.generateCalendar();
     }
   }
-  open(date: moment.Moment){
+  open(date: moment.Moment) {
     this.date = date;
     this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
-    this.modal = this._modalsService.open(this.availabilities)
+    this.modal = this._modalsService.open(this.availabilities, { size: 'lg' });
     this.modal.result.then(() => { }, () => this.closedModal());
   }
-  closedModal(){
-    this.newTime = "";
+  closedModal() {
+    this.newTime = '';
     this.date = null;
     this.getUserInfo();
   }
   getUserInfo() {
     let obs = this._authenticationsService.profile();
     obs.subscribe((data) => {
-      if(data['errors']){
+      if (data['errors']) {
         this._router.navigateByUrl('/user');
       }
-      else{
-        if(data['mentor_id']){
+      else {
+        if (data['mentor_id']) {
           this.user = data;
           this.user.mentor_id.availabilities = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours')));
           this.generateCalendar();
         }
-        else{
+        else {
           this._router.navigateByUrl('/user');
         }
       }
-    })
+    });
   }
   generateCalendar(): void {
     const dates = this.fillDates(this.currentDate);
@@ -88,17 +88,17 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   fillDates(currentMoment: moment.Moment): CalendarDate[] {
     const firstOfMonth = moment(currentMoment).startOf('month').day();
     const firstDayOfGrid = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days');
-    var x = moment(currentMoment).month()
-    var y = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days').add(35, 'days').month();
+    const x = moment(currentMoment).month();
+    const y = moment(currentMoment).startOf('month').subtract(firstOfMonth, 'days').add(35, 'days').month();
     return _.range(0, (x === y ? 42 : 35))
-            .map((date: number): CalendarDate => {
-              const d = moment(firstDayOfGrid).add(date, 'days');
-              return {
-                today: this.isToday(d),
-                available: this.isDayAvailable(d),
-                mDate: d,
-              };
-            });
+      .map((date: number): CalendarDate => {
+        const d = moment(firstDayOfGrid).add(date, 'days');
+        return {
+          today: this.isToday(d),
+          available: this.isDayAvailable(d),
+          mDate: d,
+        };
+      });
   }
   isToday(date: moment.Moment): boolean {
     return moment().startOf('day').format() === date.format();
@@ -107,8 +107,8 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     return moment(date).month() === moment(this.currentDate).month();
   }
   isDayAvailable(date: moment.Moment): boolean {
-    var meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());
-    if(meetings.length){
+    const meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());
+    if (meetings.length) {
       return true;
     }
     return false;
@@ -121,23 +121,23 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     this.currentDate = moment(this.currentDate).add(1, 'months');
     this.generateCalendar();
   }
-  newMeeting(){
+  newMeeting() {
     this.availability_error = null;
-    var time = this.newTime.split(":");
-    var date = moment(this.date.toDate());
+    const time = this.newTime.split(':');
+    const date = moment(this.date.toDate());
     let obs = this._meetingsService.addMeeting({
       datetime: date.add(time[0], 'hours').add(time[1], 'minutes').toDate(),
       mentor: this.user.mentor_id._id
-    })
-    obs.subscribe(data =>{
-      if (data['errors']){
+    });
+    obs.subscribe(data => {
+      if (data['errors']) {
         this.availability_error = data['errors'].datetime.message;
       }
-      else{
+      else {
         this.daily_meetings.push(data);
         console.log(this.daily_meetings);
         this.getUserInfo();
       }
-    })
+    });
   }
 }
