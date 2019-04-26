@@ -1,5 +1,12 @@
 var mongoose = require('mongoose');
 
+var CategorySchema = new mongoose.Schema({
+        management: {type: Boolean},
+        communication: {type: Boolean},
+        medical: {type: Boolean},
+        technical: {type: Boolean}
+})
+
 var QuestionSchema = new mongoose.Schema({
         question:{type:String},
         right_answer:{type:String},
@@ -41,6 +48,11 @@ var WebinarSchema = new mongoose.Schema({
         webinar_link: {
                 type: String,
                 required: [true, "Please enter the link for the video."]
+        },
+
+        category: {
+                type: CategorySchema,
+                required: [true, "Please enter the category."]
         },
 
         quiz: {

@@ -13,6 +13,7 @@
           <input class="form-control" name="title" type="text" [(ngModel)]="newWebinar.title">
           <div *ngIf="errors?.title" class="text-danger"><small>{{errors.title.message}}</small></div>
         </div>
+
         <div class="form-group col">
           <label>Live or video</label>
           <select class="form-control" name="type" [(ngModel)]="newWebinar.type">
@@ -21,6 +22,7 @@
           </select>
           <div *ngIf="errors?.type" class="text-danger"><small>{{errors.type.message}}</small></div>
         </div>
+        
         <div class="form-group col">
           <label *ngIf="newWebinar.type == 'Live' || newWebinar.type == ''">Date and time</label>
           <label *ngIf="newWebinar.type == 'Video'">Date and time of live broadcast</label>
@@ -28,11 +30,13 @@
           <div *ngIf="errors?.datetime" class="text-danger"><small>{{errors.datetime.message}}</small></div>
         </div>
       </div>
+
       <div class="form-group">
         <label>Description</label>
         <textarea class="form-control" name="description" [(ngModel)]="newWebinar.description"></textarea>
         <div *ngIf="errors?.description" class="text-danger"><small>{{errors.description.message}}</small></div>
       </div>
+
       <div class="form-group">
         <label for="file">Choose a picture for your webinar</label>
         <input class="form-control" #imageInput2 id="file" type="file" accept="image/*"
@@ -44,13 +48,47 @@
         <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
         <img *ngIf="fileToUpload2.status === 'ok'" class="img-preview" [src]="newWebinar.img" alt="Image Preview">
-
       </div>
+
       <div class="form-group">
         <label>Webinar link</label>
         <input class="form-control" name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
         <div *ngIf="errors?.webinar_link" class="text-danger"><small>{{errors.webinar_link.message}}</small></div>
       </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input" [(ngModel)]="newWebinar.category.management">
+          <label class="custom-control-label" for="checkbox1">Management</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input" [(ngModel)]="newWebinar.category.communication">
+          <label class="custom-control-label" for="checkbox2">Communication</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input" [(ngModel)]="newWebinar.category.medical">
+          <label class="custom-control-label" for="checkbox3">Medical</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline mr-0">
+          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input" [(ngModel)]="newWebinar.category.technical">
+          <label class="custom-control-label" for="checkbox4">Technical</label>
+        </div>
+          <!-- <input type="checkbox" id="management" name="management" class="form-control" [(ngModel)]="newWebinar.category.management">
+          <label class="custom-control-label" for="management">Management</label>
+
+          <input type="checkbox" id="communication" name="communication" class="form-control" [(ngModel)]="newWebinar.category.communication">
+          <label class="custom-control-label" for="communication">Communication</label>
+          
+          <input type="checkbox" id="medical" name="medical" class="form-control" [(ngModel)]="newWebinar.category.medical">
+          <label class="custom-control-label" for="medical">Medical</label>
+          
+          <input type="checkbox" id="technical" name="technical" class="form-control" [(ngModel)]="newWebinar.category.technical">
+          <label class="custom-control-label" for="technical">Technical</label> -->
+
+        <div *ngIf="errors?.category" class="text-danger"><small>{{errors.category.message}}</small></div>
+      </div>
+      
       <div class="form-group">
         <label>Speaker</label>
         <select class="form-control" name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker"
@@ -60,10 +98,11 @@
             {{speaker.lastName}}</option>
           <option value="new">ADD A NEW SPEAKER</option>
         </select>
-        <div *ngIf="speaker_image != ''" >
-          <img [src]="speaker_image" alt="Speaker Image">
+        <div *ngIf="speaker_image != ''" class="w-25" >
+          <img class="w-100" [src]="speaker_image" alt="Speaker Image">
         </div>
       </div>
+      <!-- ----adding speaker----- -->
       <form *ngIf="newWebinar.speaker == 'new'" class = "border p-4">
         <h5>Add a speaker</h5>
         <hr />

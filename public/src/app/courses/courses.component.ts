@@ -16,13 +16,28 @@ export class CoursesComponent implements OnInit {
   ) { }
 
   allCourses: any;
-  featuredNumber: number;
-  titleSearch: any;
-  searchError: any;
+  // featuredNumber: number;
+  // titleSearch: any;
+  // searchError: any;
+  searchBar: any;
 
   ngOnInit() {
     this.getAllCourses();
-    this.featuredNumber = 6;
+    // this.featuredNumber = 6;
+    this.searchBar = {
+      featuredNumber: 6,
+      bar: "",
+      type: {
+        Live: false,
+        Video: false
+      } ,
+      category: {
+        management: false,
+        communication: false,
+        medical: false,
+        technical: false
+      }
+    }
   }
   getAllCourses() {
     // why is this searchWebinars, not getWebinars?
@@ -33,25 +48,25 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  searchCourse(){
-    this._webinarsService.findWebinar({'title':{"$regex":this.titleSearch,"$options":"i"}})
-    .subscribe(course=>{
-      if(course['error']){
-        this.searchError=course['error'];
-        console.log(this.searchError);
-      }
-      else{
-        console.log
-        this.allCourses=course;
-      }
-    });
-  }
+  // searchCourse(){
+  //   this._webinarsService.findWebinar({'title':{"$regex":this.titleSearch,"$options":"i"}})
+  //   .subscribe(course=>{
+  //     if(course['error']){
+  //       this.searchError=course['error'];
+  //       console.log(this.searchError);
+  //     }
+  //     else{
+  //       console.log
+  //       this.allCourses=course;
+  //     }
+  //   });
+  // }
 
   seeMore(){
-    this.featuredNumber += 6;
+    this.searchBar.featuredNumber += 6;
   }
 
-  somethingChanged(){
-    console.log("type checkbox");
-  }
+  // somethingChanged(){
+  //   console.log("type checkbox");
+  // }
 }
