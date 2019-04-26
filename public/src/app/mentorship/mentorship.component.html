@@ -1,4 +1,5 @@
-<ng-template #becomeAMentor>
+<!-- --------Mentor form----------- -->
+    <ng-template #becomeAMentor>
     <div *ngIf="!application_submitted">
         <div class="modal-header">
             <h2 class="modal-title">Become a mentor</h2>
@@ -98,6 +99,7 @@
             </div>
         </form>
     </div>
+
     <div *ngIf="application_submitted">
         <div class="modal-header">
             <h2>Thank you for submitting your application!</h2>
@@ -110,6 +112,10 @@
         </div>
     </div>
 </ng-template>
+<!-- --------End Mentor form----------- -->
+
+
+<!--  ------ Heading ------- -->
 <section id="section-mentorship" class="container">
     <div class="jumbotron d-flex justify-content-end">
         <div id="mentorship-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
@@ -122,6 +128,9 @@
         </div>
     </div>
 </section>
+<!-- ------End Heading----- -->
+
+
 <!-- <section id="section-schedule" class="py-4">
     <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
         <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
@@ -132,9 +141,9 @@
     </div>
 </section> -->
 
-<!-- list of mentor cards -->
+<!-- ---list of mentor cards--- -->
 <section class="bg-light py-5 m-0">
-    <!-- search bar -->
+    <!-- ----search bar---- -->
     <div class="container mb-3">
         <h1 class="mb-3">Find a Mentor</h1>
         <div id="search-bar" class="input-group mb-3">
@@ -144,6 +153,7 @@
                 <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
             </div>
         </div>
+        <!-- ---check box filters--- -->
         <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
             <h6>Refine results by :&nbsp;</h6>
             <div id="checkboxes">
@@ -170,9 +180,11 @@
             </div>
         </div>
     </div>
+    <!-- ---- end search bar---- -->
+
     <div class="container">
         <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
-            <!-- mentor card -->
+            <!-- ----mentor card---- -->
             <a class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar"
                 [routerLink]="['/mentorship', mentor._id]">
                 <!-- search pipe to limit the amount of displayed data-->
@@ -189,6 +201,7 @@
                     <p>{{mentor.resume | slice: 100 }}</p>
                 </div>
             </a>
+            <!-- ----end  mentor card---- -->
         </div>
     </div>
 </section>
