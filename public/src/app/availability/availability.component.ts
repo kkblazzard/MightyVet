@@ -11,6 +11,7 @@ export interface CalendarDate {
   mDate: moment.Moment;
   available?: boolean;
   today?: boolean;
+  isPast?: boolean;
 }
 @Component({
   selector: 'app-availability',
@@ -49,10 +50,12 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     }
   }
   open(date: moment.Moment) {
-    this.date = date;
-    this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
-    this.modal = this._modalsService.open(this.availabilities, { size: 'lg' });
-    this.modal.result.then(() => { }, () => this.closedModal());
+    if(!this.isPast(date)){
+      this.date = date;
+      this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
+      this.modal = this._modalsService.open(this.availabilities, { size: 'lg' });
+      this.modal.result.then(() => { }, () => this.closedModal());
+    }
   }
   closedModal() {
     this.newTime = '';
@@ -97,6 +100,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
           today: this.isToday(d),
           available: this.isDayAvailable(d),
           mDate: d,
+          isPast: this.isPast(d)
         };
       });
   }
@@ -105,6 +109,9 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   }
   isSelectedMonth(date: moment.Moment): boolean {
     return moment(date).month() === moment(this.currentDate).month();
+  }
+  isPast(date: moment.Moment): boolean{
+    return moment(date).isBefore(moment().startOf('day'))
   }
   isDayAvailable(date: moment.Moment): boolean {
     const meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());

@@ -11,6 +11,7 @@ export interface CalendarDate {
   mDate: moment.Moment;
   available?: boolean;
   today?: boolean;
+  isPast?: boolean;
 }
 @Component({
   selector: 'app-scheduling',
@@ -66,7 +67,6 @@ export class SchedulingComponent implements OnInit, OnChanges {
     }
   }
   closedModal(){
-    this.mentor = {user: {firstName : "Mentor"}};
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
       if(this._authenticationsService.isLoggedIn()){
@@ -129,6 +129,7 @@ export class SchedulingComponent implements OnInit, OnChanges {
                 today: this.isToday(d),
                 available: this.isDayAvailable(d),
                 mDate: d,
+                isPast: this.isPast(d)
               };
             });
   }
@@ -137,6 +138,9 @@ export class SchedulingComponent implements OnInit, OnChanges {
   }
   isSelectedMonth(date: moment.Moment): boolean {
     return moment(date).month() === moment(this.currentDate).month();
+  }
+  isPast(date: moment.Moment): boolean{
+    return moment(date).isBefore(moment().startOf('day'))
   }
   isDayAvailable(date: moment.Moment): boolean {
     this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());

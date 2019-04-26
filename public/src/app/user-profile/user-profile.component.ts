@@ -7,12 +7,8 @@ import { UsersService } from '../http_services/users.service';
 import { Router } from '@angular/router';
 import { MenteesService } from '../http_services/mentees.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
-class ImageSnippet {
-    pending: boolean = false;
-    status: string = 'init';
-    constructor(public src: string, public file: File) { }
-}
 @Component({
     selector: 'app-user-profile',
     templateUrl: './user-profile.component.html',
@@ -35,7 +31,8 @@ export class UserProfileComponent implements OnInit {
     mentees: any;
     mentee_applications: any;
     continuingEducationContent = "progress";
-    fileToUpload: ImageSnippet;
+    imageChangedEvent: any = '';
+    croppedImage: any = '';
     constructor(
         private _accreditationsService: AccreditationsService,
         private _usersService: UsersService,
@@ -58,6 +55,21 @@ export class UserProfileComponent implements OnInit {
         }
         this.getUserInfo();
     }
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+    }
+    imageCropped(event: ImageCroppedEvent) {
+        this.croppedImage = event.file;
+    }
+    imageLoaded() {
+        // show cropper
+    }
+    cropperReady() {
+        // cropper ready
+    }
+    loadImageFailed() {
+        // show message
+    }
     changeContent(str){
         this.continuingEducationContent = str;
     }
@@ -73,24 +85,6 @@ export class UserProfileComponent implements OnInit {
     closedModal() {
         this.image = '';
         this.getUserInfo();
-    }
-    processFile(imageInput: any) {
-        const file: File = imageInput.files[0];
-        const reader = new FileReader();
-
-        reader.addEventListener('load', (event: any) => {
-
-            this.fileToUpload = new ImageSnippet(event.target.result, file);
-            let obs = this._filesUploadService.userUploadImage(this.fileToUpload.file);
-            obs.subscribe(
-                (data) => {
-                    this.image = data['imageUrl'];
-                },
-                (err) => {
-
-                });
-        });
-        reader.readAsDataURL(file);
     }
     editting(){
         var old_email = this.userInfo.email;
@@ -260,15 +254,24 @@ export class UserProfileComponent implements OnInit {
     }
     editImage() {
         this.img_error = null;
-        let obs = this._usersService.updateImage(this.userInfo._id, this.image);
-        obs.subscribe(data => {
-            if (data['errors']) {
-                this.img_error = data['errors'].picture.message;
-            }
-            else {
-                this.modal.dismiss('success');
-            }
-        });
+        let obs = this._filesUploadService.userUploadImage(this.croppedImage);
+        obs.subscribe(
+            (data) => {
+                var image = data['imageUrl'];
+                let obs = this._usersService.updateImage(this.userInfo._id, image);
+                obs.subscribe(data => {
+                    if (data['errors']) {
+                        this.img_error = data['errors'].picture.message;
+                    }
+                    else {
+                        this.imageChangedEvent = '';
+                        this.croppedImage = null;
+                        this.getUserInfo();
+                    }
+                });
+            },
+            (err) => {
+
+            });
     }
-    // this will eventually go and update the userInfo after some validations.
 }
