@@ -1,30 +1,32 @@
-/* * {
-    box-sizing: border-box;
-} */
-.available{
-    background-color: lightblue;
+table {
+    table-layout: fixed;
 }
-.notMonth .date-text{
-    opacity: .7;
+.date-container:hover {
+    box-shadow: 0px 0px 10px #ccc;
 }
-.month-grid .day-names {
-    border-left: solid grey 2px;
+.date-text {
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+    line-height: 40px;
 }
-.month-grid .week {
-    border-bottom: solid grey 2px;
-    border-left: solid grey 2px;
+.today .date-text {
+    color: #fff;
+    border: 2px solid #38b9a4;
+    background: #38b9a4;
+    box-shadow: 0px 0px 5px #666;
 }
-.month-grid .day-name {
-    border: solid grey 2px;
-    border-left: none;
+.available .date-text {
+    color: #fff;
+    border: 2px solid #fe6564;
+    background: #fe6564;
+    box-shadow: 0px 0px 5px #666;
 }
-
-.month-grid .week-date {
-    cursor: pointer;
-    padding: 20px;
-    border-right: solid grey 2px;
-}
-
-.today .date-text{
-    color: red;
+@media only screen and (max-width:576px){
+    .date-text {
+        width: 30px;
+        height:30px;
+        border-radius: 50%;
+        line-height: 30px;
+    }
 }
