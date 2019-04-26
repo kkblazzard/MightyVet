@@ -57,6 +57,8 @@ export class KeysPipe implements PipeTransform {
     return Object.keys(value);
   }
 }
+
+//--------------mentor pipe-----------------------
 @Pipe({ name: 'mentorsearch', pure: false })
 
 export class MentorSearchPipe implements PipeTransform {
@@ -138,6 +140,9 @@ export class MentorSearchPipe implements PipeTransform {
   }
 }
 
+//-------------end mentor pipe--------------------
+
+//  ---------- course featured number-------
 @Pipe({ name: 'search', pure: true })
 
 export class SearchPipe implements PipeTransform {
@@ -150,6 +155,106 @@ export class SearchPipe implements PipeTransform {
   }
 }
 
+// -----------courses pipe-----------
+@Pipe({ name: 'coursesearch', pure: false })
+
+export class CourseSearchPipe implements PipeTransform {
+  transform(value: Array<any>, search: any): Array<any> {
+    if (value) {
+      var strings = search.bar.toLowerCase().split(' ');
+      value = value.sort((x, y) => {
+        var count_x = 0;
+        var count_y = 0;
+        for (let j = 0; j < strings.length; j++) {
+          if (x.title.toLowerCase().includes(strings[j])) {
+            count_x++;
+          }
+          if (x.description.toLowerCase().includes(strings[j])) {
+            count_x++;
+          }
+          if (x.speaker.firstName.toLowerCase().includes(strings[j])) {
+            count_x++;
+          }
+          if (x.speaker.lastName.toLowerCase().includes(strings[j])) {
+            count_x++;
+          }
+          if (y.title.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.description.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.speaker.firstName.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+          if (y.speaker.lastName.toLowerCase().includes(strings[j])) {
+            count_y++;
+          }
+        }
+        if (search.type.Live) {
+          if (x.type.includes("Live")) {
+            count_x += 3;
+          }
+          if (y.type.includes("Live")) {
+            count_y += 3;
+          }
+        }
+        if (search.type.Video) {
+          if (x.type.includes("Video")) {
+            count_x += 3;
+          }
+          if (y.type.includes("Video")) {
+            count_y += 3;
+          }
+        }
+        if (search.category.management) {
+          console.log("pipe management search");
+          if (x.category.management) {
+            console.log("pipe management search2");
+            count_x += 10;
+          }
+          if (y.category.management) {
+            count_y += 10;
+          }
+        }
+        if (search.category.communication) {
+          console.log("pipe communication 1");
+          if (x.category.communication) {
+            console.log("pipe communication 2");
+            count_x += 10;
+          }
+          if (y.category.communication) {
+            console.log("pipe communication 3");
+            count_y += 10;
+          }
+        }
+        if (search.category.medical) {
+          if (x.category.medical) {
+            count_x += 10;
+          }
+          if (y.category.medical) {
+            count_y += 10;
+          }
+        }
+        if (search.category.technical) {
+          if (x.category.technical) {
+            count_x += 10;
+          }
+          if (y.category.technical) {
+            count_y += 10;
+          }
+        }
+
+        return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
+      });
+      return value.slice(0, search.featuredNumber);
+    }
+    return [];
+  }
+}
+
+// ---------slice pipe---------------
+
 @Pipe({ name: 'slice', pure: true })
 
 export class SlicePipe implements PipeTransform {
@@ -160,6 +265,8 @@ export class SlicePipe implements PipeTransform {
     return value;
   }
 }
+
+// ---------module declarations----------
 @NgModule({
   declarations: [
     AppComponent,
@@ -183,6 +290,7 @@ export class SlicePipe implements PipeTransform {
     KeysPipe,
     SearchPipe,
     MentorSearchPipe,
+    CourseSearchPipe,
     SlicePipe,
     AdminMentorsComponent,
     NotFoundComponent,

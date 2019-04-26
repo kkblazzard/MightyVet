@@ -1,3 +1,4 @@
+<!-- ------heading------- -->
 <section id="courses-welcome" class="container">
   <div class="jumbotron d-flex justify-content-start align-items-end">
     <div id="welcome-text" class="mr-3 p-5 text-light">
@@ -6,26 +7,27 @@
     </div>
   </div>
 </section>
+<!-- ------End Heading----- -->
 
+<!-- ---- search bar----- -->
 <section id="search-bar" class="container mb-3">
-  <!-- search bar -->
   <h1 class="mb-3">Browse Courses</h1>
   <div id="search-bar" class="input-group mb-3">
-    <input type="text" class="form-control border-dark" placeholder="Search title..." aria-label="coursesSearch" aria-describedby="coursesSearch" [(ngModel)]="titleSearch" >
+    <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch" aria-describedby="coursesSearch" [(ngModel)]="searchBar.bar" >
     <div class="input-group-append border-dark">
       <button (click)="searchCourse()" class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
     </div>
   </div>
-  <!-- search filters -->
+  <!-- search check box filters -->
   <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
     <div>
       <h6>Format type:</h6>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="live" name="live" class="custom-control-input" ng-change="somethingChanged()">
+          <input type="checkbox" id="live" name="live" class="custom-control-input" [(ngModel)]="searchBar.type.Live" >
           <label class="custom-control-label" for="live">Live Webinar</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="video" name="video" class="custom-control-input" ng-change="somethingChanged()">
+          <input type="checkbox" id="video" name="video" class="custom-control-input" [(ngModel)]="searchBar.type.Video" >
           <label class="custom-control-label" for="video">Video</label>
         </div>
     </div>
@@ -33,28 +35,30 @@
     <div>
       <h6>Categories:</h6>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input">
+          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input" [(ngModel)]="searchBar.category.management">
           <label class="custom-control-label" for="checkbox1">Management</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input">
+          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input" [(ngModel)]="searchBar.category.communication">
           <label class="custom-control-label" for="checkbox2">Communication</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input">
+          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input" [(ngModel)]="searchBar.category.medical">
           <label class="custom-control-label" for="checkbox3">Medical</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline mr-0">
-          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input">
+          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input" [(ngModel)]="searchBar.category.technical">
           <label class="custom-control-label" for="checkbox4">Technical</label>
         </div>
     </div>
   </div>
 </section>
+<!-- ---- end search bar----- -->
 
+<!-- ----list of course cards---- -->
 <section id="course-cards" class="container">
   <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
-    <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4 cardheight">  <!-- search pipe to limit number of entries -->
+    <div *ngFor="let course of allCourses | coursesearch : searchBar" class="card mb-4 cardheight">  <!-- search pipe to limit number of entries -->
       <img [src]="course.img" class="card-img mt-2" alt="Course Image">
       <div class="card-body">
         <h5 class="card-title">{{course.title | slice: 40}}</h5>

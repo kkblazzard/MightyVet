@@ -32,7 +32,15 @@ export class AdminWebinarsComponent implements OnInit {
   newAnswers = 0;
   speaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   stage = 1;
-  newWebinar: any = {title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
+  newWebinar: any = {
+    title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: [], 
+    category: {
+      management: false,
+      communication: false,
+      medical: false,
+      technical: false
+    }
+  };
   webinars: any;
   speakers: any;
   newSpeaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
@@ -120,7 +128,13 @@ export class AdminWebinarsComponent implements OnInit {
     this.speaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.speakerPreview = null;
-    this.newWebinar = {title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: []};
+    this.newWebinar = {title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: [], 
+    category: {
+      management: false,
+      communication: false,
+      medical: false,
+      technical: false
+    }};
     this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
     this.fileToUpload2 = {src: null, file: null, pending: false, status: 'init'};
     this.speaker_image = '';
