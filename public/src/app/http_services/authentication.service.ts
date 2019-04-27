@@ -6,12 +6,6 @@ import { map } from 'rxjs/operators';
 export interface UserDetails {
   _id: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  title: string;
-  org: string;
-  state: string;
-  picture: string;
   admin: boolean;
   exp: number;
   iat: number;
@@ -24,12 +18,6 @@ interface TokenResponse {
 export interface TokenPayload {
   email: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
-  title?: string;
-  org?: string;
-  state?: string;
-  picture?: string;
   admin?: boolean;
 }
 
@@ -90,6 +78,9 @@ export class AuthenticationService {
     else {
       return false;
     }
+  }
+  public checkPassword(newPassword, info){
+    return this._http.post('/api/users/password/'+newPassword, info)
   }
   public getUserDetails(): UserDetails {
     const token = this.getToken();

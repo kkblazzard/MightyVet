@@ -101,6 +101,21 @@ module.exports={
             }   
         })(req, res);  
     },
+    updatePassword: (req, res) => {
+      passport.authenticate('local', function(err, user, info){
+        if (err){
+          res.json(err);
+        }
+        if(user){
+          user.setPassword(req.params.password);
+          user.save();
+          res.json(user);
+        }
+        else{
+          res.json(info);
+        }
+      })(req, res);
+    },
     userProfile: (req, res) => {
 
       // If no user ID exists in the JWT return a 401

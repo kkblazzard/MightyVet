@@ -111,7 +111,7 @@ export class MentorshipComponent implements OnInit {
     }
     open() {
         if (this.isLoggedIn()){
-            this.modal = this._modalService.open(this.becomeAMentor);
+            this.modal = this._modalService.open(this.becomeAMentor, { size: 'lg'});
             this.modal.result.then(()=>{}, () => this.closedModal())
         }
         else{

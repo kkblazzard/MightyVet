@@ -17,6 +17,9 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 export class UserProfileComponent implements OnInit {
     @ViewChild('edit') edit: ElementRef;
     @ViewChild('picture') picture: ElementRef;
+    @ViewChild('password') password: ElementRef;
+    editPassword: any;
+    editPassword_errors: any;
     current_courses: any;
     completed_courses: any;
     img_error: string;
@@ -45,6 +48,10 @@ export class UserProfileComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.editPassword = { old: "",
+            new: "",
+            confirm: ""
+        }
         this.editUser = {
             firstName: "",
             lastName: "",
@@ -74,6 +81,9 @@ export class UserProfileComponent implements OnInit {
         this.continuingEducationContent = str;
     }
     open(str) {
+        if (str === 'password'){
+            this.modal = this._modalsService.open(this.password, { size: 'lg'});
+        }
         if (str === 'edit') {
             this.modal = this._modalsService.open(this.edit, { size: 'lg' });
         }
@@ -83,6 +93,13 @@ export class UserProfileComponent implements OnInit {
         this.modal.result.then(() => { }, () => this.closedModal());
     }
     closedModal() {
+        this.editPassword = this.editPassword = { old: "",
+        new: "",
+        confirm: ""
+        } 
+        this.edit_errors = null;
+        this.editPassword_errors = null;
+        this.img_error = null;
         this.image = '';
         this.getUserInfo();
     }
@@ -99,6 +116,19 @@ export class UserProfileComponent implements OnInit {
                 this.changeNewsletterStatus(old_email, new_email);
             }
         });
+    }
+    edittingPassword(){
+        this.editPassword_errors = null;
+        let obs = this._authenticationsService.checkPassword(this.editPassword.new, {email: this._authenticationsService.getUserDetails().email, password: this.editPassword.old});
+        obs.subscribe(data => {
+            console.log(data);
+            if (data['errors']){
+                this.editPassword_errors = data['errors'];
+            }
+            else{
+                this.modal.dismiss("password updated");
+            }
+        })
     }
     changeNewsletterStatus(old_email, new_email){
         if (this.newsletter !== this.checkbox_newsletter){

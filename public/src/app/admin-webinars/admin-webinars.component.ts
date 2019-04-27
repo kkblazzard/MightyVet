@@ -4,7 +4,7 @@ import { WebinarsService } from '../http_services/webinars.service';
 import { SpeakersService } from '../http_services/speakers.service';
 import { FileUploadService } from '../http_services/file-upload.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 
 class ImageSnippet {
@@ -26,7 +26,6 @@ export class AdminWebinarsComponent implements OnInit {
   modal: any;
   speaker_image: String;
   speakerPreview: String;
-  fileToUpload: ImageSnippet;
   fileToUpload2: ImageSnippet;
   newQuestions = 0;
   newAnswers = 0;
@@ -44,6 +43,8 @@ export class AdminWebinarsComponent implements OnInit {
   webinars: any;
   speakers: any;
   newSpeaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
   constructor(
     private _modalsService: NgbModal,
     private _webinarsService: WebinarsService,
@@ -52,15 +53,20 @@ export class AdminWebinarsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
     ) { }
-    
-  private onSuccess() {
-    this.fileToUpload.pending = false;
-    this.fileToUpload.status = 'ok';
+  fileChangeEvent(event: any): void {
+      this.imageChangedEvent = event;
   }
-  private onError() {
-    this.fileToUpload.pending = false;
-    this.fileToUpload.status = 'fail';
-    this.fileToUpload.src = '';
+  imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.file;
+  }
+  imageLoaded() {
+      // show cropper
+  }
+  cropperReady() {
+      // cropper ready
+  }
+  loadImageFailed() {
+      // show message
   }
   private onSuccess2() {
     this.fileToUpload2.pending = false;
@@ -135,7 +141,6 @@ export class AdminWebinarsComponent implements OnInit {
       medical: false,
       technical: false
     }};
-    this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
     this.fileToUpload2 = {src: null, file: null, pending: false, status: 'init'};
     this.speaker_image = '';
     this.newQuestions = 0;
@@ -191,39 +196,27 @@ export class AdminWebinarsComponent implements OnInit {
   }
   addSpeaker() {
     this.speaker_errors = null;
-    const obs = this._speakersService.addSpeaker(this.newSpeaker);
-    obs.subscribe(data => {
-      if (!data['errors']){
-      this.getSpeakers();
-      this.newWebinar.speaker = data['_id'];
-      this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
-      this.getSpeakerImage();
-      this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
-      }
-      else{
-        console.log(data['errors']);
-        this.speaker_errors = data['errors'];
-      }
-    });
-  }
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-    reader.addEventListener('load', (event: any) => {
-      this.fileToUpload = new ImageSnippet(event.target.result, file);
-      const obs = this._filesUploadService.speakerUploadImage(this.fileToUpload.file);
+    const obs = this._filesUploadService.speakerUploadImage(this.croppedImage);
       obs.subscribe(
         (data) => {
-          this.onSuccess();
           this.newSpeaker.img = data['imageUrl'];
+          const obs = this._speakersService.addSpeaker(this.newSpeaker);
+          obs.subscribe(data => {
+            if (!data['errors']){
+            this.getSpeakers();
+            this.newWebinar.speaker = data['_id'];
+            this.getSpeakerImage();
+            this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
+            }
+            else{
+              console.log(data['errors']);
+              this.speaker_errors = data['errors'];
+            }
+          });
         },
         (err) => {
-          this.onError();
           console.log(err);
         })
-    });
-      
-    reader.readAsDataURL(file);
   }
   processFile2(imageInput: any) {
     const file: File = imageInput.files[0];
