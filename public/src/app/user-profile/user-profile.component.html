@@ -58,20 +58,6 @@
                     <div *ngIf="edit_errors?.org" class="text-danger">{{edit_errors.org.message}}</div>
                 </div>
             </div>
-
-            <!-- <div class="row">
-          <div class="form-group col">
-            <label>Password</label>
-            <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password" required>
-            <div *ngIf="signup_errors?.password" class="errors">{{signup_errors.lastName.password}}</div>
-          </div>
-          <div class="form-group col">
-            <label>Confirm Password</label>
-            <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm" required>
-            <div class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password
-              field is not matching your Password field.</div>
-          </div>
-        </div> -->
             <div class="d-flex align-items-between">
                 <div class="form-group ml-auto">
                     <label>Sign up for our newsletter</label>
@@ -79,13 +65,51 @@
                 </div>
             </div>
         </div>
-        <!-- arrange this to be in bottom right with absolute -->
         <div class="modal-footer">
             <button class="btn btn-primary" (click)="editting()">Edit</button>
         </div>
     </form>
 </ng-template>
 
+<!-- Edit User Info modal -->
+<ng-template #password>
+    <div class="modal-header">
+        <h2 class="modal-title">Edit Your Password</h2>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body container">
+            <div class="row">
+                <div class="form-group col">
+                    <label>Old Password</label>
+                    <input type="password" class="form-control col" placeholder="********" name="editPassword.old"
+                        [(ngModel)]="editPassword.old" required>
+                    <!-- <div *ngIf="editPassword_errors?.old" class="text-danger">{{edit_errors.firstName.message}}</div> -->
+                </div>
+                <div class="form-group col">
+                    <label>New Password</label>
+                    <input type="password" class="form-control col" placeholder="********" name="editPassword.new"
+                        [(ngModel)]="editPassword.new" required>
+                    <!-- <div *ngIf="editPassword_errors?.old" class="text-danger">{{edit_errors.firstName.message}}</div> -->
+                </div>
+                <div class="form-group col">
+                    <label>Confirm New Password</label>
+                    <input type="password" class="form-control col" placeholder="********" name="editPassword.confirm"
+                        [(ngModel)]="editPassword.confirm" required>
+                    <div class="text-danger" *ngIf="editPassword.confirm !== '' && editPassword.new !== editPassword.confirm"><small>The Confirm Password
+                            field is not matching your Password field.</small></div>
+                    <!-- <div *ngIf="editPassword_errors?.old" class="text-danger">{{edit_errors.firstName.message}}</div> -->
+                </div>
+            </div>
+        </div>
+        <!-- arrange this to be in bottom right with absolute -->
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="edittingPassword()">Edit</button>
+        </div>
+    </form>
+</ng-template>
 
 <!-- Edit User Photo modal -->
 <ng-template #picture>
@@ -155,6 +179,8 @@
                 <hr />
                 <button (click)="open('edit')" class="btn btn-sm btn-outline-secondary btn-block"><i
                         class="fa fa-pencil mr-2"></i>Edit User Profile</button>
+                <button (click)="open('password')" class="btn btn-sm btn-outline-secondary btn-block"><i
+                    class="fa fa-pencil mr-2"></i>Edit Your Password</button>
                 <button *ngIf="userInfo?.mentor_id" [routerLink]="['/user/avails']"
                     class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-calendar mr-2"></i>Set Mentoring
                     Availabilities</button>

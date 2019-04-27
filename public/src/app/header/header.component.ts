@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   signup_errors: any;
   login_errors: any;
   loginInfo: TokenPayload;
-  newUser: TokenPayload;
+  newUser: any;
   password_confirm: String;
   newsletter: boolean;
   admin: boolean = false;

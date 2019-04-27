@@ -8,6 +8,7 @@ module.exports=function(app){
     app
     .get('/api/users', controller.userAll)
     .get('/api/users/excel', controller.userExcel)
+    .post('/api/users/password/:password', controller.updatePassword)
     .post('/api/users/register', controller.userRegister)
     .put('/api/users/img/:id', controller.updateImage)
     .get('/api/users/profile', auth, controller.userProfile)
