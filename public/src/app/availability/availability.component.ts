@@ -50,7 +50,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     }
   }
   open(date: moment.Moment) {
-    if(!this.isPast(date)){
+    if (!this.isPast(date)) {
       this.date = date;
       this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
       this.modal = this._modalsService.open(this.availabilities, { size: 'lg' });
@@ -110,8 +110,8 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   isSelectedMonth(date: moment.Moment): boolean {
     return moment(date).month() === moment(this.currentDate).month();
   }
-  isPast(date: moment.Moment): boolean{
-    return moment(date).isBefore(moment().startOf('day'))
+  isPast(date: moment.Moment): boolean {
+    return moment(date).isBefore(moment().startOf('day'));
   }
   isDayAvailable(date: moment.Moment): boolean {
     const meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());

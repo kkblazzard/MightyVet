@@ -49,10 +49,10 @@
             <ng-container *ngFor="let week of weeks">
               <tr>
                 <ng-container *ngFor="let day of week">
-                  <td class="date-container text-center bg-light border-0" [ngClass]="{ 'today': day.today, 'available': day.available, 'past': day.isPast }" *ngIf="!isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
+                  <td class="date-container text-center bg-light border-0" [ngClass]="{ 'today': day.today, 'available': day.available, 'past': day.isPast, 'not-past': !day.isPast }" *ngIf="!isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
                     <div class="date-text m-auto">{{ day.mDate.date() }}</div>
                   </td>
-                  <td class="date-container text-center border-0" [ngClass]="{ 'today': day.today, 'available': day.available, 'past': day.isPast }" *ngIf="isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
+                  <td class="clickable date-container text-center border-0" [ngClass]="{ 'today': day.today, 'available': day.available, 'past': day.isPast, 'not-past': !day.isPast  }" *ngIf="isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
                     <div class="date-text m-auto">{{ day.mDate.date() }}</div>
                   </td>
                 </ng-container>

@@ -1,17 +1,17 @@
 table {
     table-layout: fixed;
 }
-.date-container:hover {
+.not-past:hover {
     box-shadow: 0px 0px 10px #ccc;
 }
 .past .date-text{
     opacity: .5;
 }
 .date-text {
-    width: 40px;
-    height:40px;
+    width: 35px;
+    height:35px;
     border-radius: 50%;
-    line-height: 40px;
+    line-height: 35px;
 }
 .available .date-text {
     color: #fff;
@@ -20,15 +20,14 @@ table {
     box-shadow: 0px 0px 5px #666;
 }
 
-.today .date-text {
-    border: 2px solid #38b9a4;
-    box-shadow: 0px 0px 5px #666;
+.today {
+    background: #cafaf2;
 }
 @media only screen and (max-width:576px){
     .date-text {
-        width: 30px;
-        height:30px;
+        width: 25px;
+        height:25px;
         border-radius: 50%;
-        line-height: 30px;
+        line-height: 25px;
     }
 }
