@@ -6,23 +6,16 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-  }
-  #mentorship-text {
+}
+#mentorship-text {
     background-color: rgba(40, 40, 40, 0.55);
     width: 600px;
     border-bottom: 5px solid #7290cd;
-  }
-.mentor{
-    background: rgba(168, 201, 239, 0.62);
 }
-.mentor:hover {
-    background: rgba(168, 201, 239, 0.50);
-}
-#mentor-img img{
-    width: 176px;
-}
-.modal-dialog{
-    max-width: 80%;
+#mentor:hover, #mentor.card-header:hover {
+    box-shadow: 0px 0px 3px 3px #ccc;
+    text-decoration: none;
+    cursor: pointer;
 }
 .form-input{
     width: 45%;
@@ -38,7 +31,7 @@ textarea {
 /* media queries */
 
 @media only screen and (min-width:992px){
-    .main-image{
+    /* .main-image{
         width: 48.6%;
     }
     .main-info{
@@ -46,5 +39,5 @@ textarea {
     }
     .mentor{
         width: 48.6%;
-    }
+    } */
 }
