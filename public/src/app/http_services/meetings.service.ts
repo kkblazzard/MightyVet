@@ -26,5 +26,12 @@ export class MeetingsService {
   deleteMeeting(id) {
     return this._http.delete('/api/meetings/' + id);
   }
-
+  signUp(meeting_id, meetingUpdate) {
+    console.log("http.service sign up meeting", meetingUpdate);
+    return this._http.put('/api/meetings/signup/' + meeting_id, meetingUpdate);
+  }
+  cancel(meeting_id, meetingUpdate) {
+    console.log("http.service cancel sign up", meetingUpdate);
+    return this._http.put('/api/meetings/cancel/' + meeting_id, meetingUpdate);
+  }
 }

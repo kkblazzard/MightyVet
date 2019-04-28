@@ -129,7 +129,7 @@ module.exports={
         Users
           .findById(req.payload._id)
           .select('-password')
-          .populate([{path: 'accreditations', populate: {path: 'webinar'}},{path: 'mentors', populate: [{path: 'mentor', populate: {path: 'user'}}, {path: 'meetings', populate: {path: 'mentor', populate: {path: 'user', select: '-password'}}}]},{path: 'mentor_id', populate: [{path: 'mentees', populate: {path: 'user', select: '-password'}}, {path: 'availabilities', populate: {path: 'mentee', populate: {path: 'user', select: '-password'}}}]}])
+          .populate([{path: 'accreditations', populate: {path: 'webinar'}},{path: 'mentors', populate: {path: 'mentor', populate: {path: 'user', select: '-password'}}},{path: 'mentor_id', populate: [{path: 'mentees', populate: {path: 'user', select: '-password'}}, {path: 'availabilities', populate: {path: 'mentee',  select: '-password'}}]}, {path: 'meetings', populate: {path: 'mentor', populate: {path: 'user', select: '-password'}}}])
           .then(one=>console.log(one) || res.json(one))
           .catch(err=>console.log(err) || res.json(err))
       }

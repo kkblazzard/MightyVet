@@ -53,7 +53,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     if (!this.isPast(date)) {
       this.date = date;
       this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
-      this.modal = this._modalsService.open(this.availabilities, { size: 'lg' });
+      this.modal = this._modalsService.open(this.availabilities);
       this.modal.result.then(() => { }, () => this.closedModal());
     }
   }
@@ -73,6 +73,9 @@ export class AvailabilityComponent implements OnInit, OnChanges {
           this.user = data;
           this.user.mentor_id.availabilities = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours')));
           this.generateCalendar();
+          if(this.date){
+            this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === this.date.format());
+          }
         }
         else {
           this._router.navigateByUrl('/user');
@@ -141,10 +144,19 @@ export class AvailabilityComponent implements OnInit, OnChanges {
         this.availability_error = data['errors'].datetime.message;
       }
       else {
-        this.daily_meetings.push(data);
-        console.log(this.daily_meetings);
         this.getUserInfo();
       }
     });
+  }
+  cancel(meeting_id) {
+    let obs = this._meetingsService.deleteMeeting(meeting_id);
+    obs.subscribe(data => {
+      if (data['errors']){
+        console.log(data['errors']);
+      }
+      else{
+        this.getUserInfo();
+      }
+    })
   }
 }

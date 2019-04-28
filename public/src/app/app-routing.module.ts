@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'courses/:id', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
   {path: 'mentorship/:id', component: MentorDetailsComponent},
-  {path: 'mentorship/:id/schedule', component: SchedulingComponent},
+  {path: 'mentorship/:id/schedule', canActivate: [LoginService], component: SchedulingComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'support', component: SupportComponent},
   {path: 'blog', component: BlogComponent},

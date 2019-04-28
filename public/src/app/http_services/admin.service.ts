@@ -16,10 +16,10 @@ export class AdminService implements CanActivate{
       if (this._authenticationsService.getUserDetails().admin){
         return true;
       }
-        this._router.navigateByUrl('/not-found');
+        this._router.navigateByUrl('/');
         return false;
     }
-    this._router.navigateByUrl('/not-found');
+    this._router.navigateByUrl('/');
     return false;
   }
 }
