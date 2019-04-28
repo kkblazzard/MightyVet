@@ -1,5 +1,4 @@
 const Doner=require('./models');
-// import {secrets} from ('../');
 module.exports={
     donerAdd: (req, res) => {
     var doner = new Doner(req.body);
@@ -25,17 +24,20 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err)),
     donerPayments: (req, res) => {
         console.log("payment controller hit",req.body);
-        // var stripe = require("stripe")(secrets.pubKey);
-        // stripe.charges.create({
-        // amount: 2000,
-        // currency: "usd",
-        // source: "tok_amex", // obtained with Stripe.js
-        // description: "Charge for jenny.rosen@example.com"
-        // }, function(err, charge) {
-        // // asynchronously called
-        // });
-        console.log("doner payment charge var from stripe", charge)
-        // .then(payment=>console.log("paid", payment || res.json(payment))
-        // .catch(err=>console.log("payment errors", err) || res.json(err)),
-    },
+        var stripe = require("stripe")(require('../secrets').stripeKey);
+        stripe.charges.create({
+            amount: req.body.amount,
+            currency: 'usd',
+            description: 'Donation',
+            source: req.body.stripeToken.id,
+          },
+        function(err, charge) {
+            if (err) {
+                console.log("payment errors", err) || res.json(err)
+            } 
+            else{
+                console.log("paid", charge) || res.json(charge)
+            }
+        })
+    }
 }
