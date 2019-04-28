@@ -9,10 +9,9 @@ export class PaymentsService {
 
   constructor(private _http: HttpClient) { }
 
-  makePayment(token, extraData){
+  makePayment(token, amount){
     console.log("http payment service make payment");
-    
-    return this._http.post('/api/doner/payment', token, extraData)
+    return this._http.post('/api/doner/payment', {stripeToken: token, amount: amount})
     
   }
 

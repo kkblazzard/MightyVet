@@ -20,7 +20,7 @@ export class SupportComponent implements OnInit {
   open(content) {
     if (content === 'paymentSuccess') {
     // payment modal
-    this.modal = this._modalService.open(this.paymentSuccess, { size: 'lg' });
+    this.modal = this._modalService.open(this.paymentSuccess);
   } else {
     // donation modal
     this.modal = this._modalService.open(this.donate, { size: 'lg' });
