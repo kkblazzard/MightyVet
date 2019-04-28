@@ -55,7 +55,9 @@ var UserSchema = new mongoose.Schema({
                 default: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png",
                 required: [true, "Please upload an image... It may take a bit of time to load."]
         },
-
+        meetings: [ {type : mongoose.Schema.ObjectId, 
+                ref : 'meeting' } ],
+                
         accreditations: [{type : mongoose.Schema.ObjectId, 
                 ref : 'accreditation'}],  //list of accreditation ids
 

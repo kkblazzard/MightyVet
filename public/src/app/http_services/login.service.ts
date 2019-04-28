@@ -14,7 +14,7 @@ export class LoginService implements CanActivate{
     if (this._authenticationsService.isLoggedIn()) {
       return true;
     }
-    this._router.navigateByUrl('/not-found');
+    this._router.navigateByUrl('/');
     return true;
   }
 }

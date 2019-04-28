@@ -7,7 +7,7 @@ var MeetingSchema = new mongoose.Schema({
     },
     mentee: {
         type : mongoose.Schema.ObjectId, 
-        ref : 'mentee'
+        ref : 'user'
     },
     datetime: {
         type: Date,

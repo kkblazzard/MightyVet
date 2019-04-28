@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 
 export interface CalendarDate {
   mDate: moment.Moment;
+  booked?: boolean;
   available?: boolean;
   today?: boolean;
   isPast?: boolean;
@@ -60,7 +61,7 @@ export class SchedulingComponent implements OnInit, OnChanges {
   }
   open(date: moment.Moment){
     this.date = date;
-    this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
+    this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());
     if(this.daily_meetings.length){
       this.modal = this._modalsService.open(this.availabilities)
       this.modal.result.then(() => { }, () => this.closedModal());
@@ -85,29 +86,53 @@ export class SchedulingComponent implements OnInit, OnChanges {
       }
       else{
         this.mentor = data;
-        if (data['availabilities']){
-          data['availabilities'] = data['availabilities'].filter(x => !x.mentee && moment(x.datetime).isSameOrAfter(moment().subtract(1, "hours")));
+        if (this.mentor['availabilities']){
+          this.mentor['availabilities'] = this.mentor['availabilities'].filter(x => (!x.mentee ? true : x.mentee._id === this._authenticationsService.getUserDetails()._id) && moment(x.datetime).isSameOrAfter(moment().subtract(1, "hours")));
         }
-        if (data['mentees']){
-          this.checkMentee();
+        if(this.date){
+          this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === this.date.format());
         }
-        console.log(this.mentor);
+        this.checkMentee();
         this.generateCalendar();
       }
     })
   }
   checkMentee() {
     var isMentee = false;
-    for (let mentee of this.mentor.mentees) {
-      if (mentee.user === this._authenticationsService.getUserDetails()._id) {
-        if (mentee.approval){
-          isMentee = true;
+    if (this.mentor.mentees){
+      for (let mentee of this.mentor.mentees) {
+        if (mentee.user === this._authenticationsService.getUserDetails()._id) {
+          if (mentee.approval){
+            isMentee = true;
+          }
         }
       }
     }
     if (!isMentee){
       this._router.navigateByUrl('/mentorship/'+this.id);
     }
+  }
+  signUp(meeting_id) {
+    let obs = this._meetingsService.signUp(meeting_id, {mentee: this._authenticationsService.getUserDetails()._id});
+    obs.subscribe(data => {
+      if (data['errors']){
+        console.log(data['errors']);
+      }
+      else{
+        this.getMentor();
+      }
+    })
+  }
+  cancel(meeting_id) {
+    let obs = this._meetingsService.cancel(meeting_id, {mentee: this._authenticationsService.getUserDetails()._id});
+    obs.subscribe(data => {
+      if (data['errors']){
+        console.log(data['errors']);
+      }
+      else{
+        this.getMentor();
+      }
+    })
   }
   generateCalendar(): void {
     const dates = this.fillDates(this.currentDate);
@@ -129,6 +154,7 @@ export class SchedulingComponent implements OnInit, OnChanges {
                 today: this.isToday(d),
                 available: this.isDayAvailable(d),
                 mDate: d,
+                booked: this.isDayBooked(d),
                 isPast: this.isPast(d)
               };
             });
@@ -142,9 +168,16 @@ export class SchedulingComponent implements OnInit, OnChanges {
   isPast(date: moment.Moment): boolean{
     return moment(date).isBefore(moment().startOf('day'))
   }
+  isDayBooked(date: moment.Moment): boolean {
+    var daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format() && (!x.mentee ? false : x.mentee._id === this._authenticationsService.getUserDetails()._id));
+    if(daily_meetings.length){
+      return true;
+    }
+    return false;
+  }
   isDayAvailable(date: moment.Moment): boolean {
-    this.daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());
-    if(this.daily_meetings.length){
+    var daily_meetings = this.mentor.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format() && !x.mentee);
+    if(daily_meetings.length){
       return true;
     }
     return false;
