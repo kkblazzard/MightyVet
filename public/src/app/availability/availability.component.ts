@@ -19,9 +19,13 @@ export interface CalendarDate {
 })
 export class AvailabilityComponent implements OnInit, OnChanges {
   @ViewChild('showAvailabilities') availabilities: ElementRef;
+  recurring = {
+    boolean: false,
+    num: '4'
+  }
   schedule_events: any;
   availability_error: string;
-  newTime: string;
+  newTime: any;
   daily_meetings: any;
   modal: any;
   user: any;
@@ -58,9 +62,14 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     }
   }
   closedModal() {
-    this.newTime = '';
+    this.availability_error = null;
+    this.newTime = null;
     this.date = null;
     this.getUserInfo();
+    this.recurring = {
+      boolean: false,
+      num: '4'
+    }
   }
   getUserInfo() {
     let obs = this._authenticationsService.profile();
@@ -135,18 +144,26 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   }
   newMeeting() {
     this.availability_error = null;
-    const time = this.newTime.split(':');
-    const date = moment(this.date.toDate());
-    let obs = this._meetingsService.addMeeting(this._authenticationsService.getUserDetails()._id, {
-      datetime: date.add(time[0], 'hours').add(time[1], 'minutes').toDate(),
-      mentor: this.user.mentor_id._id
-    });
+    var date = moment(this.date.toDate()).add(this.newTime.hour, 'hours').add(this.newTime.minute, 'minutes');
+    var meetings = [{datetime: date.toDate(), mentor: this.user.mentor_id._id}]
+    if (this.recurring.boolean){
+      for(let i = 1; i < parseInt(this.recurring.num); i ++){
+        date = date.add(7, 'days')
+        meetings.push({
+          datetime: date.toDate(),
+          mentor: this.user.mentor_id._id
+        });
+      }
+    }
+    let obs = this._meetingsService.addMeeting(this._authenticationsService.getUserDetails()._id, meetings);
     obs.subscribe(data => {
+      console.log(data);
       if (data['errors']) {
         this.availability_error = data['errors'].datetime.message;
       }
       else {
         this.getUserInfo();
+        this.newTime = null;
       }
     });
   }
