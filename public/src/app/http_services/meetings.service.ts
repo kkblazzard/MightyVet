@@ -15,9 +15,9 @@ export class MeetingsService {
       return this._http.get(`/api/meetings/mentee/${id}`);
     }
   }
-  addMeeting(newMeeting) {
+  addMeeting(user_id, newMeeting) {
     console.log("http.service addMeeting", newMeeting);
-    return this._http.post('/api/meetings', newMeeting);
+    return this._http.post('/api/meetings/'+user_id, newMeeting);
   }
   meetingUpdate(id, meetingUpdate) {
     console.log("http.service meetingupdate", meetingUpdate);

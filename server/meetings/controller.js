@@ -8,13 +8,24 @@ module.exports={
 
     meetingNew: (req, res) => {
         console.log("entered new controller", req.body);
-        Meetings
-        .create(req.body)
-        .then(anew=>{
-            console.log("created in controller",anew);
-            Mentors.findByIdAndUpdate(req.body.mentor, {$push:{availabilities: anew._id}}, {new: true})
-            .then(updated => console.log("pushed to mentor", updated) || res.json(anew))
-            .catch(err=>console.log(err) || res.json(err))
+        var before = new Date(req.body.datetime).setHours(new Date(req.body.datetime).getHours()-1);
+        var after = new Date(req.body.datetime).setHours(new Date(req.body.datetime).getHours()+1)
+        Meetings.find({$or: [{mentor: req.body.mentor, datetime: {$gt: before, $lt: after}}, {mentee: req.params.id, datetime: {$gt: before, $lt: after}}]})
+        .then(data => {
+            if(data.length){
+                res.json( {"errors": { "datetime": {"message": "You are already signed up for a meeting at this time."}}})
+            }
+            else{
+                Meetings
+                .create(req.body)
+                .then(anew=>{
+                    console.log("created in controller",anew);
+                    Mentors.findByIdAndUpdate(req.body.mentor, {$push:{availabilities: anew._id}}, {new: true})
+                    .then(updated => console.log("pushed to mentor", updated) || res.json(anew))
+                    .catch(err=>console.log(err) || res.json(err))
+                })
+                .catch(err=>console.log(err) || res.json(err))
+            }
         })
         .catch(err=>console.log(err) || res.json(err))
     },
@@ -47,15 +58,32 @@ module.exports={
         .then(meetings=>console.log(meetings) || res.json(meetings))
         .catch(err=>console.log(err) || res.json(err)),
 
-    meetingSignUp: (req, res) => Meetings
-    .findByIdAndUpdate(req.params.id,req.body,{new: true})
-    .then(updated => {
-        console.log("updated",updated);
-        Users.findByIdAndUpdate(req.body.mentee, {$push: {meetings: updated._id}}, {new: true})
-        .then(() => res.json(updated))
+    meetingSignUp: (req, res) => {
+        Meetings.findById(req.params.id)
+        .then( meeting => {
+            var before = new Date(meeting.datetime).setHours(new Date(meeting.datetime).getHours()-1);
+            var after = new Date(meeting.datetime).setHours(new Date(meeting.datetime).getHours()+1)
+            Meetings.find({$or:[{mentee: req.body.mentee, datetime: {$gt: before, $lt: after}}, {mentor: req.body.mentor, datetime: {$gt: before, $lt: after}}]})
+            .then(data => {
+                if(data.length){
+                    res.json( {"errors": { "datetime": {"message": "You are already signed up for a meeting at this time."},  "_id": req.params.id}})
+                }
+                else{
+                    meeting.mentee = req.body.mentee;
+                    meeting.save()
+                    .then(updated => {
+                        console.log("updated",updated);
+                        Users.findByIdAndUpdate(req.body.mentee, {$push: {meetings: updated._id}}, {new: true})
+                        .then(() => res.json(updated))
+                        .catch(err=>console.log(err) || res.json(err))
+                    })
+                    .catch(err=>console.log(err) || res.json(err))
+                }
+            })
+            .catch(err=>console.log(err) || res.json(err))
+        })
         .catch(err=>console.log(err) || res.json(err))
-    })
-    .catch(err=>console.log(err) || res.json(err)),
+    },
     cancelMeeting: (req, res) => Meetings
     .findByIdAndUpdate(req.params.id,{mentee: null},{new: true})
     .then(updated => {
