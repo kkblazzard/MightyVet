@@ -151,8 +151,8 @@
 <div class="container">
     <div class="d-flex justify-content-between mb-4">
         <div id="user-profile-left" class="card border-primary">
-            <div id="user-profile-img" class="p-5">
-                <img class="w-100" (click)="open('picture')" [src]="userInfo.picture" alt="Profile Picture">
+            <div id="user-profile-img" class="p-5 pointer" (click)="open('picture')">
+                <img class="w-100" [src]="userInfo.picture" alt="Profile Picture">
             </div>
             <div class="card-body">
                 <h3 class="card-title">{{userInfo.firstName}} {{userInfo.lastName}}</h3>
@@ -181,9 +181,8 @@
                         class="fa fa-pencil mr-2"></i>Edit User Profile</button>
                 <button (click)="open('password')" class="btn btn-sm btn-outline-secondary btn-block"><i
                     class="fa fa-pencil mr-2"></i>Edit Your Password</button>
-                <button *ngIf="userInfo?.mentor_id" [routerLink]="['/user/avails']"
-                    class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-calendar mr-2"></i>Set Mentoring
-                    Availabilities</button>
+                <button [routerLink]="['/user/schedule']"
+                    class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-calendar mr-2"></i>Upcoming Schedule</button>
             </div>
         </div>
         <div id="user-profile-right">
@@ -209,15 +208,15 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link class_nav" (click)="changeContent('progress')"
+                            <a class="nav-link pointer" (click)="changeContent('progress')"
                                 [ngClass]="{'active': isProgress()}">CE Credit Progress</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link class_nav" (click)="changeContent('current')"
+                            <a class="nav-link pointer" (click)="changeContent('current')"
                                 [ngClass]="{'active': isCurrent()}">Current Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link class_nav" (click)="changeContent('completed')"
+                            <a class="nav-link pointer" (click)="changeContent('completed')"
                                 [ngClass]="{'active': isCompleted()}">Courses Completed</a>
                         </li>
                     </ul>

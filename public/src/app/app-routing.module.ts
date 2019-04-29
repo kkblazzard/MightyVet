@@ -25,7 +25,7 @@ import { LoginService } from './http_services/login.service';
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomeComponent},
   {path: 'user', canActivate: [LoginService], component: UserProfileComponent},
-  {path: 'user/avails', canActivate: [LoginService], component: AvailabilityComponent},
+  {path: 'user/schedule', canActivate: [LoginService], component: AvailabilityComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/:id', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},

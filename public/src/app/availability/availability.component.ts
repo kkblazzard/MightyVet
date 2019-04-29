@@ -1,7 +1,6 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MeetingsService } from '../http_services/meetings.service';
-import { MentorsService } from '../http_services/mentors.service';
 import { AuthenticationService } from '../http_services/authentication.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
@@ -20,6 +19,7 @@ export interface CalendarDate {
 })
 export class AvailabilityComponent implements OnInit, OnChanges {
   @ViewChild('showAvailabilities') availabilities: ElementRef;
+  schedule_events: any;
   availability_error: string;
   newTime: string;
   daily_meetings: any;
@@ -52,7 +52,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   open(date: moment.Moment) {
     if (!this.isPast(date)) {
       this.date = date;
-      this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format())
+      this.daily_meetings = this.schedule_events.filter(x => moment(x.datetime).startOf('day').format() === date.format())
       this.modal = this._modalsService.open(this.availabilities);
       this.modal.result.then(() => { }, () => this.closedModal());
     }
@@ -69,16 +69,18 @@ export class AvailabilityComponent implements OnInit, OnChanges {
         this._router.navigateByUrl('/user');
       }
       else {
-        if (data['mentor_id']) {
-          this.user = data;
-          this.user.mentor_id.availabilities = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours')));
-          this.generateCalendar();
-          if(this.date){
-            this.daily_meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === this.date.format());
-          }
+        this.user = data;
+        console.log(this.user);
+        if(this.user.mentor_id){
+          this.schedule_events = [...this.user.mentor_id.availabilities.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours'))), ...this.user.meetings.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours'))), ...this.user.accreditations.map(x => x.webinar).filter(x => x.type === "Live" && moment(x.datetime).isSameOrAfter(moment()))]
         }
-        else {
-          this._router.navigateByUrl('/user');
+        else{
+          [...this.user.meetings.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours'))), ...this.user.accreditations.map(x => x.webinar).filter(x => x.type === "Live" && moment(x.datetime).isSameOrAfter(moment()))]
+        }
+        console.log(this.schedule_events);
+        this.generateCalendar();
+        if(this.date){
+          this.daily_meetings = this.schedule_events.filter(x => moment(x.datetime).startOf('day').format() === this.date.format());
         }
       }
     });
@@ -117,7 +119,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     return moment(date).isBefore(moment().startOf('day'));
   }
   isDayAvailable(date: moment.Moment): boolean {
-    const meetings = this.user.mentor_id.availabilities.filter(x => moment(x.datetime).startOf('day').format() === date.format());
+    const meetings = this.schedule_events.filter(x => moment(x.datetime).startOf('day').format() === date.format());
     if (meetings.length) {
       return true;
     }
@@ -135,7 +137,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     this.availability_error = null;
     const time = this.newTime.split(':');
     const date = moment(this.date.toDate());
-    let obs = this._meetingsService.addMeeting({
+    let obs = this._meetingsService.addMeeting(this._authenticationsService.getUserDetails()._id, {
       datetime: date.add(time[0], 'hours').add(time[1], 'minutes').toDate(),
       mentor: this.user.mentor_id._id
     });
@@ -150,6 +152,17 @@ export class AvailabilityComponent implements OnInit, OnChanges {
   }
   cancel(meeting_id) {
     let obs = this._meetingsService.deleteMeeting(meeting_id);
+    obs.subscribe(data => {
+      if (data['errors']){
+        console.log(data['errors']);
+      }
+      else{
+        this.getUserInfo();
+      }
+    })
+  }
+  unSignUp(meeting_id){
+    let obs = this._meetingsService.cancel(meeting_id, {mentee: this._authenticationsService.getUserDetails()._id});
     obs.subscribe(data => {
       if (data['errors']){
         console.log(data['errors']);

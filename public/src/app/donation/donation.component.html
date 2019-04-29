@@ -112,11 +112,11 @@
     <div class="form-group">
       <label for="card-info">Credit or debit card</label>
       <div id="card-info" class="m-0" #cardInfo></div>
-      <div id="card-errors" role="alert" style="color:red" *ngIf="error">{{ error }}</div>
+      <div id="card-errors" class="text-danger" *ngIf="error"><small>{{ error }}</small></div>
     </div>
     <div class="form-group">
       <label>Amount</label>
-      <input type="number" class="form-control" placeholder="100.00" name="amount" [(ngModel)]="amount" required>
+      <input class="form-control" name="amount" [(ngModel)]="amount" currencyMask required>
     </div>
   </div>
   <div class="modal-footer">

@@ -140,14 +140,14 @@
             <small>{{speaker_errors.description.message}}</small></div>
         </div>
         <div class="form-group">
-          <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
-            format="jpeg, png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
-            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
-        </div>
-        <div class="form-group">
           <label for="file">Choose a picture for your speaker</label>
           <input class="form-control" id="file" type="file" accept="image/*" (change)="fileChangeEvent($event)">
           <div *ngIf="speaker_errors?.img" class="text-danger"><small>{{speaker_errors.img.message}}}</small></div>
+        </div>
+        <div>
+          <image-cropper class="w-50" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+            format="jpeg, png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
         </div>
         <!-- <input #imageInput class="form-control" id="file" type="file" accept="image/*"
             (change)="processFile(imageInput)">

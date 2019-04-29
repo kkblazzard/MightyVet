@@ -22,6 +22,7 @@ export interface CalendarDate {
 
 export class SchedulingComponent implements OnInit, OnChanges {
   @ViewChild('showAvailabilities') availabilities: ElementRef;
+  error: any;
   daily_meetings: any;
   modal: any;
   id: string;
@@ -68,6 +69,7 @@ export class SchedulingComponent implements OnInit, OnChanges {
     }
   }
   closedModal(){
+    this.error = null;
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
       if(this._authenticationsService.isLoggedIn()){
@@ -113,14 +115,24 @@ export class SchedulingComponent implements OnInit, OnChanges {
     }
   }
   signUp(meeting_id) {
-    let obs = this._meetingsService.signUp(meeting_id, {mentee: this._authenticationsService.getUserDetails()._id});
+    let obs = this._authenticationsService.profile();
     obs.subscribe(data => {
-      if (data['errors']){
-        console.log(data['errors']);
+      var mentor;
+      if (data.mentor_id){
+        mentor = data.mentor_id
       }
       else{
-        this.getMentor();
+        mentor = null
       }
+      let obs2 = this._meetingsService.signUp(meeting_id, {mentee: this._authenticationsService.getUserDetails()._id, mentor: mentor});
+      obs2.subscribe(data2 => {
+        if (data2['errors']){
+          this.error = data2['errors'];
+        }
+        else{
+          this.getMentor();
+        }
+      }) 
     })
   }
   cancel(meeting_id) {

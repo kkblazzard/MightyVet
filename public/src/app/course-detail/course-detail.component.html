@@ -14,7 +14,7 @@
         <h4>Class Type</h4>
         <p>{{course.type}}</p>
         <h4>Class Date & Time</h4>
-        <p>{{course.datetime | date:"MMM-dd-y, HH:MMa"}}</p>
+        <p>{{course.datetime | date:"MMM-dd-y, hh:mma"}}</p>
         <h4>Speaker</h4>
         <app-speaker-details [model]="course.speaker"></app-speaker-details>
         <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>

@@ -16,6 +16,7 @@ import { AuthenticationService } from './http_services/authentication.service';
 import { AdminService } from './http_services/admin.service';
 import { LoginService } from './http_services/login.service';
 // modules
+import { CurrencyMaskModule } from "ng2-currency-mask";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -141,18 +142,6 @@ export class MentorSearchPipe implements PipeTransform {
 
 //-------------end mentor pipe--------------------
 
-//  ---------- course featured number-------
-@Pipe({ name: 'search', pure: true })
-
-export class SearchPipe implements PipeTransform {
-  transform(value: Array<any>, num: number): Array<any> {
-    if (value) {
-      return value.slice(0, num);
-    } else {
-      return new Array<any>();
-    }
-  }
-}
 
 // -----------courses pipe-----------
 @Pipe({ name: 'coursesearch', pure: false })
@@ -287,7 +276,6 @@ export class SlicePipe implements PipeTransform {
     AdminUsersComponent,
     AvailabilityComponent,
     KeysPipe,
-    SearchPipe,
     MentorSearchPipe,
     CourseSearchPipe,
     SlicePipe,
@@ -303,6 +291,7 @@ export class SlicePipe implements PipeTransform {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CurrencyMaskModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     ImageCropperModule,
