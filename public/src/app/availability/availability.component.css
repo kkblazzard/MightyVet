@@ -3,6 +3,7 @@ table {
 }
 .not-past:hover {
     box-shadow: 0px 0px 10px #ccc;
+    cursor: pointer;
 }
 .past .date-text{
     opacity: .5;
