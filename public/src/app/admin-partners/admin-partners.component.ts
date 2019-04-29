@@ -54,6 +54,7 @@ export class AdminPartnersComponent implements OnInit {
       this.img_error = null;
       this.link_error = null;
       if (!data['errors']){
+        this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
         this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
       }
       else{

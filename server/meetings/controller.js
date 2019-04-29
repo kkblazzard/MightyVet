@@ -8,24 +8,13 @@ module.exports={
 
     meetingNew: (req, res) => {
         console.log("entered new controller", req.body);
-        var before = new Date(req.body.datetime).setHours(new Date(req.body.datetime).getHours()-1);
-        var after = new Date(req.body.datetime).setHours(new Date(req.body.datetime).getHours()+1)
-        Meetings.find({$or: [{mentor: req.body.mentor, datetime: {$gt: before, $lt: after}}, {mentee: req.params.id, datetime: {$gt: before, $lt: after}}]})
-        .then(data => {
-            if(data.length){
-                res.json( {"errors": { "datetime": {"message": "You are already signed up for a meeting at this time."}}})
-            }
-            else{
-                Meetings
-                .create(req.body)
-                .then(anew=>{
-                    console.log("created in controller",anew);
-                    Mentors.findByIdAndUpdate(req.body.mentor, {$push:{availabilities: anew._id}}, {new: true})
-                    .then(updated => console.log("pushed to mentor", updated) || res.json(anew))
-                    .catch(err=>console.log(err) || res.json(err))
-                })
-                .catch(err=>console.log(err) || res.json(err))
-            }
+        Meetings
+        .create(req.body)
+        .then(allnew=>{
+            console.log("created in controller",allnew);
+            Mentors.findByIdAndUpdate(req.body[0].mentor, {$addToSet:{availabilities: {$each: allnew.map(x => {return x._id})}}}, {new: true})
+            .then(updated => console.log("pushed to mentor", updated) || res.json(allnew))
+            .catch(err=>console.log(err) || res.json(err))
         })
         .catch(err=>console.log(err) || res.json(err))
     },
@@ -60,7 +49,7 @@ module.exports={
 
     meetingSignUp: (req, res) => {
         Meetings.findById(req.params.id)
-        .then( meeting => {
+        .then(meeting => {
             var before = new Date(meeting.datetime).setHours(new Date(meeting.datetime).getHours()-1);
             var after = new Date(meeting.datetime).setHours(new Date(meeting.datetime).getHours()+1)
             Meetings.find({$or:[{mentee: req.body.mentee, datetime: {$gt: before, $lt: after}}, {mentor: req.body.mentor, datetime: {$gt: before, $lt: after}}]})
@@ -69,8 +58,7 @@ module.exports={
                     res.json( {"errors": { "datetime": {"message": "You are already signed up for a meeting at this time."},  "_id": req.params.id}})
                 }
                 else{
-                    meeting.mentee = req.body.mentee;
-                    meeting.save()
+                    Meetings.findByIdAndUpdate(meeting.id, {mentee: req.body.mentee}, {new: true})
                     .then(updated => {
                         console.log("updated",updated);
                         Users.findByIdAndUpdate(req.body.mentee, {$push: {meetings: updated._id}}, {new: true})
