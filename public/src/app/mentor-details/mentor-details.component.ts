@@ -11,6 +11,7 @@ import { MenteesService } from '../http_services/mentees.service';
   styleUrls: ['./mentor-details.component.css']
 })
 export class MentorDetailsComponent implements OnInit {
+  adminView = false;
   id: string;
   mentor: any;
   isMentee: boolean;
@@ -39,14 +40,33 @@ export class MentorDetailsComponent implements OnInit {
     let obs = this._mentorsService.getMentor(this.id);
     obs.subscribe((data) => {
       this.mentor = data;
-      if(this._authenticationsService.isLoggedIn()){
-        if (this.mentor.user._id === this._authenticationsService.getUserDetails()._id){
-          this._router.navigateByUrl('/user');
+      console.log(this.mentor);
+      if (!this.mentor.approval){
+        if(this._authenticationsService.isLoggedIn()){
+          let obs = this._authenticationsService.profile()
+          obs.subscribe(data => {
+            if (data['admin']){
+              this.adminView = true;
+            }
+            else{
+              this._router.navigateByUrl('/mentorship');
+            }
+          })
+        }
+        else{
+          this._router.navigateByUrl('/mentorship');
         }
       }
-      if (data['mentees']){
-        this.checkMentee();
-      } 
+      else{
+        if(this._authenticationsService.isLoggedIn()){
+          if (this.mentor.user._id === this._authenticationsService.getUserDetails()._id){
+            this._router.navigateByUrl('/user');
+          }
+        }
+        if (data['mentees']){
+          this.checkMentee();
+        } 
+      }
     }),
     (err) => {
         console.log(err);

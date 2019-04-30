@@ -245,7 +245,6 @@ export class CourseSearchPipe implements PipeTransform {
 @Pipe({name: 'sortSchedule', pure: true})
 export class SortSchedulePipe implements PipeTransform{
   transform(value: Array<any>): Array<any>{
-    console.log(value);
     if (value.length > 1) {
       return value.sort((a,b) => 
       {
