@@ -13,23 +13,38 @@
           <input class="form-control" name="title" type="text" [(ngModel)]="newWebinar.title">
           <div *ngIf="errors?.title" class="text-danger"><small>{{errors.title.message}}</small></div>
         </div>
-
+        <div class="form-group col">
+          <label>Webinar link</label>
+          <input class="form-control" name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
+          <div *ngIf="errors?.webinar_link" class="text-danger"><small>{{errors.webinar_link.message}}</small></div>
+        </div>
         <div class="form-group col">
           <label>Live or video</label>
           <select class="form-control" name="type" [(ngModel)]="newWebinar.type">
-            <option value="Live">Live Webinar</option>
             <option value="Video">Video</option>
+            <option value="Live">Live Webinar</option>
           </select>
           <div *ngIf="errors?.type" class="text-danger"><small>{{errors.type.message}}</small></div>
         </div>
 
-        <div class="form-group col">
+        <!-- <div class="form-group col">
           <label *ngIf="newWebinar.type == 'Live' || newWebinar.type == ''">Date and time</label>
           <label *ngIf="newWebinar.type == 'Video'">Date and time of live broadcast</label>
           <input class="form-control" name="datetime" type="datetime-local" [(ngModel)]="dateTimeLocal">
           <div *ngIf="errors?.datetime" class="text-danger"><small>{{errors.datetime.message}}</small></div>
-        </div>
+        </div> -->
       </div>
+      <label *ngIf="newWebinar.type == 'Live'">Date and Time of the Live Webinar</label>
+      <div class="d-flex align-items-center" *ngIf="newWebinar.type == 'Live'">
+        <div class="input-group mr-4">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="date" [(ngModel)]="webinarDate"
+            ngbDatepicker #d="ngbDatepicker">
+          <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+        </div>
+        <ngb-timepicker name="time" [(ngModel)]="webinarTime" meridian="ON" [minuteStep]="15">
+        </ngb-timepicker>
+      </div>
+      <div *ngIf="time_errors" class="text-danger"><small>{{time_errors}}</small></div>
 
       <div class="form-group">
         <label>Description</label>
@@ -48,12 +63,6 @@
         <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
         <img *ngIf="fileToUpload2.status === 'ok'" class="img-preview" [src]="newWebinar.img" alt="Image Preview">
-      </div>
-
-      <div class="form-group">
-        <label>Webinar link</label>
-        <input class="form-control" name="webinar_link" [(ngModel)]="newWebinar.webinar_link">
-        <div *ngIf="errors?.webinar_link" class="text-danger"><small>{{errors.webinar_link.message}}</small></div>
       </div>
 
       <div class="form-group">

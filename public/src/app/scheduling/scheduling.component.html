@@ -7,7 +7,7 @@
   </div>
   <form>
     <div class="modal-body container">
-      <div id="available_times" class="card border-info mr-2 mb-2" *ngFor="let daily_meeting of daily_meetings">
+      <div id="available_times" class="card border-info mr-2 mb-2" *ngFor="let daily_meeting of daily_meetings | sortSchedule">
         <div class="m-2 text-center" *ngIf="!daily_meeting.mentee">
           <span>{{daily_meeting.datetime | date: "hh:mma"}}</span>
           <div class="btn-group w-100" role="group">

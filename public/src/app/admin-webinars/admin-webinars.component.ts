@@ -5,6 +5,7 @@ import { SpeakersService } from '../http_services/speakers.service';
 import { FileUploadService } from '../http_services/file-upload.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import * as moment from 'moment'
 
 
 class ImageSnippet {
@@ -21,6 +22,9 @@ class ImageSnippet {
 
 export class AdminWebinarsComponent implements OnInit {
   @ViewChild('addWebinar') webinarModal: ElementRef;
+  time_errors: string;
+  webinarTime: any;
+  webinarDate: any;
   errors: any;
   speaker_errors: any;
   modal: any;
@@ -32,7 +36,7 @@ export class AdminWebinarsComponent implements OnInit {
   speaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   stage = 1;
   newWebinar: any = {
-    title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: [], 
+    title: '', type: '', description: '', speaker: '', webinar_link: '', quiz: [], 
     category: {
       management: false,
       communication: false,
@@ -90,15 +94,34 @@ export class AdminWebinarsComponent implements OnInit {
     obs.subscribe(data => this.webinars = data );
   }
   addNewWebinar() {
+    this.newWebinar.datetime = null;
     this.errors = null;
-    var date = this.newWebinar.datetime;
+    this.time_errors = null;
+    if (this.newWebinar.type === "Live"){
+      if(this.webinarTime && this.webinarDate){
+        if(Number.isInteger(this.webinarTime.hour) && Number.isInteger(this.webinarTime.minute) && Number.isInteger(this.webinarDate.year) && Number.isInteger(this.webinarDate.month) && Number.isInteger(this.webinarDate.day)){
+          this.newWebinar.datetime = moment(this.webinarDate.year.toString() + "-" + (this.webinarDate.month.toString().length === 2 ? this.webinarDate.month.toString() : "0" +this.webinarDate.month.toString()) + "-" + (this.webinarDate.day.toString().length === 2 ? this.webinarDate.day.toString() : "0" + this.webinarDate.day.toString())).add(this.webinarTime.hour, "hours").add(this.webinarTime.minute, "minutes").toDate();
+          if(this.newWebinar.datetime < new Date()){
+            this.time_errors = "Please enter a future date and time."
+            return;
+          }
+        }
+        else{
+          this.time_errors = "Please enter a valid date and time."
+          return;
+        }
+      }
+      else{
+        this.time_errors = "Please enter a valid date and time."
+        return;
+      }
+    }
     if(this.newWebinar.speaker === 'new' || this.newWebinar.speaker === ''){
       var temp = this.newWebinar.speaker;
       this.newWebinar.speaker = null;
     }
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
-      this.newWebinar.datetime = date;
       if (!data['errors']){
         console.log(data);
         this.getWebinars();
@@ -114,27 +137,28 @@ export class AdminWebinarsComponent implements OnInit {
   stage1() {
     this.stage = 1;
   }
-  stage2() {
-    this.stage = 2;
-    console.log(this.newWebinar.datetime);
-  }
-  stage3() {
-    this.stage = 3;
-    const obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
-    obs.subscribe(data => this.speaker = data);
-  }
+  // stage2() {
+  //   this.stage = 2;
+  // }
+  // stage3() {
+  //   this.stage = 3;
+  //   const obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
+  //   obs.subscribe(data => this.speaker = data);
+  // }
   openModal() {
     this.modal = this._modalsService.open(this.webinarModal, {size: 'lg'});
     this.modal.result.then(() => {}, () => this.closedModal());
   }
   closedModal() {
+    this.webinarTime = null;
+    this.webinarDate = null;
     this.errors = null;
     this.speaker_errors = null;
     this.stage = 1;
     this.speaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.speakerPreview = null;
-    this.newWebinar = {title: '', type: '', datetime: new Date(), description: '', speaker: '', webinar_link: '', quiz: [], 
+    this.newWebinar = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
     category: {
       management: false,
       communication: false,
@@ -146,50 +170,27 @@ export class AdminWebinarsComponent implements OnInit {
     this.newQuestions = 0;
     this.newAnswers = 0;
   }
-  // 3 next functions are to allow model binding with datetime-local input
-  private parseDateToStringWithFormat(parsedDate: Date): string {
-    let result: string;
-    let dd = parsedDate.getDate().toString();
-    let mm = (parsedDate.getMonth() + 1).toString();
-    let hh = parsedDate.getHours().toString();
-    let min = parsedDate.getMinutes().toString();
-    dd = dd.length === 2 ? dd : '0' + dd;
-    mm = mm.length === 2 ? mm : '0' + mm;
-    hh = hh.length === 2 ? hh : '0' + hh;
-    min = min.length === 2 ? min : '0' + min;
-    result = [parsedDate.getFullYear(), '-', mm, '-', dd, 'T', hh, ':', min].join('');
-    return result;
-  }
-
-  public set dateTimeLocal(v: string) {
-    const actualParsedDate = v ? new Date(v) : new Date();
-    this.newWebinar.datetime = actualParsedDate;
-  }
-
-  public get dateTimeLocal(): string {
-    return this.parseDateToStringWithFormat(this.newWebinar.datetime);
-  }
-  addMultipleQuestions() {
-    for (let i = 0; i < this.newQuestions; i++) {
-      this.newWebinar.quiz.push({question: '', right_answer: '', wrong_answers: Array(this.newAnswers).fill('')});
-    }
-    this.newQuestions = 0;
-    this.newAnswers = 0;
-  }
-  addQuestion() {
-    this.newWebinar.quiz.push({question: '', right_answer: '', wrong_answers: ['']});
-  }
-  addAnswer(index) {
-    this.newWebinar.quiz[index].wrong_answers.push('');
-    console.log(index);
-    console.log(this.newWebinar);
-  }
-  deleteQuestion(i) {
-    this.newWebinar.quiz.splice(i, 1);
-  }
-  deleteAnswer(i) {
-    this.newWebinar.quiz[i].wrong_answers.pop();
-  }
+  // addMultipleQuestions() {
+  //   for (let i = 0; i < this.newQuestions; i++) {
+  //     this.newWebinar.quiz.push({question: '', right_answer: '', wrong_answers: Array(this.newAnswers).fill('')});
+  //   }
+  //   this.newQuestions = 0;
+  //   this.newAnswers = 0;
+  // }
+  // addQuestion() {
+  //   this.newWebinar.quiz.push({question: '', right_answer: '', wrong_answers: ['']});
+  // }
+  // addAnswer(index) {
+  //   this.newWebinar.quiz[index].wrong_answers.push('');
+  //   console.log(index);
+  //   console.log(this.newWebinar);
+  // }
+  // deleteQuestion(i) {
+  //   this.newWebinar.quiz.splice(i, 1);
+  // }
+  // deleteAnswer(i) {
+  //   this.newWebinar.quiz[i].wrong_answers.pop();
+  // }
   getSpeakers() {
     const obs = this._speakersService.getSpeakers();
     obs.subscribe(data => this.speakers = data);

@@ -7,11 +7,11 @@ var CategorySchema = new mongoose.Schema({
         technical: {type: Boolean}
 })
 
-var QuestionSchema = new mongoose.Schema({
-        question:{type:String},
-        right_answer:{type:String},
-        wrong_answers:{type:[String]}
-}, {timestamps:true})
+// var QuestionSchema = new mongoose.Schema({
+//         question:{type:String},
+//         right_answer:{type:String},
+//         wrong_answers:{type:[String]}
+// }, {timestamps:true})
 
 var WebinarSchema = new mongoose.Schema({
         title: {
@@ -55,10 +55,10 @@ var WebinarSchema = new mongoose.Schema({
                 required: [true, "Please enter the category."]
         },
 
-        quiz: {
-                type: [QuestionSchema],
-                minlength: [3, "Your quiz should have at least 3 questions."]
-        },
+        // quiz: {
+        //         type: [QuestionSchema],
+        //         minlength: [3, "Your quiz should have at least 3 questions."]
+        // },
         
 }, {timestamps:true})
 
