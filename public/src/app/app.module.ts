@@ -242,7 +242,19 @@ export class CourseSearchPipe implements PipeTransform {
 }
 
 // ---------slice pipe---------------
-
+@Pipe({name: 'sortSchedule', pure: true})
+export class SortSchedulePipe implements PipeTransform{
+  transform(value: Array<any>): Array<any>{
+    console.log(value);
+    if (value.length > 1) {
+      return value.sort((a,b) => 
+      {
+        return <any>new Date(a.datetime) - <any>new Date(b.datetime);
+      });
+    }
+    return value;
+  }
+}
 @Pipe({ name: 'slice', pure: true })
 
 export class SlicePipe implements PipeTransform {
@@ -279,6 +291,7 @@ export class SlicePipe implements PipeTransform {
     MentorSearchPipe,
     CourseSearchPipe,
     SlicePipe,
+    SortSchedulePipe,
     AdminMentorsComponent,
     NotFoundComponent,
     SpeakerDetailsComponent,

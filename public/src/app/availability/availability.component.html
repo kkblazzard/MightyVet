@@ -7,23 +7,45 @@
     </button>
   </div>
   <div class="container modal-body">
-    <div id="available_times" class="card border-info mr-2 mb-2" *ngFor="let daily_meeting of daily_meetings">
+    <p *ngIf="!daily_meetings.length">You don't have anything scheduled on that day.</p>
+    <div id="available_times" class="card border-info mr-2 mb-2"
+      *ngFor="let daily_meeting of daily_meetings | sortSchedule, let i = index">
       <div *ngIf="daily_meeting.mentor">
         <div class="m-2 text-center" *ngIf="daily_meeting.mentor === user.mentor_id?._id">
-          <span class="text-success" *ngIf="!daily_meeting.mentee">{{daily_meeting.datetime | date: "hh:mma"}} is still available.</span>
+          <span class="text-success" *ngIf="!daily_meeting.mentee">{{daily_meeting.datetime | date: "hh:mma"}} is still
+            available.</span>
           <span class="text-success" *ngIf="daily_meeting.mentee">Meeting with {{daily_meeting.mentee.firstName}}
             {{daily_meeting.mentee.lastName}} at
             {{daily_meeting.datetime | date: "hh:mma"}}.</span>
-          <div class="btn-group w-100" role="group">
-            <button class="btn btn-sm btn-warning" (click)="updateTime(daily_meeting._id)"><i class="fa fa-cogs"
+          <div *ngIf="update !== i" class="btn-group w-100" role="group">
+            <button class="btn btn-sm btn-warning" (click)="toggle(i)"><i class="fa fa-cogs"
                 aria-hidden="true"></i>&nbsp;Update Time</button>
             <button class="btn btn-sm btn-danger" (click)="cancel(daily_meeting._id)"><i class="fa fa-times"
                 aria-hidden="true"></i>&nbsp;Cancel</button>
           </div>
+          <div *ngIf="update === i" class="d-flex flex-column align-items-center">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="updateDate" [(ngModel)]="updateDate"
+                ngbDatepicker #d="ngbDatepicker">
+              <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+            </div>
+            <div class="form-group">
+              <ngb-timepicker name="updateTime" [(ngModel)]="updateTime" meridian="ON" [minuteStep]="15">
+              </ngb-timepicker>
+            </div>
+            <div class="text-danger" *ngIf="update_error"><small>{{update_error}}</small></div>
+            <div class="btn-group w-100" role="group">
+              <button class="btn btn-sm btn-warning" (click)="updatingTime(daily_meeting._id)"><i class="fa fa-cogs"
+                  aria-hidden="true"></i>&nbsp;Update</button>
+              <button class="btn btn-sm btn-danger" (click)="untoggle(i)"><i class="fa fa-times"
+                  aria-hidden="true"></i>&nbsp;Cancel</button>
+            </div>
+          </div>
         </div>
         <div class="m-2 text-center" *ngIf="daily_meeting.mentee === user._id">
-          <span class="text-primary">Meeting with <a [routerLink]="['/mentorship', daily_meeting.mentor._id]">{{daily_meeting.mentor.user.firstName}}
-            {{daily_meeting.mentor.user.lastName}}</a> at
+          <span class="text-primary">Meeting with <a
+              [routerLink]="['/mentorship', daily_meeting.mentor._id]">{{daily_meeting.mentor.user.firstName}}
+              {{daily_meeting.mentor.user.lastName}}</a> at
             {{daily_meeting.datetime | date: "hh:mma"}}.</span>
           <div class="btn-group w-100" role="group">
             <button class="btn btn-sm btn-danger" (click)="unSignUp(daily_meeting._id)"><i class="fa fa-times"
@@ -32,12 +54,13 @@
         </div>
       </div>
       <div class="m-2 text-center" *ngIf="daily_meeting.type">
-        <span class="text-warning"><a [routerLink]="['/courses', daily_meeting._id]">{{daily_meeting.title | slice: 15}}</a>: Live Webinar at
+        <span class="text-warning"><a
+            [routerLink]="['/courses', daily_meeting._id]">{{daily_meeting.title | slice: 15}}</a>: Live Webinar at
           {{daily_meeting.datetime | date: "hh:mma"}}.
         </span>
       </div>
     </div>
-    <div class="card border-info p-4">
+    <div class="card border-info p-4 text-center" *ngIf="user?.mentor_id">
       <h4>Add Mentoring Availabilities</h4>
       <form class="d-flex flex-column align-items-center">
         <div class="form-group">
