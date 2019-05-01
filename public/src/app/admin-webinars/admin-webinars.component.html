@@ -54,15 +54,16 @@
 
       <div class="form-group">
         <label for="file">Choose a picture for your webinar</label>
-        <input class="form-control" #imageInput2 id="file" type="file" accept="image/*"
-          (change)="processFile2(imageInput2)">
+        <input class="form-control" #imageInput id="file" type="file" accept="image/*"
+          (change)="processFile(imageInput)">
         <div *ngIf="errors?.img" class="text-danger"><small>{{errors.img.message}}</small></div>
       </div>
-      <div *ngIf="fileToUpload2" class="img-preview-container">
-        <div *ngIf="fileToUpload2.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
-        <div *ngIf="fileToUpload2.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+      <div *ngIf="fileToUpload" class="img-preview-container">
+        <div *ngIf="fileToUpload.pending" class="alert alert-primary"><i class="fa fa-spinner fa-spin"></i>&nbsp;Uploading Image</div>
+        <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
+        <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
-        <img *ngIf="fileToUpload2.status === 'ok'" class="img-preview" [src]="newWebinar.img" alt="Image Preview">
+        <img *ngIf="fileToUpload.status === 'ok'" class="img-preview" [src]="newWebinar.img" alt="Image Preview">
       </div>
 
       <div class="form-group">
@@ -104,16 +105,12 @@
 
       <div class="form-group">
         <label>Speaker</label>
-        <select class="form-control" name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker"
-          (ngModelChange)="getSpeakerImage()">
+        <select class="form-control" name="newWebinar.speaker" [(ngModel)]="newWebinar.speaker">
           <option></option>
           <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}}
             {{speaker.lastName}}</option>
           <option value="new">ADD A NEW SPEAKER</option>
         </select>
-        <div *ngIf="speaker_image != ''" class="w-25">
-          <img class="w-100" [src]="speaker_image" alt="Speaker Image">
-        </div>
       </div>
       <!-- ----adding speaker----- -->
       <form *ngIf="newWebinar.speaker == 'new'" class="border p-4">
@@ -168,7 +165,9 @@
 
           <img *ngIf="fileToUpload.status === 'ok'" class="img-preview" [src]="newSpeaker.img" alt="Image Preview">
         </div> -->
-        <button class="btn btn-sm btn-outline-secondary" (click)="addSpeaker()">ADD SPEAKER</button>
+        <button *ngIf="!speakerPending && !speakerSuccess" class="btn btn-sm btn-primary" (click)="addSpeaker()">Add speaker</button>
+        <button *ngIf="speakerPending && !speakerSuccess" class="btn btn-sm btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Add speaker</button>
+        <button *ngIf="speakerSuccess" class="btn btn-sm btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
       </form>
       <div *ngIf="errors?.speaker" class="text-danger"><small>{{errors.speaker.message}}</small></div>
     </div>
@@ -176,9 +175,9 @@
       <!-- Removing stage 2 for MVP 1 -->
       <!-- <button *ngIf="newWebinar.type == 'Video'" class="btn btn-outline-success" (click)="stage2()">ADD QUIZ</button> -->
       <!-- <button *ngIf="newWebinar.type == 'Live'" class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
-      <button class="btn btn-outline-primary" (click)="addNewWebinar()">SUBMIT</button>
+      <button *ngIf="!webinarSuccess" class="btn btn-primary" (click)="addNewWebinar()">Submit</button>
+      <button *ngIf="webinarSuccess" class="btn btn-sm btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
       <!-- <button class="btn btn-outline-success" (click)="stage3()">PREVIEW</button> -->
-      <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
     </div>
   </form>
   <!-- Removing stage 2 for MVP 1 -->

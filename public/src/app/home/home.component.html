@@ -16,10 +16,13 @@
     <form class="input-group m-0 p-0 align-self-center" (submit)="submitNewsletter()">
       <input type="text" class="form-control" id="inlineFormInputName2" name="newsletter" type="text" [(ngModel)]="newsletter" placeholder="Email">
       <div class="input-group-append d-block">
-        <button type="submit" class="btn btn-primary">Add me to the list</button>
+        <button *ngIf="!pendingNewsletter && !successNewsletter" type="submit" class="btn btn-primary">Add me to the list</button>
+        <button *ngIf="pendingNewsletter && !successNewsletter" type="submit" class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i>&nbsp;Add me to the list</button>
+        <button *ngIf="successNewsletter" type="submit" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
       </div>
     </form>
   </div>
+  <div class="text-danger text-center"><small>{{newsletter_error}}</small></div>
 </section>
 
 <!-- Overview -->
@@ -28,7 +31,7 @@
     <div class="media d-flex align-items-center mr-5">
       <!-- <img id="courses" class="mr-5" alt="courses" [src]="imgSrc1" [routerLink]="['/courses']" (mouseover)="imgSrc1 = 'assets/img/home_page/green_courses.png'" (mouseout)="imgSrc1 = 'assets/img/home_page/courses.png'"> -->
       <div class="media-body">
-        <h4 class="my-1 mb-3">Free CE Courses</h4>
+        <h4 class="my-1 mb-3">Online Learning</h4>
         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
         <button class="btn btn-outline-info btn-sm" [routerLink]="['/courses']">Learn More&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>

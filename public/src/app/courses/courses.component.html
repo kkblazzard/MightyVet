@@ -23,11 +23,11 @@
     <div>
       <h6>Format type:</h6>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="live" name="live" class="custom-control-input" [(ngModel)]="searchBar.type.Live" >
+          <input type="checkbox" id="live" name="live" class="custom-control-input" [(ngModel)]="searchBar.type.Live" (click)="clickLive()">
           <label class="custom-control-label" for="live">Live Webinar</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="video" name="video" class="custom-control-input" [(ngModel)]="searchBar.type.Video" >
+          <input type="checkbox" id="video" name="video" class="custom-control-input" [(ngModel)]="searchBar.type.Video" (click)="clickVideo()">
           <label class="custom-control-label" for="video">Video</label>
         </div>
     </div>

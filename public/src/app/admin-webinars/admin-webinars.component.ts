@@ -9,7 +9,7 @@ import * as moment from 'moment'
 
 
 class ImageSnippet {
-  pending: boolean = false;
+  pending: boolean = true;
   status: string = 'init';
 
   constructor(public src: string, public file: File) {}
@@ -28,13 +28,13 @@ export class AdminWebinarsComponent implements OnInit {
   errors: any;
   speaker_errors: any;
   modal: any;
-  speaker_image: String;
   speakerPreview: String;
-  fileToUpload2: ImageSnippet;
+  fileToUpload: ImageSnippet;
   newQuestions = 0;
   newAnswers = 0;
   speaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   stage = 1;
+  webinarSuccess: boolean;
   newWebinar: any = {
     title: '', type: '', description: '', speaker: '', webinar_link: '', quiz: [], 
     category: {
@@ -46,6 +46,8 @@ export class AdminWebinarsComponent implements OnInit {
   };
   webinars: any;
   speakers: any;
+  speakerSuccess: boolean;
+  speakerPending: boolean;
   newSpeaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -72,21 +74,20 @@ export class AdminWebinarsComponent implements OnInit {
   loadImageFailed() {
       // show message
   }
-  private onSuccess2() {
-    this.fileToUpload2.pending = false;
-    this.fileToUpload2.status = 'ok';
+  private onSuccess() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'ok';
   }
 
-  private onError2() {
-    this.fileToUpload2.pending = false;
-    this.fileToUpload2.status = 'fail';
-    this.fileToUpload2.src = '';
+  private onError() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'fail';
+    this.fileToUpload.src = '';
   }
   
   ngOnInit() {
     this.getWebinars();
     this.getSpeakers();
-    this.speaker_image = '';
   }
 
   getWebinars() {
@@ -123,13 +124,22 @@ export class AdminWebinarsComponent implements OnInit {
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
       if (!data['errors']){
-        console.log(data);
+        this.webinarSuccess = true;
+        setTimeout(() => {
+          this.webinarSuccess = false;
+          this.newWebinar = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
+          category: {
+            management: false,
+            communication: false,
+            medical: false,
+            technical: false
+          }};
+          this.fileToUpload = null;
+        }, 5000);
         this.getWebinars();
-        this.modal.dismiss("form completed")
       }
       else{
         this.newWebinar.speaker = temp;
-        console.log(data['errors']);
         this.errors = data['errors'];
       }
     });
@@ -150,6 +160,8 @@ export class AdminWebinarsComponent implements OnInit {
     this.modal.result.then(() => {}, () => this.closedModal());
   }
   closedModal() {
+    this.webinarSuccess = false;
+    this.speakerSuccess = false;
     this.webinarTime = null;
     this.webinarDate = null;
     this.errors = null;
@@ -165,10 +177,9 @@ export class AdminWebinarsComponent implements OnInit {
       medical: false,
       technical: false
     }};
-    this.fileToUpload2 = {src: null, file: null, pending: false, status: 'init'};
-    this.speaker_image = '';
-    this.newQuestions = 0;
-    this.newAnswers = 0;
+    this.fileToUpload = null;
+    // this.newQuestions = 0;
+    // this.newAnswers = 0;
   }
   // addMultipleQuestions() {
   //   for (let i = 0; i < this.newQuestions; i++) {
@@ -196,6 +207,7 @@ export class AdminWebinarsComponent implements OnInit {
     obs.subscribe(data => this.speakers = data);
   }
   addSpeaker() {
+    this.speakerPending = true;
     this.speaker_errors = null;
     const obs = this._filesUploadService.speakerUploadImage(this.croppedImage);
       obs.subscribe(
@@ -204,48 +216,43 @@ export class AdminWebinarsComponent implements OnInit {
           const obs = this._speakersService.addSpeaker(this.newSpeaker);
           obs.subscribe(data => {
             if (!data['errors']){
-            this.getSpeakers();
-            this.newWebinar.speaker = data['_id'];
-            this.getSpeakerImage();
-            this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
+              this.speakerSuccess = true;
+              setTimeout(() => {
+                this.speakerSuccess = false
+                this.newWebinar.speaker = data['_id'];
+                this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
+              }, 5000);
+              this.getSpeakers();
             }
             else{
-              console.log(data['errors']);
               this.speaker_errors = data['errors'];
             }
+            this.speakerPending = false;
           });
         },
         (err) => {
           console.log(err);
         })
   }
-  processFile2(imageInput: any) {
+  processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
 
-      this.fileToUpload2 = new ImageSnippet(event.target.result, file);
-      const obs = this._filesUploadService.webinarUploadImage(this.fileToUpload2.file);
+      this.fileToUpload = new ImageSnippet(event.target.result, file);
+      const obs = this._filesUploadService.webinarUploadImage(this.fileToUpload.file);
       obs.subscribe(
         (data) => {
-          this.onSuccess2()
+          this.onSuccess()
           this.newWebinar.img = data['imageUrl'];
         },
         (err) => {
-          this.onError2()
+          this.onError()
           console.log(err);
         })
     });
     reader.readAsDataURL(file);
 
-  }
-  getSpeakerImage() {
-    if (this.newWebinar.speaker === '' || this.newWebinar.speaker === 'new' ) {
-      this.speaker_image = '';
-    } else {
-      const obs = this._speakersService.getSpeaker(this.newWebinar.speaker);
-      obs.subscribe(data => this.speaker_image = data['img']);
-    }
   }
 }

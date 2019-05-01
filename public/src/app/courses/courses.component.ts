@@ -48,20 +48,16 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  // searchCourse(){
-  //   this._webinarsService.findWebinar({'title':{"$regex":this.titleSearch,"$options":"i"}})
-  //   .subscribe(course=>{
-  //     if(course['error']){
-  //       this.searchError=course['error'];
-  //       console.log(this.searchError);
-  //     }
-  //     else{
-  //       console.log
-  //       this.allCourses=course;
-  //     }
-  //   });
-  // }
-
+  clickLive(){
+    if(this.searchBar.type.Video){
+      this.searchBar.type.Video = false;
+    }
+  }
+  clickVideo(){
+    if(this.searchBar.type.Live){
+      this.searchBar.type.Live = false;
+    }
+  }
   seeMore(){
     this.searchBar.featuredNumber += 6;
   }
