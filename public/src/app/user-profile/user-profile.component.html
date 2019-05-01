@@ -66,7 +66,10 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" (click)="editting()">Edit</button>
+            <button *ngIf="!editPending && !editSuccess" class="btn btn-primary" (click)="editting()">Edit</button>
+            <button *ngIf="editPending && !editSuccess" class="btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Edit</button>
+            <button *ngIf="editSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
+        
         </div>
     </form>
 </ng-template>
@@ -106,7 +109,9 @@
         </div>
         <!-- arrange this to be in bottom right with absolute -->
         <div class="modal-footer">
-            <button class="btn btn-primary" (click)="edittingPassword()">Edit</button>
+            <button *ngIf="!passwordPending && !passwordSuccess" class="btn btn-primary" (click)="edittingPassword()">Edit</button>
+            <button *ngIf="passwordPending && !passwordSuccess" class="btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Edit</button>
+            <button *ngIf="passwordSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
         </div>
     </form>
 </ng-template>
@@ -142,7 +147,9 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" (click)="editImage(imageInput)">Save</button>
+            <button *ngIf="picturePending && !pictureSuccess" class="btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Save</button>
+            <button *ngIf="!picturePending && !pictureSuccess" class="btn btn-primary" (click)="editImage(imageInput)">Save</button>
+            <button *ngIf="pictureSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
         </div>
     </form>
 </ng-template>

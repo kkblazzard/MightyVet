@@ -5,7 +5,7 @@ import { FileUploadService } from '../http_services/file-upload.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 class ImageSnippet {
-  pending: boolean = false;
+  pending: boolean = true;
   status: string = 'init';
   constructor(public src: string, public file: File) {}
 }
@@ -23,6 +23,7 @@ export class AdminPartnersComponent implements OnInit {
   partners: any;
   newPartner: any = {tier: 1, partner: {name: "", img: "", link: ""}};
   fileToUpload: ImageSnippet;
+  partnerSuccess: boolean;
   constructor(
     private _modalsService: NgbModal,
     private _filesUploadService: FileUploadService,
@@ -54,11 +55,14 @@ export class AdminPartnersComponent implements OnInit {
       this.img_error = null;
       this.link_error = null;
       if (!data['errors']){
-        this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
-        this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
+        this.partnerSuccess = true;
+        setTimeout(() => {
+          this.partnerSuccess = false
+          this.fileToUpload = null;
+          this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
+        }, 5000);
       }
       else{
-        console.log(data['errors']);
         if(data['errors'].partners){
           if(data['errors'].partners.errors.name){
             this.name_error = data['errors'].partners.errors.name.message;
@@ -80,7 +84,7 @@ export class AdminPartnersComponent implements OnInit {
   }
   closedModal(){
     this.newPartner = {tier: 1, partner: {name: "", img: "", link: ""}};
-    this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
+    this.fileToUpload = null;
   }
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];

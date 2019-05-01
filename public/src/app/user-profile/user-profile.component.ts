@@ -22,6 +22,12 @@ export class UserProfileComponent implements OnInit {
     editPassword_errors: any;
     current_courses: any;
     completed_courses: any;
+    picturePending: boolean;
+    pictureSuccess: boolean;
+    editPending: boolean;
+    editSuccess: boolean;
+    passwordPending: boolean;
+    passwordSuccess: boolean;
     img_error: string;
     image: string;
     edit_errors: any;
@@ -93,6 +99,9 @@ export class UserProfileComponent implements OnInit {
         this.modal.result.then(() => { }, () => this.closedModal());
     }
     closedModal() {
+        this.pictureSuccess = false;
+        this.editSuccess= false;
+        this.passwordSuccess= false;
         this.editPassword = this.editPassword = { old: "",
         new: "",
         confirm: ""
@@ -107,18 +116,25 @@ export class UserProfileComponent implements OnInit {
         var old_email = this.userInfo.email;
         var new_email = this.editUser.email;
         this.edit_errors = null;
+        this.editPending = true;
         let obs = this._usersService.userUpdate(this.userInfo._id, this.editUser)
         obs.subscribe(data => {
             if (data['errors']){
                 this.edit_errors = data['errors'];
             }
             else{
+                this.editSuccess = true;
+                setTimeout(()=>{
+                    this.editSuccess = false;
+                }, 5000);
                 this.changeNewsletterStatus(old_email, new_email);
             }
+            this.editPending = false;
         });
     }
     edittingPassword(){
         this.editPassword_errors = null;
+        this.passwordPending = true;
         let obs = this._authenticationsService.checkPassword(this.editPassword.new, {email: this._authenticationsService.getUserDetails().email, password: this.editPassword.old});
         obs.subscribe(data => {
             console.log(data);
@@ -126,8 +142,12 @@ export class UserProfileComponent implements OnInit {
                 this.editPassword_errors = data['errors'];
             }
             else{
-                this.modal.dismiss("password updated");
+                this.passwordSuccess = true;
+                setTimeout(()=>{
+                    this.passwordSuccess = false;
+                }, 5000);
             }
+            this.passwordPending = false;
         })
     }
     changeNewsletterStatus(old_email, new_email){
@@ -138,7 +158,6 @@ export class UserProfileComponent implements OnInit {
                     obs.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                 }
                 else{
@@ -146,13 +165,11 @@ export class UserProfileComponent implements OnInit {
                     obs.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                     let obs2 = this._newslettersService.addNewsletter({email: new_email});
                     obs2.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                 }
             }
@@ -162,7 +179,6 @@ export class UserProfileComponent implements OnInit {
                     obs.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                 }
                 else{
@@ -170,7 +186,6 @@ export class UserProfileComponent implements OnInit {
                     obs.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                 }
             }
@@ -182,23 +197,19 @@ export class UserProfileComponent implements OnInit {
                     obs.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                     let obs2 = this._newslettersService.addNewsletter({email: new_email});
                     obs2.subscribe(data => {
                         console.log(data);
                         this.getUserInfo();
-                        this.modal.dismiss("edit succeeded");
                     });
                 }
                 else{
                     this.getUserInfo();
-                    this.modal.dismiss("edit succeeded");
                 }
             }
             else{
                 this.getUserInfo();
-                this.modal.dismiss("edit succeeded");
             }
         }
     }
@@ -256,6 +267,9 @@ export class UserProfileComponent implements OnInit {
                     this.newsletter = false;
                     this.checkbox_newsletter = false;
                 }
+                this.picturePending = false;
+                this.imageChangedEvent = '';
+                this.croppedImage = null;
             })
         });
     }
@@ -283,22 +297,32 @@ export class UserProfileComponent implements OnInit {
         })
     }
     editImage() {
+        this.picturePending = true;
         this.img_error = null;
         let obs = this._filesUploadService.userUploadImage(this.croppedImage);
         obs.subscribe(
             (data) => {
-                var image = data['imageUrl'];
-                let obs = this._usersService.updateImage(this.userInfo._id, image);
-                obs.subscribe(data => {
-                    if (data['errors']) {
-                        this.img_error = data['errors'].picture.message;
-                    }
-                    else {
-                        this.imageChangedEvent = '';
-                        this.croppedImage = null;
-                        this.getUserInfo();
-                    }
-                });
+                if (data['errors']){
+                    this.img_error = data['errors'].picture.message;
+                    this.picturePending = false;
+                }
+                else{
+                    var image = data['imageUrl'];
+                    let obs = this._usersService.updateImage(this.userInfo._id, image);
+                    obs.subscribe(data => {
+                        if (data['errors']) {
+                            this.img_error = data['errors'].picture.message;
+                            this.picturePending = false;
+                        }
+                        else {
+                            this.pictureSuccess = true;
+                            setTimeout(() => {
+                                this.pictureSuccess = false;
+                            }, 5000);
+                            this.getUserInfo();
+                        }
+                    });
+                }
             },
             (err) => {
 

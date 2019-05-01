@@ -22,7 +22,10 @@ export class AboutComponent implements OnInit {
   }
   getPartners() {
     const obs = this._httpService.getPartners();
-    obs.subscribe(data => this.partners = data);
+    obs.subscribe(data => {
+      this.partners = data;
+      this.partners.sort((a,b) => {return a.tier - b.tier})
+    });
   }
   // need to sort by tier number
 }

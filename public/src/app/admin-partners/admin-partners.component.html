@@ -43,8 +43,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline-primary" (click)="addPartner()">SUBMIT</button>
-      <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('click')">CANCEL</button>
+      <button *ngIf="!partnerSuccess" class="btn btn-primary" (click)="addPartner()">Submit</button>
+      <button *ngIf="partnerSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
     </div>
   </form>
 </ng-template>
