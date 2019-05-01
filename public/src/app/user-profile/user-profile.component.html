@@ -271,7 +271,7 @@
                 <div class="border-bottom pb-2 mb-4">Your Mentees</div>
                 <div class="d-flex justify-content-start flex-wrap">
                     <div id="mentee-img" class="card border-info mr-2 mb-2" *ngFor="let mentee of mentees">
-                        <a class="m-2 text-center">
+                        <a class="m-2 text-center" [href]="'mailto:'+mentee.user.email" >
                             <img class="rounded-circle w-100" [src]="mentee.user.picture"
                                 [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
                             <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
@@ -288,7 +288,7 @@
                 <div class="border-bottom pb-2 mb-4">New Mentee Requests</div>
                 <div class="d-flex justify-content-start flex-wrap">
                     <div id="mentee-img" class="card border-info mr-2 mb-2" *ngFor="let mentee of mentee_applications">
-                        <a class="m-2 text-center">
+                        <a class="m-2 text-center" [href]="'mailto:'+mentee.user.email" >
                             <img class="rounded-circle w-100 mb-2" [src]="mentee.user.picture"
                                 [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
                             <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
