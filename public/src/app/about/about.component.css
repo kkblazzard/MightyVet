@@ -1,13 +1,28 @@
+.jumbotron {
+    width: 100%;
+    min-height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/shutterstock_609423461.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 2rem 2rem;
+}
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
+}
 
 /* Tier 1 - 3 */
 .tier1 img{
-    height: 90px;
+    height:100px;
 }
 .tier2 img{
-    height: 60px;
+    height: 70px;
 }
 .tier3 img{
-    height: 40px;
+    height: 50px;
 }
 
 
