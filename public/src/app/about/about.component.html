@@ -1,3 +1,13 @@
+<section id="section-welcome" class="container">
+    <div class="jumbotron d-flex justify-content-start align-items-end">
+      <div id="welcome-text" class="mr-3 p-5 text-light">
+          <h1 class="text-light">What's MightyVet?</h1>
+          <p class="mb-0">We seek to bridge the gap in veterinary education by ensuring veterinarians are informed of and prepared for the challenges they will face in practice. We will do this through an industry-wide platform to support veterinary professionals in their career and well-being.</p>
+      </div>
+    </div>
+  </section>
+  
+
 <!-- Mission -->
 <div id="mighty-mission" class="container">
   <h1>A Mighty Mission</h1>
@@ -5,7 +15,7 @@
     <div class="mr-5">
       <h3>Remembering Why We Do This</h3>
       <div class="hide-show-mission" [class.show]="show[0]">
-          <p>Demand to have some of whatever the human is cooking, then sniff the offering and walk away love to play with owner's hair tie and hopped up on catnip, and pretend you want to go out but then don't. I can haz i am the best for i shall purr myself to sleep. Why use post when this sofa is here flee in terror at cucumber discovered on floor, or kitten is playing with dead mouse so mouse but get suspicious of own shadow then go play with toilette paper. Why use post when this sofa is here eats owners hair then claws head but friends are not food scratch leg; meow for can opener to feed me meow meow mama. Shove bum in owner's face like camera lens crusty butthole when in doubt, wash i want to go outside let me go outside nevermind inside is better. Where is my slave? I'm getting hungry purr like an angel human give me attention meow. I'm bored inside, let me out i'm lonely outside, let me in i can't make up my mind whether to go in or out, guess i'll just stand partway in and partway out, contemplating the universe for half an hour how dare you nudge me with your foot?!?! leap into the air in greatest offense! leave hair on owner's clothes yet spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce and cats secretly make all the worlds muffins so cute.</p>
+          <p>We seek to bridge the gap in veterinary education by ensuring veterinarians are informed of the challenges they will face in practice. We will do this through an industry-wide platform to support veterinary professionals in their career and well-being.</p>
       </div>
       <button class="btn btn-link pull-right" (click)="show[0]= !show[0]">{{ show[0] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
     </div>
@@ -27,7 +37,7 @@
         <h4>Dr. Steve Weinrauch</h4>
         <h5>Founder</h5>
         <div class="hide-show-member-text" [class.show]="show[1]">
-            <p>Demand to have some of whatever the human is cooking, then sniff the offering and walk away love to play with owner's hair tie and hopped up on catnip, and pretend you want to go out but then don't. I can haz i am the best for i shall purr myself to sleep. Why use post when this sofa is here flee in terror at cucumber discovered on floor, or kitten is playing with dead mouse so mouse but get suspicious of own shadow then go play with toilette paper. Why use post when this sofa is here eats owners hair then claws head but friends are not food scratch leg; meow for can opener to feed me meow meow mama. Shove bum in owner's face like camera lens crusty butthole when in doubt, wash i want to go outside let me go outside nevermind inside is better. Where is my slave? I'm getting hungry purr like an angel human give me attention meow. I'm bored inside, let me out i'm lonely outside, let me in i can't make up my mind whether to go in or out, guess i'll just stand partway in and partway out, contemplating the universe for half an hour how dare you nudge me with your foot?!?! leap into the air in greatest offense! leave hair on owner's clothes yet spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce and cats secretly make all the worlds muffins so cute.</p>
+            <p>Dr. Steve is a great resource for those interested in a veterinary industry career outside of practice. He is the founder of MightyVet, Co-Founder and Medical Director of 2nd Chance Rescue, and Chief Veterinary Officer at Trupanion. He has published his research in numerous peer-reviewed journals and is licensed to practice in both the USA and the European Union. His wife is also a practicing veterinarian and both graduated from the Glasgow University School of Veterinary Medicine in 2005.</p>
         </div>
         <button class="btn btn-link pull-right mb-4" (click)="show[1] = !show[1]">{{ show[1] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
@@ -76,14 +86,16 @@
 <!-- Partners-->
 <div class="container">
   <h1>Meet our Partners</h1>
+  <!-- for each list of partners per tiers -->
   <div *ngFor="let tiers of partners">
-    <div class="tier1 d-flex justify-content-around" *ngIf="tiers.tier == 1">
+    <div class="tier1 d-flex justify-content-around flex-wrap my-3" *ngIf="tiers.tier == 1">
+      <!-- for each partner in that tier -->
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
-    <div class="tier2 d-flex justify-content-around" *ngIf="tiers.tier == 2">
+    <div class="tier2 d-flex justify-content-around flex-wrap my-3" *ngIf="tiers.tier == 2">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
-    <div class="tier3 d-flex justify-content-around" *ngIf="tiers.tier == 3">
+    <div class="tier3 d-flex justify-content-around flex-wrap my-3" *ngIf="tiers.tier == 3">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
   </div>
