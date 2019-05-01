@@ -24,7 +24,7 @@
         <div *ngIf="fileToUpload.status === 'ok'" class="alert alert-success"> Image Uploaded Successfuly!</div>
         <div *ngIf="fileToUpload.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
 
-        <img *ngIf="fileToUpload.status === 'ok'" [src]="newPartner.partner.img" alt="Image Preview">
+        <img *ngIf="fileToUpload.status === 'ok'" class="img-preview" [src]="newPartner.partner.img" alt="Image Preview">
       </div>
       <div class="form-group">
         <label for="link">Partner link</label>

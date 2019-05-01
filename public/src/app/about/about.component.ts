@@ -24,4 +24,5 @@ export class AboutComponent implements OnInit {
     const obs = this._httpService.getPartners();
     obs.subscribe(data => this.partners = data);
   }
+  // need to sort by tier number
 }
