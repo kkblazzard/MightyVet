@@ -9,7 +9,6 @@ import { PartnersService } from '../http_services/partners.service';
 })
 export class AboutComponent implements OnInit {
   partners: any;
-
   show = [false, false, false, false, false];
 
   constructor(
@@ -20,6 +19,9 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
     this.getPartners();
   }
+
+  //creates observable that uses our partner service to get all partners in the database.
+  //we then subscribe to it to render the data once recieved. 
   getPartners() {
     const obs = this._httpService.getPartners();
     obs.subscribe(data => {
