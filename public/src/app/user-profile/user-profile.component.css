@@ -17,3 +17,14 @@
 .pointer{
     cursor: pointer;
 }
+.horizontal-scroll{
+    overflow: auto;
+    white-space: nowrap;
+}
+.class-card{
+    width: 200px;
+    height: 250px;
+}
+.btn-wrap{
+    white-space: normal;
+}

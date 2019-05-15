@@ -61,6 +61,7 @@ module.exports={
     .select('-__v')
     .select('-updatedAt')
     .select('-picture')
+    .select('-meetings')
     .populate([{path: 'mentors', populate: {path: 'mentor', populate: {path: 'user'}}}, {path: 'accreditations', populate: {path: 'webinar'}}, {path: 'mentor_id'}])
     .then(all=>console.log(all) || res.json(all))
     .catch(err=>console.log(err)|| res.json(err)),

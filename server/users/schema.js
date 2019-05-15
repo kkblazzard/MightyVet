@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
                 validate: [function(email) {
                         return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
                 }, "Please enter a valid email."],
-                unique: [true, "This email address is already in use."]
+                unique: true
         },
 
         password: { hash: {
@@ -72,7 +72,7 @@ var UserSchema = new mongoose.Schema({
         default: false }
 }, {timestamps:true})
 
-UserSchema.plugin(uniqueValidator);
+UserSchema.plugin(uniqueValidator, { message: 'This email address is already in use.' });
 UserSchema.methods.setPassword = function(password){
         this.password.salt = crypto.randomBytes(16).toString('hex');
         this.password.hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');

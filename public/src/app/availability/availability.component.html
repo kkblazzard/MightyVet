@@ -1,65 +1,73 @@
 <!-- Add Availabilities modal -->
 <ng-template #showAvailabilities>
   <div class="modal-header">
-    <h2 class="modal-title">Your schedule on {{date.format('dddd, D MMMM, YYYY')}} </h2>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('click')">
-      <span aria-hidden="true">&times;</span>
+    <h2 class="modal-title">{{date | date:'EEEE, dd MMMM, yyyy'}}</h2>
+    <button type="button" class="close" (click)="modal.dismiss('cross-click')">
+      <span aria-hidden="true"><i class="fa fa-times"></i></span>
     </button>
   </div>
-  <div class="container modal-body">
-    <p *ngIf="!daily_meetings.length">You don't have anything scheduled on that day.</p>
-    <div id="available_times" class="card border-info mr-2 mb-2"
-      *ngFor="let daily_meeting of daily_meetings | sortSchedule, let i = index">
-      <div *ngIf="daily_meeting.mentor">
-        <div class="m-2 text-center" *ngIf="daily_meeting.mentor === user.mentor_id?._id">
-          <span class="text-success" *ngIf="!daily_meeting.mentee">{{daily_meeting.datetime | date: "hh:mma"}} is still
-            available.</span>
-          <span class="text-success" *ngIf="daily_meeting.mentee">Meeting with {{daily_meeting.mentee.firstName}}
-            {{daily_meeting.mentee.lastName}} at
-            {{daily_meeting.datetime | date: "hh:mma"}}.</span>
-          <div *ngIf="update !== i" class="btn-group w-100" role="group">
-            <button class="btn btn-sm btn-warning" (click)="toggle(i)"><i class="fa fa-cogs"
-                aria-hidden="true"></i>&nbsp;Update Time</button>
-            <button class="btn btn-sm btn-danger" (click)="cancel(daily_meeting._id)"><i class="fa fa-times"
-                aria-hidden="true"></i>&nbsp;Cancel</button>
+  <div class="container modal-body" *ngIf="!new">
+    <div class="card border-secondary mb-2 text-center w-100 p-2" *ngIf="!daily_meetings.length">
+      <span class="text-primary">You don't have anything scheduled on that
+        day.</span>
+    </div>
+    <div id="available_times" *ngFor="let daily_meeting of daily_meetings | sortSchedule, let i = index">
+      <div class="d-flex">
+        <div class="card border-secondary mr-2 mb-2 text-center w-25 d-flex align-items-center justify-content-center">
+          <span class="text-secondary">{{daily_meeting.datetime | date: "hh:mma"}}</span>
+        </div>
+        <div *ngIf="daily_meeting.mentor" class="card border-info mb-2 w-75">
+          <div class="m-2 text-center" *ngIf="daily_meeting.mentor === user.mentor_id?._id">
+            <span class="text-success mb-2" *ngIf="!daily_meeting.mentee">Mentoring Availability</span>
+            <span class="text-success mb-2" *ngIf="daily_meeting.mentee">Meeting with {{daily_meeting.mentee.firstName}}
+              {{daily_meeting.mentee.lastName}}</span>
+            <div *ngIf="update !== i" class="btn-group d-flex justify-content-between" role="group">
+              <button class="btn btn-sm btn-secondary" (click)="toggle(i)"><i class="fa fa-cogs"
+                  aria-hidden="true"></i>&nbsp;Reschedule</button>
+              <button class="btn btn-sm btn-danger" (click)="cancel(daily_meeting._id)"><i class="fa fa-times"
+                  aria-hidden="true"></i>&nbsp;Cancel</button>
+            </div>
+            <div *ngIf="update === i" class="d-flex flex-column align-items-center">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="updateDate" [(ngModel)]="updateDate"
+                  ngbDatepicker #d="ngbDatepicker">
+                <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
+              </div>
+              <div class="form-group">
+                <ngb-timepicker name="updateTime" [(ngModel)]="updateTime" meridian="ON" [minuteStep]="15">
+                </ngb-timepicker>
+              </div>
+              <div class="text-danger mb-2" *ngIf="update_error"><small>{{update_error}}</small></div>
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-sm btn-warning" (click)="updatingTime(daily_meeting._id)"><i class="fa fa-cogs"
+                    aria-hidden="true"></i>&nbsp;Update</button>
+                <button class="btn btn-sm btn-secondary" (click)="untoggle(i)"><i class="fa fa-times"
+                    aria-hidden="true"></i>&nbsp;Cancel</button>
+              </div>
+            </div>
           </div>
-          <div *ngIf="update === i" class="d-flex flex-column align-items-center">
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" name="updateDate" [(ngModel)]="updateDate"
-                ngbDatepicker #d="ngbDatepicker">
-              <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-            </div>
-            <div class="form-group">
-              <ngb-timepicker name="updateTime" [(ngModel)]="updateTime" meridian="ON" [minuteStep]="15">
-              </ngb-timepicker>
-            </div>
-            <div class="text-danger" *ngIf="update_error"><small>{{update_error}}</small></div>
-            <div class="btn-group w-100" role="group">
-              <button class="btn btn-sm btn-warning" (click)="updatingTime(daily_meeting._id)"><i class="fa fa-cogs"
-                  aria-hidden="true"></i>&nbsp;Update</button>
-              <button class="btn btn-sm btn-danger" (click)="untoggle(i)"><i class="fa fa-times"
+          <div class="m-2 text-center" *ngIf="daily_meeting.mentee === user._id">
+            <span class="text-primary mb-2">Meeting with <a
+                [routerLink]="['/mentorship', daily_meeting.mentor._id]">{{daily_meeting.mentor.user.firstName}}
+                {{daily_meeting.mentor.user.lastName}}</a></span>
+            <div class="btn-group d-flex" role="group">
+              <button class="btn btn-sm btn-danger" (click)="unSignUp(daily_meeting._id)"><i class="fa fa-times"
                   aria-hidden="true"></i>&nbsp;Cancel</button>
             </div>
           </div>
         </div>
-        <div class="m-2 text-center" *ngIf="daily_meeting.mentee === user._id">
-          <span class="text-primary">Meeting with <a
-              [routerLink]="['/mentorship', daily_meeting.mentor._id]">{{daily_meeting.mentor.user.firstName}}
-              {{daily_meeting.mentor.user.lastName}}</a> at
-            {{daily_meeting.datetime | date: "hh:mma"}}.</span>
-          <div class="btn-group w-100" role="group">
-            <button class="btn btn-sm btn-danger" (click)="unSignUp(daily_meeting._id)"><i class="fa fa-times"
-                aria-hidden="true"></i>&nbsp;Cancel</button>
+        <div class="card border-info mb-2 w-75" *ngIf="daily_meeting.type">
+          <div class="m-2 text-center">
+            <span class="text-warning">Live Webinar:&nbsp;<a
+                [routerLink]="['/courses', daily_meeting._id]">{{daily_meeting.title | slice: 15}}</a>
+            </span>
           </div>
         </div>
       </div>
-      <div class="m-2 text-center" *ngIf="daily_meeting.type">
-        <span class="text-warning"><a
-            [routerLink]="['/courses', daily_meeting._id]">{{daily_meeting.title | slice: 15}}</a>: Live Webinar at
-          {{daily_meeting.datetime | date: "hh:mma"}}.
-        </span>
-      </div>
     </div>
+  </div>
+  <div class="container modal-body" *ngIf="new">
     <div class="card border-info p-4 text-center" *ngIf="user?.mentor_id">
       <h4>Add Mentoring Availabilities</h4>
       <form class="d-flex flex-column align-items-center">
@@ -69,7 +77,7 @@
         <div class="text-danger" *ngIf="availability_error"><small>{{availability_error}}</small></div>
         <div class="d-flex align-items-end">
           <div class="form-group text-center mr-2 mb-0">
-            <label for="recurring">Recurring?</label>
+            <label for="recurring">Reocurring?</label>
             <input type="checkbox" id="recurring" class="form-control" name="boolean" [(ngModel)]="recurring.boolean">
           </div>
           <div class="form-group text-center mr-2 mb-0" *ngIf="recurring.boolean">
@@ -86,8 +94,12 @@
       </form>
     </div>
   </div>
-  <div class="modal-footer">
-    <button class="btn btn-danger" (click)="modal.dismiss('click')">Exit</button>
+  <div *ngIf="user?.mentor_id" class="modal-footer">
+    <button *ngIf="!new" class="btn btn-success" (click)="toggleNew()">New</button>
+    <button *ngIf="new" class="btn btn-secondary" (click)="toggleNew()">Back</button>
+  </div>
+  <div *ngIf="!user?.mentor_id" class="modal-footer">
+    <button class="btn btn-danger" (click)="modal.dismiss('exit')">Exit</button>
   </div>
 </ng-template>
 

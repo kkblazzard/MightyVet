@@ -62,6 +62,7 @@
       <th>Partner Name</th>
       <th>Partner Image</th>
       <th>Partner Link</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody *ngFor="let tier of partners">
@@ -70,6 +71,7 @@
       <td>{{partner.name}}</td>
       <td>{{partner.img}}</td>
       <td>{{partner.link}}</td>
+      <td><button class="btn btn-sm btn-danger" (click)="deletePartner(tier._id, partner._id)"><i class="fa fa-times"></i>&nbsp;Delete</button></td>
     </tr>
   </tbody>
 </table>

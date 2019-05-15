@@ -31,17 +31,21 @@ export class AdminMentorsComponent implements OnInit {
     obs.subscribe(data => this.mentors = data);
   }
   approveMentor(id){
-    let obs = this._mentorsService.approveMentor(id);
-    obs.subscribe(data => {
-      this.getApprovals();
-      this.getMentors();
-    })
+    if(confirm("Are you sure?")) {
+      let obs = this._mentorsService.approveMentor(id);
+      obs.subscribe(data => {
+        this.getApprovals();
+        this.getMentors();
+      })
+    }
   }
   declineMentor(id){
-    let obs = this._mentorsService.deleteMentor(id);
-    obs.subscribe(data => {
-      this.getApprovals();
-      this.getMentors();
-    })
+    if(confirm("Are you sure?")) {
+      let obs = this._mentorsService.deleteMentor(id);
+      obs.subscribe(data => {
+        this.getApprovals();
+        this.getMentors();
+      })
+    }
   }
 }

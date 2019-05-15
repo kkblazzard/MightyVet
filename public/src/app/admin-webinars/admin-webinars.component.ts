@@ -22,18 +22,32 @@ class ImageSnippet {
 
 export class AdminWebinarsComponent implements OnInit {
   @ViewChild('addWebinar') webinarModal: ElementRef;
+  @ViewChild('update') updateModal: ElementRef;
   time_errors: string;
   webinarTime: any;
   webinarDate: any;
   errors: any;
+  updateErrors: any;
+  updateTime_errors: any;
+  updateWebinarTime: any;
+  updateWebinarDate: any;
+  updateWebinarSuccess: boolean;
+  updateWebinar : any = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
+    category: {
+      management: false,
+      communication: false,
+      medical: false,
+      technical: false
+    }
+  };
   speaker_errors: any;
   modal: any;
   speakerPreview: String;
   fileToUpload: ImageSnippet;
-  newQuestions = 0;
-  newAnswers = 0;
+  // newQuestions = 0;
+  // newAnswers = 0;
   speaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
-  stage = 1;
+  // stage = 1;
   webinarSuccess: boolean;
   newWebinar: any = {
     title: '', type: '', description: '', speaker: '', webinar_link: '', quiz: [], 
@@ -135,7 +149,7 @@ export class AdminWebinarsComponent implements OnInit {
             technical: false
           }};
           this.fileToUpload = null;
-        }, 5000);
+        }, 2000);
         this.getWebinars();
       }
       else{
@@ -144,9 +158,9 @@ export class AdminWebinarsComponent implements OnInit {
       }
     });
   }
-  stage1() {
-    this.stage = 1;
-  }
+  // stage1() {
+  //   this.stage = 1;
+  // }
   // stage2() {
   //   this.stage = 2;
   // }
@@ -166,7 +180,7 @@ export class AdminWebinarsComponent implements OnInit {
     this.webinarDate = null;
     this.errors = null;
     this.speaker_errors = null;
-    this.stage = 1;
+    // this.stage = 1;
     this.speaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
     this.speakerPreview = null;
@@ -178,6 +192,8 @@ export class AdminWebinarsComponent implements OnInit {
       technical: false
     }};
     this.fileToUpload = null;
+    this.imageChangedEvent = '';
+    this.croppedImage = null;
     // this.newQuestions = 0;
     // this.newAnswers = 0;
   }
@@ -219,9 +235,16 @@ export class AdminWebinarsComponent implements OnInit {
               this.speakerSuccess = true;
               setTimeout(() => {
                 this.speakerSuccess = false
-                this.newWebinar.speaker = data['_id'];
+                if(this.modal === this.webinarModal){
+                  this.newWebinar.speaker = data['_id'];
+                }
+                else{
+                  this.updateWebinar.speaker = data['_id'];
+                }
                 this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
-              }, 5000);
+                this.imageChangedEvent = '';
+                this.croppedImage = null;
+              }, 1000);
               this.getSpeakers();
             }
             else{
@@ -254,5 +277,83 @@ export class AdminWebinarsComponent implements OnInit {
     });
     reader.readAsDataURL(file);
 
+  }
+  deleteWebinar(id){
+    if(confirm("Are you sure?")) {
+      let obs = this._webinarsService.deleteWebinar(id);
+      obs.subscribe(data => {
+        this.getWebinars();
+      })
+    }
+  }
+  openUpdate(id){
+    this.updateErrors = null;
+    this.updateTime_errors = null;
+    this.updateWebinarDate = null;
+    this.updateWebinarTime = null;
+    let obs = this._webinarsService.getWebinar(id);
+    obs.subscribe(data => {
+      this.updateWebinar = data;
+      if (data['datetime']){
+        var date = new Date(data['datetime'])
+        this.updateWebinarDate = {
+          year: date.getFullYear(),
+          month: date.getMonth()+1,
+          day: date.getDate()
+        }
+        this.updateWebinarTime = {
+          hour: date.getHours(),
+          minute: date.getMinutes(),
+          seconds: 0,
+        }
+      }
+      this.updateWebinar.speaker = data['speaker']._id
+      this.modal = this._modalsService.open(this.updateModal, {size: 'lg'});
+      this.modal.result.then(() => {}, () => this.closedModal());
+    })
+  }
+  updatingWebinar(){
+    this.updateWebinar.datetime = null;
+    this.updateErrors = null;
+    this.updateTime_errors = null;
+    if (this.updateWebinar.type === "Live"){
+      if(this.updateWebinarTime && this.updateWebinarDate){
+        if(Number.isInteger(this.updateWebinarTime.hour) && Number.isInteger(this.updateWebinarTime.minute) && Number.isInteger(this.updateWebinarDate.year) && Number.isInteger(this.updateWebinarDate.month) && Number.isInteger(this.updateWebinarDate.day)){
+          this.updateWebinar.datetime = moment(this.updateWebinarDate.year.toString() + "-" + (this.updateWebinarDate.month.toString().length === 2 ? this.updateWebinarDate.month.toString() : "0" +this.updateWebinarDate.month.toString()) + "-" + (this.updateWebinarDate.day.toString().length === 2 ? this.updateWebinarDate.day.toString() : "0" + this.updateWebinarDate.day.toString())).add(this.updateWebinarTime.hour, "hours").add(this.updateWebinarTime.minute, "minutes").toDate();
+          if(this.updateWebinar.datetime < new Date()){
+            this.updateTime_errors = "Please enter a future date and time."
+            return;
+          }
+        }
+        else{
+          this.updateTime_errors = "Please enter a valid date and time."
+          return;
+        }
+      }
+      else{
+        this.updateTime_errors = "Please enter a valid date and time."
+        return;
+      }
+    }
+    if(this.updateWebinar.speaker === 'new' || this.updateWebinar.speaker === ''){
+      var temp = this.updateWebinar.speaker;
+      this.updateWebinar.speaker = null;
+    }
+    console.log(this.updateWebinar);
+    let obs = this._webinarsService.webinarUpdate(this.updateWebinar._id, this.updateWebinar);
+    obs.subscribe(data => {
+      if (!data['errors']){
+        this.updateWebinarSuccess = true;
+        setTimeout(() => {
+          this.updateWebinarSuccess = false;
+          this.modal.dismiss('finished updating')
+        }, 2000);
+        this.getWebinars();
+      }
+      else{
+        this.updateWebinar.speaker = temp;
+        this.updateErrors = data['errors'];
+      }
+    });
   }
 }

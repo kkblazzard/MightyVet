@@ -1,6 +1,6 @@
 .jumbotron {
   width: 100%;
-  min-height: 600px;
+  min-height: 400px;
   filter: grayscale(30%);
   background-image: url('../../assets/img/stock_photos/krista-mangulsone-53122-unsplash.jpg');
   background-repeat: no-repeat;

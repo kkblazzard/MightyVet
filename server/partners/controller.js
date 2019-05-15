@@ -12,6 +12,7 @@ module.exports={
         .then(anew=>console.log("created in controller",anew.partners[anew.partners.length-1]) || res.json(anew))
         .catch(err=> console.log(err) || res.json(err))
     },
+
     partnerRemove: (req, res) => Partners
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted))

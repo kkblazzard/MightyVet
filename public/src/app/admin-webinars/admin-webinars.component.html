@@ -5,7 +5,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <form *ngIf="stage == 1">
+  <form>
     <div class="modal-body justify-content-between">
       <div class="row">
         <div class="form-group col">
@@ -148,7 +148,7 @@
         <div class="form-group">
           <label for="file">Choose a picture for your speaker</label>
           <input class="form-control" id="file" type="file" accept="image/*" (change)="fileChangeEvent($event)">
-          <div *ngIf="speaker_errors?.img" class="text-danger"><small>{{speaker_errors.img.message}}}</small></div>
+          <div *ngIf="speaker_errors?.img" class="text-danger"><small>{{speaker_errors.img.message}}</small></div>
         </div>
         <div>
           <image-cropper class="w-50" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
@@ -260,6 +260,143 @@
     </div>
   </div> -->
 </ng-template>
+<ng-template #update>
+  <div class="modal-header">
+    <h3 class="modal-title">Update Webinar</h3>
+    <button type="button" class="close" (click)="modal.dismiss('click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form>
+    <div class="modal-body justify-content-between">
+      <div class="row">
+        <div class="form-group col">
+          <label>Webinar title</label>
+          <input class="form-control" name="title" type="text" [(ngModel)]="updateWebinar.title">
+          <div *ngIf="updateErrors?.title" class="text-danger"><small>{{updateErrors.title.message}}</small></div>
+        </div>
+        <div class="form-group col">
+          <label>Webinar link</label>
+          <input class="form-control" name="webinar_link" [(ngModel)]="updateWebinar.webinar_link">
+          <div *ngIf="updateErrors?.webinar_link" class="text-danger"><small>{{updateErrors.webinar_link.message}}</small></div>
+        </div>
+        <div class="form-group col">
+          <label>Live or video</label>
+          <select class="form-control" name="type" [(ngModel)]="updateWebinar.type">
+            <option value="Video">Video</option>
+            <option value="Live">Live Webinar</option>
+          </select>
+          <div *ngIf="updateErrors?.type" class="text-danger"><small>{{updateErrors.type.message}}</small></div>
+        </div>
+      </div>
+      <label *ngIf="updateWebinar.type == 'Live'">Date and Time of the Live Webinar</label>
+      <div class="d-flex align-items-center" *ngIf="updateWebinar.type == 'Live'">
+        <div class="input-group mr-4">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="updateWebinarDate" [(ngModel)]="updateWebinarDate"
+            ngbDatepicker #d="ngbDatepicker">
+          <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+        </div>
+        <ngb-timepicker name="updateWebinarTime" [(ngModel)]="updateWebinarTime" meridian="ON" [minuteStep]="15">
+        </ngb-timepicker>
+      </div>
+      <div *ngIf="updateTime_errors" class="text-danger"><small>{{updateTime_errors}}</small></div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description" [(ngModel)]="updateWebinar.description"></textarea>
+        <div *ngIf="updateErrors?.description" class="text-danger"><small>{{updateErrors.description.message}}</small></div>
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
+            [(ngModel)]="updateWebinar.category.management">
+          <label class="custom-control-label" for="checkbox1">Management</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
+            [(ngModel)]="updateWebinar.category.communication">
+          <label class="custom-control-label" for="checkbox2">Communication</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
+            [(ngModel)]="updateWebinar.category.medical">
+          <label class="custom-control-label" for="checkbox3">Medical</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline mr-0">
+          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+            [(ngModel)]="updateWebinar.category.technical">
+          <label class="custom-control-label" for="checkbox4">Technical</label>
+        </div>
+
+        <div *ngIf="updateErrors?.category" class="text-danger"><small>{{updateErrors.category.message}}</small></div>
+      </div>
+
+      <div class="form-group">
+        <label>Speaker</label>
+        <select class="form-control" name="updateWebinar.speaker" [(ngModel)]="updateWebinar.speaker">
+          <option></option>
+          <option *ngFor="let speaker of speakers" [value]="speaker._id">{{speaker.title}} {{speaker.firstName}}
+            {{speaker.lastName}}</option>
+          <option value="new">ADD A NEW SPEAKER</option>
+        </select>
+      </div>
+      <!-- ----adding speaker----- -->
+      <form *ngIf="updateWebinar.speaker == 'new'" class="border p-4">
+        <h5>Add a speaker</h5>
+        <hr />
+        <div class="row">
+          <div class="form-group col">
+            <label>Title</label>
+            <select class="form-control" name="title" [(ngModel)]="newSpeaker.title">
+              <option>Dr.</option>
+              <option>Mr.</option>
+              <option>Ms.</option>
+            </select>
+            <div *ngIf="speaker_errors?.title" class="text-danger"><small>{{speaker_errors.title.message}}</small></div>
+          </div>
+          <div class="form-group col">
+            <label>First name</label>
+            <input class="form-control" name="firstName" type="text" [(ngModel)]="newSpeaker.firstName">
+            <div *ngIf="speaker_errors?.firstName" class="text-danger">
+              <small>{{speaker_errors.firstName.message}}</small></div>
+          </div>
+          <div class="form-group col">
+            <label>Last name</label>
+            <input class="form-control" name="lastName" type="text" [(ngModel)]="newSpeaker.lastName">
+            <div *ngIf="speaker_errors?.lastName" class="text-danger"><small>{{speaker_errors.lastName.message}}</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Speaker description</label>
+          <textarea class="form-control" name="description" [(ngModel)]="newSpeaker.description"></textarea>
+          <div *ngIf="speaker_errors?.description" class="text-danger">
+            <small>{{speaker_errors.description.message}}</small></div>
+        </div>
+        <div class="form-group">
+          <label for="file">Choose a picture for your speaker</label>
+          <input class="form-control" id="file" type="file" accept="image/*" (change)="fileChangeEvent($event)">
+          <div *ngIf="speaker_errors?.img" class="text-danger"><small>{{speaker_errors.img.message}}</small></div>
+        </div>
+        <div>
+          <image-cropper class="w-50" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+            format="jpeg, png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+        </div>
+        <button *ngIf="!speakerPending && !speakerSuccess" class="btn btn-sm btn-primary" (click)="addSpeaker()">Add speaker</button>
+        <button *ngIf="speakerPending && !speakerSuccess" class="btn btn-sm btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Add speaker</button>
+        <button *ngIf="speakerSuccess" class="btn btn-sm btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
+      </form>
+      <div *ngIf="updateErrors?.speaker" class="text-danger"><small>{{updateErrors.speaker.message}}</small></div>
+    </div>
+    <div class="modal-footer">
+      <button *ngIf="!updateWebinarSuccess" class="btn btn-primary" (click)="updatingWebinar()">Update</button>
+      <button *ngIf="updateWebinarSuccess" class="btn btn-sm btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
+    </div>
+  </form>
+</ng-template>
 
 <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
   <h4>All Webinars</h4>
@@ -270,54 +407,43 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Type</th>
       <th>Date and Time</th>
       <th>Description</th>
       <th>Speaker</th>
-      <th>Webinar Link</th>
-      <th>Users</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let webinar of webinars">
-      <td>{{webinar.title}}</td>
-      <td>{{webinar.datetime | date:'hh:mm a on MMMM dd y'}}</td>
-      <td>{{webinar.description}}</td>
-      <td>{{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}</td>
-      <td>{{webinar.webinar_link}}</td>
-      <td>{{webinar.users.length}}</td>
-    </tr>
-  </tbody>
-</table>
-<h4>All Speakers</h4>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
+      <th>Signed Up</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let speaker of speakers">
-      <td>
-        <ng-template #popContent>
-          <div class="container">
-            <div class="img-ctn">
-              <img class="img-pop" [src]="speaker.img" [alt]="speaker.title+' '+speaker.firstName+' '+speaker.lastName">
-            </div>
-            <h5>About the Speaker</h5>
-            <p>{{speaker.description}}</p>
+    <tr *ngFor="let webinar of webinars">
+      <td class="w-25"><a [href]="webinar.webinar_link">{{webinar.title}}</a></td>
+      <td>{{webinar.type}}</td>
+      <td *ngIf="webinar.datetime">{{webinar.datetime | date:'hh:mm a on MMMM dd y'}}</td>
+      <td *ngIf="!webinar.datetime">N/A</td>
+      <td>{{webinar.description}}</td>
+      <ng-template #popContent>
+        <div class="container">
+          <div class="img-ctn">
+            <img class="img-pop" [src]="webinar.speaker.img" [alt]="webinar.speaker.title+' '+webinar.speaker.firstName+' '+webinar.speaker.lastName">
           </div>
-        </ng-template>
-        <ng-template #popTitle>
-          <div class="container">
-            {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}
-          </div>
-        </ng-template>
-        <h6 triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="right">
-          {{speaker.title}} {{speaker.firstName}} {{speaker.lastName}}
-        </h6>
+          <h5>About the Speaker</h5>
+          <p>{{webinar.speaker.description}}</p>
+        </div>
+      </ng-template>
+      <ng-template #popTitle>
+        <div class="container">
+          {{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}
+        </div>
+      </ng-template>
+      <td triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="right">
+          {{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}
       </td>
-      <td>Buttons will go here.</td>
+      <td>{{webinar.users.length}}</td>
+      <td class="w-25">
+        <button class="btn btn-sm btn-secondary" (click)="openUpdate(webinar._id)"><i class="fa fa-cog"></i>&nbsp;Update</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteWebinar(webinar._id)"><i class="fa fa-times"></i>&nbsp;Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

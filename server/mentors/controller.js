@@ -1,6 +1,7 @@
-const Mentors=require('./models');
-const Users=require('../users/models');
-
+const Mentors = require('./models');
+const Mentees = require('../mentees/models');
+const Users = require('../users/models');
+const Meetings = require('../meetings/models');
 module.exports={
     mentorAll: (req, res)=>Mentors
         .find({approval: true})
@@ -26,12 +27,32 @@ module.exports={
     },
     mentorRemove: (req, res) => Mentors
         .findById(req.params.id)
-        .then( data => {
-            Users.findByIdAndUpdate(data.user, {$set: {mentor_id:null}})
-            .then(user=>console.log("deleted") ||res.json(user))
-            .catch(err=>console.log(err) || res.json(err));
-            Mentors.findByIdAndDelete(req.params.id)
-            .then(deleted=>console.log("deleted") ||res.json(deleted))
+        .populate({path: "mentees", populate: {path: "user"}})
+        .then( mentor => {
+            Users.findByIdAndUpdate(mentor.user, {$set: {mentor_id:null}, $pull: {meetings: {mentor: mentor._id}}})
+            .populate({path: "meetings"})
+            .then(user=> {
+                console.log("deleted", user)
+                Meetings.deleteMany({mentor: mentor._id})
+                .then(meetings => {
+                    console.log("deleted", meetings);
+                    Users.updateMany({},{$pull: {mentors: {mentor: mentor._id}}})
+                    .populate({path: "mentors"})
+                    .then(users => {
+                        console.log("updated", users)
+                        Mentees.deleteMany({mentor: mentor._id})
+                        .then(mentees => {
+                            console.log("updated", mentees)
+                            Mentors.findByIdAndDelete(req.params.id)
+                            .then(deleted=>console.log("deleted") ||res.json(deleted))
+                            .catch(err=>console.log(err) || res.json(err))
+                        })
+                        .catch(err=>console.log(err) || res.json(err));
+                    })
+                    .catch(err=>console.log(err) || res.json(err));
+                })
+                .catch(err=>console.log(err) || res.json(err));
+            })
             .catch(err=>console.log(err) || res.json(err));
         })
         .catch(err => console.log(err) || res.json(err)),

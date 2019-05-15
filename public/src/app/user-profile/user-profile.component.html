@@ -188,17 +188,17 @@
                         class="fa fa-pencil mr-2"></i>Edit User Profile</button>
                 <button (click)="open('password')" class="btn btn-sm btn-outline-secondary btn-block"><i
                     class="fa fa-pencil mr-2"></i>Edit Your Password</button>
-                <button [routerLink]="['/user/schedule']"
-                    class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-calendar mr-2"></i>Upcoming Schedule</button>
             </div>
         </div>
         <div id="user-profile-right">
+            <button [routerLink]="['/user/schedule']"
+                class="btn btn-lg btn-outline-success btn-block mb-4"><i class="fa fa-calendar mr-2"></i>Upcoming Schedule</button>
             <div id="your-mentors-card" class="card mb-4 border-success">
                 <div class="card-header bg-success border-success">Your Mentors</div>
                 <div class="card-body">
                     <div class="mentors-img-list">
                         <div class="d-flex justify-content-between mb-4">
-                            <a *ngFor="let mentor of userInfo?.mentors" class="mentor-img mr-5"
+                            <a *ngFor="let mentor of userInfo?.mentors" class="card border-info mentor-img mr-5 p-2"
                                 [routerLink]="['/mentorship', mentor.mentor._id]">
                                 <img class="rounded-circle" width="100px" [src]="mentor.mentor.user.picture"
                                     [alt]="mentor.mentor.user.firstName + ' ' + mentor.mentor.user.lastName">
@@ -233,15 +233,15 @@
                             <p>Credit Requirement: N/A</p>
                         </div>
                         <div *ngIf="continuingEducationContent === 'current'"
-                            class="d-flex justify-content-between mb-4 flex-wrap">
-                            <div *ngFor="let accreditation of current_courses" class="w-25 text-center">
-                                <a [routerLink]="['/courses', accreditation.webinar._id]">
-                                    <img class="mw-100" [src]="accreditation.webinar.img"
-                                        [alt]="accreditation.webinar.title">
-                                    <p>{{accreditation.webinar.title}}</p>
-                                </a>
-                                <div class="btn-group w-100" role="group">
-                                    <button class="btn btn-sm btn-success"
+                            class="horizontal-scroll mb-4">
+                            <div *ngFor="let accreditation of current_courses" class="d-inline-block align-top mr-2">
+                                <div class="class-card d-flex flex-column justify-content-between text-center card border-info p-2">
+                                    <a [routerLink]="['/courses', accreditation.webinar._id]">
+                                        <img class="mw-100 rounded" [src]="accreditation.webinar.img"
+                                            [alt]="accreditation.webinar.title">
+                                        <p>{{accreditation.webinar.title | slice: 10}}</p>
+                                    </a>
+                                    <button class="btn btn-sm btn-block btn-outline-success"
                                         (click)="completeCourse(accreditation._id)"><i class="fa fa-check"
                                             aria-hidden="true"></i>&nbsp;Add To Complete</button>
                                 </div>
@@ -250,15 +250,15 @@
                                 [routerLink]="['/courses']">Find a Course</button>
                         </div>
                         <div *ngIf="continuingEducationContent === 'completed'"
-                            class="d-flex justify-content-between flex-wrap mb-4 w25">
-                            <div *ngFor="let accreditation of completed_courses" class="w-25 text-center">
-                                <a [routerLink]="['/courses', accreditation.webinar._id]">
-                                <img class="mw-100" [src]="accreditation.webinar.img"
-                                    [alt]="accreditation.webinar.title">
-                                <p>{{accreditation.webinar.title}}</p>
-                                </a>
-                                <div class="btn-group w-100" role="group">
-                                    <button class="btn btn-sm btn-danger"
+                            class="horizontal-scroll mb-4">
+                            <div *ngFor="let accreditation of completed_courses" class="d-inline-block align-top mr-2">
+                                <div class="class-card d-flex flex-column justify-content-between text-center card border-info p-2">
+                                    <a [routerLink]="['/courses', accreditation.webinar._id]">
+                                        <img class="mw-100 rounded" [src]="accreditation.webinar.img"
+                                            [alt]="accreditation.webinar.title">
+                                        <p>{{accreditation.webinar.title | slice: 10}}</p>
+                                    </a>
+                                    <button class="btn btn-sm btn-block btn-outline-danger btn-wrap"
                                         (click)="incompleteCourse(accreditation._id)"><i class="fa fa-times"
                                             aria-hidden="true"></i>&nbsp;Not Quite Complete Yet</button>
                                 </div>

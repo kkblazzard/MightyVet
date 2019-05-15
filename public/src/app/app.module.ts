@@ -48,7 +48,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SpeakerDetailsComponent } from './speaker-details/speaker-details.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
-import { DonationComponent } from './donation/donation.component';
+// import { DonationComponent } from './donation/donation.component';
 
 @Pipe({ name: 'keys', pure: false })
 
@@ -64,75 +64,50 @@ export class KeysPipe implements PipeTransform {
 export class MentorSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
     if (value) {
-      var strings = search.bar.toLowerCase().split(' ');
-      value = value.sort((x, y) => {
-        var count_x = 0;
-        var count_y = 0;
-        for (let j = 0; j < strings.length; j++) {
-          if (x.user.firstName.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.user.lastName.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.user.title.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.user.org.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.resume.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (y.user.firstName.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.user.lastName.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.user.title.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.user.org.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.resume.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-        }
+      value = value.filter((x) => {
         if (search.mental_health) {
-          if (x.support.mental_health) {
-            count_x += 10;
-          }
-          if (y.support.mental_health) {
-            count_y += 10;
+          if (!x.support.mental_health) {
+            return false;
           }
         }
         if (search.financial_advice) {
-          if (x.support.financial_advice) {
-            count_x += 10;
-          }
-          if (y.support.financial_advice) {
-            count_y += 10;
+          if (!x.support.financial_advice) {
+            return false;
           }
         }
         if (search.career_advice) {
-          if (x.support.career_advice) {
-            count_x += 10;
-          }
-          if (y.support.career_advice) {
-            count_y += 10;
+          if (!x.support.career_advice) {
+            return false;
           }
         }
         if (search.technical_advice) {
           if (x.support.technical_advice) {
-            count_x += 10;
-          }
-          if (y.support.technical_advice) {
-            count_y += 10;
+            return false;
           }
         }
-        return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
+        var word_count = 0;
+        var strings = search.bar.toLowerCase().split(' ');
+        for (let j = 0; j < strings.length; j++) {
+          if (x.user.firstName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.user.lastName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.user.title.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.user.org.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.resume.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+        }
+        if(word_count !== strings.length){
+          return false;
+        }
+        return true;
       });
       return value.slice(0, search.featuredNumber);
     }
@@ -149,91 +124,57 @@ export class MentorSearchPipe implements PipeTransform {
 export class CourseSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
     if (value) {
-      var strings = search.bar.toLowerCase().split(' ');
-      value = value.sort((x, y) => {
-        var count_x = 0;
-        var count_y = 0;
-        for (let j = 0; j < strings.length; j++) {
-          if (x.title.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.description.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.speaker.firstName.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (x.speaker.lastName.toLowerCase().includes(strings[j])) {
-            count_x++;
-          }
-          if (y.title.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.description.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.speaker.firstName.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-          if (y.speaker.lastName.toLowerCase().includes(strings[j])) {
-            count_y++;
-          }
-        }
+      value = value.filter((x) => {
         if (search.type.Live) {
-          if (x.type.includes("Live")) {
-            count_x += 3;
-          }
-          if (y.type.includes("Live")) {
-            count_y += 3;
+          if (x.type !== "Live") {
+            return false;
           }
         }
         if (search.type.Video) {
-          if (x.type.includes("Video")) {
-            count_x += 3;
-          }
-          if (y.type.includes("Video")) {
-            count_y += 3;
+          if (x.type !== "Video") {
+            return false;
           }
         }
         if (search.category.management) {
-          console.log("pipe management search");
-          if (x.category.management) {
-            console.log("pipe management search2");
-            count_x += 10;
-          }
-          if (y.category.management) {
-            count_y += 10;
+          if (!x.category.management) {
+            return false;
           }
         }
         if (search.category.communication) {
-          console.log("pipe communication 1");
-          if (x.category.communication) {
-            console.log("pipe communication 2");
-            count_x += 10;
-          }
-          if (y.category.communication) {
-            console.log("pipe communication 3");
-            count_y += 10;
+          if (!x.category.communication) {
+            return false;
           }
         }
         if (search.category.medical) {
-          if (x.category.medical) {
-            count_x += 10;
-          }
-          if (y.category.medical) {
-            count_y += 10;
+          if (!x.category.medical) {
+            return false;
           }
         }
         if (search.category.technical) {
-          if (x.category.technical) {
-            count_x += 10;
-          }
-          if (y.category.technical) {
-            count_y += 10;
+          if (!x.category.technical) {
+            return false;
           }
         }
-
-        return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
+        var word_count = 0;
+        var strings = search.bar.toLowerCase().split(' ');
+        for (let j = 0; j < strings.length; j++) {
+          if (x.title.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.description.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.speaker.firstName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.speaker.lastName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+        }
+        if(word_count !== strings.length){
+          return false;
+        }
+        return true;
       });
       return value.slice(0, search.featuredNumber);
     }
@@ -296,7 +237,7 @@ export class SlicePipe implements PipeTransform {
     SpeakerDetailsComponent,
     AdminNewsletterComponent,
     MentorDetailsComponent,
-    DonationComponent,
+    // DonationComponent,
   ],
   imports: [
     BrowserModule,
