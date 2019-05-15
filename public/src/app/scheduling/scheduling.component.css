@@ -28,7 +28,6 @@
 .today .date-text{
     color: red;
 } */
-
 .past .date-text{
     opacity: .5;
 }
@@ -44,10 +43,16 @@ table {
     border-radius: 50%;
     line-height: 40px;
 }
+.available{
+    cursor: pointer;
+}
+.booked{
+    cursor: pointer;
+}
 .available .date-text {
     color: #fff;
-    border: 2px solid #fe6564;
-    background: #fe6564;
+    border: 2px solid #38b9a4;
+    background: #38b9a4;
     box-shadow: 0px 0px 5px #666;
 }
 .booked .date-text {

@@ -20,7 +20,7 @@ export class MentorshipComponent implements OnInit {
     userInfo: any;
     mentors: any;
     newMentor: any;
-    isMentor: boolean;
+    isMentor: boolean = true;
     application_submitted: boolean;
     @ViewChild('becomeAMentor') becomeAMentor: ElementRef
     modal: any;
@@ -46,8 +46,7 @@ export class MentorshipComponent implements OnInit {
             career_advice: false,
             technical_advice: false
         }
-        if (this.isLoggedIn()){
-            this.isApplicationSubmitted();
+        if (this._authenticationsService.isLoggedIn()){
             this.getUserInfo()
             this.newMentor={
                 user: this._authenticationsService.getUserDetails()._id,
@@ -59,6 +58,7 @@ export class MentorshipComponent implements OnInit {
             }
         }
         else{
+            this.isMentor = false; this.application_submitted = false
             this.userInfo = {
                 email: "",
                 firstName: "",
@@ -79,26 +79,20 @@ export class MentorshipComponent implements OnInit {
         this.states =  [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other' ];
         this.getMentors();
     }
-    isLoggedIn(){
-        if(this._authenticationsService.isLoggedIn()){
-            this.isApplicationSubmitted();
-        }
-        return this._authenticationsService.isLoggedIn();
+    applicationSubmitted(){
+        this.isMentor = false;
+        this.application_submitted = true;
     }
-    isApplicationSubmitted(){
-        let obs = this._mentorsService.getApprovals();
-        obs.subscribe(data => {
-            for(let mentor in data){
-                if(data[mentor].user._id === this._authenticationsService.getUserDetails()._id){
-                    this.application_submitted = true;
-                }
-            } 
-        })
+    clearMentor(){
+        this.isMentor = false;
+        this.application_submitted = false;
     }
     getUserInfo(){
-        this.userInfo = this._authenticationsService.getUserDetails();
         let obs = this._authenticationsService.profile();
-        obs.subscribe(data =>{
+        obs.subscribe(data => {
+            data.mentor_id ?
+                data.mentor_id.approval ? this.isMentor = true : this.applicationSubmitted() 
+                : this.clearMentor();
             this.userInfo = {
                 email: data['email'],
                 firstName: data['firstName'],
@@ -110,7 +104,7 @@ export class MentorshipComponent implements OnInit {
         })
     }
     open() {
-        if (this.isLoggedIn()){
+        if (this._authenticationsService.isLoggedIn()){
             this.modal = this._modalService.open(this.becomeAMentor, { size: 'lg'});
             this.modal.result.then(()=>{}, () => this.closedModal())
         }
@@ -122,7 +116,7 @@ export class MentorshipComponent implements OnInit {
         this.modal = null;
         this.user_errors = null;
         this.mentor_errors = null;
-        if (this.isLoggedIn()){
+        if (this._authenticationsService.isLoggedIn()){
             this.getUserInfo();
         }
         this.newMentor={
@@ -137,12 +131,8 @@ export class MentorshipComponent implements OnInit {
     getMentors(){
         let obs = this._mentorsService.getMentors();
         obs.subscribe(data => {
-            console.log(data);
             this.mentors = data;
             if (this._authenticationsService.isLoggedIn()){
-                if (this.mentors.find(x => x.user._id === this._authenticationsService.getUserDetails()._id)){
-                    this.isMentor = true;
-                }
                 this.mentors = this.mentors.filter(x => x.user._id !== this._authenticationsService.getUserDetails()._id);
             }
         });
@@ -171,6 +161,4 @@ export class MentorshipComponent implements OnInit {
     seeMore(){
         this.searchBar.featuredNumber += 8;
     }
-
-
 }

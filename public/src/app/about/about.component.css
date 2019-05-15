@@ -19,20 +19,16 @@
     height:100px;
 }
 .tier2 img{
-    height: 70px;
+    height: 80px;
 }
 .tier3 img{
-    height: 50px;
+    height: 60px;
 }
 
 
 /* Show more / Shoe less */
-.hide-show-mission {
-    height:257px;
-    overflow: hidden;
-}
 .hide-show-member-text {
-    height:110px;
+    height:105px;
     overflow: hidden;
 }
 .show {

@@ -23,6 +23,7 @@ export class AvailabilityComponent implements OnInit, OnChanges {
     boolean: false,
     num: '4'
   }
+  new: boolean = false;
   schedule_events: any;
   update: number;
   updateTime: any;
@@ -110,8 +111,12 @@ export class AvailabilityComponent implements OnInit, OnChanges {
         if(this.date){
           this.daily_meetings = this.schedule_events.filter(x => moment(x.datetime).startOf('day').format() === this.date.format());
         }
+        this.new = false;
       }
     })
+  }
+  toggleNew(){
+    this.new = !this.new;
   }
   generateCalendar(): void {
     const dates = this.fillDates(this.currentDate);

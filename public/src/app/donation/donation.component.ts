@@ -74,8 +74,8 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
             this.error = data['message'];
           }
           else{
-            this._support.modal.close();
-            this._support.open('paymentSuccess');
+            // this._support.modal.close();
+            // this._support.open('paymentSuccess');
           }
         }
         else{
@@ -102,7 +102,7 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     }
   }
-  close(){
-    this._support.modal.close();
-  }
+  // close(){
+  //   this._support.modal.close();
+  // }
 }

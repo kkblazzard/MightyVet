@@ -47,7 +47,9 @@ export class AdminPartnersComponent implements OnInit {
 
   getPartners(){
     let obs = this._partnersService.getPartners();
-    obs.subscribe(data=>this.partners=data)}
+    obs.subscribe(data=>this.partners=data);
+  }
+
   addPartner(){
     let obs = this._partnersService.addPartner(this.newPartner);
     obs.subscribe(data=>{
@@ -60,7 +62,7 @@ export class AdminPartnersComponent implements OnInit {
           this.partnerSuccess = false
           this.fileToUpload = null;
           this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
-        }, 5000);
+        }, 2000);
       }
       else{
         if(data['errors'].partners){
@@ -78,14 +80,17 @@ export class AdminPartnersComponent implements OnInit {
       this.getPartners();
     });
   }
+
   openModal(){
     this.modal = this._modalsService.open(this.partnerModal)
     this.modal.result.then(()=>{}, () => this.closedModal())
   }
+
   closedModal(){
     this.newPartner = {tier: 1, partner: {name: "", img: "", link: ""}};
     this.fileToUpload = null;
   }
+
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
@@ -102,7 +107,13 @@ export class AdminPartnersComponent implements OnInit {
           console.log(err);
         })
     });
-      
     reader.readAsDataURL(file);
+  }
+
+  deletePartner(tier_id, partner_id){
+    let obs = this._partnersService.partnerUpdate(tier_id, {$pull: {partners: {_id: partner_id}}});
+    obs.subscribe(data => {
+      this.getPartners();
+    })
   }
 }

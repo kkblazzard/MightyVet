@@ -13,9 +13,9 @@ var NewsletterSchema = new mongoose.Schema({
                 return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
         }, "Please enter a valid email."], //email validation
         required: [true, "Please enter an email."],
-        unique: [true, "This email is already receiving the newsletter."] }
+        unique: true }
 }, {timestamps:true})
 
-NewsletterSchema.plugin(uniqueValidator);
+NewsletterSchema.plugin(uniqueValidator, {message: "This email is already receiving the newsletter."});
 
 module.exports=mongoose.model('newsletter', NewsletterSchema);

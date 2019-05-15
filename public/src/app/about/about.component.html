@@ -1,7 +1,7 @@
 <section id="section-welcome" class="container">
     <div class="jumbotron d-flex justify-content-start align-items-end">
       <div id="welcome-text" class="mr-3 p-5 text-light">
-          <h1 class="text-light">What's MightyVet?</h1>
+          <h1 class="text-light">A Mighty Mission</h1>
           <p class="mb-0">We seek to bridge the gap in veterinary education by ensuring veterinarians are informed of and prepared for the challenges they will face in practice. We will do this through an industry-wide platform to support veterinary professionals in their career and well-being.</p>
       </div>
     </div>
@@ -9,21 +9,9 @@
   
 
 <!-- Mission -->
-<div id="mighty-mission" class="container">
-  <h1>A Mighty Mission</h1>
-  <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-    <div class="mr-5">
-      <h3>Remembering Why We Do This</h3>
-      <div class="hide-show-mission" [class.show]="show[0]">
-          <p>We seek to bridge the gap in veterinary education by ensuring veterinarians are informed of the challenges they will face in practice. We will do this through an industry-wide platform to support veterinary professionals in their career and well-being.</p>
-      </div>
-      <button class="btn btn-link pull-right" (click)="show[0]= !show[0]">{{ show[0] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
-    </div>
-    <div id="mission-video">
-      <h6>Hear Sophia's Story</h6>
-      <iframe width="550px" height="350px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </div>
+<div id="mighty-mission" class="container d-flex flex-column">
+  <h3 class="mb-4">Remembering Why We Do This</h3>
+  <iframe height="500px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <!-- Board Members-->
 <div id="board-members" class="my-5 bg-light">

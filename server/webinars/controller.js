@@ -49,7 +49,16 @@ module.exports={
     },
     webinarRemove: (req, res) => Webinars
         .findByIdAndDelete(req.params.id)
-        .then(deleted=>console.log("deleted") ||res.json(deleted))
+        .then(deleted=> {
+            console.log("deleted", deleted);
+            Users.updateMany({}, {$pull: {accreditations: {webinar:deleted._id}}})
+            .populate({path: "accreditations"})
+            .then(update => {
+                console.log("updated", update);
+                res.json(deleted)
+            })
+            .catch(err=>console.log(err) || res.json(err))
+        })
         .catch(err=>console.log(err) || res.json(err)),
 
     webinarDetails:(req, res) => Webinars
@@ -60,7 +69,7 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err)),
 
     webinarUpdate: (req, res) => Webinars
-        .findByIdAndUpdate(req.params.id,req.body,{new: true})
+        .findByIdAndUpdate(req.params.id,req.body,{new: true, runValidators: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
 

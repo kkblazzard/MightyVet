@@ -10,7 +10,7 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public/dist/public/')));
 
-require('./server/payments/routes')(app);
+// require('./server/payments/routes')(app);
 require('./server/mentees/routes')(app);
 require('./server/fileuploads/routes')(app);
 require('./server/speakers/routes')(app);
