@@ -20,7 +20,8 @@ var MentorSchema = new mongoose.Schema({
     mentees: [{type : mongoose.Schema.ObjectId, 
         ref : 'mentee'}], //array of mentees
     availabilities: [{type : mongoose.Schema.ObjectId, 
-        ref : 'meeting'}] //holds an array of dates and arrays of time
+        ref : 'meeting'}], //holds an array of dates and arrays of time
+    zoomId: {type : String}
 }, {timestamps:true})
 
 module.exports = MentorSchema;

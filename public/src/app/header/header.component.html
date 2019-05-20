@@ -95,7 +95,7 @@
         <div class="form-group col">
           <label>Password*</label>
           <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password" required>
-          <div *ngIf="signup_errors?.password" class="text-danger"><small>{{signup_errors.lastName.password}}</small></div>
+          <div *ngIf="signup_errors?.password" class="text-danger"><small>{{signup_errors?.password.message}}</small></div>
         </div>
         <div class="form-group col">
           <label>Confirm Password*</label>
@@ -159,7 +159,7 @@
             <button class="navbar-toggler ml-auto" id="navbartoggle" ngbDropdownToggle>
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div ngbDropdownMenu aria-labelledby="navbartoggle">
+            <div class="d-lg-none" ngbDropdownMenu aria-labelledby="navbartoggle">
               <ul class="navbar-nav navigation">
                 <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
                   <a class="nav-link">Online Learning</a>

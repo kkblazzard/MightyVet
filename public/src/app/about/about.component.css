@@ -53,5 +53,17 @@
     overflow: hidden;
     border-radius: 50%;
 }
+.video{
+    height: 400px;
+}
 
 /* add in extra media query for phone/tablet/laptop? */
+@media only screen and (min-width:992px){
+    .video-text{
+        width: 48%;
+    }
+    .video{
+        width: 48%;
+        height: 300px;
+    }
+}

@@ -10,7 +10,7 @@
     <tr *ngFor="let tentativeMentor of approvalMentors">
       <td><a [routerLink]="['/mentorship', tentativeMentor._id]">{{tentativeMentor.user.firstName}} {{tentativeMentor.user.lastName}}</a></td>
       <td>
-        <button class="btn btn-success" (click)="approveMentor(tentativeMentor._id)">Approve</button>
+        <button class="btn btn-success" (click)="approveMentor(tentativeMentor._id, tentativeMentor.user.email)">Approve</button>
         <button class="btn btn-danger" (click)="declineMentor(tentativeMentor._id)">Decline</button>
       </td>
     </tr>

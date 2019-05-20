@@ -229,8 +229,10 @@
                     </ul>
                     <div class="p-5">
                         <div *ngIf="continuingEducationContent === 'progress'">
-                            <p>Credit Completed: {{completed_courses?.length}}</p>
-                            <p>Credit Requirement: N/A</p>
+                            <div *ngIf="userInfo?.title === 'Vet Tech' || userInfo?.title === 'Veterinarian' && userInfo.state && userInfo.state !== 'Other'" >
+                                <p>Credit Completed: {{completed_courses?.length}}</p>
+                                <p>Credit Requirement: {{state_requirements[userInfo?.state][userInfo?.title].hours}} over {{state_requirements[userInfo?.state][userInfo?.title].years}} years</p>
+                            </div>
                         </div>
                         <div *ngIf="continuingEducationContent === 'current'"
                             class="horizontal-scroll mb-4">

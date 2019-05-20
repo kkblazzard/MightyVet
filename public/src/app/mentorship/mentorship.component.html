@@ -144,13 +144,10 @@
 <!--  ------ Heading ------- -->
 <section id="section-mentorship" class="container">
     <div class="jumbotron d-flex justify-content-end">
-        <div id="mentorship-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
-            <h1 class="text-light">MightyVet is looking for some mighty mentors</h1>
-            <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders
-                from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to
-                evaluate your career options. You can schedule office hours with one of our featured members.</p>
-            <button *ngIf="!isMentor" class="btn btn-primary mt-auto" (click)="open(becomeAMentor)">Apply to Become a
-                Mentor</button>
+        <div id="mentorship-text" class="mr-3 p-5 text-light d-flex flex-column">
+            <h1 class="text-light">Find a Mighty Mentor</h1>
+            <p>Connect with industry leaders in the same stage of life as you to gain insight and advice for your future. Our mentors are located all over North America and are eager to share their experiences with you.</p>
+            <p>Interested in becoming a Mighty Mentor?&nbsp;<a *ngIf="!isMentor" class="text-info apply-link" (click)="open(becomeAMentor)">Apply here!</a></p>
         </div>
     </div>
 </section>
@@ -171,7 +168,7 @@
 <section class="bg-light py-5 m-0">
     <!-- ----search bar---- -->
     <div class="container mb-3">
-        <h1 class="mb-3">Find a Mentor</h1>
+        <h1 class="mb-3">Find a Mighty Mentor</h1>
         <div id="search-bar" class="input-group mb-3">
             <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch"
                 aria-describedby="coursesSearch" [(ngModel)]="searchBar.bar">
