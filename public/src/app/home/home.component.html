@@ -1,9 +1,8 @@
 <section id="section-welcome" class="container">
   <div class="jumbotron d-flex justify-content-end">
     <div id="welcome-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
-      <h1 class="text-light">Free Support for the Veterinary Community</h1>
-      <p>MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs,
-        students, and anyone else involved in the veterinary profession.</p>
+      <h1 class="text-light">Support for the Veterinary Community</h1>
+      <p>We offer free continuing education, mentorship programs, office hours with industry professionals, and other resources to help veterinary professionals in their career and well-being.</p>
       <button class="btn btn-success mt-auto" [routerLink]="['/about']">About MightyVet</button>
     </div>
   </div>
@@ -93,8 +92,12 @@
 </div> -->
 <!-- Mentors -->
 <section id="courses" class="bg-light my-5 py-5">
-  <div class="container">
-    <h2>Online Learning</h2>
+  <div class="container d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
+    <div class="online-learning-info mr-5">
+      <h2>Online Learning</h2>
+      <p>Participate in a variety of continuing education courses with well-respected industry leaders focusing on the challenges and opportunities faced by those drawn to be part of the most compassionate and trusted profession in the world.</p>
+      <button class="btn btn-primary mt-2" [routerLink]="['/courses']">Browse our Courses</button>
+    </div>
     <div class="courses-list d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
       <div *ngFor="let course of featuredCourses" class="course-info col-lg pl-0">
         <a [routerLink]="['/courses', course._id]">
@@ -105,26 +108,20 @@
         </a>
       </div>
     </div>
-    <button class="btn btn-primary mt-2" [routerLink]="['/courses']">Browse our Courses</button>
   </div>
 </section>
 <!-- Courses -->
 
 <section id="mentors" class="container">
   <div class="d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
-    <div class="mentors-info mr-5">
+    <div class="mentors-info mr-5 mb-4">
       <h2>Mighty Mentors</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-      <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-        sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin
-        aliquam.</p>
+      <p>Connect with industry leaders in the same stage of life as you to gain insight and advice for your future.</p> 
+      <p>Whether you are in veterinary school and trying to determine what life post-graduation should look like, near retirement and looking for advice on selling your practice, or anywhere in between, we have a mentor for that.</p>
       <button class="btn btn-primary mt-2" [routerLink]="['/mentorship']">Meet Our Mentors</button>
     </div>
     <div class="mentors-img-list">
-      <div class="d-flex justify-content-between mb-4">
+      <div class="d-flex justify-content-around mb-4">
         <div class="mentor-img mr-5">
           <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg"
             alt="Dr. Steve Weinrauch">
@@ -134,7 +131,7 @@
             alt="Dr. Steve Weinrauch">
         </div>
       </div>
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-around">
         <div class="mentor-img mr-5">
           <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg"
             alt="Dr. Steve Weinrauch">

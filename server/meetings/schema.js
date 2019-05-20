@@ -13,6 +13,9 @@ var MeetingSchema = new mongoose.Schema({
         type: Date,
         required: [true, "Please enter a valid time."]
     },
+    zoomId: {
+        type: String
+    }
 }, {timestamps:true})
 MeetingSchema.pre('validate', function(next) {
     var that = this;

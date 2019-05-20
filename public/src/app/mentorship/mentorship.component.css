@@ -1,6 +1,5 @@
 .jumbotron {
     width: 100%;
-    min-height: 500px;
     filter: grayscale(30%);
     background-image: url('../../assets/img/stock_photos/kayla-farmer-1433741-unsplash.jpg');
     background-repeat: no-repeat;
@@ -24,20 +23,10 @@
     border-radius: 5px;
     text-align: center;
 }
+.apply-link{
+    cursor: pointer;
+}
 textarea {
     resize: none;
     overflow: scroll;
-}
-/* media queries */
-
-@media only screen and (min-width:992px){
-    /* .main-image{
-        width: 48.6%;
-    }
-    .main-info{
-        width: 48.6%;
-    }
-    .mentor{
-        width: 48.6%;
-    } */
 }

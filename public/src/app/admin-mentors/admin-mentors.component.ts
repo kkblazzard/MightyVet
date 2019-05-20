@@ -30,13 +30,13 @@ export class AdminMentorsComponent implements OnInit {
     let obs = this._mentorsService.getMentors();
     obs.subscribe(data => this.mentors = data);
   }
-  approveMentor(id){
+  approveMentor(id, email){
     if(confirm("Are you sure?")) {
       let obs = this._mentorsService.approveMentor(id);
       obs.subscribe(data => {
         this.getApprovals();
         this.getMentors();
-      })
+      });
     }
   }
   declineMentor(id){

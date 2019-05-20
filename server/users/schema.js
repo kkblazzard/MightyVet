@@ -25,12 +25,10 @@ var UserSchema = new mongoose.Schema({
         },
 
         password: { hash: {
-                        type: String, 
-                        required: [true, "Please enter a password."], 
+                        type: String,
                 },
                 salt: {
-                        type: String, 
-                        required: [true, "Please enter a password."], 
+                        type: String,
                 }
         },
 
@@ -74,8 +72,16 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(uniqueValidator, { message: 'This email address is already in use.' });
 UserSchema.methods.setPassword = function(password){
-        this.password.salt = crypto.randomBytes(16).toString('hex');
-        this.password.hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
+        if(password.length === 0){
+                this.invalidate("password", "Password is a required field.");
+        }
+        else if(password.length < 6){
+                this.invalidate("password", "Your password should be at least 6 characters long.");
+        }
+        else{
+                this.password.salt = crypto.randomBytes(16).toString('hex');
+                this.password.hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
+        }
 };
 UserSchema.methods.validPassword = function(password) {
         var hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');

@@ -34,7 +34,60 @@ export class UserProfileComponent implements OnInit {
     editUser: any;
     newsletter: boolean;
     checkbox_newsletter: boolean;
-    states: any = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other'];
+    states: any = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'Other'];
+    state_requirements = {
+        'AL':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 8, years: 1}},
+        'AK':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 10, years: 2}},
+        'AZ':{ "Veterinarian": { hours: 20, years: 2}, "Vet Tech": { hours: 10, years: 2}},
+        'AS':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 6, years: 1}},
+        'CA':{ "Veterinarian": { hours: 36, years: 2}, "Vet Tech": { hours: 20, years: 2}},
+        'CO':{ "Veterinarian": { hours: 32, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'CT':{ "Veterinarian": { hours: 24, years: 1}, "Vet Tech": { hours: 0, years: 1}},
+        'DE':{ "Veterinarian": { hours: 24, years: 2}, "Vet Tech": { hours: 12, years: 2}},
+        'DC':{ "Veterinarian": { hours: 36, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'FL':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'GA':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 10, years: 2}},
+        'HI':{ "Veterinarian": { hours: 20, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'ID':{ "Veterinarian": { hours: 20, years: 2}, "Vet Tech": { hours: 14, years: 2}},
+        'IL':{ "Veterinarian": { hours: 40, years: 2}, "Vet Tech": { hours: 15, years: 2}},
+        'IN':{ "Veterinarian": { hours: 40, years: 2}, "Vet Tech": { hours: 16, years: 2}},
+        'IA':{ "Veterinarian": { hours: 60, years: 3}, "Vet Tech": { hours: 0, years: 1}},
+        'KS':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 4, years: 1}},
+        'KY':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 6, years: 1}},
+        'LA':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 10, years: 1}},
+        'ME':{ "Veterinarian": { hours: 24, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'MD':{ "Veterinarian": { hours: 18, years: 1}, "Vet Tech": { hours: 24, years: 3}},
+        'MA':{ "Veterinarian": { hours: 15, years: 1}, "Vet Tech": { hours: 12, years: 1}},
+        'MI':{ "Veterinarian": { hours: 0, years: 1}, "Vet Tech": { hours: 0, years: 1}},
+        'MN':{ "Veterinarian": { hours: 40, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'MS':{ "Veterinarian": { hours: 15, years: 1}, "Vet Tech": { hours: 10, years: 1}},
+        'MO':{ "Veterinarian": { hours: 10, years: 1}, "Vet Tech": { hours: 5, years: 1}},
+        'MT':{ "Veterinarian": { hours: 20, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'NE':{ "Veterinarian": { hours: 32, years: 2}, "Vet Tech": { hours: 16, years: 2}},
+        'NV':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 10, years: 1}},
+        'NH':{ "Veterinarian": { hours: 12, years: 1}, "Vet Tech": { hours: 0, years: 1}},
+        'NJ':{ "Veterinarian": { hours: 20, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'NM':{ "Veterinarian": { hours: 15, years: 1}, "Vet Tech": { hours: 8, years: 1}},
+        'NY':{ "Veterinarian": { hours: 45, years: 3}, "Vet Tech": { hours: 24, years: 3}},
+        'NC':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 12, years: 2}},
+        'ND':{ "Veterinarian": { hours: 24, years: 2}, "Vet Tech": { hours: 8, years: 2}},
+        'OH':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 10, years: 2}},
+        'OK':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 10, years: 1}},
+        'OR':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 15, years: 2}},
+        'PA':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 16, years: 2}},
+        'RI':{ "Veterinarian": { hours: 24, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'SC':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 10, years: 2}},
+        'SD':{ "Veterinarian": { hours: 32, years: 2}, "Vet Tech": { hours: 12, years: 2}},
+        'TN':{ "Veterinarian": { hours: 20, years: 1}, "Vet Tech": { hours: 12, years: 1}},
+        'TX':{ "Veterinarian": { hours: 17, years: 1}, "Vet Tech": { hours: 0, years: 1}},
+        'UT':{ "Veterinarian": { hours: 24, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'VT':{ "Veterinarian": { hours: 24, years: 2}, "Vet Tech": { hours: 0, years: 1}},
+        'VA':{ "Veterinarian": { hours: 15, years: 1}, "Vet Tech": { hours: 8, years: 1}},
+        'WA':{ "Veterinarian": { hours: 30, years: 3}, "Vet Tech": { hours: 30, years: 3}},
+        'WV':{ "Veterinarian": { hours: 18, years: 1}, "Vet Tech": { hours: 12, years: 1}},
+        'WI':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 15, years: 2}},
+        'WY':{ "Veterinarian": { hours: 16, years: 2}, "Vet Tech": { hours: 10, years: 2}}
+    }
     modal: any;
     userInfo: any = { picture: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"};
     mentees: any;
@@ -126,7 +179,7 @@ export class UserProfileComponent implements OnInit {
                 this.editSuccess = true;
                 setTimeout(()=>{
                     this.editSuccess = false;
-                }, 5000);
+                }, 2000);
                 this.changeNewsletterStatus(old_email, new_email);
             }
             this.editPending = false;
@@ -237,6 +290,7 @@ export class UserProfileComponent implements OnInit {
         this.mentee_applications = [];
         let obs = this._authenticationsService.profile();
         obs.subscribe(data => {
+            console.log(data);
             this.userInfo = data;
             this.editUser = {
                 firstName: data['firstName'],
