@@ -403,47 +403,59 @@
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" (click)="openModal()">ADD A WEBINAR</button>
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Type</th>
-      <th>Date and Time</th>
-      <th>Description</th>
-      <th>Speaker</th>
-      <th>Signed Up</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let webinar of webinars">
-      <td class="w-25"><a [href]="webinar.webinar_link">{{webinar.title}}</a></td>
-      <td>{{webinar.type}}</td>
-      <td *ngIf="webinar.datetime">{{webinar.datetime | date:'hh:mm a on MMMM dd y'}}</td>
-      <td *ngIf="!webinar.datetime">N/A</td>
-      <td>{{webinar.description}}</td>
-      <ng-template #popContent>
-        <div class="container">
-          <div class="img-ctn">
-            <img class="img-pop" [src]="webinar.speaker.img" [alt]="webinar.speaker.title+' '+webinar.speaker.firstName+' '+webinar.speaker.lastName">
+
+<div class="container table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Date and Time</th>
+        <th>Description</th>
+        <th>Speaker</th>
+        <th>Signed Up</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let webinar of webinars">
+        <td width="20%"><a [href]="webinar.webinar_link">{{webinar.title}}</a></td>
+        <td>{{webinar.type}}</td>
+        <td *ngIf="webinar.datetime" width="10%">{{webinar.datetime | date:'hh:mm a, MMMM dd y'}}</td>
+        <td *ngIf="!webinar.datetime">N/A</td>
+        <td>{{webinar.description}}</td>
+        <!-- <ng-template #popContent>
+          <div class="container">
+            <div class="img-ctn">
+              <img class="img-pop" [src]="webinar.speaker.img" [alt]="webinar.speaker.title+' '+webinar.speaker.firstName+' '+webinar.speaker.lastName">
+            </div>
+            <h5>About the Speaker</h5>
+            <p>{{webinar.speaker.description}}</p>
           </div>
-          <h5>About the Speaker</h5>
-          <p>{{webinar.speaker.description}}</p>
-        </div>
-      </ng-template>
-      <ng-template #popTitle>
-        <div class="container">
-          {{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}
-        </div>
-      </ng-template>
-      <td triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="right">
-          {{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}
-      </td>
-      <td>{{webinar.users.length}}</td>
-      <td class="w-25">
-        <button class="btn btn-sm btn-secondary" (click)="openUpdate(webinar._id)"><i class="fa fa-cog"></i>&nbsp;Update</button>
-        <button class="btn btn-sm btn-danger" (click)="deleteWebinar(webinar._id)"><i class="fa fa-times"></i>&nbsp;Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </ng-template>
+        <ng-template #popTitle>
+          <div class="container">
+            {{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}
+          </div>
+        </ng-template>
+        <td triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" placement="right"></td> -->
+        <td >
+          <button class="btn btn-link" (click)="toggleSpeaker()">
+            {{webinar.speaker.title}} {{webinar.speaker.firstName}} {{webinar.speaker.lastName}}
+            <i *ngIf="!showSpeaker" class="fa fa-angle-double-down"></i>
+            <i *ngIf="showSpeaker" class="fa fa-angle-double-up"></i>
+          </button>
+          <div  *ngIf="showSpeaker">
+              <img class="img-pop" [src]="webinar.speaker.img" alt="speaker's image">
+              <p class="m-3">{{webinar.speaker.description}}</p>
+          </div>
+        </td>
+        <td>{{webinar.users.length}}</td>
+        <td class="w-25">
+          <button class="btn btn-sm btn-secondary" (click)="openUpdate(webinar._id)"><i class="fa fa-cog"></i>&nbsp;Update</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteWebinar(webinar._id)"><i class="fa fa-times"></i>&nbsp;Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
