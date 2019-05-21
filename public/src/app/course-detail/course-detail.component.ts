@@ -14,6 +14,9 @@ export class CourseDetailComponent implements OnInit {
   id: string;
   course: any;
   isSignedUp: boolean;
+  isLive: boolean;
+  showSpeaker: boolean;
+
   constructor(
     private _route: ActivatedRoute,
     private _webinarsService: WebinarsService,
@@ -73,5 +76,9 @@ export class CourseDetailComponent implements OnInit {
         console.log("something went wrong:", err);
       }
     }
+  }
+
+  toggle() {
+    this.showSpeaker = !this.showSpeaker;
   }
 }

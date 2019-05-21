@@ -65,6 +65,8 @@ export class AdminWebinarsComponent implements OnInit {
   newSpeaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  showSpeaker: boolean;
+
   constructor(
     private _modalsService: NgbModal,
     private _webinarsService: WebinarsService,
@@ -355,5 +357,9 @@ export class AdminWebinarsComponent implements OnInit {
         this.updateErrors = data['errors'];
       }
     });
+  }
+
+  toggleSpeaker() {
+    this.showSpeaker = !this.showSpeaker;
   }
 }

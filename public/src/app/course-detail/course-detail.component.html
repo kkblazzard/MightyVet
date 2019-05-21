@@ -2,24 +2,39 @@
   <div *ngIf="course._id">
     <div class="container">
       <h1>{{course.title}}</h1>
-      <img id="course_img" class="jumbotron jumbotron-fluid border-top border-bottom py-0 rounded" [src]="course.img"
+      <img id="course_img" class="py-0 round" [src]="course.img"
         alt="Course Image">
     </div>
-    <div class="container d-flex justify-content-between flex-wrap">
-      <div class="w-75 p-4">
-        <h2>{{course.title}}</h2>
-        <p class="m-3">{{course.description}}</p>
+    <div class="container d-flex flex-wrap flex-column flex-lg-row">
+      <div class="col-lg-8 p-4">
+        <p >{{course.description}}</p>
+        <!-- toggle speaker info -->
+        <h3 >Speaker</h3>
+        <!-- <app-speaker-details [model]="course.speaker"></app-speaker-details> -->
+        <button class="btn btn-link" (click)="toggle()"><p>
+            {{course.speaker.title}} {{course.speaker.firstName}} {{course.speaker.lastName}} 
+          <i *ngIf="!showSpeaker" class="fa fa-angle-double-down"></i>
+          <i *ngIf="showSpeaker" class="fa fa-angle-double-up"></i>
+        </p></button>
+        <div  *ngIf="showSpeaker">
+          <img class="speakerimg" [src]="course.speaker.img" alt="speaker's image">
+          <p class="m-3">{{course.speaker.description}}</p>
+        </div>
       </div>
-      <div class="p-4">
+
+      <div class="col p-4">        
         <h4>Class Type</h4>
         <p>{{course.type}}</p>
-        <h4>Class Date & Time</h4>
-        <p>{{course.datetime | date:"MMM-dd-y, hh:mma"}}</p>
-        <h4>Speaker</h4>
-        <app-speaker-details [model]="course.speaker"></app-speaker-details>
-        <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
-        <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary"> Go to
-            course</button></a>
+        <div *ngIf="course.type == 'Live'">
+          <h4>Class Date & Time</h4>
+          <p>{{course.datetime | date:"MMM-dd-y, hh:mma"}}</p>
+        </div>
+
+        <!-- signup or go to course -->
+        <div>
+          <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
+          <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary"> Go to course</button></a>
+        </div>
       </div>
     </div>
   </div>
