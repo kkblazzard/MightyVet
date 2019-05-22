@@ -8,17 +8,17 @@
     <div class="container d-flex flex-wrap flex-column flex-lg-row">
       <div class="col-lg-8 p-4">
         <p >{{course.description}}</p>
-        <!-- toggle speaker info -->
-        <h3 >Speaker</h3>
+      <!-- toggle speaker info -->
+        <h4 >Speaker</h4>
         <!-- <app-speaker-details [model]="course.speaker"></app-speaker-details> -->
         <button class="btn btn-link" (click)="toggle()"><p>
             {{course.speaker.title}} {{course.speaker.firstName}} {{course.speaker.lastName}} 
           <i *ngIf="!showSpeaker" class="fa fa-angle-double-down"></i>
           <i *ngIf="showSpeaker" class="fa fa-angle-double-up"></i>
         </p></button>
-        <div  *ngIf="showSpeaker">
-          <img class="speakerimg" [src]="course.speaker.img" alt="speaker's image">
-          <p class="m-3">{{course.speaker.description}}</p>
+        <div  *ngIf="showSpeaker" class="p-3 border rounded">
+          <img class="speakerimg rounded" [src]="course.speaker.img" alt="speaker's image">
+          <p class="p-3">{{course.speaker.description}}</p>
         </div>
       </div>
 
@@ -29,6 +29,13 @@
           <h4>Class Date & Time</h4>
           <p>{{course.datetime | date:"MMM-dd-y, hh:mma"}}</p>
         </div>
+        <h4>Category:</h4>
+        <ul>
+          <li *ngIf="course.category.communication">Communication</li>
+          <li *ngIf="course.category.management">Management</li>
+          <li *ngIf="course.category.medical">Medical</li>
+          <li *ngIf="course.category.technical">Technical</li>
+        </ul>
 
         <!-- signup or go to course -->
         <div>
@@ -39,6 +46,7 @@
     </div>
   </div>
 
+<!-- invalid course id url-->
   <div *ngIf="!course._id" class="container d-flex justify-content-center pt-5">
     <i class="fa fa-paw fa-5x mr-3 text-info"></i>
     <div class="text-info">
