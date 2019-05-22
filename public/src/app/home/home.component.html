@@ -9,10 +9,10 @@
 </section>
 
 <!-- NewsLetter -->
-<section id="newsletter" class="my-5 py-4">
+<section id="newsletter" class="my-5 py-3">
   <div class="container d-flex flex-lg-row justify-content-between flex-md-column flex-sm-column">
     <div class="align-self-center text-center">
-      <h5 class="mb-lg-0">GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</h5>
+      <h6 class="mb-lg-0">GET GREAT RESOURCES AND TIPS IN OUR NEWSLETTER</h6>
     </div>
     <form class="input-group m-0 p-0 align-self-center" (submit)="submitNewsletter()">
       <input type="text" class="form-control" id="inlineFormInputName2" name="newsletter" type="text"
@@ -90,7 +90,8 @@
     </div>
   </div>
 </div> -->
-<!-- Mentors -->
+
+<!-- Courses -->
 <section id="courses" class="bg-light my-5 py-5">
   <div class="container d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
     <div class="online-learning-info mr-5">
@@ -100,21 +101,19 @@
     </div>
     <div class="courses-list d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
       <div *ngFor="let course of featuredCourses" class="course-info col-lg pl-0">
-        <a [routerLink]="['/courses', course._id]">
           <h5>{{course.title | slice: 40}}</h5>
-        </a>
-        <a [routerLink]="['/courses', course._id]">
-          <p>{{course.description | slice: 100}}</p>
+        <a [routerLink]="['/courses', course._id]" class="stretched-link">
+          <p>{{course.description | slice: 100}} <i class="fa fa-angle-double-right"></i></p>
         </a>
       </div>
     </div>
   </div>
 </section>
-<!-- Courses -->
 
+<!-- Mentors -->
 <section id="mentors" class="container">
   <div class="d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
-    <div class="mentors-info mr-5 mb-4">
+    <div class="mentors-info mr-5 my-4">
       <h2>Mighty Mentors</h2>
       <p>Connect with industry leaders in the same stage of life as you to gain insight and advice for your future.</p> 
       <p>Whether you are in veterinary school and trying to determine what life post-graduation should look like, near retirement and looking for advice on selling your practice, or anywhere in between, we have a mentor for that.</p>
@@ -123,24 +122,38 @@
     <div class="mentors-img-list">
       <div class="d-flex justify-content-around mb-4">
         <div class="mentor-img mr-5">
-          <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg"
-            alt="Dr. Steve Weinrauch">
+          <img class="rounded-circle" width="150px" src="/assets/img/home_page/Steve.Weinrauch.sm.jpg"
+            alt="Steve Weinrauch">
         </div>
         <div class="mentor-img mr-5">
           <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg"
-            alt="Dr. Steve Weinrauch">
+            alt="Barry Kipperman">
         </div>
       </div>
       <div class="d-flex justify-content-around">
         <div class="mentor-img mr-5">
-          <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg"
-            alt="Dr. Steve Weinrauch">
+          <img class="rounded-circle" width="150px" src="/assets/img/home_page/CJurney_sq.jpg"
+            alt="Carrie Jurney">
         </div>
         <div class="mentor-img mr-5">
-          <img class="rounded-circle" width="150px" src="/assets/img/home_page/Kipperman_sq.jpg"
-            alt="Dr. Steve Weinrauch">
+          <img class="rounded-circle" width="150px" src="/assets/img/home_page/janeharrell.sm.png"
+            alt="Jane Harrell">
         </div>
       </div>
     </div>
   </div>
+</section>
+
+<!-- Resources -->
+<section id="resources" class="bg-light my-5 py-5">
+    <div class="container d-flex justify-content-between flex-lg-row flex-md-column flex-sm-column">
+        <div class="resources-info mr-5 my-4">
+          <h2>Free Resources</h2>
+          <p>Browse through our social media graphics, peer-reviewed papers, budget calculators and more. These resources are intended to help you navigate your career and well-being.</p>
+          <button class="btn btn-primary mt-2" [routerLink]="['/resources']">Learn More</button>
+        </div>
+        <div id="courses_img">
+            <img class="rounded" alt="puppy" src='/assets/img/stock_photos/puppy_home2.jpg'>
+        </div>
+    </div>
 </section>

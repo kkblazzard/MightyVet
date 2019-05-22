@@ -1,16 +1,19 @@
 <div *ngIf="course">
   <div *ngIf="course._id">
+    <!-- header -->
     <div class="container">
       <h1>{{course.title}}</h1>
       <img id="course_img" class="py-0 round" [src]="course.img"
         alt="Course Image">
     </div>
+
     <div class="container d-flex flex-wrap flex-column flex-lg-row">
+      <!-- left main -->
       <div class="col-lg-8 p-4">
         <p >{{course.description}}</p>
-      <!-- toggle speaker info -->
         <h4 >Speaker</h4>
         <!-- <app-speaker-details [model]="course.speaker"></app-speaker-details> -->
+        <!-- toggle speaker info -->
         <button class="btn btn-link" (click)="toggle()"><p>
             {{course.speaker.title}} {{course.speaker.firstName}} {{course.speaker.lastName}} 
           <i *ngIf="!showSpeaker" class="fa fa-angle-double-down"></i>
@@ -22,6 +25,7 @@
         </div>
       </div>
 
+      <!-- right main -->
       <div class="col p-4">        
         <h4>Class Type</h4>
         <p>{{course.type}}</p>

@@ -40,7 +40,6 @@ export class CoursesComponent implements OnInit {
     }
   }
   getAllCourses() {
-    // why is this searchWebinars, not getWebinars?
     this._webinarsService.searchWebinars()
     .subscribe(courses => {
       console.log('received all courses', courses);
@@ -62,7 +61,4 @@ export class CoursesComponent implements OnInit {
     this.searchBar.featuredNumber += 6;
   }
 
-  // somethingChanged(){
-  //   console.log("type checkbox");
-  // }
 }

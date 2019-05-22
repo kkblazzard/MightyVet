@@ -29,5 +29,4 @@ export class AboutComponent implements OnInit {
       this.partners.sort((a,b) => {return a.tier - b.tier})
     });
   }
-  // need to sort by tier number
 }
