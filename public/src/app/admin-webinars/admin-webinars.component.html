@@ -69,24 +69,34 @@
       <div class="form-group">
         <label>Category</label>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
-            [(ngModel)]="newWebinar.category.management">
-          <label class="custom-control-label" for="checkbox1">Management</label>
+            <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
+                [(ngModel)]="newWebinar.category.business">
+            <label class="custom-control-label" for="checkbox1">Business</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
-            [(ngModel)]="newWebinar.category.communication">
-          <label class="custom-control-label" for="checkbox2">Communication</label>
+            <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
+                [(ngModel)]="newWebinar.category.communication">
+            <label class="custom-control-label" for="checkbox2">Communication</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
-            [(ngModel)]="newWebinar.category.medical">
-          <label class="custom-control-label" for="checkbox3">Medical</label>
+            <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
+                [(ngModel)]="newWebinar.category.mental_health">
+            <label class="custom-control-label" for="checkbox3">Mental Health</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+                [(ngModel)]="newWebinar.category.well_being">
+            <label class="custom-control-label" for="checkbox4">Ethics/Well-being</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="checkbox5" name="checkbox5" class="custom-control-input"
+                [(ngModel)]="newWebinar.category.university_life">
+            <label class="custom-control-label" for="checkbox5">University Life</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline mr-0">
-          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
-            [(ngModel)]="newWebinar.category.technical">
-          <label class="custom-control-label" for="checkbox4">Technical</label>
+            <input type="checkbox" id="checkbox6" name="checkbox6" class="custom-control-input"
+                [(ngModel)]="newWebinar.category.career_path">
+            <label class="custom-control-label" for="checkbox6">Career Path</label>
         </div>
         <!-- <input type="checkbox" id="management" name="management" class="form-control" [(ngModel)]="newWebinar.category.management">
           <label class="custom-control-label" for="management">Management</label>
@@ -310,24 +320,34 @@
       <div class="form-group">
         <label>Category</label>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
-            [(ngModel)]="updateWebinar.category.management">
-          <label class="custom-control-label" for="checkbox1">Management</label>
+            <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
+                [(ngModel)]="updateWebinar.category.business">
+            <label class="custom-control-label" for="checkbox1">Business</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
-            [(ngModel)]="updateWebinar.category.communication">
-          <label class="custom-control-label" for="checkbox2">Communication</label>
+            <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
+                [(ngModel)]="updateWebinar.category.communication">
+            <label class="custom-control-label" for="checkbox2">Communication</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
-            [(ngModel)]="updateWebinar.category.medical">
-          <label class="custom-control-label" for="checkbox3">Medical</label>
+            <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
+                [(ngModel)]="updateWebinar.category.mental_health">
+            <label class="custom-control-label" for="checkbox3">Mental Health</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+                [(ngModel)]="updateWebinar.category.well_being">
+            <label class="custom-control-label" for="checkbox4">Ethics/Well-being</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="checkbox5" name="checkbox5" class="custom-control-input"
+                [(ngModel)]="updateWebinar.category.university_life">
+            <label class="custom-control-label" for="checkbox5">University Life</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline mr-0">
-          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
-            [(ngModel)]="updateWebinar.category.technical">
-          <label class="custom-control-label" for="checkbox4">Technical</label>
+            <input type="checkbox" id="checkbox6" name="checkbox6" class="custom-control-input"
+                [(ngModel)]="updateWebinar.category.career_path">
+            <label class="custom-control-label" for="checkbox6">Career Path</label>
         </div>
 
         <div *ngIf="updateErrors?.category" class="text-danger"><small>{{updateErrors.category.message}}</small></div>

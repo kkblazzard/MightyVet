@@ -29,11 +29,6 @@
     }
 }
 
-.cardheight{
-    height: 500px!important;
-}
-
 .card-img{
-    height: 45%!important;
     object-fit: contain;
 } 

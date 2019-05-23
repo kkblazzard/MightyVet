@@ -41,19 +41,25 @@ export class MentorshipComponent implements OnInit {
         this.searchBar = {
             featuredNumber: 8,
             bar: "",
+            business: false,
+            communication: false,
             mental_health: false,
-            financial_advice: false,
-            career_advice: false,
-            technical_advice: false
+            well_being: false,
+            university_life: false,
+            career_path: false
         }
         if (this._authenticationsService.isLoggedIn()){
             this.getUserInfo()
             this.newMentor={
                 user: this._authenticationsService.getUserDetails()._id,
-                support: { mental_health: false,
-                    financial_advice: false,
-                    career_advice: false,
-                    technical_advice: false },
+                support: {
+                    business: false,
+                    communication: false,
+                    mental_health: false,
+                    well_being: false,
+                    university_life: false,
+                    career_path: false
+                },
                 resume: "",
             }
         }
@@ -69,10 +75,14 @@ export class MentorshipComponent implements OnInit {
             }
             this.newMentor={
                 user: null,
-                support: { mental_health: false,
-                    financial_advice: false,
-                    career_advice: false,
-                    technical_advice: false },
+                support: {
+                    business: false,
+                    communication: false,
+                    mental_health: false,
+                    well_being: false,
+                    university_life: false,
+                    career_path: false
+                },
                 resume: "",
             }
         }
@@ -121,10 +131,14 @@ export class MentorshipComponent implements OnInit {
         }
         this.newMentor={
             user: null,
-            support: { mental_health: false,
-                financial_advice: false,
-                career_advice: false,
-                technical_advice: false },
+            support: {
+                business: false,
+                communication: false,
+                mental_health: false,
+                well_being: false,
+                university_life: false,
+                career_path: false
+            },
             resume: "",
         }
     }

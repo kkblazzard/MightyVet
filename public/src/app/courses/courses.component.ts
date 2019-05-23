@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebinarsService } from '../http_services/webinars.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-courses',
@@ -32,10 +33,12 @@ export class CoursesComponent implements OnInit {
         Video: false
       } ,
       category: {
-        management: false,
+        business: false,
         communication: false,
-        medical: false,
-        technical: false
+        mental_health: false,
+        well_being: false,
+        university_life: false,
+        career_path: false
       }
     }
   }
@@ -45,6 +48,9 @@ export class CoursesComponent implements OnInit {
     .subscribe(courses => {
       console.log('received all courses', courses);
       this.allCourses = courses;
+      this.allCourses.map(x => {
+        x.new = moment(x.createdAt).isSameOrAfter(moment().subtract(14, 'days'));
+      });
     });
   }
 

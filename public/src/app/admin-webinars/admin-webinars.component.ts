@@ -34,10 +34,12 @@ export class AdminWebinarsComponent implements OnInit {
   updateWebinarSuccess: boolean;
   updateWebinar : any = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
     category: {
-      management: false,
+      business: false,
       communication: false,
-      medical: false,
-      technical: false
+      mental_health: false,
+      well_being: false,
+      university_life: false,
+      career_path: false
     }
   };
   speaker_errors: any;
@@ -52,10 +54,12 @@ export class AdminWebinarsComponent implements OnInit {
   newWebinar: any = {
     title: '', type: '', description: '', speaker: '', webinar_link: '', quiz: [], 
     category: {
-      management: false,
+      business: false,
       communication: false,
-      medical: false,
-      technical: false
+      mental_health: false,
+      well_being: false,
+      university_life: false,
+      career_path: false
     }
   };
   webinars: any;
@@ -145,10 +149,12 @@ export class AdminWebinarsComponent implements OnInit {
           this.webinarSuccess = false;
           this.newWebinar = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
           category: {
-            management: false,
+            business: false,
             communication: false,
-            medical: false,
-            technical: false
+            mental_health: false,
+            well_being: false,
+            university_life: false,
+            career_path: false
           }};
           this.fileToUpload = null;
         }, 2000);
@@ -188,10 +194,12 @@ export class AdminWebinarsComponent implements OnInit {
     this.speakerPreview = null;
     this.newWebinar = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
     category: {
-      management: false,
+      business: false,
       communication: false,
-      medical: false,
-      technical: false
+      mental_health: false,
+      well_being: false,
+      university_life: false,
+      career_path: false
     }};
     this.fileToUpload = null;
     this.imageChangedEvent = '';
