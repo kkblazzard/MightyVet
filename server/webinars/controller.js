@@ -13,7 +13,7 @@ module.exports={
         Webinars
         .find()
         .sort('-createdAt')
-        .limit(4)    
+        .limit(3)    
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
     webinarNew: (req, res) => {
