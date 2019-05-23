@@ -40,7 +40,6 @@ export class MentorDetailsComponent implements OnInit {
     let obs = this._mentorsService.getMentor(this.id);
     obs.subscribe((data) => {
       this.mentor = data;
-      console.log(this.mentor);
       if (!this.mentor.approval){
         if(this._authenticationsService.isLoggedIn()){
           let obs = this._authenticationsService.profile()
@@ -98,10 +97,8 @@ export class MentorDetailsComponent implements OnInit {
       if(!this.application && !this.isMentee){
         let obs = this._menteesService.addMentee({ user: this._authenticationsService.getUserDetails()._id, mentor: this.id });
         obs.subscribe(data => {
-          console.log('successfully created new mentee', data);
           let obs2 = this._mentorsService.signUp(this.id, data);
           obs2.subscribe(data2 => {
-            console.log('successfully added new mentee to mentor', data2);
             this.application = true;
           },
             err => {

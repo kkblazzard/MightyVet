@@ -139,7 +139,6 @@ export class SchedulingComponent implements OnInit, OnChanges {
     let obs = this._meetingsService.cancel(meeting_id, {mentee: this._authenticationsService.getUserDetails()._id});
     obs.subscribe(data => {
       if (data['errors']){
-        console.log(data['errors']);
       }
       else{
         this.getMentor();

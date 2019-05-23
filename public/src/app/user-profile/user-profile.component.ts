@@ -196,7 +196,6 @@ export class UserProfileComponent implements OnInit {
         this.passwordPending = true;
         let obs = this._authenticationsService.checkPassword(this.editPassword.new, {email: this._authenticationsService.getUserDetails().email, password: this.editPassword.old});
         obs.subscribe(data => {
-            console.log(data);
             if (data['errors']){
                 this.editPassword_errors = data['errors'];
             }
@@ -215,19 +214,16 @@ export class UserProfileComponent implements OnInit {
                 if(this.newsletter){
                     let obs = this._newslettersService.deleteNewsletter(old_email);
                     obs.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                 }
                 else{
                     let obs = this._newslettersService.deleteNewsletter(old_email);
                     obs.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                     let obs2 = this._newslettersService.addNewsletter({email: new_email});
                     obs2.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                 }
@@ -236,14 +232,12 @@ export class UserProfileComponent implements OnInit {
                 if(this.newsletter){
                     let obs = this._newslettersService.deleteNewsletter(old_email);
                     obs.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                 }
                 else{
                     let obs = this._newslettersService.addNewsletter({email: old_email});
                     obs.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                 }
@@ -254,12 +248,10 @@ export class UserProfileComponent implements OnInit {
                 if(this.newsletter){
                     let obs = this._newslettersService.deleteNewsletter(old_email);
                     obs.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                     let obs2 = this._newslettersService.addNewsletter({email: new_email});
                     obs2.subscribe(data => {
-                        console.log(data);
                         this.getUserInfo();
                     });
                 }
@@ -275,14 +267,12 @@ export class UserProfileComponent implements OnInit {
     approveMentee(id) {
         let obs = this._menteesService.menteeApproval(id);
         obs.subscribe(data => {
-            console.log(data);
             this.getUserInfo();
         });
     }
     declineMentee(id) {
         let obs = this._menteesService.menteeDecline(this.userInfo.mentor_id._id, id);
         obs.subscribe(data => {
-            console.log(data);
             this.getUserInfo();
         });
     }
@@ -296,7 +286,6 @@ export class UserProfileComponent implements OnInit {
         this.mentee_applications = [];
         let obs = this._authenticationsService.profile();
         obs.subscribe(data => {
-            console.log(data);
             this.userInfo = data;
             this.editUser = {
                 firstName: data['firstName'],
@@ -369,14 +358,12 @@ export class UserProfileComponent implements OnInit {
     completeCourse(id){
         let obs = this._accreditationsService.accreditationUpdate(id, {$set: {credit_received: true}});
         obs.subscribe(data => {
-            console.log(data);
             this.getUserInfo();
         })
     }
     incompleteCourse(id){
         let obs = this._accreditationsService.accreditationUpdate(id, {$set: {credit_received: false}});
         obs.subscribe(data => {
-            console.log(data);
             this.getUserInfo();
         })
     }

@@ -12,38 +12,30 @@ export class MentorsService {
     private _http: HttpClient
   ) { }
   getMentors(){ 
-    console.log("http.service getting all mentors");
     return this._http.get(`/api/mentors`);
   }
   getApprovals() {
-    console.log("http.service getting mentors seeking approval");
     return this._http.get(`/api/mentors/approvals`);
   }
   getMentor(mentor_id){
-    console.log("http.service getting mentor");
     return this._http.get('/api/mentors/'+mentor_id);
   }
   addMentor(newMentor) {
     return this._http.post('/api/mentors', newMentor);
   }
   mentorUpdate(id, mentorUpdate) {
-    console.log("http.service mentorupdate", mentorUpdate);
     return this._http.put('/api/mentors/' + id, mentorUpdate);
   }
   approveMentor(id){
-    console.log("http.service approving mentor");
     return this._http.put('/api/mentors/' + id, {$set: {approval: true}});
   }
   signUp(id: string, mentee: object){
-    console.log("http.service adding new mentee");
     return this._http.put('/api/mentors/signup/'+id, mentee);
   }
   declineMentee(id, mentee_id){
-    console.log("http.service decline mentee");
     return this._http.put('/api/mentors/decline_mentee'+id, {mentee_id: mentee_id})
   }
   approveMentee(id){
-    console.log("http.service approving mentee");
     return this._http.put('/api/mentors/approve_mentee'+id, {})
   }
   deleteMentor(id) {

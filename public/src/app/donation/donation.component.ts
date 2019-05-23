@@ -68,7 +68,6 @@ export class DonationComponent implements OnInit, AfterViewInit, OnDestroy {
 
       let obs = this._paymentsService.makePayment(token, this.amount * 100);  
       obs.subscribe((data) => {
-        console.log(data);
         if (data['status']){
           if (data['status'] !== "succeeded"){
             this.error = data['message'];

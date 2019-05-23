@@ -10,11 +10,9 @@ export class NewslettersService {
       return this._http.get(`/api/newsletters`);
   }
   addNewsletter(newNewsletter) {
-    console.log("http.service addNewsletter", newNewsletter);
     return this._http.post('/api/newsletters', newNewsletter);
   }
   newsletterUpdate(id, newsletterUpdate) {
-    console.log("http.service Newsletterupdate", newsletterUpdate);
     return this._http.put('/api/newsletters/' + id, newsletterUpdate);
   }
   deleteNewsletter(email) {

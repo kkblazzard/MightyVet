@@ -45,7 +45,6 @@ export class CoursesComponent implements OnInit {
   getAllCourses() {
     this._webinarsService.searchWebinars()
     .subscribe(courses => {
-      console.log('received all courses', courses);
       this.allCourses = courses;
       this.allCourses.map(x => {
         x.new = moment(x.createdAt).isSameOrAfter(moment().subtract(14, 'days'));

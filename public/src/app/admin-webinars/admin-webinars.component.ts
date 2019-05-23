@@ -349,7 +349,6 @@ export class AdminWebinarsComponent implements OnInit {
       var temp = this.updateWebinar.speaker;
       this.updateWebinar.speaker = null;
     }
-    console.log(this.updateWebinar);
     let obs = this._webinarsService.webinarUpdate(this.updateWebinar._id, this.updateWebinar);
     obs.subscribe(data => {
       if (!data['errors']){

@@ -106,7 +106,6 @@ export class HeaderComponent implements OnInit {
     this.login_errors = null;
     const obs = this._authenticationsService.login(this.loginInfo);
     obs.subscribe( data => {
-      console.log(data);
       if (data['message']) {
         this.login_errors = "We could not log you in. Please double-check your login information.";
       } else {
@@ -142,7 +141,6 @@ export class HeaderComponent implements OnInit {
     const obs = this._authenticationsService.register(this.newUser);
     obs.subscribe(data => {
       if (data['errors']) {
-        console.log(data['errors']);
         this.signup_errors = data['errors'];
       } else {
         if (this.newsletter === true) {

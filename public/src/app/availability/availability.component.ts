@@ -85,7 +85,6 @@ export class AvailabilityComponent implements OnInit, OnChanges {
       }
       else {
         this.user = data;
-        console.log(this.user);
         if(this.user.mentor_id){
           this.schedule_events = [...this.user.mentor_id.availabilities.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours'))), 
           ...this.user.meetings.filter(x => moment(x.datetime).isSameOrAfter(moment().subtract(1, 'hours'))), 
@@ -184,7 +183,6 @@ export class AvailabilityComponent implements OnInit, OnChanges {
           }
           let obs = this._meetingsService.addMeeting(this._authenticationsService.getUserDetails()._id, meetings);
           obs.subscribe(data => {
-            console.log(data);
             if (data['errors']) {
               this.availability_error = data['errors'].datetime.message;
             }

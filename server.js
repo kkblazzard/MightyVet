@@ -1,3 +1,12 @@
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+if(fs.existsSync('server.key') && fs.existsSync('server.cert')){
+    var privateKey  = fs.readFileSync('server.key', 'utf8');
+    var certificate = fs.readFileSync('server.cert', 'utf8');
+    var credentials = {key: privateKey, cert: certificate};
+}
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,7 +18,6 @@ app.use(passport.initialize());
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public/dist/public/')));
-
 // require('./server/payments/routes')(app);
 require('./server/mentees/routes')(app);
 require('./server/fileuploads/routes')(app);
@@ -26,6 +34,7 @@ app.all("*", (req,res,next) => {
     res.sendFile(path.resolve("./public/dist/public/index.html"))
 });
 
-app.listen(8000, function() {
-    console.log("listening on port 8000");
-})
+http.createServer(app).listen(8000);
+if(credentials){
+    https.createServer(credentials, app).listen(8400);
+}
