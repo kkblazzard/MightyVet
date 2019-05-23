@@ -71,7 +71,7 @@
 
 <!-- ----list of course cards---- -->
 <section id="course-cards" class="container">
-  <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
+  <div class="d-flex flex-column flex-lg-row justify-content-between flex-wrap">
     <a *ngFor="let course of allCourses | coursesearch : searchBar" class="card mb-4 p-2" [routerLink]="['/courses',course._id]" > <!-- search pipe to limit number of entries -->
       <div class="d-flex justify-content-between mb-1">
         <span *ngIf="course.new" class="badge badge-danger mr-1">New</span>
