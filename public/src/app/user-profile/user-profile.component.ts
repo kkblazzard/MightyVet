@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MenteesService } from '../http_services/mentees.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-user-profile',
@@ -18,6 +19,10 @@ export class UserProfileComponent implements OnInit {
     @ViewChild('edit') edit: ElementRef;
     @ViewChild('picture') picture: ElementRef;
     @ViewChild('password') password: ElementRef;
+    selectedDate: any;
+    chosenDate: Date;
+    selectedDate_errors: string;
+    current_credit: Number;
     editPassword: any;
     editPassword_errors: any;
     current_courses: any;
@@ -86,7 +91,8 @@ export class UserProfileComponent implements OnInit {
         'WA':{ "Veterinarian": { hours: 30, years: 3}, "Vet Tech": { hours: 30, years: 3}},
         'WV':{ "Veterinarian": { hours: 18, years: 1}, "Vet Tech": { hours: 12, years: 1}},
         'WI':{ "Veterinarian": { hours: 30, years: 2}, "Vet Tech": { hours: 15, years: 2}},
-        'WY':{ "Veterinarian": { hours: 16, years: 2}, "Vet Tech": { hours: 10, years: 2}}
+        'WY':{ "Veterinarian": { hours: 16, years: 2}, "Vet Tech": { hours: 10, years: 2}},
+        'Other':{ "Veterinarian": { hours: 0, years: 0}, "Vet Tech": { hours: 0, years: 0}},
     }
     modal: any;
     userInfo: any = { picture: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"};
@@ -326,6 +332,30 @@ export class UserProfileComponent implements OnInit {
                 this.croppedImage = null;
             })
         });
+    }
+    changeSelectedDate(){
+        this.chosenDate = null;
+        this.selectedDate = null;
+        this.current_credit = null;
+    }
+    chooseDate(){
+        this.selectedDate_errors = null;
+        if(this.selectedDate){
+            if(Number.isInteger(this.selectedDate.year) && Number.isInteger(this.selectedDate.month) && Number.isInteger(this.selectedDate.day)){
+                this.chosenDate = moment(this.selectedDate.year.toString() + "-" + (this.selectedDate.month.toString().length === 2 ? this.selectedDate.month.toString() : "0" +this.selectedDate.month.toString()) + "-" + (this.selectedDate.day.toString().length === 2 ? this.selectedDate.day.toString() : "0" + this.selectedDate.day.toString())).toDate()
+                if(this.chosenDate > new Date()){
+                    this.selectedDate_errors = "Please enter a past date."
+                    return;
+                }
+                this.current_credit = this.completed_courses.filter(x => {return moment(x.updatedAt).isSameOrAfter(moment(this.chosenDate))}).length;
+            }
+            else{
+                this.selectedDate_errors = "Please enter a valid date."
+            }
+        }
+        else{
+            this.selectedDate_errors = "Please enter a date."
+        }
     }
     isProgress(){
         return this.continuingEducationContent === 'progress';

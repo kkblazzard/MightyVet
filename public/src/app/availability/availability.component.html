@@ -69,7 +69,7 @@
   </div>
   <div class="container modal-body" *ngIf="new">
     <div class="card border-info p-4 text-center" *ngIf="user?.mentor_id">
-      <h4>Add Mentoring Availabilities</h4>
+      <h5>Add Mentoring Availabilities</h5>
       <form class="d-flex flex-column align-items-center">
         <div class="form-group">
           <ngb-timepicker name="newTime" [(ngModel)]="newTime" meridian="ON" [minuteStep]="15"></ngb-timepicker>
@@ -77,11 +77,11 @@
         <div class="text-danger" *ngIf="availability_error"><small>{{availability_error}}</small></div>
         <div class="d-flex align-items-end">
           <div class="form-group text-center mr-2 mb-0">
-            <label for="recurring">Reocurring?</label>
+            <h6 for="recurring">Recurring Weekly?</h6>
             <input type="checkbox" id="recurring" class="form-control" name="boolean" [(ngModel)]="recurring.boolean">
           </div>
           <div class="form-group text-center mr-2 mb-0" *ngIf="recurring.boolean">
-            <label for="recur_length">For</label>
+            <h6 for="recur_length">For</h6>
             <select id="recur_length" name="number" [(ngModel)]="recurring.num" class="form-control">
               <option value="4">4 weeks</option>
               <option value="12">12 weeks</option>
@@ -149,5 +149,28 @@
     </div>
     <button class="btn btn-lg btn-outline-success rounded-circle" (click)="nextMonth()"><i class="fa fa-arrow-right"
         aria-hidden="true"></i></button>
+  </div>
+  <div class="card border-info mt-4 p-2">
+    <h5 class="text-center">Legend</h5>
+    <div class="d-flex justify-content-center">
+      <div class="mr-4">
+        <div class="available d-inline-block mr-1">
+          <div class="date-text text-center"> 1 </div>
+        </div>
+        <h6 class="d-inline-block">Events</h6>
+      </div>
+      <div class="mr-4">
+        <div class="bg-light past d-inline-block mr-1">
+          <div class="date-text text-center"> 1 </div>
+        </div>
+        <h6 class="d-inline-block">Past Day</h6>
+      </div>
+      <div>
+        <div class="today d-inline-block mr-1">
+          <div class="date-text text-center"> 1 </div>
+        </div>
+        <h6 class="d-inline-block">Today</h6>
+      </div>
+    </div> 
   </div>
 </div>
