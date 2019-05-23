@@ -45,12 +45,14 @@ var WebinarSchema = new mongoose.Schema({
 
         category: { 
                 type:{
-                        management: {type: Boolean},
+                        business: {type: Boolean},
                         communication: {type: Boolean},
-                        medical: {type: Boolean},
-                        technical: {type: Boolean}
+                        mental_health: {type: Boolean},
+                        well_being: {type: Boolean},
+                        university_life: {type: Boolean},
+                        career_path: {type: Boolean},
                 },
-                required: [true, "Please enter the category."]
+                required: true,
         },
 
         // quiz: {

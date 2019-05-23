@@ -67,9 +67,10 @@
         </div>
         <div class="modal-footer">
             <button *ngIf="!editPending && !editSuccess" class="btn btn-primary" (click)="editting()">Edit</button>
-            <button *ngIf="editPending && !editSuccess" class="btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Edit</button>
+            <button *ngIf="editPending && !editSuccess" class="btn btn-primary" disabled><i
+                    class="fa fa-spinner fa-spin"></i>&nbsp;Edit</button>
             <button *ngIf="editSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
-        
+
         </div>
     </form>
 </ng-template>
@@ -101,7 +102,9 @@
                     <label>Confirm New Password</label>
                     <input type="password" class="form-control col" placeholder="********" name="editPassword.confirm"
                         [(ngModel)]="editPassword.confirm" required>
-                    <div class="text-danger" *ngIf="editPassword.confirm !== '' && editPassword.new !== editPassword.confirm"><small>The Confirm Password
+                    <div class="text-danger"
+                        *ngIf="editPassword.confirm !== '' && editPassword.new !== editPassword.confirm"><small>The
+                            Confirm Password
                             field is not matching your Password field.</small></div>
                     <!-- <div *ngIf="editPassword_errors?.old" class="text-danger">{{edit_errors.firstName.message}}</div> -->
                 </div>
@@ -109,8 +112,10 @@
         </div>
         <!-- arrange this to be in bottom right with absolute -->
         <div class="modal-footer">
-            <button *ngIf="!passwordPending && !passwordSuccess" class="btn btn-primary" (click)="edittingPassword()">Edit</button>
-            <button *ngIf="passwordPending && !passwordSuccess" class="btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Edit</button>
+            <button *ngIf="!passwordPending && !passwordSuccess" class="btn btn-primary"
+                (click)="edittingPassword()">Edit</button>
+            <button *ngIf="passwordPending && !passwordSuccess" class="btn btn-primary" disabled><i
+                    class="fa fa-spinner fa-spin"></i>&nbsp;Edit</button>
             <button *ngIf="passwordSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
         </div>
     </form>
@@ -128,27 +133,22 @@
         <div class="modal-body container">
             <div class="holder-image">
                 <img *ngIf="!croppedImage" class="profile-picture w-100" [src]="userInfo.picture" alt="Profile Picture">
-                <image-cropper
-                    [imageChangedEvent]="imageChangedEvent"
-                    [maintainAspectRatio]="true"
-                    [aspectRatio]="1 / 1"
-                    format="jpeg, png"
-                    (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded()"
-                    (cropperReady)="cropperReady()"
-                    (loadImageFailed)="loadImageFailed()"
-                ></image-cropper>
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [aspectRatio]="1 / 1" format="jpeg, png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                </image-cropper>
             </div>
             <div class="form-group">
                 <label for="file">Choose new picture</label>
-                <input class="form-control" id="file" type="file" accept="image/*"
-                (change)="fileChangeEvent($event)">
+                <input class="form-control" id="file" type="file" accept="image/*" (change)="fileChangeEvent($event)">
                 <div *ngIf="img_error" class="text-danger"><small>{{img_error}}</small></div>
             </div>
         </div>
         <div class="modal-footer">
-            <button *ngIf="picturePending && !pictureSuccess" class="btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i>&nbsp;Save</button>
-            <button *ngIf="!picturePending && !pictureSuccess" class="btn btn-primary" (click)="editImage(imageInput)">Save</button>
+            <button *ngIf="picturePending && !pictureSuccess" class="btn btn-primary" disabled><i
+                    class="fa fa-spinner fa-spin"></i>&nbsp;Save</button>
+            <button *ngIf="!picturePending && !pictureSuccess" class="btn btn-primary"
+                (click)="editImage(imageInput)">Save</button>
             <button *ngIf="pictureSuccess" class="btn btn-success">Success&nbsp;<i class="fa fa-check"></i></button>
         </div>
     </form>
@@ -187,12 +187,12 @@
                 <button (click)="open('edit')" class="btn btn-sm btn-outline-secondary btn-block"><i
                         class="fa fa-pencil mr-2"></i>Edit User Profile</button>
                 <button (click)="open('password')" class="btn btn-sm btn-outline-secondary btn-block"><i
-                    class="fa fa-pencil mr-2"></i>Edit Your Password</button>
+                        class="fa fa-pencil mr-2"></i>Edit Your Password</button>
             </div>
         </div>
         <div id="user-profile-right">
-            <button [routerLink]="['/user/schedule']"
-                class="btn btn-lg btn-outline-success btn-block mb-4"><i class="fa fa-calendar mr-2"></i>Upcoming Schedule</button>
+            <button [routerLink]="['/user/schedule']" class="btn btn-lg btn-outline-success btn-block mb-4"><i
+                    class="fa fa-calendar mr-2"></i>Upcoming Schedule</button>
             <div id="your-mentors-card" class="card mb-4 border-success">
                 <div class="card-header bg-success border-success">Your Mentors</div>
                 <div class="card-body">
@@ -229,15 +229,36 @@
                     </ul>
                     <div class="p-5">
                         <div *ngIf="continuingEducationContent === 'progress'">
-                            <div *ngIf="userInfo?.title === 'Vet Tech' || userInfo?.title === 'Veterinarian' && userInfo.state && userInfo.state !== 'Other'" >
-                                <p>Credit Completed: {{completed_courses?.length}}</p>
-                                <p>Credit Requirement: {{state_requirements[userInfo?.state][userInfo?.title].hours}} over {{state_requirements[userInfo?.state][userInfo?.title].years}} years</p>
+                            <div
+                                *ngIf="userInfo?.title === 'Vet Tech' || userInfo?.title === 'Veterinarian' && userInfo.state && userInfo.state !== 'Other'">
+                                <div *ngIf="current_credit || current_credit === 0" class="mb-2">
+                                    <h6>Credit Completed since {{chosenDate | date:"MMM dd yyyy"}}: {{current_credit}} Credits</h6>
+                                    <button (click)="changeSelectedDate()" class="btn btn-primary">Choose a
+                                        different date</button>
+                                </div>
+                                <div *ngIf="!current_credit && current_credit !== 0" class="mb-2">
+                                    <h6>Select a Date to see how many credits you've completed since then:</h6>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="date"
+                                        [(ngModel)]="selectedDate" ngbDatepicker #d="ngbDatepicker">
+                                        <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                        <button (click)="chooseDate()" class="btn btn-primary input-group-append">Select</button>
+                                    </div>
+                                    <div><small class="text-danger">{{selectedDate_errors}}</small></div>
+                                </div>
+                                <h6>Credit Requirement for {{userInfo?.title}} in {{userInfo?.state}}:
+                                    {{state_requirements[userInfo?.state][userInfo?.title].hours}} over
+                                    {{state_requirements[userInfo?.state][userInfo?.title].years}} years</h6>
+                            </div>
+                            <div
+                                *ngIf="userInfo?.title !== 'Vet Tech' && userInfo?.title !== 'Veterinarian' || !userInfo.state || userInfo.state === 'Other'">
+                                <h6>You've completed {{completed_courses?.length}} MightyVet courses.</h6>
                             </div>
                         </div>
-                        <div *ngIf="continuingEducationContent === 'current'"
-                            class="horizontal-scroll mb-4">
+                        <div *ngIf="continuingEducationContent === 'current'" class="horizontal-scroll mb-4">
                             <div *ngFor="let accreditation of current_courses" class="d-inline-block align-top mr-2">
-                                <div class="class-card d-flex flex-column justify-content-between text-center card border-info p-2">
+                                <div
+                                    class="class-card d-flex flex-column justify-content-between text-center card border-info p-2">
                                     <a [routerLink]="['/courses', accreditation.webinar._id]">
                                         <img class="mw-100 rounded" [src]="accreditation.webinar.img"
                                             [alt]="accreditation.webinar.title">
@@ -251,10 +272,10 @@
                             <button *ngIf="!current_courses?.length" class="btn btn-primary"
                                 [routerLink]="['/courses']">Find a Course</button>
                         </div>
-                        <div *ngIf="continuingEducationContent === 'completed'"
-                            class="horizontal-scroll mb-4">
+                        <div *ngIf="continuingEducationContent === 'completed'" class="horizontal-scroll mb-4">
                             <div *ngFor="let accreditation of completed_courses" class="d-inline-block align-top mr-2">
-                                <div class="class-card d-flex flex-column justify-content-between text-center card border-info p-2">
+                                <div
+                                    class="class-card d-flex flex-column justify-content-between text-center card border-info p-2">
                                     <a [routerLink]="['/courses', accreditation.webinar._id]">
                                         <img class="mw-100 rounded" [src]="accreditation.webinar.img"
                                             [alt]="accreditation.webinar.title">
@@ -280,15 +301,17 @@
                 <div class="border-bottom pb-2 mb-4">Your Mentees</div>
                 <div class="d-flex justify-content-start flex-wrap">
                     <div id="mentee-img" class="card border-info mr-2 mb-2" *ngFor="let mentee of mentees">
-                        <a class="m-2 text-center" [href]="'mailto:'+mentee.user.email" >
-                            <img class="rounded-circle w-100" [src]="mentee.user.picture"
+                        <div class="m-2 text-center">
+                            <a [href]="'mailto:'+mentee.user.email">
+                                <img class="rounded-circle w-100" [src]="mentee.user.picture"
                                 [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
-                            <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
-                        <div class="btn-group w-100" role="group">
-                            <button class="btn btn-sm btn-danger" (click)="declineMentee(mentee._id)"><i
-                                    class="fa fa-times" aria-hidden="true"></i></button>
+                                <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
+                            </a>
+                            <div class="btn-group w-100" role="group">
+                                <button class="btn btn-sm btn-danger" (click)="declineMentee(mentee._id)"><i
+                                        class="fa fa-times" aria-hidden="true"></i></button>
+                            </div>
                         </div>
-                        </a>
                     </div>
                     <h6 *ngIf="mentees?.length === 0">You don't have any mentees yet.</h6>
                 </div>
@@ -297,17 +320,19 @@
                 <div class="border-bottom pb-2 mb-4">New Mentee Requests</div>
                 <div class="d-flex justify-content-start flex-wrap">
                     <div id="mentee-img" class="card border-info mr-2 mb-2" *ngFor="let mentee of mentee_applications">
-                        <a class="m-2 text-center" [href]="'mailto:'+mentee.user.email" >
-                            <img class="rounded-circle w-100 mb-2" [src]="mentee.user.picture"
-                                [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
-                            <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
+                        <div class="m-2 text-center">
+                            <a [href]="'mailto:'+mentee.user.email">
+                                <img class="rounded-circle w-100 mb-2" [src]="mentee.user.picture"
+                                    [alt]="mentee.user.firstName + ' ' + mentee.user.lastName">
+                                <span>{{mentee.user.firstName | slice: 15}} {{mentee.user.lastName | slice: 15}}</span>
+                            </a>
                             <div class="btn-group w-100" role="group">
                                 <button class="btn btn-sm btn-success" (click)="approveMentee(mentee._id)"><i
                                         class="fa fa-check" aria-hidden="true"></i></button>
                                 <button class="btn btn-sm btn-danger" (click)="declineMentee(mentee._id)"><i
                                         class="fa fa-times" aria-hidden="true"></i></button>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <h6 *ngIf="mentee_applications?.length === 0">You don't have any new mentee requests.</h6>
                 </div>

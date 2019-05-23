@@ -65,23 +65,33 @@ export class MentorSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
     if (value) {
       value = value.filter((x) => {
+        if (search.business) {
+          if (!x.support.business) {
+            return false;
+          }
+        }
+        if (search.communication) {
+          if (!x.support.communication) {
+            return false;
+          }
+        }
         if (search.mental_health) {
           if (!x.support.mental_health) {
             return false;
           }
         }
-        if (search.financial_advice) {
-          if (!x.support.financial_advice) {
+        if (search.well_being) {
+          if (!x.support.well_being) {
             return false;
           }
         }
-        if (search.career_advice) {
-          if (!x.support.career_advice) {
+        if (search.university_life) {
+          if (!x.support.university_life) {
             return false;
           }
         }
-        if (search.technical_advice) {
-          if (x.support.technical_advice) {
+        if (search.career_path) {
+          if (!x.support.career_path) {
             return false;
           }
         }
@@ -120,7 +130,6 @@ export class MentorSearchPipe implements PipeTransform {
 
 // -----------courses pipe-----------
 @Pipe({ name: 'coursesearch', pure: false })
-
 export class CourseSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
     if (value) {
@@ -135,8 +144,8 @@ export class CourseSearchPipe implements PipeTransform {
             return false;
           }
         }
-        if (search.category.management) {
-          if (!x.category.management) {
+        if (search.category.business) {
+          if (!x.category.business) {
             return false;
           }
         }
@@ -145,13 +154,23 @@ export class CourseSearchPipe implements PipeTransform {
             return false;
           }
         }
-        if (search.category.medical) {
-          if (!x.category.medical) {
+        if (search.category.mental_health) {
+          if (!x.category.mental_health) {
             return false;
           }
         }
-        if (search.category.technical) {
-          if (!x.category.technical) {
+        if (search.category.well_being) {
+          if (!x.category.well_being) {
+            return false;
+          }
+        }
+        if (search.category.university_life) {
+          if (!x.category.university_life) {
+            return false;
+          }
+        }
+        if (search.category.career_path) {
+          if (!x.category.career_path) {
             return false;
           }
         }

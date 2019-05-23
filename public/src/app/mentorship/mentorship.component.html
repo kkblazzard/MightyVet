@@ -82,26 +82,35 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        <h6>What kind of support are you willing to give? (Check all that apply)</h6>
+                        <h6>What kind of support are you willing to give? (Check all that apply)</h6><div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="businessBox" name="businessBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.business">
+                            <label class="custom-control-label" for="businessBox">Business</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="communicationBox" name="communicationBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.communication">
+                            <label class="custom-control-label" for="communicationBox">Communication</label>
+                        </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" id="mentalHealthBox" name="mentalHealthBox" class="custom-control-input"
                                 [(ngModel)]="newMentor.support.mental_health">
                             <label class="custom-control-label" for="mentalHealthBox">Mental Health</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="financialAdviceBox" name="financialAdviceBox" class="custom-control-input"
-                                [(ngModel)]="newMentor.support.financial_advice">
-                            <label class="custom-control-label" for="financialAdviceBox">Financial Advice</label>
+                            <input type="checkbox" id="wellBeingBox" name="wellBeingBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.well_being">
+                            <label class="custom-control-label" for="wellBeingBox">Ethics/Well-being</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="careerAdviceBox" name="careerAdviceBox" class="custom-control-input"
-                                [(ngModel)]="newMentor.support.career_advice">
-                            <label class="custom-control-label" for="careerAdviceBox">Career Advice</label>
+                            <input type="checkbox" id="universityLifeBox" name="universityLifeBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.university_life">
+                            <label class="custom-control-label" for="universityLifeBox">University Life</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" id="technicalAdviceBox" name="technicalAdviceBox" class="custom-control-input"
-                                [(ngModel)]="newMentor.support.technical_advice">
-                            <label class="custom-control-label" for="technicalAdviceBox">Technical or Surgical</label>
+                            <input type="checkbox" id="careerPathBox" name="careerPathBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.career_path">
+                            <label class="custom-control-label" for="careerPathBox">Career Path</label>
                         </div>
                         <!-- <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health"
                             name="mentalHealthBox">
@@ -182,23 +191,33 @@
             <div id="checkboxes">
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
-                        [(ngModel)]="searchBar.mental_health">
-                    <label class="custom-control-label" for="checkbox1">Mental Health</label>
+                        [(ngModel)]="searchBar.business">
+                    <label class="custom-control-label" for="checkbox1">Business</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
-                        [(ngModel)]="searchBar.financial_advice">
-                    <label class="custom-control-label" for="checkbox2">Financial Advice</label>
+                        [(ngModel)]="searchBar.communication">
+                    <label class="custom-control-label" for="checkbox2">Communication</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
-                        [(ngModel)]="searchBar.career_advice">
-                    <label class="custom-control-label" for="checkbox3">Career Advice</label>
+                        [(ngModel)]="searchBar.mental_health">
+                    <label class="custom-control-label" for="checkbox3">Mental Health</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+                        [(ngModel)]="searchBar.well_being">
+                    <label class="custom-control-label" for="checkbox4">Ethics/Well-being</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox5" name="checkbox5" class="custom-control-input"
+                        [(ngModel)]="searchBar.university_life">
+                    <label class="custom-control-label" for="checkbox5">University Life</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline mr-0">
-                    <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
-                        [(ngModel)]="searchBar.technical_advice">
-                    <label class="custom-control-label" for="checkbox4">Technical Advice</label>
+                    <input type="checkbox" id="checkbox6" name="checkbox6" class="custom-control-input"
+                        [(ngModel)]="searchBar.career_path">
+                    <label class="custom-control-label" for="checkbox6">Career Path</label>
                 </div>
             </div>
         </div>
@@ -219,10 +238,12 @@
                         <h2 class="text-primary">{{mentor.user.firstName}} {{mentor.user.lastName}}</h2>
                         <h5 class="text-muted">{{mentor.user.title}}</h5>
                         <h4 class="text-dark">{{mentor.user.org}}</h4>
-                        <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health">Mental Health</span>
-                        <span class="badge badge-info mr-1" *ngIf="mentor.support.financial_advice">Financial Advice</span>
-                        <span class="badge badge-info mr-1" *ngIf="mentor.support.career_advice">Career Advice</span>
-                        <span class="badge badge-info mr-1" *ngIf="mentor.support.technical_advice">Technical Advice</span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.business"> Business </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.communication"> Communication </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health"> Mental Health </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.well_being"> Ethics/Well-being </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.university_life"> University Life </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.career_path"> Career Path </span>
                     </div>
                 </div>
                 <div class="card-body">
