@@ -19,21 +19,23 @@ import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
+import { AdminService } from './http_services/admin.service';
+import { LoginService } from './http_services/login.service';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: HomeComponent},
-  {path: 'user', component: UserProfileComponent},
+  {path: 'user', canActivate: [LoginService], component: UserProfileComponent},
+  {path: 'user/schedule', canActivate: [LoginService], component: AvailabilityComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'courses/:id', component: CourseDetailComponent},
   {path: 'mentorship', component: MentorshipComponent},
   {path: 'mentorship/:id', component: MentorDetailsComponent},
-  {path: 'mentorship/schedule', component: SchedulingComponent},
-  {path: 'mentorship/schedule/:date', component: AvailabilityComponent},
+  {path: 'mentorship/:id/schedule', canActivate: [LoginService], component: SchedulingComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'support', component: SupportComponent},
   {path: 'blog', component: BlogComponent},
   {path: 'about', component: AboutComponent},
-  {path: 'admin', component: AdminComponent, children: [
+  {path: 'admin', component: AdminComponent, canActivate: [AdminService], children: [
     {path: 'webinars', component: AdminWebinarsComponent},
     {path: 'users', component: AdminUsersComponent},
     {path: 'partners', component: AdminPartnersComponent},

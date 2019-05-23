@@ -1,7 +1,7 @@
 /* welcome */
 .jumbotron {
     width: 100%;
-    height: 450px;
+    min-height: 450px;
     filter: grayscale(30%);
     background-image: url('../../assets/img/stock_photos/home.jpg');
     background-repeat: no-repeat;
@@ -25,4 +25,24 @@
 }
 a p{
     color: black;
+}
+
+@media only screen and (max-width:991px){
+    h1 {
+        font-size: 2em;
+    }
+    #newsletter form {
+        width: 100%;
+    }
+}
+@media only screen and (max-width:576px){
+    #welcome-text h1 {
+        font-size: 2em;
+    }
+    #newsletter .flex-sm-column {
+        flex-direction: column;
+    }
+    #welcome-text p {
+        font-size: 1em;
+    }
 }

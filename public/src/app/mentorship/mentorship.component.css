@@ -1,14 +1,20 @@
-.mentor{
-    background: rgba(168, 201, 239, 0.62);
+.jumbotron {
+    width: 100%;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/kayla-farmer-1433741-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
-.mentor:hover {
-    background: rgba(168, 201, 239, 0.50);
+#mentorship-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
 }
-#mentor-img img{
-    width: 176px;
-}
-.modal-dialog{
-    max-width: 80%;
+#mentor:hover, #mentor.card-header:hover {
+    box-shadow: 0px 0px 3px 3px #ccc;
+    text-decoration: none;
+    cursor: pointer;
 }
 .form-input{
     width: 45%;
@@ -17,23 +23,10 @@
     border-radius: 5px;
     text-align: center;
 }
+.apply-link{
+    cursor: pointer;
+}
 textarea {
     resize: none;
     overflow: scroll;
-}
-.errors{
-    color: red;
-}
-/* media queries */
-
-@media only screen and (min-width:992px){
-    .main-image{
-        width: 48.6%;
-    }
-    .main-info{
-        width: 48.6%;
-    }
-    .mentor{
-        width: 48.6%;
-    }
 }

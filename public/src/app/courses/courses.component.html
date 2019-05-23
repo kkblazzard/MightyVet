@@ -1,59 +1,98 @@
+<!-- ------heading------- -->
 <section id="courses-welcome" class="container">
   <div class="jumbotron d-flex justify-content-start align-items-end">
     <div id="welcome-text" class="mr-3 p-5 text-light">
-        <h1 class="text-light">Find your perfect course</h1>
+        <h1 class="text-light">Find the perfect course</h1>
         <p class="mb-0">MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
     </div>
   </div>
 </section>
+<!-- ------End Heading----- -->
 
+<!-- ---- search bar----- -->
 <section id="search-bar" class="container mb-3">
-  <!-- search bar -->
   <h1 class="mb-3">Browse Courses</h1>
   <div id="search-bar" class="input-group mb-3">
-    <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch"
-      aria-describedby="coursesSearch">
+    <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch" aria-describedby="coursesSearch" [(ngModel)]="searchBar.bar" >
     <div class="input-group-append border-dark">
-      <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
+      <button (click)="searchCourse()" class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
     </div>
   </div>
-  <!-- search filters -->
-  <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between mb-3">
+  <!-- search check box filters -->
+  <div id="search-filters" class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+    <div class="mb-1">
+      <h6>Format type:</h6>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="live" name="live" class="custom-control-input" [(ngModel)]="searchBar.type.Live" (click)="clickLive()">
+          <label class="custom-control-label" for="live">Live Webinar</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="video" name="video" class="custom-control-input" [(ngModel)]="searchBar.type.Video" (click)="clickVideo()">
+          <label class="custom-control-label" for="video">Video</label>
+        </div>
+    </div>
+    
+    <div>
       <h6>Categories:</h6>
-      <div>
-        <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input">
-          <label class="custom-control-label" for="checkbox1">Management</label>
-        </div>
-        <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input">
+      <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
+              [(ngModel)]="searchBar.category.business">
+          <label class="custom-control-label" for="checkbox1">Business</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
+              [(ngModel)]="searchBar.category.communication">
           <label class="custom-control-label" for="checkbox2">Communication</label>
-        </div>
-        <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input">
-          <label class="custom-control-label" for="checkbox3">Medical</label>
-        </div>
-        <div class="custom-control custom-checkbox custom-control-inline mr-0">
-          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input">
-          <label class="custom-control-label" for="checkbox4">Technical</label>
-        </div>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
+              [(ngModel)]="searchBar.category.mental_health">
+          <label class="custom-control-label" for="checkbox3">Mental Health</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+              [(ngModel)]="searchBar.category.well_being">
+          <label class="custom-control-label" for="checkbox4">Ethics/Well-being</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" id="checkbox5" name="checkbox5" class="custom-control-input"
+              [(ngModel)]="searchBar.category.university_life">
+          <label class="custom-control-label" for="checkbox5">University Life</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline mr-0">
+          <input type="checkbox" id="checkbox6" name="checkbox6" class="custom-control-input"
+              [(ngModel)]="searchBar.category.career_path">
+          <label class="custom-control-label" for="checkbox6">Career Path</label>
       </div>
     </div>
+  </div>
 </section>
+<!-- ---- end search bar----- -->
 
+<!-- ----list of course cards---- -->
 <section id="course-cards" class="container">
-  <div class="d-flex flex-lg-row flex-md-row flex-sm-column justify-content-between flex-wrap">
-    <div *ngFor="let course of allCourses | search : featuredNumber" class="card mb-4">  <!-- search pipe to limit number of entries -->
-      <img [src]="course.img" class="card-img-top" alt="Course Image">
+  <div class="d-flex flex-column flex-lg-row justify-content-between flex-wrap">
+    <a *ngFor="let course of allCourses | coursesearch : searchBar" class="card mb-4 p-2" [routerLink]="['/courses',course._id]" > <!-- search pipe to limit number of entries -->
+      <div class="d-flex justify-content-between mb-1">
+        <span *ngIf="course.new" class="badge badge-danger mr-1">New</span>
+        <span *ngIf="!course.new"></span>
+        <span *ngIf="course.type === 'Live'" class="badge badge-success mr-1">Live Webinar</span>
+        <span *ngIf="course.type === 'Video'" class="badge badge-success mr-1">Video</span>
+      </div> 
+      <img [src]="course.img" class="card-img rounded" alt="Course Image">
       <div class="card-body">
-        <h5 class="card-title">{{course.title | slice: 40}}</h5>
-        <p class="card-text">{{course.description | slice: 100}}</p>
-        <a class="card-link" [routerLink]="['/courses',course._id]">READ MORE&nbsp;&nbsp;<i
-            class="fa fa-arrow-right"></i></a>
+        <h4 class="card-title">{{course.title | slice: 40}}</h4>
+        <span class="badge badge-info mr-1" *ngIf="course.category.business"> Business </span>
+        <span class="badge badge-info mr-1" *ngIf="course.category.communication"> Communication </span>
+        <span class="badge badge-info mr-1" *ngIf="course.category.mental_health"> Mental Health </span>
+        <span class="badge badge-info mr-1" *ngIf="course.category.well_being"> Ethics/Well-being </span>
+        <span class="badge badge-info mr-1" *ngIf="course.category.university_life"> University Life </span>
+        <span class="badge badge-info mr-1" *ngIf="course.category.career_path"> Career Path </span>
+        <p class="card-text mt-2">{{course.description | slice: 100}}</p>
       </div>
-    </div>
+    </a>
   </div>
   <div class="text-center">
-      <button type="button" class="btn btn-light btn-block btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
+      <button *ngIf="searchBar.featuredNumber < allCourses?.length" type="button" class="btn btn-light btn-block btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i class="fa fa-chevron-down"></i></button>
   </div>
 </section>

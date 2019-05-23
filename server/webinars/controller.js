@@ -1,5 +1,6 @@
 const Webinars=require('./models');
-const Speakers=require('../speakers/models')
+const Speakers=require('../speakers/models');
+const Users = require('../users/models');
 module.exports={
     webinarAll: (req, res)  =>
         Webinars
@@ -12,7 +13,7 @@ module.exports={
         Webinars
         .find()
         .sort('-createdAt')
-        .limit(4)    
+        .limit(3)    
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
     webinarNew: (req, res) => {
@@ -48,7 +49,16 @@ module.exports={
     },
     webinarRemove: (req, res) => Webinars
         .findByIdAndDelete(req.params.id)
-        .then(deleted=>console.log("deleted") ||res.json(deleted))
+        .then(deleted=> {
+            console.log("deleted", deleted);
+            Users.updateMany({}, {$pull: {accreditations: {webinar:deleted._id}}})
+            .populate({path: "accreditations"})
+            .then(update => {
+                console.log("updated", update);
+                res.json(deleted)
+            })
+            .catch(err=>console.log(err) || res.json(err))
+        })
         .catch(err=>console.log(err) || res.json(err)),
 
     webinarDetails:(req, res) => Webinars
@@ -59,11 +69,25 @@ module.exports={
         .catch(err=>console.log(err) || res.json(err)),
 
     webinarUpdate: (req, res) => Webinars
-        .findByIdAndUpdate(req.params.id,req.body,{new: true})
+        .findByIdAndUpdate(req.params.id,req.body,{new: true, runValidators: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
+
     signUp: (req, res) => Webinars
-        .findByIdAndUpdate(req.params.id, {$push:{users : req.body.id}},{new: true})
-        .then(updated =>console.log("updated",updated)||res.json(updated))
-        .catch(err=>console.log(err) || res.json(err))
+        .findByIdAndUpdate(req.params.id, {$push:{users : req.body.accreditation_id}},{new: true})
+        .then(updated => {
+            console.log("updated",updated);
+            Users.findByIdAndUpdate(req.body.user_id, {$push:{accreditations: req.body.accreditation_id}})
+            .then(update => console.log("updated",update)||res.json(update))
+            .catch(err=>console.log(err) || res.json(err))
+        })
+        .catch(err=>console.log(err) || res.json(err)),
+
+    webinarFind: (req, res)  =>
+        Webinars
+        .find({title:req.body.title})
+        .sort('-createdAt')
+        // .populate('speaker')
+        .then(all=>console.log(all) || res.json(all))
+        .catch(err=>console.log(err)|| res.json(err)),
 }

@@ -11,9 +11,11 @@ import { MenteesService } from '../http_services/mentees.service';
   styleUrls: ['./mentor-details.component.css']
 })
 export class MentorDetailsComponent implements OnInit {
+  adminView = false;
   id: string;
   mentor: any;
   isMentee: boolean;
+  application: boolean;
   constructor(
     private _route: ActivatedRoute,
     private _mentorsService: MentorsService,
@@ -24,6 +26,7 @@ export class MentorDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.application = false;
     this.isMentee = false;
     this._route.params.subscribe((params: Params) => {
       this.id = params.id;
@@ -36,20 +39,50 @@ export class MentorDetailsComponent implements OnInit {
   getMentor() {
     let obs = this._mentorsService.getMentor(this.id);
     obs.subscribe((data) => {
-      console.log(data);
       this.mentor = data;
-      if (data['mentees']){
-        this.checkMentee();
-      } 
+      console.log(this.mentor);
+      if (!this.mentor.approval){
+        if(this._authenticationsService.isLoggedIn()){
+          let obs = this._authenticationsService.profile()
+          obs.subscribe(data => {
+            if (data['admin']){
+              this.adminView = true;
+            }
+            else{
+              this._router.navigateByUrl('/mentorship');
+            }
+          })
+        }
+        else{
+          this._router.navigateByUrl('/mentorship');
+        }
+      }
+      else{
+        if(this._authenticationsService.isLoggedIn()){
+          if (this.mentor.user._id === this._authenticationsService.getUserDetails()._id){
+            this._router.navigateByUrl('/user');
+          }
+        }
+        if (data['mentees']){
+          this.checkMentee();
+        } 
+      }
     }),
     (err) => {
         console.log(err);
       }
   }
   checkMentee() {
-    for (let mentee of this.mentor.mentees) {
-      if (mentee.user === this._authenticationsService.getUserDetails()._id) {
-        this.isMentee = true;
+    if(this._authenticationsService.isLoggedIn()){
+      for (let mentee of this.mentor.mentees) {
+        if (mentee.user === this._authenticationsService.getUserDetails()._id) {
+          if (!mentee.approval){
+            this.application = true;
+          }
+          else{
+            this.isMentee = true;
+          }
+        }
       }
     }
   }
@@ -57,19 +90,26 @@ export class MentorDetailsComponent implements OnInit {
     if (!this._authenticationsService.isLoggedIn()) {
       this._eventsService.sendLogin();
     } else {
-      let obs = this._menteesService.addMentee({ user: this._authenticationsService.getUserDetails()._id, mentor: this.id });
-      obs.subscribe(data => {
-        console.log('successfully created new mentee', data);
-        let obs2 = this._mentorsService.signUp(this.id, data);
-        obs2.subscribe(data2 => {
-          console.log('successfully added new mentee to mentor', data2);
-          this.getMentor();
-        },
-          err => {
-            console.log('something went wrong:', err);
-          });
-      }), err => {
-        console.log('something went wrong:', err);
+      if (this.mentor.user._id === this._authenticationsService.getUserDetails()._id){
+        this._router.navigateByUrl('/user');
+        return;
+      }
+      this.checkMentee();
+      if(!this.application && !this.isMentee){
+        let obs = this._menteesService.addMentee({ user: this._authenticationsService.getUserDetails()._id, mentor: this.id });
+        obs.subscribe(data => {
+          console.log('successfully created new mentee', data);
+          let obs2 = this._mentorsService.signUp(this.id, data);
+          obs2.subscribe(data2 => {
+            console.log('successfully added new mentee to mentor', data2);
+            this.application = true;
+          },
+            err => {
+              console.log('something went wrong:', err);
+            });
+        }), err => {
+          console.log('something went wrong:', err);
+        }
       }
     }
   }

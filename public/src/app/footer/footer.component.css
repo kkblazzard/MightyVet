@@ -1,0 +1,20 @@
+footer {
+    box-shadow: 10px 10px 6px 6px #000;
+}
+.bg-black {
+    background-color: #212121;
+}
+.text-light {
+    text-shadow: 0px 0px 2px #5a5a5a;
+}
+
+@media only screen and (min-width:992px){
+    .fixed-lg-width{
+        width: 250px;
+    }
+}
+@media only screen and (max-width:576px){
+    .flex-sm-column {
+        flex-direction: column;
+    }
+}

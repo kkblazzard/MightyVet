@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WebinarsService } from '../http_services/webinars.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-courses',
@@ -16,26 +17,54 @@ export class CoursesComponent implements OnInit {
   ) { }
 
   allCourses: any;
-  featuredNumber: number;
-  // setting static data as example
-  course = {
-    title: 'Veterinary Self-Worth and the Psychology of Money',
-    description: 'Recognizing and embracing your self- worth is core to your success as a veterinarian. However, many veterinary professionals find it difficult',
-    link: 'https://webinar-portal.net/webinars/vmt/registration_190307.php'
-  };
+  // featuredNumber: number;
+  // titleSearch: any;
+  // searchError: any;
+  searchBar: any;
 
   ngOnInit() {
     this.getAllCourses();
-    this.featuredNumber = 6;
+    // this.featuredNumber = 6;
+    this.searchBar = {
+      featuredNumber: 6,
+      bar: "",
+      type: {
+        Live: false,
+        Video: false
+      } ,
+      category: {
+        business: false,
+        communication: false,
+        mental_health: false,
+        well_being: false,
+        university_life: false,
+        career_path: false
+      }
+    }
   }
   getAllCourses() {
     this._webinarsService.searchWebinars()
     .subscribe(courses => {
       console.log('received all courses', courses);
       this.allCourses = courses;
+      this.allCourses.map(x => {
+        x.new = moment(x.createdAt).isSameOrAfter(moment().subtract(14, 'days'));
+      });
     });
   }
-  seeMore(){
-    this.featuredNumber += 6;
+
+  clickLive(){
+    if(this.searchBar.type.Video){
+      this.searchBar.type.Video = false;
+    }
   }
+  clickVideo(){
+    if(this.searchBar.type.Live){
+      this.searchBar.type.Live = false;
+    }
+  }
+  seeMore(){
+    this.searchBar.featuredNumber += 6;
+  }
+
 }

@@ -1,58 +1,83 @@
+<section id="section-welcome" class="container">
+    <div class="jumbotron d-flex justify-content-start align-items-end">
+      <div id="welcome-text" class="mr-3 p-5 text-light">
+          <h1 class="text-light">What is MightyVet</h1>
+          <p class="mb-0">We seek to bridge the gap in veterinary education by ensuring veterinarians and veterinary team members are informed of and prepared for the challenges they will face in practice.</p>
+      </div>
+    </div>
+  </section>
+  
+
 <!-- Mission -->
-<div id="mighty-mission" class="container">
-  <h1>A Mighty Mission</h1>
-  <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-    <div class="mr-4">
-      <h3>Remembering Why We Do This</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-      <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
-      <p>Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam. Nam sed luctus sem. Integer eget placerat dolor, ac placerat ligula. Vestibulum elementum neque et sollicitudin aliquam.</p>
-    </div>
-    <div id="mission-video">
-      <h6>Hear Sophia's Story</h6>
-      <iframe width="550px" height="350px" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+<section id="section video" class="container d-flex flex-column flex-lg-row justify-content-between">
+  <div class="video-text text-lg-center">
+    <h3 class="mb-4">A Mighty Mission: Remembering Why</h3>
+    <p>Sophia Yin, DVM, MS was a veterinarian, applied animal behaviorist, author, lecturer, and friend. She was world-renowned in her field and was helping to shape the standard of care for veterinary professionals.</p>
+    <p>She was smart, kind, and seemed to enjoy life to the fullest. Yet tragically, at the age of 48, Dr. Yin took her own life. Watch this video in remembrance of Dr. Yin, featuring friend Dr. Sally Foote.</p>
   </div>
-</div>
+  <iframe class="video" src="https://www.youtube.com/embed/nW9XNDAplkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
 <!-- Board Members-->
 <div id="board-members" class="my-5 bg-light">
   <div class="container py-5">
     <h2>Board Members</h2>
-    <div class="member my-4 d-flex justify-content-between">
-      <div class="mr-4">
+    <div class="my-5 d-flex justify-content-between border-bottom">
+      <div class="member-img mr-4">
         <img src="/assets/img/about_page/Weinrauch.jpg" alt="Dr. Steve Weinrauch">
       </div>
       <div>
-        <h4>Dr. Steve Weinrauch, Founder</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h4>Steve Weinrauch, BVMS, MRCVS</h4>
+        <h5>Founder & Chairman of the Board</h5>
+        <h5>Chief Veterinary Officer, Trupanion</h5>
+        <div class="hide-show-member-text" [class.show]="show[1]">
+          <p>Dr. Weinrauch has a passion for giving back to the veterinary community. In addition to founding MightyVet in 2018, he also co-founded an animal rescue organization called 2nd Chance Rescue, of which he was also Medical Director. He has published his research in numerous peer-reviewed journals and is licensed to practice in the USA and the European Union. His wife is also a veterinarian and both graduated from the Glasgow University School of Veterinary Medicine in 2005.</p>
+        </div>
+        <button class="btn btn-link pull-right mb-4" (click)="show[1] = !show[1]">{{ show[1] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
     </div>
-    <div class="member my-4 d-flex justify-content-between">
-      <div class="mr-4">
-        <img src="/assets/img/about_page/Kipperman.jpg" alt="Dr. Barry Kipperman">
+    <div class="my-5 d-flex justify-content-between border-bottom">
+      <div class="member-img mr-4">
+        <img src="/assets/img/about_page/Kipperman_sm2.jpg" alt="Dr. Barry Kipperman">
       </div>
       <div>
-        <h4>Dr. Barry Kipperman, Board President</h4>
-        <p>Dr. Kipperman grew up in New York, and feels the TV show Seinfeld drew heavily from his own life experiences. He is board certified in internal medicine and is staff internist and founder of a 24-hour referral/emergency practice in the San Francisco Bay area. After 26 years in practice, Dr. Kipperman decided to devote the remainder of his career to animal welfare and ethics. He received a master’s degree in animal welfare, ethics and law in 2017 from the University of Edinburgh, and is pursuing board certification in animal welfare. He teaches veterinary ethics at the University of California at Davis School of Veterinary Medicine, and animal welfare and ethics for the University of Missouri. In addition to serving on the MightyVet board, Dr. Kipperman serves on the Board of Directors of the Humane Society Veterinary Medical Association. His research interests include the influence of economics on animal welfare and veterinarian well-being, and the ethical dilemmas and moral stress faced by veterinarians.</p>
+        <h4>Barry Kipperman, DVM, DACVIM, MSc</h4>
+        <h5>Board President</h5>
+        <h5>Founder, Ironhorse Vet Care</h5>
+        <h5>Board President, Humane Society Veterinary Medical Association</h5>
+        <h5>Diplomate, UC Davis School of Veterinary Medicine</h5>
+        <div class="hide-show-member-text" [class.show]="show[2]">
+          <p>Dr. Kipperman grew up in New York, and feels the TV show Seinfeld drew heavily from his own life experiences. He is board certified in internal medicine and is staff internist and founder of a 24 hour referral/emergency practice in the San Francisco Bay area. After 26 years in practice, Dr. Kipperman decided to devote the remainder of his career to animal welfare and ethics. He received a master’s degree in animal welfare, ethics and law in 2017 from the University of Edinburgh, and is pursuing board certification in animal welfare. He teaches veterinary ethics at the University of California at Davis School of Veterinary Medicine, and animal welfare and ethics for the University of Missouri. In additional to serving on the MightyVet board, Dr. Kipperman serves on the Board of Directors of the Humane Society Veterinary Medical Association. His research interests include the influence of economics on animal welfare and veterinarian well-being, and the ethical dilemmas and moral stress faced by veterinarians</p>
+        </div>
+        <button class="btn btn-link pull-right mb-4" (click)="show[2] = !show[2]">{{ show[2] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
     </div>
-    <div class="member my-4 d-flex justify-content-between">
-      <div class="mr-4">
+    <div class="my-5 d-flex justify-content-between border-bottom">
+      <div class="member-img mr-4">
         <img src="/assets/img/about_page/Strong.jpg" alt="Dr. Laura Strong">
       </div>
       <div>
-        <h4>Dr. Laura Strong, Board Vice President & Secretary</h4>
-        <p>Dr. Strong spent 30 years at the helm of her own comprehensive veterinary hospital, where she oversaw a team of six veterinarians, 30 team members, and the wellbeing of thousands of pets and their families. Laura has served as a trusted advisor for educational institutions and field-related businesses, including Lincoln Memorial University’s College of Veterinary Medicine, Trupanion, Purdue University’s Veterinary Technology Distance Learning program, and the JBOgle Animal Shelter. She is now Director of University Relations at Community Veterinary Partners and part of the Clinical Outreach Team for Lincoln Memorial University CVM. Dr. Strong earned her doctorate from Purdue University and recently completed the requirements to become a Certified Compassion Fatigue Professional (CCFP).</p>
+        <h4>Laura Strong, DVM, CCFP</h4>
+        <h5>Board Vice President & Secretary</h5>
+        <h5>Director of University Relations, Community Veterinary Partners</h5>
+        <h5>Member of Clinical Outreach Team for Lincoln Memorial University CVM</h5>
+        <div class="hide-show-member-text" [class.show]="show[3]">
+          <p>Dr. Strong earned her degree from Bellarmine University and her doctorate from Purdue University, after which led her to directing and overseeing her own comprehensive veterinary hospital, a team of six veterinarians, 30 staff members, and the wellbeing of thousands of pets and their families for over 25 years. She has a passion for leadership and helping veterinarians balance the financial wellbeing of a practice with the financial wellbeing of staff members, while also providing care to potentially unlucky pets and clients.</p>  
+        </div>
+        <button class="btn btn-link pull-right mb-4" (click)="show[3] = !show[3]">{{ show[3] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
     </div>
-    <div class="member my-4 d-flex justify-content-between">
-      <div class="mr-4">
+    <div class="my-5 d-flex justify-content-between">
+      <div class="member-img mr-4">
         <img src="/assets/img/about_page/Dollar.jpg" alt="Chris Dollar">
-      </div> 
+      </div>
       <div>
-        <h4>Chris Dollar, Board Treasurer</h4>
-        <p>Mr. Dollar is currently SVP and President, Global Software and Services at Covetrus – a company formed out of the recent Henry Schein Animal Health and Vets First Choice merger. Prior to the formation of Covetrus, Dollar was President of Global Animal Health Practice Solutions at Henry Schein. A senior technology executive who has driven growth and profitability for multibillion-dollar Fortune 500 public companies, Dollar spent 17 years in technology product management and general management, working in numerous leadership roles at McKesson Corporation. He received his bachelor’s degree from Missouri State University.</p>
+        <h4>Chris Dollar</h4>
+        <h5>Board Treasurer</h5>
+        <h5>SVP & President, Global Software and Services, Covetrus</h5>
+        <div class="hide-show-member-text" [class.show]="show[4]">
+          <p>Mr. Dollar is currently SVP and President, Global Software and Services at Covetrus – a company formed out of the recent Henry Schein Animal Health and Vets First Choice merger. Prior to the formation of Covetrus, Dollar was President of Global Animal Health Practice Solutions at Henry Schein. A senior technology executive who has driven growth and profitability for multibillion-dollar Fortune 500 public companies, Dollar spent 17 years in technology product management and general management, working in numerous leadership roles at McKesson Corporation. Dollar received his bachelor’s degree from Missouri State University.</p>
+        </div>
+        <button class="btn btn-link pull-right" (click)="show[4] = !show[4]">{{ show[4] ? 'Show less': 'Show More' }}&nbsp;<i class="fa fa-angle-double-right"></i></button>
       </div>
     </div>
   </div>
@@ -60,14 +85,16 @@
 <!-- Partners-->
 <div class="container">
   <h1>Meet our Partners</h1>
+  <!-- for each list of partners per tiers -->
   <div *ngFor="let tiers of partners">
-    <div class="tier1 text-center" *ngIf="tiers.tier == 1">
+    <div class="tier1 d-flex justify-content-around flex-wrap my-3" *ngIf="tiers.tier == 1">
+      <!-- for each partner in that tier -->
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
-    <div class="tier2 text-center" *ngIf="tiers.tier == 2">
+    <div class="tier2 d-flex justify-content-around flex-wrap my-3" *ngIf="tiers.tier == 2">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
-    <div class="tier3 text-center" *ngIf="tiers.tier == 3">
+    <div class="tier3 d-flex justify-content-around flex-wrap my-3" *ngIf="tiers.tier == 3">
         <a *ngFor="let partner of tiers.partners" [href]="partner.link"><img [src]="partner.img" [alt]="partner.name"></a>
     </div>
   </div>

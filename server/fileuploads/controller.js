@@ -24,8 +24,12 @@ module.exports = {
       if (err) {
         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
       }
-      console.log(res)
-      return res.json({'imageUrl': req.file.location});
+      if (req.file){
+        return res.json({'imageUrl': req.file.location});
+      }
+      else{
+        return res.json({'errors': {'picture' : {'message': "Please upload an image before saving."}}});
+      }
     });
   },
   webinarImageUpload(req, res) {
@@ -49,8 +53,12 @@ module.exports = {
       if (err) {
         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
       }
-      console.log(res)
-      return res.json({'imageUrl': req.file.location});
+      if (req.file){
+        return res.json({'imageUrl': req.file.location});
+      }
+      else{
+        return res.json({'errors': {'picture' : {'message': "Please upload an image before saving."}}});
+      }
     });
   },
   userImageUpload(req, res) {
@@ -74,8 +82,12 @@ module.exports = {
       if (err) {
         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
       }
-      console.log(res)
-      return res.json({'imageUrl': req.file.location});
+      if (req.file){
+        return res.json({'imageUrl': req.file.location});
+      }
+      else{
+        return res.json({'errors': {'picture' : {'message': "Please upload an image before saving."}}});
+      }
     });
   },
   partnerImageUpload(req, res) {
@@ -99,9 +111,13 @@ module.exports = {
     partnerSingleUpload(req, res, function(err, data) {
       if (err) {
         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+      } 
+      if (req.file){
+        return res.json({'imageUrl': req.file.location});
       }
-      console.log(res)
-      return res.json({'imageUrl': req.file.location});
+      else{
+        return res.json({'errors': {'picture' : {'message': "Please upload an image before saving."}}});
+      }
     });
   }
 }

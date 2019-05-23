@@ -1,29 +1,57 @@
 <div *ngIf="course">
   <div *ngIf="course._id">
+    <!-- header -->
     <div class="container">
       <h1>{{course.title}}</h1>
+      <img id="course_img" class="py-0 round" [src]="course.img"
+        alt="Course Image">
     </div>
-    <img id="course_img" class="jumbotron jumbotron-fluid border-top border-bottom py-0" [src]="course.img" alt="Course Image">
-    <div class="container d-flex">
-      <div>
+
+    <div class="container d-flex flex-wrap flex-column flex-lg-row">
+      <!-- left main -->
+      <div class="col-lg-8 p-4">
         <h3>{{course.title}}</h3>
         <p>{{course.description}}</p>
-        <h6>What you will learn in this course:</h6>
-        <ul>
-          <li>thing1</li>
-          <li>thing2</li>
-          <li>thing3</li>
-        </ul>
-        <p>Related courses:</p>
+        <h4>Tags:</h4>
+        <div>
+          <span class="badge badge-info mr-1" *ngIf="course.category.business"> Business </span>
+          <span class="badge badge-info mr-1" *ngIf="course.category.communication"> Communication </span>
+          <span class="badge badge-info mr-1" *ngIf="course.category.mental_health"> Mental Health </span>
+          <span class="badge badge-info mr-1" *ngIf="course.category.well_being"> Ethics/Well-being </span>
+          <span class="badge badge-info mr-1" *ngIf="course.category.university_life"> University Life </span>
+          <span class="badge badge-info mr-1" *ngIf="course.category.career_path"> Career Path </span>
         </div>
-      <div class="ml-auto">
-        <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
-        <button *ngIf="isSignedUp" class="btn btn-secondary">You are signed up for this class</button>
-        <h6>Class Date & Time</h6>
-        <p>{{course.datetime | date:"MMM-dd-y, HH:MMa z"}}</p>
+      </div>
+
+      <!-- right main -->
+      <div class="col p-4">     
+        <div class="mb-2">
+          <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
+          <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary"> Go to course</button></a>
+        </div>
+        <div *ngIf="course.type == 'Live'">
+          <h4>Class Date & Time</h4>
+          <p>{{course.datetime | date:"MMM-dd-y, hh:mma"}}</p>
+        </div>
+        <h4>Speaker</h4>
+        <!-- <app-speaker-details [model]="course.speaker"></app-speaker-details> -->
+        <!-- toggle speaker info -->
+        <button class="btn btn-link" (click)="toggle()"><p>
+            {{course.speaker.title}} {{course.speaker.firstName}} {{course.speaker.lastName}} 
+          <i *ngIf="!showSpeaker" class="fa fa-angle-double-down"></i>
+          <i *ngIf="showSpeaker" class="fa fa-angle-double-up"></i>
+          </p>
+        </button>
+        <div *ngIf="showSpeaker" class="p-3 border rounded">
+          <img class="speakerimg rounded w-100" [src]="course.speaker.img" alt="speaker's image">
+          <p class="p-3">{{course.speaker.description}}</p>
+        </div>
+        <!-- signup or go to course -->
       </div>
     </div>
   </div>
+
+<!-- invalid course id url-->
   <div *ngIf="!course._id" class="container d-flex justify-content-center pt-5">
     <i class="fa fa-paw fa-5x mr-3 text-info"></i>
     <div class="text-info">

@@ -1,22 +1,69 @@
-.mission-info {
-    margin-right: 20px;
+.jumbotron {
+    width: 100%;
+    min-height: 450px;
+    filter: grayscale(30%);
+    background-image: url('../../assets/img/stock_photos/shutterstock_609423461.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 2rem 2rem;
 }
-.board-members{
-    margin: 30px 0;
-    padding: 30px 0;
+#welcome-text {
+    background-color: rgba(40, 40, 40, 0.55);
+    width: 600px;
+    border-bottom: 5px solid #7290cd;
 }
-.member{
-    margin: 20px 0;
-}
-.board-member-img {
-    margin-right: 20px;
-}
+
+/* Tier 1 - 3 */
 .tier1 img{
-    height: 90px;
+    height:100px;
 }
 .tier2 img{
-    height: 60px;
+    height: 80px;
 }
 .tier3 img{
-    height: 40px;
+    height: 60px;
+}
+
+
+/* Show more / Shoe less */
+.hide-show-member-text {
+    height:105px;
+    overflow: hidden;
+}
+.show {
+    overflow: visible;
+    height: auto;
+}
+
+#board-members h5 {
+    color: #666;
+}
+#board-members h4 {
+    color: #444;
+    font-weight: 800;
+}
+#board-members p {
+    color: #666;
+}
+
+.member-img {
+    min-width: 170px;
+    height: 170px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.video{
+    height: 400px;
+}
+
+/* add in extra media query for phone/tablet/laptop? */
+@media only screen and (min-width:992px){
+    .video-text{
+        width: 48%;
+    }
+    .video{
+        width: 48%;
+        height: 300px;
+    }
 }

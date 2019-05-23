@@ -18,16 +18,17 @@ var UserSchema = new mongoose.Schema({
         email: {
                 type: String,
                 required: [true, "Please enter an email."],
-                unique: [true, "This email address is already in use."]
+                validate: [function(email) {
+                        return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
+                }, "Please enter a valid email."],
+                unique: true
         },
 
         password: { hash: {
-                        type: String, 
-                        required: [true, "Please enter a password."], 
+                        type: String,
                 },
                 salt: {
-                        type: String, 
-                        required: [true, "Please enter a password."], 
+                        type: String,
                 }
         },
 
@@ -49,9 +50,12 @@ var UserSchema = new mongoose.Schema({
         },
 
         picture: {type: String,
-                default: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"
+                default: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png",
+                required: [true, "Please upload an image... It may take a bit of time to load."]
         },
-
+        meetings: [ {type : mongoose.Schema.ObjectId, 
+                ref : 'meeting' } ],
+                
         accreditations: [{type : mongoose.Schema.ObjectId, 
                 ref : 'accreditation'}],  //list of accreditation ids
 
@@ -61,14 +65,23 @@ var UserSchema = new mongoose.Schema({
         mentor_id: {
                 type : mongoose.Schema.ObjectId, 
                 ref : 'mentor'
-        } //mentor application and info
-
+        }, //mentor application and info
+        admin: { type: Boolean,
+        default: false }
 }, {timestamps:true})
 
-UserSchema.plugin(uniqueValidator);
+UserSchema.plugin(uniqueValidator, { message: 'This email address is already in use.' });
 UserSchema.methods.setPassword = function(password){
-        this.password.salt = crypto.randomBytes(16).toString('hex');
-        this.password.hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
+        if(password.length === 0){
+                this.invalidate("password", "Password is a required field.");
+        }
+        else if(password.length < 6){
+                this.invalidate("password", "Your password should be at least 6 characters long.");
+        }
+        else{
+                this.password.salt = crypto.randomBytes(16).toString('hex');
+                this.password.hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
+        }
 };
 UserSchema.methods.validPassword = function(password) {
         var hash = crypto.pbkdf2Sync(password, this.password.salt, 1000, 64, 'sha512').toString('hex');
@@ -79,10 +92,10 @@ UserSchema.methods.generateJwt = function() {
         expiry.setDate(expiry.getDate() + 7);
       
         return jwt.sign({
-          _id: this._id,
-          email: this.email,
-          name: this.name,
-          exp: parseInt(expiry.getTime() / 1000),
+                _id: this._id,
+                email: this.email,
+                admin: this.admin,
+                exp: parseInt(expiry.getTime() / 1000),
         }, require('../secrets').jwt); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 module.exports = UserSchema;

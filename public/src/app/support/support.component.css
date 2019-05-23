@@ -1,7 +1,17 @@
-.container {
-  height: 100vh;
-  overflow: auto;
+.jumbotron {
+  width: 100%;
+  min-height: 400px;
+  filter: grayscale(30%);
+  background-image: url('../../assets/img/stock_photos/krista-mangulsone-53122-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
-.fas {
-  font-size: 100pt;
+#support-text {
+  background-color: rgba(40, 40, 40, 0.55);
+  width: 600px;
+  border-bottom: 5px solid #7290cd;
+}
+#support-text a{
+  color: white;
 }

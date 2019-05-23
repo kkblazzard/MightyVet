@@ -1,39 +1,51 @@
-
 <div class="modal-header">
   <h2 class="modal-title">Make A Donation</h2>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <button type="button" class="close" aria-label="Close" (click)="close()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout" id="payment-form">
   <div class="modal-body container">
     <div class="alert alert-success" role="alert">
-      <p>As a non-profit we rely partially on donations to keep the lights on. We are always grateful to receive any methods of support.</p>
+      <p>As a non-profit we rely partially on donations to keep the lights on. We are always grateful to receive any
+        methods of support.</p>
       <hr>
       <p class="mb-0">If you have any questions, please contact us at info@mightyvet.com.</p>
-    </div>  
+    </div>
     <div class="row">
       <div class="form-group col">
         <label>Name</label>
-        <input type="text" class="form-control col" name="name" placeholder="Jenny Rosen" [(ngModel)]="extraData.name" required>
+        <input type="text" class="form-control col" name="name" placeholder="Jenny Rosen" [(ngModel)]="extraData.name"
+          required>
       </div>
       <div class="form-group col">
         <label>Email</label>
-        <input name="email" type="email" placeholder="jenny@example.com" [(ngModel)]="extraData.email" class="form-control col" required>
+        <input name="email" type="email" placeholder="jenny@example.com" [(ngModel)]="extraData.email"
+          class="form-control col" required>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-6">
-        <label>Address</label>
-        <input type="text" class="form-control col" name="address" placeholder="185 Berry Street Suite 550" [(ngModel)]="extraData.address_line1" required>
+      <div class="form-group col">
+        <label>Address Line 1</label>
+        <input type="text" class="form-control" name="address" placeholder="185 Berry Street Suite 550"
+          [(ngModel)]="extraData.address_line1" required>
       </div>
       <div class="form-group col">
+        <label>Address Line 2</label>
+        <input type="text" class="form-control" name="address" placeholder="185 Berry Street Suite 550"
+          [(ngModel)]="extraData.address_line2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
         <label>City</label>
-        <input name="city" class="form-control col" type="text" placeholder="Seattle" [(ngModel)]="extraData.address_city" required>
+        <input name="city" class="form-control" type="text" placeholder="Seattle"
+          [(ngModel)]="extraData.address_city" required>
       </div>
       <div class="form-group col">
         <label>State</label>
-        <select name="State" class="form-control col" placeholder="Washington" name="extraData.address_state" [(ngModel)]="extraData.address_state" required>
+        <select *ngIf="extraData.address_country === 'US'" name="state" class="form-control" placeholder="Washington" name="extraData.address_state"
+          [(ngModel)]="extraData.address_state" required>
           <option value="AL"> Alabama </option>
           <option value="AK"> Alaska </option>
           <option value="AZ"> Arizona </option>
@@ -85,30 +97,30 @@
           <option value="WI"> Wisconsin</option>
           <option value="WY"> Wyoming</option>
         </select>
+        <input *ngIf="extraData.address_country !== 'US'" type="text" name="state" class="form-control" placeholder="Washington" name="extraData.address_state"
+        [(ngModel)]="extraData.address_state" required>
       </div>
       <div class="form-group col">
-        <label>ZIP</label>
-        <input name="address_zip" class="form-control col" type="number" placeholder="94107" [(ngModel)]="extraData.address_zip" required>
+        <label>Country</label>
+        <select name="State" class="form-control" placeholder="Washington" name="country"
+          [(ngModel)]="extraData.address_country" required>
+          <option *ngFor="let country of countries" [value]="country.code">{{country.name}}</option>
+        </select>
       </div>
     </div>
     <!-- credit card info -->
-    <div class="row">
-      <label for="card-info" class="ml-3">Credit or debit card</label>
-      <div id="card-info" style="width:100%" #cardInfo></div>
-      <div id="card-errors" role="alert" class="ml-3" style="color:red" *ngIf="error">{{ error }}</div>
+    <div class="form-group">
+      <label for="card-info">Credit or debit card</label>
+      <div id="card-info" class="m-0" #cardInfo></div>
+      <div id="card-errors" class="text-danger" *ngIf="error"><small>{{ error }}</small></div>
     </div>
-    <div class="row">
-      <div class="form-group col">
-        <label>Amount</label>
-        <input type="number" class="form-control" placeholder= "100.00" [(ngModel)]="amount" required>
-      </div>
+    <div class="form-group">
+      <label>Amount</label>
+      <input class="form-control" name="amount" [(ngModel)]="amount" currencyMask required>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
     <button type="submit" class="btn btn-outline-success">Donate Now</button>
   </div>
 </form>
-
-
-

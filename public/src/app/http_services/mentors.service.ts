@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { UsersService } from '../http_services/users.service'
+import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../http_services/users.service';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class MentorsService {
     console.log("http.service getting all mentors");
     return this._http.get(`/api/mentors`);
   }
-  getApprovals(){
+  getApprovals() {
     console.log("http.service getting mentors seeking approval");
     return this._http.get(`/api/mentors/approvals`);
   }

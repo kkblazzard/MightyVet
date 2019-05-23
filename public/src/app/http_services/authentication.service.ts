@@ -6,11 +6,7 @@ import { map } from 'rxjs/operators';
 export interface UserDetails {
   _id: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  title: string;
-  org: string;
-  state: string;
+  admin: boolean;
   exp: number;
   iat: number;
 }
@@ -22,11 +18,7 @@ interface TokenResponse {
 export interface TokenPayload {
   email: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
-  title?: string;
-  org?: string;
-  state?: string;
+  admin?: boolean;
 }
 
 @Injectable({
@@ -36,7 +28,7 @@ export interface TokenPayload {
 export class AuthenticationService {
   private token: string;
 
-  constructor(private _http: HttpClient, private router: Router) {}
+  constructor(private _http: HttpClient, private _router: Router) {}
 
   private saveToken(token: string): void {
     localStorage.setItem('mean-token', token);
@@ -72,9 +64,11 @@ export class AuthenticationService {
   public register(user: TokenPayload) {
     return this.request('post', 'register', user);
   }
-  
   public login(user: TokenPayload) {
     return this.request('post', 'login', user);
+  }
+  public profile() {
+    return this.request('get', 'profile');
   }
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
@@ -84,6 +78,9 @@ export class AuthenticationService {
     else {
       return false;
     }
+  }
+  public checkPassword(newPassword, info){
+    return this._http.post('/api/users/password/'+newPassword, info)
   }
   public getUserDetails(): UserDetails {
     const token = this.getToken();
@@ -100,5 +97,6 @@ export class AuthenticationService {
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');
+    window.location.reload();
   }
 }

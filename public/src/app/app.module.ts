@@ -12,13 +12,16 @@ import { PartnersService } from './http_services/partners.service';
 import { SpeakersService } from './http_services/speakers.service';
 import { FileUploadService } from './http_services/file-upload.service';
 import { PaymentsService } from './http_services/payments.service';
+import { AuthenticationService } from './http_services/authentication.service';
+import { AdminService } from './http_services/admin.service';
+import { LoginService } from './http_services/login.service';
 // modules
+import { CurrencyMaskModule } from "ng2-currency-mask";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ImageCropperModule } from 'ngx-image-cropper';
 // Fontawesome
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // components
@@ -45,7 +48,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SpeakerDetailsComponent } from './speaker-details/speaker-details.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
-import { DonationComponent } from './donation/donation.component';
+// import { DonationComponent } from './donation/donation.component';
 
 @Pipe({ name: 'keys', pure: false })
 
@@ -54,70 +57,163 @@ export class KeysPipe implements PipeTransform {
     return Object.keys(value);
   }
 }
+
+//--------------mentor pipe-----------------------
 @Pipe({ name: 'mentorsearch', pure: false })
 
 export class MentorSearchPipe implements PipeTransform {
   transform(value: Array<any>, search: any): Array<any> {
     if (value) {
-      if (search.bar) {
-        var strings = search.bar.toLowerCase().split(' ');
-        value = value.sort((x, y) => {
-          var count_x = 0;
-          var count_y = 0;
-          for (let j = 0; j < strings.length; j++) {
-            if (x.user.firstName.toLowerCase().includes(strings[j])) {
-              count_x++;
-            }
-            if (x.user.lastName.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (x.user.title.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (x.user.org.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (x.resume.toLowerCase().includes(strings[j])){
-              count_x++;
-            }
-            if (y.user.firstName.toLowerCase().includes(strings[j])) {
-              count_y++;
-            }
-            if (y.user.lastName.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
-            if (y.user.title.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
-            if (y.user.org.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
-            if (y.resume.toLowerCase().includes(strings[j])){
-              count_y++;
-            }
+      value = value.filter((x) => {
+        if (search.business) {
+          if (!x.support.business) {
+            return false;
           }
-          return count_x === count_y ? 0 : count_x > count_y ? -1 : 1;
-        });
-      }
+        }
+        if (search.communication) {
+          if (!x.support.communication) {
+            return false;
+          }
+        }
+        if (search.mental_health) {
+          if (!x.support.mental_health) {
+            return false;
+          }
+        }
+        if (search.well_being) {
+          if (!x.support.well_being) {
+            return false;
+          }
+        }
+        if (search.university_life) {
+          if (!x.support.university_life) {
+            return false;
+          }
+        }
+        if (search.career_path) {
+          if (!x.support.career_path) {
+            return false;
+          }
+        }
+        var word_count = 0;
+        var strings = search.bar.toLowerCase().split(' ');
+        for (let j = 0; j < strings.length; j++) {
+          if (x.user.firstName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.user.lastName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.user.title.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.user.org.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.resume.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+        }
+        if(word_count !== strings.length){
+          return false;
+        }
+        return true;
+      });
       return value.slice(0, search.featuredNumber);
-    } else {
-      return new Array<any>();
     }
+    return [];
   }
 }
 
-@Pipe({ name: 'search', pure: true })
+//-------------end mentor pipe--------------------
 
-export class SearchPipe implements PipeTransform {
-  transform(value: Array<any>, num: number): Array<any> {
+
+// -----------courses pipe-----------
+@Pipe({ name: 'coursesearch', pure: false })
+export class CourseSearchPipe implements PipeTransform {
+  transform(value: Array<any>, search: any): Array<any> {
     if (value) {
-      return value.slice(0, num);
-    } else {
-      return new Array<any>();
+      value = value.filter((x) => {
+        if (search.type.Live) {
+          if (x.type !== "Live") {
+            return false;
+          }
+        }
+        if (search.type.Video) {
+          if (x.type !== "Video") {
+            return false;
+          }
+        }
+        if (search.category.business) {
+          if (!x.category.business) {
+            return false;
+          }
+        }
+        if (search.category.communication) {
+          if (!x.category.communication) {
+            return false;
+          }
+        }
+        if (search.category.mental_health) {
+          if (!x.category.mental_health) {
+            return false;
+          }
+        }
+        if (search.category.well_being) {
+          if (!x.category.well_being) {
+            return false;
+          }
+        }
+        if (search.category.university_life) {
+          if (!x.category.university_life) {
+            return false;
+          }
+        }
+        if (search.category.career_path) {
+          if (!x.category.career_path) {
+            return false;
+          }
+        }
+        var word_count = 0;
+        var strings = search.bar.toLowerCase().split(' ');
+        for (let j = 0; j < strings.length; j++) {
+          if (x.title.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.description.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.speaker.firstName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+          else if (x.speaker.lastName.toLowerCase().includes(strings[j])) {
+            word_count++;
+          }
+        }
+        if(word_count !== strings.length){
+          return false;
+        }
+        return true;
+      });
+      return value.slice(0, search.featuredNumber);
     }
+    return [];
   }
 }
 
+// ---------slice pipe---------------
+@Pipe({name: 'sortSchedule', pure: true})
+export class SortSchedulePipe implements PipeTransform{
+  transform(value: Array<any>): Array<any>{
+    if (value.length > 1) {
+      return value.sort((a,b) => 
+      {
+        return <any>new Date(a.datetime) - <any>new Date(b.datetime);
+      });
+    }
+    return value;
+  }
+}
 @Pipe({ name: 'slice', pure: true })
 
 export class SlicePipe implements PipeTransform {
@@ -128,6 +224,8 @@ export class SlicePipe implements PipeTransform {
     return value;
   }
 }
+
+// ---------module declarations----------
 @NgModule({
   declarations: [
     AppComponent,
@@ -149,27 +247,26 @@ export class SlicePipe implements PipeTransform {
     AdminUsersComponent,
     AvailabilityComponent,
     KeysPipe,
-    SearchPipe,
     MentorSearchPipe,
+    CourseSearchPipe,
     SlicePipe,
+    SortSchedulePipe,
     AdminMentorsComponent,
     NotFoundComponent,
     SpeakerDetailsComponent,
     AdminNewsletterComponent,
     MentorDetailsComponent,
-    DonationComponent,
+    // DonationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CurrencyMaskModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
+    ImageCropperModule,
     NgbModule.forRoot()
   ],
   bootstrap: [AppComponent],
@@ -185,6 +282,9 @@ export class SlicePipe implements PipeTransform {
     FileUploadService,
     PaymentsService,
     NgbActiveModal,
+    AuthenticationService,
+    AdminService,
+    LoginService
   ]
 })
 export class AppModule { }

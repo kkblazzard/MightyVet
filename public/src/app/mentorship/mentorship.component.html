@@ -1,128 +1,172 @@
-<ng-template #becomeAMentor>
-    <div class="modal-header">
-        <h2 class="modal-title">Become a mentor</h2>
-        <button type="button" class="close" (click)="modal.dismiss('click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+<!-- --------Mentor form----------- -->
+    <ng-template #becomeAMentor>
+    <div *ngIf="!application_submitted">
+        <div class="modal-header">
+            <h2 class="modal-title">Become a mentor</h2>
+            <button type="button" class="close" (click)="modal.dismiss('click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form>
+            <div class="modal-body container">
+                <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
+                        {{newMenteeErrors.errors.firstName.message}}
+                        </p> -->
+                <h6>Double check your information! Changing this information will also change your user information.
+                </h6>
+                <div class="row">
+                    <div class="form-group col">
+                        <label>First Name*</label>
+                        <input type="text" class="form-control" placeholder="First Name" name="userInfo.firstName"
+                            [(ngModel)]="userInfo.firstName">
+                        <div *ngIf="user_errors?.firstName" class="text-danger">
+                            <small>{{user_errors.firstName.message}}</small></div>
+                    </div>
+                    <div class="form-group col">
+                        <label>Last Name*</label>
+                        <input type="text" class="form-control" placeholder="Last Name" name="userInfo.lastName"
+                            [(ngModel)]="userInfo.lastName">
+                        <div *ngIf="user_errors?.lastName" class="text-danger">
+                            <small>{{user_errors.lastName.message}}</small></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label>Email*</label>
+                        <input type="email" class="form-control" placeholder="Preferred Email" name="userInfo.email"
+                            [(ngModel)]="userInfo.email">
+                        <div *ngIf="user_errors?.email" class="text-danger"><small>{{user_errors.email.message}}</small>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label>State*</label>
+                        <select class="form-control" placeholder="State" name="userInfo.state"
+                            [(ngModel)]="userInfo.state">
+                            <option *ngFor="let state of states">{{state}}</option>
+                        </select>
+                        <div *ngIf="user_errors?.state" class="text-danger"><small>{{user_errors.state.message}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label>Title*</label>
+                        <select class="form-control" placeholder="Your Title(s)" name="userInfo.title"
+                            [(ngModel)]="userInfo.title">
+                            <option>Vet Tech</option>
+                            <option>Receptionist</option>
+                            <option>Manager</option>
+                            <option>Veterinarian</option>
+                            <option>Student</option>
+                            <option>Other</option>
+                        </select>
+                        <div *ngIf="user_errors?.title" class="text-danger"><small>{{user_errors.title.message}}</small>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label>Organization*</label>
+                        <input type="text" class="form-control" placeholder="Organization(s)" name="userInfo.org"
+                            [(ngModel)]="userInfo.org">
+                        <div *ngIf="user_errors?.firstName" class="text-danger">
+                            <small>{{user_errors.org.message}}</small></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <h6>Please enter your resume here. It should be between 400 and 800 characters and will serve as your introduction to potential mentees.*</h6>
+                        <textarea class="form-control" type="text" name="newMentor.resume"
+                            [(ngModel)]="newMentor.resume"></textarea>
+                        <div *ngIf="mentor_errors?.resume" class="text-danger">
+                            <small>{{mentor_errors.resume.message}}</small></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <h6>What kind of support are you willing to give? (Check all that apply)</h6><div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="businessBox" name="businessBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.business">
+                            <label class="custom-control-label" for="businessBox">Business</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="communicationBox" name="communicationBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.communication">
+                            <label class="custom-control-label" for="communicationBox">Communication</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="mentalHealthBox" name="mentalHealthBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.mental_health">
+                            <label class="custom-control-label" for="mentalHealthBox">Mental Health</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="wellBeingBox" name="wellBeingBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.well_being">
+                            <label class="custom-control-label" for="wellBeingBox">Ethics/Well-being</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="universityLifeBox" name="universityLifeBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.university_life">
+                            <label class="custom-control-label" for="universityLifeBox">University Life</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" id="careerPathBox" name="careerPathBox" class="custom-control-input"
+                                [(ngModel)]="newMentor.support.career_path">
+                            <label class="custom-control-label" for="careerPathBox">Career Path</label>
+                        </div>
+                        <!-- <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health"
+                            name="mentalHealthBox">
+                        Mental Health
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.financial_advice"
+                            name="financialAdviceBox">
+                        Financial Advice
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.career_advice"
+                            name="careerAdviceBox">
+                        Career Advice
+                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
+                            name="technicalAdviceBox">
+                        Technical or Surgical -->
+                        <div *ngIf="mentor_errors?.support" class="text-danger">
+                            <small>{{mentor_errors.support.message}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="addMentor()">Submit</button>
+            </div>
+        </form>
     </div>
-    <form>
+
+    <div *ngIf="application_submitted">
+        <div class="modal-header">
+            <h2>Thank you for submitting your application!</h2>
+        </div>
         <div class="modal-body container">
-            <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                    </p> -->
-            <h6>Double check your information! Changing this information will also change your user information.</h6>
-            <div class="row">
-                <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="First Name" name="userInfo.firstName"
-                        [(ngModel)]="userInfo.firstName">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.firstName">{{user_errors.firstName.message}}</div>
-                    </div>
-                </div>
-                <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Last Name" name="userInfo.lastName"
-                        [(ngModel)]="userInfo.lastName">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.lastName">{{user_errors.lastName.message}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <input type="email" class="form-control" placeholder="Preferred Email" name="userInfo.email"
-                        [(ngModel)]="userInfo.email">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.email">{{user_errors.email.message}}</div>
-                    </div>
-                </div>
-                <div class="form-group col">
-                    <select class="form-control" placeholder="State" name="userInfo.state"
-                        [(ngModel)]="userInfo.state">
-                        <option *ngFor="let state of states">{{state}}</option>
-                    </select>
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.state">{{user_errors.state.message}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col">
-                    <select class="form-control" placeholder="Your Title(s)" name="userInfo.title"
-                        [(ngModel)]="userInfo.title">
-                        <option>Vet Tech</option>
-                        <option>Receptionist</option>
-                        <option>Manager</option>
-                        <option>Veterinarian</option>
-                        <option>Student</option>
-                        <option>Other</option>
-                    </select>
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.firstName">{{user_errors.title.message}}</div>
-                    </div>
-                </div>
-                <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Organization(s)" name="userInfo.org"
-                        [(ngModel)]="userInfo.org">
-                    <div *ngIf="user_errors" class="errors">
-                        <div *ngIf="user_errors.firstName">{{user_errors.org.message}}</div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="form-group">
-                    <h6>Please enter your resume here. (Between 100 and 400 characters)</h6>
-                    <textarea class="form-control" type="text" name="newMentor.resume"
-                        [(ngModel)]="newMentor.resume"></textarea>
-                    <div *ngIf="mentor_errors" class="errors">
-                        <div *ngIf="mentor_errors.resume">{{mentor_errors.resume.message}}</div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="form-group">
-                    <h6>What kind of support are you willing to give? (Check all that apply)</h6>
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health"
-                        name="mentalHealthBox">
-                    Mental Health
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.financial_advice"
-                        name="financialAdviceBox">
-                    Financial Advice
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.career_advice"
-                        name="careerAdviceBox">
-                    Career Advice
-                    <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
-                        name="technicalAdviceBox">
-                    Technical or Surgical
-                    <div *ngIf="mentor_errors" class="errors">
-                        <div *ngIf="mentor_errors.support">{{mentor_errors.support.message}}</div>
-                    </div>
-                </div>
-            </div>
+            <h6>You will get a notification once it has been reviewed.</h6>
         </div>
         <div class="modal-footer">
-            <button (click)="addMentor()">Submit</button>
+            <button class="btn-primary" (click)="modal.dismiss('close')">Close</button>
         </div>
-    </form>
+    </div>
 </ng-template>
-<section id="section-schedule" class="py-4">
-    <div class="container d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
-        <img class="main-image mb-3" src="../../assets/mentor-images/main.png" alt="main images">
-        <div class="main-info mb-3 d-flex align-items-end flex-column">
-            <h2>MightyVet is looking for some mighty mentors.</h2>
-            <p>Rotating office hours will be held online with the deans of veterinary schools and other thought leaders
-                from the veterinary industry. Ask questions of the veterinary community for a real-time feedback loop to
-                evaluate your career options. You can schedule office hours with one of our featured members.</p>
-            <button class="btn btn-outline-info mt-auto" (click)="open(becomeAMentor)">Apply to Become a
-                Mentor</button>
+<!-- --------End Mentor form----------- -->
+
+
+<!--  ------ Heading ------- -->
+<section id="section-mentorship" class="container">
+    <div class="jumbotron d-flex justify-content-end">
+        <div id="mentorship-text" class="mr-3 p-5 text-light d-flex flex-column">
+            <h1 class="text-light">Find a Mighty Mentor</h1>
+            <p>Connect with industry leaders in the same stage of life as you to gain insight and advice for your future. Our mentors are located all over North America and are eager to share their experiences with you.</p>
+            <p *ngIf="!isMentor">Interested in becoming a Mighty Mentor?&nbsp;<a class="text-info apply-link" (click)="open(becomeAMentor)">Apply here!</a></p>
         </div>
     </div>
 </section>
+<!-- ------End Heading----- -->
 
-<!-- list of mentor cards -->
+<!-- ---list of mentor cards--- -->
 <section class="bg-light py-5 m-0">
-    <!-- search bar -->
+    <!-- ----search bar---- -->
     <div class="container mb-3">
-        <h1 class="mb-3">Find a Mentor</h1>
+        <h1 class="mb-3">Find a Mighty Mentor</h1>
         <div id="search-bar" class="input-group mb-3">
             <input type="text" class="form-control border-dark" placeholder="Search..." aria-label="coursesSearch"
                 aria-describedby="coursesSearch" [(ngModel)]="searchBar.bar">
@@ -130,45 +174,74 @@
                 <button class="btn btn-dark" type="button" id="coursesSearch"><i class="fa fa-search"></i></button>
             </div>
         </div>
-        <div id="search-filters" class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between">
+        <!-- ---check box filters--- -->
+        <div id="search-filters" class="d-flex flex-column flex-lg-row justify-content-between">
             <h6>Refine results by :&nbsp;</h6>
-            <div class="checkboxes">
-                <input class="ml-1 mr-1" type="checkbox" name="mental_health" [(ngModel)]="searchBar.mental_health">
-                <label>Mental Health</label>
-                <input class="ml-1 mr-1" type="checkbox" name="financial_advice"
-                    [(ngModel)]="searchBar.financial_advice">
-                <label>Financial Advice</label>
-                <input class="ml-1 mr-1" type="checkbox" name="career_advice" [(ngModel)]="searchBar.career_advice">
-                <label>Career Advice</label>
-                <input class="ml-1 mr-1" type="checkbox" name="technical_advice"
-                    [(ngModel)]="searchBar.technical_advice">
-                <label>Technical Advice</label>
+            <div id="checkboxes">
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox1" name="checkbox1" class="custom-control-input"
+                        [(ngModel)]="searchBar.business">
+                    <label class="custom-control-label" for="checkbox1">Business</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox2" name="checkbox2" class="custom-control-input"
+                        [(ngModel)]="searchBar.communication">
+                    <label class="custom-control-label" for="checkbox2">Communication</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
+                        [(ngModel)]="searchBar.mental_health">
+                    <label class="custom-control-label" for="checkbox3">Mental Health</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
+                        [(ngModel)]="searchBar.well_being">
+                    <label class="custom-control-label" for="checkbox4">Ethics/Well-being</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="checkbox5" name="checkbox5" class="custom-control-input"
+                        [(ngModel)]="searchBar.university_life">
+                    <label class="custom-control-label" for="checkbox5">University Life</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline mr-0">
+                    <input type="checkbox" id="checkbox6" name="checkbox6" class="custom-control-input"
+                        [(ngModel)]="searchBar.career_path">
+                    <label class="custom-control-label" for="checkbox6">Career Path</label>
+                </div>
             </div>
         </div>
     </div>
+    <!-- ---- end search bar---- -->
+
     <div class="container">
-        <div class="d-flex flex-lg-row flex-md-column flex-sm-column justify-content-between flex-wrap">
-            <!-- mentor card -->
-            <div class="card mentor mb-3" *ngFor="let mentor of mentors | mentorsearch: searchBar">
+        <div class="card-columns">
+            <!-- ----mentor card---- -->
+            <a id="mentor" class="card mb-3 border-info " *ngFor="let mentor of mentors | mentorsearch: searchBar"
+                [routerLink]="['/mentorship', mentor._id]">
                 <!-- search pipe to limit the amount of displayed data-->
-                <div class="card-body d-flex justify-content-start" [routerLink]="['/mentorship', mentor._id]">
-                    <div id="mentor-img" class="p-0 mr-3">
-                        <img [src]="mentor.user.picture" [alt]="mentor.user.firstName +'s image'">
+                <div class="card-header">
+                    <div id="mentor-img" class="px-4 mx-5 my-2">
+                        <img class="w-100" [src]="mentor.user.picture" alt="mentor image">
                     </div>
-                    <div class="mentor-header align-self-center">
-                        <h4>{{mentor.user.firstName}} {{mentor.user.lastName}}</h4>
-                        <h6>{{mentor.user.title}}, {{mentor.user.org}}</h6>
+                    <div class="text-center">
+                        <h2 class="text-primary">{{mentor.user.firstName}} {{mentor.user.lastName}}</h2>
+                        <h5 class="text-muted">{{mentor.user.title}}</h5>
+                        <h4 class="text-dark">{{mentor.user.org}}</h4>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.business"> Business </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.communication"> Communication </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health"> Mental Health </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.well_being"> Ethics/Well-being </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.university_life"> University Life </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.career_path"> Career Path </span>
                     </div>
                 </div>
-                <div class="mx-4 mb-2">
-                    <p>{{mentor.resume | slice: 100 }}</p>
+                <div class="card-body">
+                    <p>{{mentor.resume | slice: 80 }}</p>
                 </div>
-            </div>
+            </a>
+            <!-- ----end  mentor card---- -->
         </div>
+        <button *ngIf="searchBar.featuredNumber < mentors?.length" type="button" class="conbtn btn-block btn-outline-primary btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i
+            class="fa fa-chevron-down"></i></button>
     </div>
 </section>
-
-<div class="container text-center">
-    <button type="button" class="btn btn-block btn-light btn-lg" (click)="seeMore()">SEE MORE&nbsp;&nbsp;<i
-            class="fa fa-chevron-down"></i></button>
-</div>

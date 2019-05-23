@@ -15,29 +15,24 @@
         <label>Email</label>
         <input type="text" class="form-control" placeholder="Email" name="loginInfo.email" [(ngModel)]="loginInfo.email"
           required>
-        <div *ngIf="login_errors" class="errors">
-          <div *ngIf="login_errors.email">{{login_errors.email.message}}</div>
-        </div>
       </div>
       <div class="form-group">
         <label>Password</label>
         <input type="password" class="form-control" placeholder="Password" name="loginInfo.password"
           [(ngModel)]="loginInfo.password" required>
-        <div *ngIf="login_errors" class="errors">
-          <div *ngIf="login_errors.password">{{login_errors.password.message}}</div>
-        </div>
+          <div *ngIf="login_errors" class="text-danger"><small>{{login_errors}}</small></div>
       </div>
-      <a class="link_text" (click)="switch()">Don't have an account? Click here to sign up!</a>
+      <a class="text-link text-primary" (click)="switch()">Don't have an account? Click here to sign up!</a>
     </div>
     <div class="modal-footer">
-      <button (click)="loggingIn()">Submit</button>
+      <button class="btn btn-primary" (click)="loggingIn()">Log In</button>
     </div>
   </form>
 </ng-template>
 
 
 
-
+<!-- signup form -->
 <ng-template #signup>
   <div class="modal-header">
     <h2 class="modal-title">Sign Up</h2>
@@ -47,48 +42,37 @@
   </div>
   <form>
     <div class="modal-body container">
-      <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                    {{newMenteeErrors.errors.firstName.message}}
-                    </p> -->
       <div class="row">
         <div class="form-group col">
-          <label>First Name</label>
+          <label>First Name*</label>
           <input type="text" class="form-control col" placeholder="First Name" name="newUser.firstName"
             [(ngModel)]="newUser.firstName" required>
-            <div *ngIf="signup_errors" class="errors">
-              <div *ngIf="signup_errors.firstName">{{signup_errors.firstName.message}}</div>
-            </div>
+          <div *ngIf="signup_errors?.firstName" class="text-danger"><small>{{signup_errors.firstName.message}}</small></div>
         </div>
         <div class="form-group col">
-          <label>Last Name</label>
+          <label>Last Name*</label>
           <input type="text" class="form-control col" placeholder="Last Name" name="newUser.lastName"
             [(ngModel)]="newUser.lastName" required>
-            <div *ngIf="signup_errors" class="errors">
-              <div *ngIf="signup_errors.lastName">{{signup_errors.lastName.message}}</div>
-            </div>
+            <div *ngIf="signup_errors?.lastName" class="text-danger"><small>{{signup_errors.lastName.message}}</small></div>
         </div>
         <div class="form-group col">
-          <label>Email</label>
+          <label>Email*</label>
           <input type="email" class="form-control" placeholder="Preferred Email" name="newUser.email"
             [(ngModel)]="newUser.email" required>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.email">{{signup_errors.email.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.email" class="text-danger"><small>{{signup_errors.email.message}}</small></div>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col">
-          <label>State</label>
+          <label>State*</label>
           <select class="form-control" placeholder="State" name="newUser.state" [(ngModel)]="newUser.state" required>
             <option *ngFor="let state of states">{{state}}</option>
           </select>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.state">{{signup_errors.state.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.state" class="text-danger"><small>{{signup_errors.state.message}}</small></div>
         </div>
         <div class="form-group col">
-          <label>Title</label>
+          <label>Title*</label>
           <select class="form-control" placeholder="Your Title(s)" name="newUser.title" [(ngModel)]="newUser.title">
             <option>Vet Tech</option>
             <option>Receptionist</option>
@@ -97,37 +81,32 @@
             <option>Student</option>
             <option>Other</option>
           </select>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.title">{{signup_errors.title.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.title" class="text-danger"><small>{{signup_errors.title.message}}</small></div>
         </div>
         <div class="form-group col">
-          <label>Organization</label>
+          <label>Organization*</label>
           <input type="text" class="form-control" placeholder="Organization(s)" name="newUser.org"
             [(ngModel)]="newUser.org" required>
-          <div *ngIf="signup_errors" class="errors">
-            <div *ngIf="signup_errors.org">{{signup_errors.org.message}}</div>
-          </div>
+          <div *ngIf="signup_errors?.org" class="text-danger"><small>{{signup_errors.org.message}}</small></div>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col">
-          <label>Password</label>
+          <label>Password*</label>
           <input type="password" class="form-control" name="newUser.password" [(ngModel)]="newUser.password" required>
-        </div>
-        <div *ngIf="signup_errors" class="errors">
-          <div *ngIf="signup_errors.password">{{signup_errors.lastName.password}}</div>
+          <div *ngIf="signup_errors?.password" class="text-danger"><small>{{signup_errors?.password.message}}</small></div>
         </div>
         <div class="form-group col">
-          <label>Confirm Password</label>
+          <label>Confirm Password*</label>
           <input type="password" class="form-control" name="password_confirm" [(ngModel)]="password_confirm" required>
-          <p class="errors" *ngIf="password_confirm != '' && newUser.password != password_confirm">The Confirm Password field is not matching your Password field.</p>
+          <div class="text-danger" *ngIf="password_confirm != '' && newUser.password != password_confirm"><small>The Confirm Password
+            field is not matching your Password field.</small></div>
         </div>
       </div>
-      <div class="d-flex align-items-between">
-        <a class="link_text" (click)="switch()">Already have an account? Click here to log in!</a>
-        <div class="form-group ml-auto">
+      <div class="d-flex justify-content-between">
+        <a class="text-link text-primary" (click)="switch()">Already have an account? Click here to log in!</a>
+        <div class="form-group">
           <label>Sign up for our newsletter</label>
           <input class="ml-1" type="checkbox" name="newsletter" [(ngModel)]="newsletter">
         </div>
@@ -136,14 +115,13 @@
     <!-- arrange this to be in bottom right with absolute -->
     <div class="modal-footer">
       <!-- <h2 class="form-submit__h2">Lets get started!</h2> -->
-      <button class="btn btn-primary" (click)="register()">Submit</button>
+      <button class="btn btn-primary" (click)="register()">Sign Up</button>
     </div>
   </form>
-
 </ng-template>
 
-
-<ng-template #donate>
+<!-- donation form stuff -->
+<!-- <ng-template #donate>
   <app-donation></app-donation>
 </ng-template>
 
@@ -151,100 +129,84 @@
   <div>
     <p>Donation Sucessful</p>
   </div>
-</ng-template>
+</ng-template> -->
 
 
 <!-- navbar starts here -->
-<nav class="navbar navbar-light navbar-expand-lg fixed-top mb-4">
-  <div class="container d-flex justify-content-between">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+  <div class="container d-flex justify-content-between align-items-start">
     <!-- site-logo -->
-    <a id="logo" [routerLink]="['/']">
-      <img src="assets/img/nav-bar/logo.png" alt="MightyVet Logo">
-    </a>
+    <div id="logo" [routerLink]="['/']" class="navbar-brand">
+      <img src="assets/img/nav-bar/logo.png" alt="MightyVet Logo" class="img-fluid">
+    </div>
     <div id="right-nav">
       <!-- login & sign up buttons -->
-      <div class="ml-auto mb-2 d-flex align-items-end flex-column">
-        <div class="login" *ngIf="!_authenticationsService.isLoggedIn()" ngbDropdown>
-          <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="navbartoggle">
-            <ul class="ml-auto navbar-nav navigation">
-              <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Online Learning</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Mentorship</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Resources</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Blog</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Support Us</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">About</a>
-              </li>
-            </ul>
+      <div class="ml-auto d-flex align-items-end flex-column mt-2">
+        <div class="profile" ngbDropdown>
+          <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-primary ml-2"
+          (click)="open('login')">LOG IN</button>
+          <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-primary ml-2"
+          (click)="open('signup')">SIGN UP</button>
+          <button *ngIf="_authenticationsService.getUserDetails()?.admin" class="btn btn-sm btn-outline-secondary ml-2"
+            [routerLink]="['/admin']"><i class="fa fa-cogs mr-2"></i>ADMIN</button>
+          <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
+            (click)="_authenticationsService.logout()"><i class="fa fa-sign-out mr-2"></i>LOGOUT</button>
+          <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-success text-dark ml-2"
+            [routerLink]="['/user']"><i class="fa fa-user mr-2"></i>PROFILE</button>
+          <!-- <br class="d-lg-none"> -->
+          <div class="d-flex d-lg-inline mt-2 align-items-center">
+            <!-- navbar dropdown -->
+            <button class="navbar-toggler ml-auto" id="navbartoggle" ngbDropdownToggle>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-lg-none" ngbDropdownMenu aria-labelledby="navbartoggle">
+              <ul class="navbar-nav navigation">
+                <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link">Online Learning</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link">Mentorship</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link">Resources</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link">Support Us</a>
+                </li>
+                <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
+                  <a class="nav-link">About</a>
+                </li>
+              </ul>
+            </div>
+            <!-- dog icon -->
+            <div class="ml-2 d-inline">
+              <img id="dog" alt="dog" src="assets/img/nav-bar/dog.png">
+            </div>
           </div>
-          <a id="log-in" class="btn" (click)="open('login')">LOG IN</a>
-          <a id="sign-up" class="btn btn-outline-info mx-1" (click)="open('signup')">SIGN UP</a>
-          <a id="donate" class="btn" (click)="open('donate')">DONATE</a>
-          <img class="dog" alt="dog" src="assets/img/nav-bar/dog.png" [routerLink]="['/admin']">
         </div>
-        <div class="profile" *ngIf="_authenticationsService.isLoggedIn()" ngbDropdown>
-          <button class="navbar-toggler" id="navbartoggle" ngbDropdownToggle>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="navbartoggle">
-            <ul class="ml-auto navbar-nav navigation">
-              <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Online Learning</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Mentorship</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Resources</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Blog</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">Support Us</a>
-              </li>
-              <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']" ngbDropdownItem>
-                <a class="nav-link px-4 py-3">About</a>
-              </li>
-            </ul>
-          </div>
-          <a id="profile_img" [routerLink]="['/user']"><i class="fa fa-user-circle fa-3x"></i></a>
-          <a id="donate" class="btn" (click)="open('donate')">DONATE</a>
-          <a id="logout" class="btn btn-outline-info ml-1" (click)="_authenticationsService.logout()">LOG OUT</a>
-        </div>
-        <!-- nav bar -->
-        <div class="navbar-nav collapse navbar-collapse">
+        <!-- navbar -->
+        <div class="collapse navbar-collapse mt-3">
           <ul class="ml-auto navbar-nav navigation">
             <li class="nav-item" [routerLink]="['/courses']" [routerLinkActive]="['activated']">
-              <a class="nav-link px-4 py-3">Online Learning</a>
+              <a class="nav-link">Online Learning</a>
             </li>
             <li class="nav-item" [routerLink]="['/mentorship']" [routerLinkActive]="['activated']">
-              <a class="nav-link px-4 py-3">Mentorship</a>
+              <a class="nav-link">Mentorship</a>
             </li>
             <li class="nav-item" [routerLink]="['/resources']" [routerLinkActive]="['activated']">
-              <a class="nav-link px-4 py-3">Resources</a>
+              <a class="nav-link">Resources</a>
             </li>
             <li class="nav-item" [routerLink]="['/blog']" [routerLinkActive]="['activated']">
-              <a class="nav-link px-4 py-3">Blog</a>
+              <a class="nav-link">Blog</a>
             </li>
             <li class="nav-item" [routerLink]="['/support']" [routerLinkActive]="['activated']">
-              <a class="nav-link px-4 py-3">Support Us</a>
+              <a class="nav-link">Support Us</a>
             </li>
             <li class="nav-item" [routerLink]="['/about']" [routerLinkActive]="['activated']">
-              <a class="nav-link px-4 py-3">About</a>
+              <a class="nav-link">About</a>
             </li>
           </ul>
         </div>

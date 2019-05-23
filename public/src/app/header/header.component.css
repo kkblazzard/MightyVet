@@ -1,97 +1,62 @@
 /* local css */
-#profile_img i{
-    margin-right: 15px;
-}
-a.link_text{
-    text-decoration: underline;
-    color: #395371;
+.text-link{
     cursor: pointer;
 }
-.errors{
-    color: red;
+
+
+#logo {
+    width: 110px;
+    cursor: pointer;
+}
+.navbar-collapse .nav-link {
+    padding: .6rem 1.5rem;
+}
+.navbar-collapse .navigation{
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+}
+.navbar .nav-item {
+    cursor: pointer;
+}
+.navbar .nav-item a{
+    color: #435c8e;
+}
+.navbar .nav-item:hover {
+    background-color: #5a5a5a;
+}
+.navbar .nav-item a:hover {
+    color: #7DA7D9;
+}
+.navbar .activated{
+    background-color: #435c8e;
+}
+.navbar .activated a{
+    color: white;
+    text-shadow: 0px 0px 2px #5a5a5a;
 }
 .close:focus{
     outline: 0;
 }
-.navigation{
-    box-shadow: inset 0px 2px 0px #ECECEC, inset 0px -2px 0px #ECECEC;
+#dog{
+    max-width: 28px;
 }
-.collapse{
-    margin-top: 10px;
+.dropdown-toggle::after {
+    display:none;
 }
-.dog{
-    margin-left: 5px;
-    max-width: 32px;
-}
-#donate{
-    border: solid transparent 3px;
-    cursor: pointer;
-}
-#log-in{
-    border: solid transparent 3px;
-    cursor: pointer;
-}
-#logout{
-    border: solid #92dac3 3px;
-    cursor: pointer;
-}
-#logout:hover{
-    color: white;
-    background-color: #92dac3;
-}
-#log-in:hover{
-    background-color: #7DA7D9;
-    border: solid #7DA7D9 3px;
-    color: white;
-}
-#donate:hover{
-    background-color: #7DA7D9;
-    border: solid #7DA7D9 3px;
-    color: white;
-}
-#sign-up{
-    border: solid #92dac3 3px;
-    cursor: pointer;
-}
-#sign-up:hover{
-    color: white;
-    background-color: #92dac3;
-}
-.navbar .nav-link{
-    padding: 10px 15px;
-}
-.navbar a{
-    color: #395371;
-}
-.navbar .nav-item {
-    cursor: pointer;
-    padding:0;
-}
-.navbar .nav-item:hover{
-    background-color: #7DA7D9;
-}
-.navbar .nav-item:hover a{
-    color: white;
-}
-.navbar .activated{
-    background-color: #7DA7D9;
-}
-.navbar .activated a{
-    color: white;
-}
-@media only screen and (min-width: 992px) {
-    .navbar{
-        position: relative;
 
+@media only screen and (max-width:991px){
+    #logo {
+        width: 85px;
     }
 }
-@media only screen and (max-width: 991px) {
-
-    .navbar {
-        background: #fff;
+@media only screen and (max-width:576px){
+    #welcome-text h1 {
+        font-size: 2em;
     }
-    #logo img{
-        margin-top: 0;
-        height: 60px;
+    #newsletter .flex-sm-column {
+        flex-direction: column;
+    }
+    #welcome-text p {
+        font-size: 1em;
     }
 }

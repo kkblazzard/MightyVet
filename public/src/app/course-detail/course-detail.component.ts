@@ -14,6 +14,9 @@ export class CourseDetailComponent implements OnInit {
   id: string;
   course: any;
   isSignedUp: boolean;
+  isLive: boolean;
+  showSpeaker: boolean;
+
   constructor(
     private _route: ActivatedRoute,
     private _webinarsService: WebinarsService,
@@ -61,7 +64,7 @@ export class CourseDetailComponent implements OnInit {
       let obs = this._accreditationsService.addAccreditation({user: this._authenticationsService.getUserDetails()._id, webinar: this.id})
       obs.subscribe(data => {
         console.log("successfully created new accreditation", data);
-        let obs2 = this._webinarsService.signUp(this.id, data['_id']);
+        let obs2 = this._webinarsService.signUp(this.id, data['_id'], this._authenticationsService.getUserDetails()._id);
         obs2.subscribe(data2 => {
           console.log("successfully added new user to webinar", data2);
           this.getWebinar();
@@ -73,5 +76,9 @@ export class CourseDetailComponent implements OnInit {
         console.log("something went wrong:", err);
       }
     }
+  }
+
+  toggle() {
+    this.showSpeaker = !this.showSpeaker;
   }
 }

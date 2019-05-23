@@ -1,3 +1,7 @@
+h6{
+    cursor: pointer;
+    text-decoration: underline;
+}
 img{
-    height: 100px;
+    max-width: 200px;
 }
