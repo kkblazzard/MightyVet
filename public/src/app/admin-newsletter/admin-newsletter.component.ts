@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NewslettersService } from '../http_services/newsletters.service';
-import { AnimationStyleMetadata } from '@angular/animations';
+import { ExcelsService } from '../http_services/excels.service';
 
 @Component({
   selector: 'app-admin-newsletter',
@@ -11,9 +11,11 @@ import { AnimationStyleMetadata } from '@angular/animations';
 export class AdminNewsletterComponent implements OnInit {
   alert: boolean;
   emails: any;
+  emailsArray: any;
   email: any;
   constructor(
     private _newslettersService: NewslettersService,
+    private _excelsService: ExcelsService,
     private _route: ActivatedRoute,
     private _router: Router) { }
   
@@ -24,13 +26,12 @@ export class AdminNewsletterComponent implements OnInit {
   getNewsletter(){
     let obs = this._newslettersService.getNewsletters();
     obs.subscribe(newsletters => {
-      console.log(newsletters);
-        this.emails = newsletters;
-        this.email = [];
-        for(let email of this.emails){
-          this.email.push(email.email)
-        }
-        this.email = this.email.join(", ");
+      this.emails = newsletters;
+      this.emailsArray = [];
+      for(let email of this.emails){
+        this.emailsArray.push({emails: email.email})
+      }
+      this.email = this.emailsArray.map(x => {return x.emails}).join(", ");
     });
   }
   copyInputMessage(inputElement){
@@ -39,5 +40,8 @@ export class AdminNewsletterComponent implements OnInit {
     inputElement.setSelectionRange(0, 0);
     this.alert = true;
     setTimeout(() => this.alert = false, 4000)
+  }
+  exportAsXLSX():void {
+    this._excelsService.exportAsExcelFile(this.emailsArray, 'newsletter');
   }
 }

@@ -19,6 +19,7 @@ import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { AdminService } from './http_services/admin.service';
 import { LoginService } from './http_services/login.service';
 
@@ -42,6 +43,7 @@ const routes: Routes = [
     {path: 'mentors', component: AdminMentorsComponent},
     {path: 'newsletters', component: AdminNewsletterComponent}
   ]},
+  {path: 'unsubscribe', component: UnsubscribeComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
