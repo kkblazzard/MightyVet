@@ -104,6 +104,7 @@ export class HeaderComponent implements OnInit {
   }
   loggingIn() {
     this.login_errors = null;
+    this.loginInfo.email = this.loginInfo.email.toLowerCase();
     const obs = this._authenticationsService.login(this.loginInfo);
     obs.subscribe( data => {
       if (data['message']) {
@@ -138,6 +139,7 @@ export class HeaderComponent implements OnInit {
   }
   register() {
     this.signup_errors = null;
+    this.newUser.email = this.newUser.email.toLowerCase();
     const obs = this._authenticationsService.register(this.newUser);
     obs.subscribe(data => {
       if (data['errors']) {

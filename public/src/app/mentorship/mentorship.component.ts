@@ -154,6 +154,7 @@ export class MentorshipComponent implements OnInit {
     addMentor(){
         this.user_errors = null;
         this.mentor_errors = null;
+        this.userInfo.email = this.userInfo.email.toLowerCase();
         let obs = this._usersService.userUpdate(this.userInfo._id, this.userInfo)
         obs.subscribe(data =>{
             if (data['errors']){

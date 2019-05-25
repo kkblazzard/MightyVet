@@ -172,6 +172,7 @@ export class UserProfileComponent implements OnInit {
         this.getUserInfo();
     }
     editting(){
+        this.editUser.email = this.editUser.email.toLowerCase();
         var old_email = this.userInfo.email;
         var new_email = this.editUser.email;
         this.edit_errors = null;

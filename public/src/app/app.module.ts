@@ -45,9 +45,9 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { AdminMentorsComponent } from './admin-mentors/admin-mentors.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { SpeakerDetailsComponent } from './speaker-details/speaker-details.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 // import { DonationComponent } from './donation/donation.component';
 
 @Pipe({ name: 'keys', pure: false })
@@ -253,9 +253,9 @@ export class SlicePipe implements PipeTransform {
     SortSchedulePipe,
     AdminMentorsComponent,
     NotFoundComponent,
-    SpeakerDetailsComponent,
     AdminNewsletterComponent,
     MentorDetailsComponent,
+    UnsubscribeComponent,
     // DonationComponent,
   ],
   imports: [
