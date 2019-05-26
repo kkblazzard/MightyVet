@@ -159,7 +159,7 @@
     <div class="d-flex justify-content-between flex-column flex-md-row mb-4">
         <div id="user-profile-left" class="card border-primary">
             <div id="user-profile-img" class="p-1 p-sm-2 p-md-3 p-lg-5 pointer" (click)="open('picture')">
-                <img class="w-100" [src]="userInfo.picture" alt="Profile Picture">
+                <img class="w-100" [src]="userInfo?.picture" alt="Profile Picture">
             </div>
             <div class="card-body">
                 <h3 class="card-title">{{userInfo.firstName}} {{userInfo.lastName}}</h3>

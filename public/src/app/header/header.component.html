@@ -8,9 +8,6 @@
   </div>
   <form>
     <div class="modal-body container">
-      <!-- <p *ngIf="newMenteeErrors.errors.firstName" style="color:red">
-                  {{newMenteeErrors.errors.firstName.message}}
-                  </p> -->
       <div class="form-group">
         <label>Email</label>
         <input type="text" class="form-control" placeholder="Email" name="loginInfo.email" [(ngModel)]="loginInfo.email"
@@ -143,17 +140,16 @@
       <!-- login & sign up buttons -->
       <div class="ml-auto d-flex align-items-end flex-column mt-2">
         <div class="profile" ngbDropdown>
-          <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-primary ml-2"
+          <button *ngIf="!isLoggedIn()" class="btn btn-sm btn-outline-primary ml-2"
           (click)="open('login')">LOG IN</button>
-          <button *ngIf="!_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-primary ml-2"
+          <button *ngIf="!isLoggedIn()" class="btn btn-sm btn-outline-primary ml-2"
           (click)="open('signup')">SIGN UP</button>
-          <button *ngIf="_authenticationsService.getUserDetails()?.admin" class="btn btn-sm btn-outline-secondary ml-2"
+          <button *ngIf="isAdmin()" class="btn btn-sm btn-outline-secondary ml-2"
             [routerLink]="['/admin']"><i class="fa fa-cogs mr-2"></i>ADMIN</button>
-          <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
-            (click)="_authenticationsService.logout()"><i class="fa fa-sign-out mr-2"></i>LOGOUT</button>
-          <button *ngIf="_authenticationsService.isLoggedIn()" class="btn btn-sm btn-outline-success text-dark ml-2"
+          <button *ngIf="isLoggedIn()" class="btn btn-sm btn-outline-secondary ml-2"
+            (click)="logOut()"><i class="fa fa-sign-out mr-2"></i>LOGOUT</button>
+          <button *ngIf="isLoggedIn()" class="btn btn-sm btn-outline-success text-dark ml-2"
             [routerLink]="['/user']"><i class="fa fa-user mr-2"></i>PROFILE</button>
-          <!-- <br class="d-lg-none"> -->
           <div class="d-flex d-lg-inline mt-2 align-items-center">
             <!-- navbar dropdown -->
             <button class="navbar-toggler ml-auto" id="navbartoggle" ngbDropdownToggle>
