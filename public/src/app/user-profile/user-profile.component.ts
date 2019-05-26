@@ -95,7 +95,7 @@ export class UserProfileComponent implements OnInit {
         'Other':{ "Veterinarian": { hours: 0, years: 0}, "Vet Tech": { hours: 0, years: 0}},
     }
     modal: any;
-    userInfo: any = { picture: "https://s3-us-west-1.amazonaws.com/mightyvet-test/images/profile_images/profile-image-placeholder.png"};
+    userInfo: any;
     mentees: any;
     mentee_applications: any;
     continuingEducationContent = "progress";
@@ -379,18 +379,17 @@ export class UserProfileComponent implements OnInit {
                     this.picturePending = false;
                 }
                 else{
-                    var image = data['imageUrl'];
-                    let obs = this._usersService.updateImage(this.userInfo._id, image);
-                    obs.subscribe(data => {
-                        if (data['errors']) {
-                            this.img_error = data['errors'].picture.message;
+                    let obs = this._usersService.updateImage(this.userInfo._id, data['imageUrl']);
+                    obs.subscribe(data2 => {
+                        if (data2['errors']) {
+                            this.img_error = data2['errors'].picture.message;
                             this.picturePending = false;
                         }
                         else {
                             this.pictureSuccess = true;
                             setTimeout(() => {
                                 this.pictureSuccess = false;
-                            }, 5000);
+                            }, 3000);
                             this.getUserInfo();
                         }
                     });

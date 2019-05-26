@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
 
+app.use(require('helmet')());
 
 app.use(passport.initialize());
 

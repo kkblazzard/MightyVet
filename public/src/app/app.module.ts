@@ -48,7 +48,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
-// import { DonationComponent } from './donation/donation.component';
+import { DonationComponent } from './donation/donation.component';
 
 @Pipe({ name: 'keys', pure: false })
 
@@ -256,7 +256,7 @@ export class SlicePipe implements PipeTransform {
     AdminNewsletterComponent,
     MentorDetailsComponent,
     UnsubscribeComponent,
-    // DonationComponent,
+    DonationComponent,
   ],
   imports: [
     BrowserModule,
