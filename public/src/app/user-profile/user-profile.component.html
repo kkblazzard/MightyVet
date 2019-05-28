@@ -158,28 +158,28 @@
 <div class="container">
     <div class="d-flex justify-content-between flex-column flex-md-row mb-4">
         <div id="user-profile-left" class="card border-primary">
-            <div id="user-profile-img" class="p-1 p-sm-2 p-md-3 p-lg-5 pointer" (click)="open('picture')">
+            <div id="user-profile-img" class="p-5 p-md-4 p-lg-5 pointer" (click)="open('picture')">
                 <img class="w-100" [src]="userInfo?.picture" alt="Profile Picture">
             </div>
             <div class="card-body">
-                <h3 class="card-title">{{userInfo.firstName}} {{userInfo.lastName}}</h3>
+                <h3 class="card-title">{{userInfo?.firstName}} {{userInfo?.lastName}}</h3>
                 <table class="table">
                     <tbody>
                         <tr>
                             <th class="p-0 text-center border-top-0"><i class="fa fa-envelope-o"></i></th>
-                            <td class="p-0 border-top-0">{{userInfo.email}}</td>
+                            <td class="p-0 border-top-0">{{userInfo?.email}}</td>
                         </tr>
                         <tr>
                             <th class="p-0 text-center border-top-0"><i class="fa fa-map-marker"></i></th>
-                            <td class="p-0 border-top-0">{{userInfo.state}}</td>
+                            <td class="p-0 border-top-0">{{userInfo?.state}}</td>
                         </tr>
                         <tr>
                             <th class="p-0 text-center border-top-0"><i class="fa fa-address-card-o"></i></th>
-                            <td class="p-0 border-top-0">{{userInfo.title}}</td>
+                            <td class="p-0 border-top-0">{{userInfo?.title}}</td>
                         </tr>
                         <tr>
                             <th class="p-0 text-center border-top-0"><i class="fa fa-building-o"></i></th>
-                            <td class="p-0 border-top-0">{{userInfo.org}}</td>
+                            <td class="p-0 border-top-0">{{userInfo?.org}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -191,7 +191,7 @@
             </div>
         </div>
         <div id="user-profile-right">
-            <button [routerLink]="['/user/schedule']" class="btn btn-lg btn-outline-success btn-block mb-4 mt-2 mt-md-0"><i
+            <button [routerLink]="['/user/schedule']" class="btn btn-lg btn-outline-success btn-block mb-4 mt-4 mt-md-0"><i
                     class="fa fa-calendar mr-2"></i>Upcoming Schedule</button>
             <div id="your-mentors-card" class="card mb-4 border-success">
                 <div class="card-header bg-success border-success">Your Mentors</div>

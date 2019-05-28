@@ -32,7 +32,7 @@ export class AdminWebinarsComponent implements OnInit {
   updateWebinarTime: any;
   updateWebinarDate: any;
   updateWebinarSuccess: boolean;
-  updateWebinar : any = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
+  updateWebinar : any = {title: '', type: '', description: '', speakers: [''], webinar_link: '', 
     category: {
       business: false,
       communication: false,
@@ -44,15 +44,13 @@ export class AdminWebinarsComponent implements OnInit {
   };
   speaker_errors: any;
   modal: any;
-  speakerPreview: String;
   fileToUpload: ImageSnippet;
   // newQuestions = 0;
   // newAnswers = 0;
-  speaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
   // stage = 1;
   webinarSuccess: boolean;
   newWebinar: any = {
-    title: '', type: '', description: '', speaker: '', webinar_link: '', quiz: [], 
+    title: '', type: '', description: '', speakers: [''], webinar_link: '', quiz: [], 
     category: {
       business: false,
       communication: false,
@@ -66,10 +64,9 @@ export class AdminWebinarsComponent implements OnInit {
   speakers: any;
   speakerSuccess: boolean;
   speakerPending: boolean;
-  newSpeaker: any = {title: '', firstName: '', lastName: '', description: '', img: ''};
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
-  showSpeaker: boolean;
+  newSpeaker: any = {title: '', firstName: '', lastName: ''};
+  // imageChangedEvent: any = '';
+  // croppedImage: any = '';
 
   constructor(
     private _modalsService: NgbModal,
@@ -79,21 +76,21 @@ export class AdminWebinarsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
     ) { }
-  fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
-  }
-  imageCropped(event: ImageCroppedEvent) {
-      this.croppedImage = event.file;
-  }
-  imageLoaded() {
-      // show cropper
-  }
-  cropperReady() {
-      // cropper ready
-  }
-  loadImageFailed() {
-      // show message
-  }
+  // fileChangeEvent(event: any): void {
+  //     this.imageChangedEvent = event;
+  // }
+  // imageCropped(event: ImageCroppedEvent) {
+  //     this.croppedImage = event.file;
+  // }
+  // imageLoaded() {
+  //     // show cropper
+  // }
+  // cropperReady() {
+  //     // cropper ready
+  // }
+  // loadImageFailed() {
+  //     // show message
+  // }
   private onSuccess() {
     this.fileToUpload.pending = false;
     this.fileToUpload.status = 'ok';
@@ -137,17 +134,23 @@ export class AdminWebinarsComponent implements OnInit {
         return;
       }
     }
-    if(this.newWebinar.speaker === 'new' || this.newWebinar.speaker === ''){
-      var temp = this.newWebinar.speaker;
-      this.newWebinar.speaker = null;
-    }
+    var temp = [...this.newWebinar.speakers];
+    this.newWebinar.speakers.map(x => {
+      if(x === 'new' || x === ''){
+        x = null;
+      }
+    });
     const obs = this._webinarsService.addWebinar(this.newWebinar);
     obs.subscribe(data => {
-      if (!data['errors']){
+      if (data['message']){
+        this.newWebinar.speakers = temp;
+        this.errors = {speakers: { message: "Please double check that you entered each speaker correctly." }};
+      }
+      else if (!data['errors']){
         this.webinarSuccess = true;
         setTimeout(() => {
           this.webinarSuccess = false;
-          this.newWebinar = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
+          this.newWebinar = {title: '', type: '', description: '', speakers: [''], webinar_link: '', 
           category: {
             business: false,
             communication: false,
@@ -161,7 +164,7 @@ export class AdminWebinarsComponent implements OnInit {
         this.getWebinars();
       }
       else{
-        this.newWebinar.speaker = temp;
+        this.newWebinar.speakers = temp;
         this.errors = data['errors'];
       }
     });
@@ -189,10 +192,8 @@ export class AdminWebinarsComponent implements OnInit {
     this.errors = null;
     this.speaker_errors = null;
     // this.stage = 1;
-    this.speaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
-    this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: ''};
-    this.speakerPreview = null;
-    this.newWebinar = {title: '', type: '', description: '', speaker: '', webinar_link: '', 
+    this.newSpeaker = {title: '', firstName: '', lastName: ''};
+    this.newWebinar = {title: '', type: '', description: '', speakers: [''], webinar_link: '', 
     category: {
       business: false,
       communication: false,
@@ -202,8 +203,8 @@ export class AdminWebinarsComponent implements OnInit {
       career_path: false
     }};
     this.fileToUpload = null;
-    this.imageChangedEvent = '';
-    this.croppedImage = null;
+    // this.imageChangedEvent = '';
+    // this.croppedImage = null;
     // this.newQuestions = 0;
     // this.newAnswers = 0;
   }
@@ -235,37 +236,45 @@ export class AdminWebinarsComponent implements OnInit {
   addSpeaker() {
     this.speakerPending = true;
     this.speaker_errors = null;
-    const obs = this._filesUploadService.speakerUploadImage(this.croppedImage);
-      obs.subscribe(
-        (data) => {
-          this.newSpeaker.img = data['imageUrl'];
-          const obs = this._speakersService.addSpeaker(this.newSpeaker);
-          obs.subscribe(data => {
-            if (!data['errors']){
-              this.speakerSuccess = true;
-              setTimeout(() => {
-                this.speakerSuccess = false
-                if(this.modal === this.webinarModal){
-                  this.newWebinar.speaker = data['_id'];
-                }
-                else{
-                  this.updateWebinar.speaker = data['_id'];
-                }
-                this.newSpeaker = {title: '', firstName: '', lastName: '', description: '', img: '', webinars: []};
-                this.imageChangedEvent = '';
-                this.croppedImage = null;
-              }, 1000);
-              this.getSpeakers();
-            }
-            else{
-              this.speaker_errors = data['errors'];
-            }
-            this.speakerPending = false;
-          });
-        },
-        (err) => {
-          console.log(err);
-        })
+    // const obs = this._filesUploadService.speakerUploadImage(this.croppedImage);
+    //   obs.subscribe(
+    //     (data) => {
+    //       this.newSpeaker.img = data['imageUrl'];
+    const obs = this._speakersService.addSpeaker(this.newSpeaker);
+    obs.subscribe(data => {
+      if (!data['errors']){
+        this.speakerSuccess = true;
+        setTimeout(() => {
+          this.speakerSuccess = false
+          if(this.modal === this.webinarModal){
+            this.newWebinar.speakers.map(x => {
+              if (x === 'new'){
+              return data['_id'];
+              }
+            })
+          }
+          else{
+            this.updateWebinar.speakers.map(x => {
+              if (x === 'new'){
+                return data['_id'];
+              }
+            })
+          }
+          this.newSpeaker = {title: '', firstName: '', lastName: ''};
+          // this.imageChangedEvent = '';
+          // this.croppedImage = null;
+        }, 1000);
+        this.getSpeakers();
+      }
+      else{
+        this.speaker_errors = data['errors'];
+      }
+      this.speakerPending = false;
+    });
+        // },
+        // (err) => {
+        //   console.log(err);
+        // })
   }
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
@@ -317,7 +326,7 @@ export class AdminWebinarsComponent implements OnInit {
           seconds: 0,
         }
       }
-      this.updateWebinar.speaker = data['speaker']._id
+      this.updateWebinar.speakers = data['speakers'].map(x => x._id);
       this.modal = this._modalsService.open(this.updateModal, {size: 'lg'});
       this.modal.result.then(() => {}, () => this.closedModal());
     })
@@ -345,13 +354,20 @@ export class AdminWebinarsComponent implements OnInit {
         return;
       }
     }
-    if(this.updateWebinar.speaker === 'new' || this.updateWebinar.speaker === ''){
-      var temp = this.updateWebinar.speaker;
-      this.updateWebinar.speaker = null;
-    }
+    var temp = [...this.updateWebinar.speakers];
+    this.updateWebinar.speakers.map(x => {
+      if(x === 'new' || x === ''){
+        x = null;
+      }
+    })
     let obs = this._webinarsService.webinarUpdate(this.updateWebinar._id, this.updateWebinar);
     obs.subscribe(data => {
-      if (!data['errors']){
+      console.log(data);
+      if (data['message']){
+        this.updateWebinar.speakers = temp;
+        this.updateErrors = {speakers: { message: "Please double check that you entered each speaker correctly." }};
+      }
+      else if (!data['errors']){
         this.updateWebinarSuccess = true;
         setTimeout(() => {
           this.updateWebinarSuccess = false;
@@ -360,13 +376,21 @@ export class AdminWebinarsComponent implements OnInit {
         this.getWebinars();
       }
       else{
-        this.updateWebinar.speaker = temp;
+        this.updateWebinar.speakers = temp;
         this.updateErrors = data['errors'];
       }
     });
   }
-
-  toggleSpeaker() {
-    this.showSpeaker = !this.showSpeaker;
+  addExtraSpeaker(){
+    this.newWebinar.speakers.push("");
+  }
+  removeExtraSpeaker(){
+    this.newWebinar.speakers.pop("");
+  }
+  addExtraUpdateSpeaker(){
+    this.updateWebinar.speakers.push("");
+  }
+  removeExtraUpdateSpeaker(){
+    this.updateWebinar.speakers.pop("");
   }
 }

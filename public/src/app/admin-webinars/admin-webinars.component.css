@@ -23,13 +23,6 @@ select{
 .img-preview{
     max-height: 100px;
 }
-h6{
-    cursor: pointer;
-    text-decoration: underline;
-}
-td h6{
-    display: inline;
-}
 
 .description_size{
     height: 200px;
