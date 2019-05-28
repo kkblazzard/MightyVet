@@ -28,10 +28,10 @@ var WebinarSchema = new mongoose.Schema({
         users: [{type : mongoose.Schema.ObjectId, 
                 ref : 'accreditation'}],  //list of user ids
         
-        speaker: {type : mongoose.Schema.ObjectId, 
+        speakers: [{type : mongoose.Schema.ObjectId, 
                 ref : 'speaker',
                 required: [true, "Please choose a speaker or create a new one."]
-        },
+        }],
 
         img: {
                 type: String,

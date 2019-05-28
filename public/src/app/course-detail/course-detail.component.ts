@@ -15,7 +15,6 @@ export class CourseDetailComponent implements OnInit {
   course: any;
   isSignedUp: boolean;
   isLive: boolean;
-  showSpeaker: boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -73,9 +72,5 @@ export class CourseDetailComponent implements OnInit {
         console.log("something went wrong:", err);
       }
     }
-  }
-
-  toggle() {
-    this.showSpeaker = !this.showSpeaker;
   }
 }

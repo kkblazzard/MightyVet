@@ -1,12 +1,14 @@
+
 const Webinars=require('./models');
-const Speakers=require('../speakers/models');
+const Accreditations=require('../accreditations/models');
 const Users = require('../users/models');
+
 module.exports={
     webinarAll: (req, res)  =>
         Webinars
         .find()
         .sort('-createdAt')
-        .populate('speaker')
+        .populate('speakers')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
     webinarFeatured: (req, res) =>
@@ -22,10 +24,6 @@ module.exports={
         .create(req.body)
         .then(anew => {
             console.log("created in controller",anew)|| res.json(anew)
-            Speakers.findByIdAndUpdate(req.body.speaker,{$push: { webinars: anew._id}
-            })
-            .then(Speakers => console.log("Succesfully updated speaker webinars", speaker))
-            .catch(err=>console.log(err)|| res.json(err))
         })
         .catch(err=>console.log(err) || res.json(err))
     },
@@ -43,7 +41,7 @@ module.exports={
             ]
         })
         .sort('-createdAt')
-        .populate('speaker')
+        .populate('speakers')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err))
     },
@@ -51,10 +49,9 @@ module.exports={
         .findByIdAndDelete(req.params.id)
         .then(deleted=> {
             console.log("deleted", deleted);
-            Users.updateMany({}, {$pull: {accreditations: {webinar:deleted._id}}})
-            .populate({path: "accreditations"})
-            .then(update => {
-                console.log("updated", update);
+            Accreditations.deleteMany({webinar:deleted._id})
+            .then(accreditations => {
+                console.log("updated", accreditations);
                 res.json(deleted)
             })
             .catch(err=>console.log(err) || res.json(err))
@@ -63,7 +60,7 @@ module.exports={
 
     webinarDetails:(req, res) => Webinars
         .findById(req.params.id)
-        .populate('speaker')
+        .populate('speakers')
         .populate('users')
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
