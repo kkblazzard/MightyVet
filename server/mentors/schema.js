@@ -15,7 +15,7 @@ var MentorSchema = new mongoose.Schema({
     resume: {type: String,
             required: [true, "Please enter your resume."],
             minlength: [400, "Your resume must be at least 400 characters long."],
-            maxlength: [800, "Your resume must be at most 800 characters long."]
+            maxlength: [1200, "Your resume must be at most 1200 characters long."]
     }, 
     support: {
         type: {

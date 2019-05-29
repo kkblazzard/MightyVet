@@ -73,9 +73,10 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        <h6>Please enter your resume here. It should be between 400 and 800 characters and will serve as your introduction to potential mentees.*</h6>
+                        <h6>Please enter your resume here. It should be between 400 and 1200 characters and will serve as your introduction to potential mentees.*</h6>
                         <textarea class="form-control" type="text" name="newMentor.resume"
                             [(ngModel)]="newMentor.resume"></textarea>
+                        <h6>Current Characters: {{newMentor.resume.length}}</h6>
                         <div *ngIf="mentor_errors?.resume" class="text-danger">
                             <small>{{mentor_errors.resume.message}}</small></div>
                     </div>
@@ -214,9 +215,9 @@
     <!-- ---- end search bar---- -->
 
     <div class="container">
-        <div class="card-columns">
+        <div class="d-flex flex-column flex-md-row justify-content-between flex-wrap">
             <!-- ----mentor card---- -->
-            <a id="mentor" class="card mb-3 border-info " *ngFor="let mentor of mentors | mentorsearch: searchBar"
+            <a id="mentor-cards" class="card mb-3 border-info " *ngFor="let mentor of mentors | mentorsearch: searchBar"
                 [routerLink]="['/mentorship', mentor._id]">
                 <!-- search pipe to limit the amount of displayed data-->
                 <div class="card-header">
