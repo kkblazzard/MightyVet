@@ -20,6 +20,7 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
+import { OfficeComponent } from './office/office.component';
 import { AdminService } from './http_services/admin.service';
 import { LoginService } from './http_services/login.service';
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'mentorship', component: MentorshipComponent},
   {path: 'mentorship/:id', component: MentorDetailsComponent},
   {path: 'mentorship/:id/schedule', canActivate: [LoginService], component: SchedulingComponent},
+  {path: 'office', component: OfficeComponent},
   {path: 'resources', component: ResourcesComponent},
   {path: 'support', component: SupportComponent},
   {path: 'blog', component: BlogComponent},

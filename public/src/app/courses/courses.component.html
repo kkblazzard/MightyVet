@@ -2,8 +2,8 @@
 <section id="courses-welcome" class="container">
   <div class="jumbotron d-flex justify-content-start align-items-end">
     <div id="welcome-text" class="mr-3 p-5 text-light">
-        <h1 class="text-light">Find the perfect course</h1>
-        <p class="mb-0">MightyVet offers continuing education, mentorship and mental health support. We're here for vets, techs, students, and anyone else involved in the veterinary profession.</p>
+        <h1 class="text-light">Free on-demand CE</h1>
+        <p class="mb-0">Earn your required CE for free and bridge the gap in your education with these essential topics that will help you in the non-clinical elements of veterinary life.</p>
     </div>
   </div>
 </section>
@@ -47,7 +47,7 @@
       <div class="custom-control custom-checkbox custom-control-inline">
           <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
               [(ngModel)]="searchBar.category.mental_health">
-          <label class="custom-control-label" for="checkbox3">Mental Health</label>
+          <label class="custom-control-label" for="checkbox3">Suicide</label>
       </div>
       <div class="custom-control custom-checkbox custom-control-inline">
           <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
@@ -77,14 +77,14 @@
         <span *ngIf="course.new" class="badge badge-danger mr-1">New</span>
         <span *ngIf="!course.new"></span>
         <span *ngIf="course.type === 'Live'" class="badge badge-success mr-1">Live Webinar</span>
-        <span *ngIf="course.type === 'Video'" class="badge badge-success mr-1">Video</span>
+        <span *ngIf="course.type === 'Video'" class="badge badge-success mr-1">On-Demand</span>
       </div> 
       <img [src]="course.img" class="card-img rounded" alt="Course Image">
       <div class="card-body">
         <h4 class="card-title">{{course.title | slice: 40}}</h4>
         <span class="badge badge-info mr-1" *ngIf="course.category.business"> Business </span>
         <span class="badge badge-info mr-1" *ngIf="course.category.communication"> Communication </span>
-        <span class="badge badge-info mr-1" *ngIf="course.category.mental_health"> Mental Health </span>
+        <span class="badge badge-info mr-1" *ngIf="course.category.mental_health"> Suicide </span>
         <span class="badge badge-info mr-1" *ngIf="course.category.well_being"> Ethics/Well-being </span>
         <span class="badge badge-info mr-1" *ngIf="course.category.university_life"> University Life </span>
         <span class="badge badge-info mr-1" *ngIf="course.category.career_path"> Career Path </span>
