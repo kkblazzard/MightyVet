@@ -96,7 +96,7 @@
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" id="mentalHealthBox" name="mentalHealthBox" class="custom-control-input"
                                 [(ngModel)]="newMentor.support.mental_health">
-                            <label class="custom-control-label" for="mentalHealthBox">Mental Health</label>
+                            <label class="custom-control-label" for="mentalHealthBox">Suicide</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" id="wellBeingBox" name="wellBeingBox" class="custom-control-input"
@@ -156,7 +156,7 @@
     <div class="jumbotron d-flex justify-content-end">
         <div id="mentorship-text" class="mr-3 p-5 text-light d-flex flex-column">
             <h1 class="text-light">Find a Mighty Mentor</h1>
-            <p>Connect with industry leaders in the same stage of life as you to gain insight and advice for your future. Our mentors are located all over North America and are eager to share their experiences with you.</p>
+            <p>Connect with industry leaders who have walked in your shoes to gain insight and advice for your future. Our mentors are located all over the world and are eager to share their experiences with you.</p>
             <p *ngIf="!isMentor">Interested in becoming a Mighty Mentor?&nbsp;<a class="text-info apply-link" (click)="open(becomeAMentor)">Apply here!</a></p>
         </div>
     </div>
@@ -192,7 +192,7 @@
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" id="checkbox3" name="checkbox3" class="custom-control-input"
                         [(ngModel)]="searchBar.mental_health">
-                    <label class="custom-control-label" for="checkbox3">Mental Health</label>
+                    <label class="custom-control-label" for="checkbox3">Suicide</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                     <input type="checkbox" id="checkbox4" name="checkbox4" class="custom-control-input"
@@ -230,7 +230,7 @@
                         <h4 class="text-dark">{{mentor.user.org}}</h4>
                         <span class="badge badge-info mr-1" *ngIf="mentor.support.business"> Business </span>
                         <span class="badge badge-info mr-1" *ngIf="mentor.support.communication"> Communication </span>
-                        <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health"> Mental Health </span>
+                        <span class="badge badge-info mr-1" *ngIf="mentor.support.mental_health"> Suicide </span>
                         <span class="badge badge-info mr-1" *ngIf="mentor.support.well_being"> Ethics/Well-being </span>
                         <span class="badge badge-info mr-1" *ngIf="mentor.support.university_life"> University Life </span>
                         <span class="badge badge-info mr-1" *ngIf="mentor.support.career_path"> Career Path </span>

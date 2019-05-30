@@ -2,8 +2,8 @@
   <div class="jumbotron d-flex justify-content-end">
     <div id="welcome-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
       <h1 class="text-light">Support for the Veterinary Community</h1>
-      <p>We offer free continuing education, mentorship programs, office hours with industry professionals, and other resources to help veterinary professionals in their career and well-being.</p>
-      <button class="btn btn-success mt-auto" [routerLink]="['/about']">About MightyVet</button>
+      <p>We offer free, on-demand continuing education, global mentorship programs, office hours with industry professionals around the world, and other resources to help veterinary professionals in their career and wellbeing.</p>
+      <button class="btn btn-primary mt-auto" [routerLink]="['/about']">About MightyVet</button>
     </div>
   </div>
 </section>
@@ -34,16 +34,25 @@
 <section id="courses" class="bg-light my-5 py-5">
   <div class="container">
     <div class="online-learning-info">
-      <h2>Online Learning</h2>
+      <h2>On-Demand Free CE</h2>
       <p>Participate in a variety of continuing education courses with well-respected industry leaders focusing on the challenges and opportunities faced by those drawn to be part of the most compassionate and trusted profession in the world.</p>
     </div>
-    <div class="courses-list d-flex justify-content-between flex-column flex-lg-row">
-      <div *ngFor="let course of featuredCourses" class="course-info col-lg pl-0">
-          <h5>{{course.title | slice: 40}}</h5>
-        <a [routerLink]="['/courses', course._id]" class="stretched-link">
-          <p>{{course.description | slice: 100}} <i class="fa fa-angle-double-right"></i></p>
-        </a>
-      </div>
+    <div class="courses-list d-flex flex-column flex-lg-row justify-content-between">
+      <a [routerLink]="['/courses', course._id]" *ngFor="let course of featuredCourses" class="course-info rounded p-2 mb-2">
+        <div class="course-images mr-2 d-none d-lg-block rounded mb-2" [ngStyle]="{'background-image': 'url('+course.img+')'}"></div>
+        <div class="d-flex">
+          <div class="d-lg-none course-images mr-2 rounded" [ngStyle]="{'background-image': 'url('+course.img+')'}"></div>
+          <div class="course-text">
+            <h5 class="course-title">{{course.title | slice: 80}}</h5>
+            <div class="stretched-link d-lg-none">
+              <p>{{course.description | slice: 100}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="stretched-link d-none d-lg-block">
+          <p>{{course.description | slice: 100}}</p>
+        </div>
+      </a>
     </div>
     <div class="d-flex justify-content-center">
       <button class="btn btn-primary mt-2" [routerLink]="['/courses']">Browse More Courses</button>
@@ -56,7 +65,7 @@
   <div class="container d-flex justify-content-between flex-column flex-lg-row">
     <div class="mentors-info mr-lg-5 my-4">
       <h2>Mighty Mentors</h2>
-      <p>Connect with industry leaders in the same stage of life as you to gain insight and advice for your future.</p> 
+      <p>Connect with industry leaders who have walked in your shoes to gain insight and advice for your future.</p> 
       <p>Whether you are in veterinary school and trying to determine what life post-graduation should look like, near retirement and looking for advice on selling your practice, or anywhere in between, we have a mentor for that.</p>
       <div class="d-flex justify-content-center">
         <button class="btn btn-primary mt-2" [routerLink]="['/mentorship']">Meet Our Mentors</button>

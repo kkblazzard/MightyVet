@@ -3,7 +3,7 @@
     width: 100%;
     min-height: 450px;
     filter: grayscale(30%);
-    background-image: url('../../assets/img/stock_photos/home.jpg');
+    background-image: url('../../assets/img/home_page/vet_paw.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -20,13 +20,33 @@
 #newsletter form {
     width: 40%;
 }
-#courses_img img {
-    width: 100%;
+.course-images{
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    min-height: 150px;
+    width: 35%;
+}
+.course-text{
+    width: 60%
 }
 a p{
     color: black;
 }
-
+.course-info{
+    border: 1px solid #435c8e;
+}
+@media only screen and (min-width:992px){
+    .course-images{
+        width: 100%;
+    }
+    .course-text{
+        width: 100%;
+    }
+    .course-info{
+        width: 32%;
+    }
+}
 @media only screen and (max-width:991px){
     h1 {
         font-size: 2em;

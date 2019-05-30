@@ -49,6 +49,7 @@ import { AdminNewsletterComponent } from './admin-newsletter/admin-newsletter.co
 import { MentorDetailsComponent } from './mentor-details/mentor-details.component';
 import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 import { DonationComponent } from './donation/donation.component';
+import { OfficeComponent } from './office/office.component';
 
 @Pipe({ name: 'keys', pure: false })
 
@@ -257,6 +258,7 @@ export class SlicePipe implements PipeTransform {
     MentorDetailsComponent,
     UnsubscribeComponent,
     DonationComponent,
+    OfficeComponent,
   ],
   imports: [
     BrowserModule,
