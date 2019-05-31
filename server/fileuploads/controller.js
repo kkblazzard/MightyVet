@@ -7,7 +7,7 @@ module.exports = {
     const speakerUpload = multer({
       storage: multerS3({
         s3: s3,
-        bucket: 'mightyvet-test',
+        bucket: 'mightyvet.org',
         acl: 'private',
         metadata: function (req, file, cb) {
           cb(null, {fieldName: file.fieldname});
@@ -36,7 +36,7 @@ module.exports = {
     const webinarUpload = multer({
       storage: multerS3({
         s3: s3,
-        bucket: 'mightyvet-test',
+        bucket: 'mightyvet.org',
         acl: 'private',
         metadata: function (req, file, cb) {
           cb(null, {fieldName: file.fieldname});
@@ -65,7 +65,7 @@ module.exports = {
     const userUpload = multer({
       storage: multerS3({
         s3: s3,
-        bucket: 'mightyvet-test',
+        bucket: 'mightyvet.org',
         acl: 'private',
         metadata: function (req, file, cb) {
           cb(null, {fieldName: file.fieldname});
@@ -95,7 +95,7 @@ module.exports = {
     const partnerUpload = multer({
       storage: multerS3({
         s3: s3,
-        bucket: 'mightyvet-test',
+        bucket: 'mightyvet.org',
         acl: 'private',
         metadata: function (req, file, cb) {
           cb(null, {fieldName: file.fieldname});
