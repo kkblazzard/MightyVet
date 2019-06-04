@@ -2,7 +2,7 @@
   <div class="jumbotron d-flex justify-content-end">
     <div id="welcome-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
       <h1 class="text-light">Support for the Veterinary Community</h1>
-      <p>We offer free, on-demand continuing education, global mentorship programs, office hours with industry professionals around the world, and other resources to help veterinary professionals in their career and wellbeing.</p>
+      <p>We offer free, on-demand continuing education, global mentorship programs, office hours with industry professionals and thought leaders around the world, as well as other resources to help veterinary professionals in their career and wellbeing.</p>
       <button class="btn btn-primary mt-auto" [routerLink]="['/about']">About MightyVet</button>
     </div>
   </div>
@@ -44,12 +44,12 @@
           <div class="d-lg-none course-images mr-2 rounded" [ngStyle]="{'background-image': 'url('+course.img+')'}"></div>
           <div class="course-text">
             <h5 class="course-title">{{course.title | slice: 80}}</h5>
-            <div class="stretched-link d-lg-none">
+            <div class="d-lg-none">
               <p>{{course.description | slice: 100}}</p>
             </div>
           </div>
         </div>
-        <div class="stretched-link d-none d-lg-block">
+        <div class="d-none d-lg-block">
           <p>{{course.description | slice: 100}}</p>
         </div>
       </a>
@@ -65,7 +65,7 @@
   <div class="container d-flex justify-content-between flex-column flex-lg-row">
     <div class="mentors-info mr-lg-5 my-4">
       <h2>Mighty Mentors</h2>
-      <p>Connect with industry leaders who have walked in your shoes to gain insight and advice for your future.</p> 
+      <p>Connect with veterinary and industry leaders who have walked in your shoes to gain insight and advice for your future.</p> 
       <p>Whether you are in veterinary school and trying to determine what life post-graduation should look like, near retirement and looking for advice on selling your practice, or anywhere in between, we have a mentor for that.</p>
       <div class="d-flex justify-content-center">
         <button class="btn btn-primary mt-2" [routerLink]="['/mentorship']">Meet Our Mentors</button>
