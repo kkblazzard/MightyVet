@@ -1,13 +1,15 @@
+<!-- Welcome -->
 <section id="section-welcome" class="container">
   <div class="jumbotron d-flex justify-content-end">
-    <div id="welcome-text" class="mr-3 p-5 text-light d-flex flex-column align-items-end">
+    <div id="welcome-text" class="mr-3 p-5 text-light">
       <h1 class="text-light">Support for the Veterinary Community</h1>
       <p>We offer free, on-demand continuing education, global mentorship programs, office hours with industry professionals and thought leaders around the world, as well as other resources to help veterinary professionals in their career and wellbeing.</p>
-      <button class="btn btn-primary mt-auto" [routerLink]="['/about']">About MightyVet</button>
+      <div class="d-flex">
+        <button class="btn btn-primary ml-auto" [routerLink]="['/about']">About MightyVet</button>
+      </div>
     </div>
   </div>
 </section>
-
 <!-- NewsLetter -->
 <section id="newsletter" class="my-5 py-3">
   <div class="container d-flex flex-column flex-lg-row justify-content-between">

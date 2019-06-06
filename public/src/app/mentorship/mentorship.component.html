@@ -113,18 +113,6 @@
                                 [(ngModel)]="newMentor.support.career_path">
                             <label class="custom-control-label" for="careerPathBox">Career Path</label>
                         </div>
-                        <!-- <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.mental_health"
-                            name="mentalHealthBox">
-                        Mental Health
-                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.financial_advice"
-                            name="financialAdviceBox">
-                        Financial Advice
-                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.career_advice"
-                            name="careerAdviceBox">
-                        Career Advice
-                        <input type="checkbox" class="checkboxes" [(ngModel)]="newMentor.support.technical_advice"
-                            name="technicalAdviceBox">
-                        Technical or Surgical -->
                         <div *ngIf="mentor_errors?.support" class="text-danger">
                             <small>{{mentor_errors.support.message}}</small></div>
                     </div>
