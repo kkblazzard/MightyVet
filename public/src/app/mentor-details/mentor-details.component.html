@@ -3,7 +3,7 @@
   <div *ngIf="mentor._id">
     <div class="container">
       <div class="row">
-        <div class="col-sm-10">
+        <div class="col-8 col-md-10">
           <h1>{{mentor.user.firstName}} {{mentor.user.lastName}}</h1>
           <h5 class="mb-4">{{mentor.user.title}}, {{mentor.user.org}}</h5>
           <!-- <button type="button" class="btn btn-info mr-1"><i class="fa fa-comments mr-2"></i>Send me a message</button> -->
@@ -15,13 +15,13 @@
           </p>
           <button class="btn btn-primary" *ngIf="isMentee" [routerLink]="['/mentorship',id,'schedule']"><i class="fa fa-calendar mr-2"></i>Look at {{mentor.user.firstName}}'s availabilities</button>
         </div>
-        <div class="col-sm-2 pull-right">
+        <div class="col-4 col-md-2 pull-right">
           <img title="profile image" class="rounded-circle w-100" id="mentor_img" [src]="mentor.user.picture" alt="Mentor Image">
         </div>
       </div>
       <hr />
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3 mb-2">
           <ul class="list-group">
             <li class="list-group-item text-muted" contenteditable="false">Profile</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Organization: </strong></span>

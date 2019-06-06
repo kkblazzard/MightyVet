@@ -9,7 +9,7 @@
 
     <div class="container d-flex flex-wrap flex-column flex-lg-row">
       <!-- left main -->
-      <div class="col-lg-8 p-4">
+      <div class="col-lg-8 p-0 p-lg-4 mb-2 mb-lg-0">
         <h3>{{course.title}}</h3>
         <p>{{course.description}}</p>
         <h4>Tags:</h4>
@@ -24,14 +24,14 @@
       </div>
 
       <!-- right main -->
-      <div class="col p-4">     
+      <div class="col-lg-4 p-0 p-lg-4">     
         <div class="mb-2">
           <button *ngIf="!isSignedUp" class="btn btn-primary" (click)="signUp()">Sign up for this class</button>
-          <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary"> Go to course</button></a>
+          <a href="{{course.webinar_link}}"><button *ngIf="isSignedUp" class="btn btn-secondary">Go to course</button></a>
         </div>
         <div *ngIf="course.type == 'Live'">
           <h4>Class Date & Time</h4>
-          <p>{{course.datetime | date:"MMM-dd-y, hh:mma"}}</p>
+          <p>{{course.datetime | date:"MMMM dd y, hh:mma"}}</p>
         </div>
         <h4>Speakers</h4>
         <!-- <app-speaker-details [model]="course.speaker"></app-speaker-details> -->
