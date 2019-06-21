@@ -11,13 +11,24 @@ module.exports={
         .populate('speakers')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
-    webinarFeatured: (req, res) =>
+    webinarFeatured: (req, res) =>{
+        date = new Date();
+        date = date.setHours(date.getHours()-2);
         Webinars
-        .find()
-        .sort('-createdAt')
+        .find({
+            $or:[ //don't post live webinars that have past
+                {type: "Video"},
+                {   
+                    type: "Live", 
+                    datetime: { $gte: date }
+                }
+            ]
+        })
+        .sort({type : 1, datetime : 1, createdAt: -1})
         .limit(3)    
         .then(all=>console.log(all) || res.json(all))
-        .catch(err=>console.log(err)|| res.json(err)),
+        .catch(err=>console.log(err)|| res.json(err))
+    },
     webinarNew: (req, res) => {
         console.log("entered new controller", req.body);
         Webinars

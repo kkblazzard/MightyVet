@@ -19,9 +19,9 @@
           <div *ngIf="errors?.webinar_link" class="text-danger"><small>{{errors.webinar_link.message}}</small></div>
         </div>
         <div class="form-group col">
-          <label>Live or video</label>
+          <label>Live or On-Demand</label>
           <select class="form-control" name="type" [(ngModel)]="newWebinar.type">
-            <option value="Video">Video</option>
+            <option value="Video">On-Demand</option>
             <option value="Live">Live Webinar</option>
           </select>
           <div *ngIf="errors?.type" class="text-danger"><small>{{errors.type.message}}</small></div>
