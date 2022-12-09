@@ -15,7 +15,7 @@
     "body-parser": "^1.18.3",
     "crypto": "^1.0.1",
     "dependencies": "0.0.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-jwt": "^5.3.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
