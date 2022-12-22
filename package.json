@@ -19,7 +19,7 @@
     "express-jwt": "^5.3.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.4.4",
     "mongoose-bcrypt": "^1.6.0",
     "mongoose-unique-validator": "^2.0.2",
