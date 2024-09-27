@@ -1,5 +1,6 @@
 const Mentees=require('./models');
 const Users=require('../users/models');
+const Mentors=require('../mentors/models');
 
 module.exports={
     menteeAll: (req, res)=>Mentees
@@ -31,14 +32,22 @@ module.exports={
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
-    
     approveMentee: (req, res) => Mentees
-    .findByIdAndUpdate({_id: req.params.id, "mentees.id":req.body.mentee_id},{$set:{"mentees.$.approval":true}},{new: true})
-    .then(updated =>console.log("approved",updated)||res.json(updated))
+    .findByIdAndUpdate(req.body.mentee_id,{$set:{approval:true}},{new: true})
+    .then(updated =>{
+        console.log("approved",updated);
+        Users.findByIdAndUpdate(updated.user, {$push:{mentors: updated._id}}, {new: true})
+        .then((data) => console.log(data) || res.json(updated))
+        .catch(err=>console.log(err) || res.json(err))
+    })
     .catch(err=>console.log(err) || res.json(err)),
-
-    declineMentee: (req, res) => Mentees
+    declineMentee: (req, res) => Mentors
     .findByIdAndUpdate(req.params.id, {$pull: {mentees: req.body.mentee_id}})
-    .then(updated =>console.log("decline",updated)||res.json(updated))
+    .then(updated =>{
+        console.log("decline",updated);
+        Mentees.findByIdAndDelete(req.body.mentee_id)
+        .then(deleted=>console.log("deleted") || res.json(deleted))
+        .catch(err=>console.log(err) || res.json(err))
+    })
     .catch(err=>console.log(err) || res.json(err)),
 }

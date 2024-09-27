@@ -14,12 +14,12 @@ module.exports={
         .catch(err=> console.log(err) || res.json(err))
     },
     newsletterRemove: (req, res) => Newsletters
-        .findByIdAndDelete(req.params.id)
+        .findOneAndDelete({email:req.params.email})
         .then(deleted=>console.log("deleted") ||res.json(deleted))
         .catch(err=>console.log(err) || res.json(err)),
 
     newsletterDetails:(req, res) => Newsletters
-        .findById(req.params.id)
+        .findOne({email:req.params.email})
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
 

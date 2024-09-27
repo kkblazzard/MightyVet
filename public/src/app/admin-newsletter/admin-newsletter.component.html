@@ -3,4 +3,7 @@
 <div *ngIf="alert" class="alert alert-success mb-3">
     <p>Textbox successfully copied!</p>
 </div>
-<button class="btn btn-outline-primary" (click)="copyInputMessage(userInput)" value="Click to Copy">Copy from Textbox</button>
+<div class="d-flex justify-content-between">
+    <button class="btn btn-outline-primary" (click)="exportAsXLSX()"><i class="fa fa-file-excel-o"></i>&nbsp;Download Newsletter into an Excel File</button>
+    <button class="btn btn-outline-primary" (click)="copyInputMessage(userInput)" value="Click to Copy">Copy from Textbox</button>
+</div>

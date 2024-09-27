@@ -1,7 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
-
-:focus{
+body{
+    padding-top: 140px;
+}
+:focus {
     outline: 0;
 }
 h1, h2, h3, h4, h5 {
@@ -11,8 +11,10 @@ h1, h2, h3, h4, h5 {
 h6 {
     color: #395371;
     letter-spacing: 0.03em;
-    font-weight: 800;
+    font-weight: 600;
  }
 p{
     font-size: 1.1em;
+}
+@media only screen and (max-width: 991px) {
 }

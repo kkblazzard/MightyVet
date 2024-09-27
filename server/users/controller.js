@@ -28,17 +28,23 @@ passport.use(new LocalStrategy({
 
 module.exports={
     userRegister: (req, res) => {
-    var user = new Users(req.body);
-
-    user.setPassword(req.body.password)
-    user.save()
+    Users.find({admin: true})
     .then(data => {
-        var token;
-        token = data.generateJwt();
-        res.status(200);
-        res.json({
-            "token" : token
-        });
+      var user = new Users(req.body);
+      user.setPassword(req.body.password);
+      if (data.length === 0){
+        user.admin = true;
+      }
+      user.save()
+      .then(data2 => {
+          var token;
+          token = data2.generateJwt();
+          res.status(200);
+          res.json({
+              "token" : token
+          });
+      })
+      .catch(err => console.log(err) || res.json(err))
     })
     .catch(err => console.log(err) || res.json(err))
     },
@@ -47,6 +53,18 @@ module.exports={
         .select('-password')
         .then(all=>console.log(all) || res.json(all))
         .catch(err=>console.log(err)|| res.json(err)),
+    userExcel: (req, res)=> Users
+    .find()
+    .select('-password')
+    .select('-admin')
+    .select('-_id')
+    .select('-__v')
+    .select('-updatedAt')
+    .select('-picture')
+    .select('-meetings')
+    .populate([{path: 'mentors', populate: {path: 'mentor', populate: {path: 'user'}}}, {path: 'accreditations', populate: {path: 'webinar'}}, {path: 'mentor_id'}])
+    .then(all=>console.log(all) || res.json(all))
+    .catch(err=>console.log(err)|| res.json(err)),
     userRemove: (req, res) => Users
         .findByIdAndDelete(req.params.id)
         .then(deleted=>console.log("deleted") ||res.json(deleted.select("-password")))
@@ -60,7 +78,7 @@ module.exports={
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
     userUpdate: (req, res) => Users
-        .findByIdAndUpdate(req.params.id,req.body,{new: true})
+        .findByIdAndUpdate(req.params.id,req.body,{new: true, runValidators: true, context: 'query'})
         .then(updated =>console.log("updated",updated)||res.json(updated))
         .catch(err=>console.log(err) || res.json(err)),
     userLogin: (req, res) => {
@@ -69,21 +87,57 @@ module.exports={
             // If Passport throws/catches an error
             if (err) {
                 console.log(err)
-                res.status(404).json(err);
+                res.json(err);
                 return;
             }
             // If a user is found
             if(user){
                 token = user.generateJwt();
-                res.status(200);
                 res.json({
                     "token" : token
                 });
             } else {
             // If user is not found
-                res.status(401).json(info);
+                res.json(info);
             }   
         })(req, res);  
-    }
-          
+    },
+    updatePassword: (req, res) => {
+      passport.authenticate('local', function(err, user, info){
+        if (err){
+          res.json(err);
+        }
+        if(user){
+          user.setPassword(req.params.password);
+          user.save();
+          res.json(user);
+        }
+        else{
+          res.json(info);
+        }
+      })(req, res);
+    },
+    userProfile: (req, res) => {
+
+      // If no user ID exists in the JWT return a 401
+      if (!req.payload._id) {
+        res.status(401).json({
+          "message" : "UnauthorizedError: private profile"
+        });
+      } else {
+        // Otherwise continue
+        console.log(req.payload._id);
+        Users
+          .findById(req.payload._id)
+          .select('-password')
+          .populate([{path: 'accreditations', populate: {path: 'webinar'}},{path: 'mentors', populate: {path: 'mentor', populate: {path: 'user', select: '-password'}}},{path: 'mentor_id', populate: [{path: 'mentees', populate: {path: 'user', select: '-password'}}, {path: 'availabilities', populate: {path: 'mentee',  select: '-password'}}]}, {path: 'meetings', populate: {path: 'mentor', populate: {path: 'user', select: '-password'}}}])
+          .then(one=>console.log(one) || res.json(one))
+          .catch(err=>console.log(err) || res.json(err))
+      }
+    },
+    updateImage: (req, res) => Users
+    .findByIdAndUpdate(req.params.id,{$set:{picture: req.body.img}},{new: true, runValidators: true})
+    .then(updated =>console.log("updated",updated)||res.json(updated))
+    .catch(err=>console.log(err) || res.json(err)),
 }
+// 

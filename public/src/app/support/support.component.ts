@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-support',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./support.component.css']
 })
 export class SupportComponent implements OnInit {
-
-  constructor() { }
+  // @ViewChild('donate') donate: ElementRef
+  // @ViewChild('paymentSuccess') paymentSuccess: ElementRef
+  // modal: any;
+  constructor(private _modalService: NgbModal) { }
 
   ngOnInit() {
   }
-
+  // open(content) {
+  //   if (content === 'paymentSuccess') {
+  //   // payment modal
+  //   this.modal = this._modalService.open(this.paymentSuccess);
+  // } else {
+  //   // donation modal
+  //   this.modal = this._modalService.open(this.donate, { size: 'lg' });
+  //   }
+  //   this.modal.result.then(() => { }, () => this.closedModal());
+  // }
+  // closedModal(){
+  //   this.modal = null;
+  // }
 }

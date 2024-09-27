@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from './http_services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +6,9 @@ import { UsersService } from './http_services/users.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private _httpService: UsersService) {}
-  userID: string;
+  constructor() {}
 
   ngOnInit() {
-    this.userID = localStorage.getItem('loginUserID');
-  }
-  clearLogin() {
-    localStorage.clear();
-    this.userID = '';
+    
   }
 }

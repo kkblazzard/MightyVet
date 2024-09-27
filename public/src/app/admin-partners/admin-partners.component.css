@@ -1,3 +1,4 @@
-.errors{
-    color: red;
+.img-preview{
+    max-height: 100px;
+    max-width: 450px;
 }

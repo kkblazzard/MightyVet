@@ -5,7 +5,7 @@ import { FileUploadService } from '../http_services/file-upload.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 class ImageSnippet {
-  pending: boolean = false;
+  pending: boolean = true;
   status: string = 'init';
   constructor(public src: string, public file: File) {}
 }
@@ -23,6 +23,7 @@ export class AdminPartnersComponent implements OnInit {
   partners: any;
   newPartner: any = {tier: 1, partner: {name: "", img: "", link: ""}};
   fileToUpload: ImageSnippet;
+  partnerSuccess: boolean;
   constructor(
     private _modalsService: NgbModal,
     private _filesUploadService: FileUploadService,
@@ -31,13 +32,24 @@ export class AdminPartnersComponent implements OnInit {
     private _router: Router
     ) { }
 
+  private onSuccess() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'ok';
+  }
+  private onError() {
+    this.fileToUpload.pending = false;
+    this.fileToUpload.status = 'fail';
+    this.fileToUpload.src = '';
+  }
   ngOnInit() {
     this.getPartners();
   }
 
   getPartners(){
     let obs = this._partnersService.getPartners();
-    obs.subscribe(data=>this.partners=data)}
+    obs.subscribe(data=>this.partners=data);
+  }
+
   addPartner(){
     let obs = this._partnersService.addPartner(this.newPartner);
     obs.subscribe(data=>{
@@ -45,10 +57,14 @@ export class AdminPartnersComponent implements OnInit {
       this.img_error = null;
       this.link_error = null;
       if (!data['errors']){
-        this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
+        this.partnerSuccess = true;
+        setTimeout(() => {
+          this.partnerSuccess = false
+          this.fileToUpload = null;
+          this.newPartner= {tier: 1, partner: {name: "", img: "", link: ""}};
+        }, 2000);
       }
       else{
-        console.log(data['errors']);
         if(data['errors'].partners){
           if(data['errors'].partners.errors.name){
             this.name_error = data['errors'].partners.errors.name.message;
@@ -64,31 +80,40 @@ export class AdminPartnersComponent implements OnInit {
       this.getPartners();
     });
   }
+
   openModal(){
     this.modal = this._modalsService.open(this.partnerModal)
     this.modal.result.then(()=>{}, () => this.closedModal())
   }
+
   closedModal(){
     this.newPartner = {tier: 1, partner: {name: "", img: "", link: ""}};
-    this.fileToUpload = {src: null, file: null, pending: false, status: 'init'};
+    this.fileToUpload = null;
   }
+
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-
     reader.addEventListener('load', (event: any) => {
-
       this.fileToUpload = new ImageSnippet(event.target.result, file);
-      let obs = this._filesUploadService.partnerUploadImage(this.fileToUpload.file)
+      const obs = this._filesUploadService.partnerUploadImage(this.fileToUpload.file);
       obs.subscribe(
         (data) => {
+          this.onSuccess();
           this.newPartner.partner.img = data['imageUrl'];
         },
         (err) => {
-        
+          this.onError();
+          console.log(err);
         })
     });
-
     reader.readAsDataURL(file);
+  }
+
+  deletePartner(tier_id, partner_id){
+    let obs = this._partnersService.partnerUpdate(tier_id, {$pull: {partners: {_id: partner_id}}});
+    obs.subscribe(data => {
+      this.getPartners();
+    })
   }
 }

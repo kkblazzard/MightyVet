@@ -1,6 +1,7 @@
-const Mentors=require('./models');
-const Users=require('../users/models');
-
+const Mentors = require('./models');
+const Mentees = require('../mentees/models');
+const Users = require('../users/models');
+const Meetings = require('../meetings/models');
 module.exports={
     mentorAll: (req, res)=>Mentors
         .find({approval: true})
@@ -26,44 +27,46 @@ module.exports={
     },
     mentorRemove: (req, res) => Mentors
         .findById(req.params.id)
-        .then( data => {
-            Users.findByIdAndUpdate(data.user, {$set: {mentor_id:null}})
-            .then(user=>console.log("deleted") ||res.json(user))
-            .catch(err=>console.log(err) || res.json(err));
-            Mentors.findByIdAndDelete(req.params.id)
-            .then(deleted=>console.log("deleted") ||res.json(deleted))
+        .populate({path: "mentees", populate: {path: "user"}})
+        .then( mentor => {
+            Users.findByIdAndUpdate(mentor.user, {$set: {mentor_id:null}, $pull: {meetings: {mentor: mentor._id}}})
+            .populate({path: "meetings"})
+            .then(user=> {
+                console.log("deleted", user)
+                Meetings.deleteMany({mentor: mentor._id})
+                .then(meetings => {
+                    console.log("deleted", meetings);
+                    Users.updateMany({},{$pull: {mentors: {mentor: mentor._id}}})
+                    .populate({path: "mentors"})
+                    .then(users => {
+                        console.log("updated", users)
+                        Mentees.deleteMany({mentor: mentor._id})
+                        .then(mentees => {
+                            console.log("updated", mentees)
+                            Mentors.findByIdAndDelete(req.params.id)
+                            .then(deleted=>console.log("deleted") ||res.json(deleted))
+                            .catch(err=>console.log(err) || res.json(err))
+                        })
+                        .catch(err=>console.log(err) || res.json(err));
+                    })
+                    .catch(err=>console.log(err) || res.json(err));
+                })
+                .catch(err=>console.log(err) || res.json(err));
+            })
             .catch(err=>console.log(err) || res.json(err));
         })
         .catch(err => console.log(err) || res.json(err)),
     mentorDetails:(req, res) => Mentors
         .findById(req.params.id)
-        .populate('user')
-        .populate('mentees')
+        .populate([{path: 'user', select: '-password'},{path:'mentees'},{path:'availabilities', populate: {path: 'mentee', select: '-password'}}])
         .then(one=>console.log(one) || res.json(one))
         .catch(err=>console.log(err) || res.json(err)),
     signUp: (req, res) => Mentors
     .findByIdAndUpdate(req.params.id,{$push: {mentees: req.body._id}},{new: true})
-    .then(mentor =>{
-        console.log("updated mentor with mentee", mentor);
-        Users.findByIdAndUpdate(req.body.user, {$push: {mentors: req.body._id}}, {new: true})
-        .then(user => {
-            console.log("updated user with mentor", user);
-        })
-        .catch(err=>console.log(err) || res.json(err));
-    })
+    .then(mentor => console.log(mentor) || res.json(mentor))
     .catch(err=>console.log(err) || res.json(err)),
     mentorUpdate: (req, res) => Mentors
         .findByIdAndUpdate(req.params.id,req.body,{new: true})
         .then(updated =>console.log("updated",updated)||res.json(updated))
-        .catch(err=>console.log(err) || res.json(err)),
-    
-    approveMentee: (req, res) => Mentors
-    .findByIdAndUpdate({_id: req.params.id, "mentees.id":req.body.mentee_id},{$set:{"mentees.$.approval":true}},{new: true})
-    .then(updated =>console.log("approved",updated)||res.json(updated))
-    .catch(err=>console.log(err) || res.json(err)),
-
-    declineMentee: (req, res) => Mentors
-    .findByIdAndUpdate(req.params.id, {$pull: {mentees: req.body.mentee_id}})
-    .then(updated =>console.log("decline",updated)||res.json(updated))
-    .catch(err=>console.log(err) || res.json(err)),
+        .catch(err=>console.log(err) || res.json(err))
 }

@@ -1,32 +1,176 @@
-<h1>{{date}} Availability</h1>
-<div class="hours am">
-  <h4>AM</h4>
-  <a (click)="addMeeting('6:00am')">6:00</a>
-  <a (click)="addMeeting('6:30')">6:30</a>
-  <a (click)="addMeeting('7:00')">7:00</a>
-  <a (click)="addMeeting('7:30')">7:30</a>
-  <a (click)="addMeeting('8:00')">8:00</a>
-  <a (click)="addMeeting('8:30')">8:30</a>
-  <a (click)="addMeeting('9:00')">9:00</a>
-  <a (click)="addMeeting('9:30')">9:30</a>
-  <a (click)="addMeeting('10:00')">10:00</a>
-  <a (click)="addMeeting('10:30')">10:30</a>
-  <a (click)="addMeeting('11:00')">11:00</a>
-  <a (click)="addMeeting('11:30')">11:30</a>
-</div>
-<div class="hours pm">
-  <h4>PM</h4>
-  <a (click)="addMeeting('12:00')">12:00</a>
-  <a (click)="addMeeting('12:30')">12:30</a>
-  <a (click)="addMeeting('1:00')">1:00</a>
-  <a (click)="addMeeting('1:30')">1:30</a>
-  <a (click)="addMeeting('2:00')">2:00</a>
-  <a (click)="addMeeting('2:30')">2:30</a>
-  <a (click)="addMeeting('3:00')">3:00</a>
-  <a (click)="addMeeting('3:30')">3:30</a>
-  <a (click)="addMeeting('4:00')">4:00</a>
-  <a (click)="addMeeting('4:30')">4:30</a>
-  <a (click)="addMeeting('5:00')">5:00</a>
-  <a (click)="addMeeting('5:30')">5:30</a>
-  <a (click)="addMeeting('6:00pm')">6:00</a>
+<!-- Add Availabilities modal -->
+<ng-template #showAvailabilities>
+  <div class="modal-header">
+    <h2 class="modal-title">{{date | date:'EEEE, dd MMMM, yyyy'}}</h2>
+    <button type="button" class="close" (click)="modal.dismiss('cross-click')">
+      <span aria-hidden="true"><i class="fa fa-times"></i></span>
+    </button>
+  </div>
+  <div class="container modal-body" *ngIf="!new">
+    <div class="card border-secondary mb-2 text-center w-100 p-2" *ngIf="!daily_meetings.length">
+      <span class="text-primary">You don't have anything scheduled on that
+        day.</span>
+    </div>
+    <div id="available_times" *ngFor="let daily_meeting of daily_meetings | sortSchedule, let i = index">
+      <div class="d-flex">
+        <div class="card border-secondary mr-2 mb-2 text-center w-25 d-flex align-items-center justify-content-center">
+          <span class="text-secondary">{{daily_meeting.datetime | date: "hh:mma"}}</span>
+        </div>
+        <div *ngIf="daily_meeting.mentor" class="card border-info mb-2 w-75">
+          <div class="m-2 text-center" *ngIf="daily_meeting.mentor === user.mentor_id?._id">
+            <span class="text-success mb-2" *ngIf="!daily_meeting.mentee">Mentoring Availability</span>
+            <span class="text-success mb-2" *ngIf="daily_meeting.mentee">Meeting with {{daily_meeting.mentee.firstName}}
+              {{daily_meeting.mentee.lastName}}</span>
+            <div *ngIf="update !== i" class="btn-group d-flex justify-content-between" role="group">
+              <button class="btn btn-sm btn-secondary" (click)="toggle(i)"><i class="fa fa-cogs"
+                  aria-hidden="true"></i>&nbsp;Reschedule</button>
+              <button class="btn btn-sm btn-danger" (click)="cancel(daily_meeting._id)"><i class="fa fa-times"
+                  aria-hidden="true"></i>&nbsp;Cancel</button>
+            </div>
+            <div *ngIf="update === i" class="d-flex flex-column align-items-center">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="updateDate" [(ngModel)]="updateDate"
+                  ngbDatepicker #d="ngbDatepicker">
+                <button class="btn btn-outline-secondary input-group-append" (click)="d.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
+              </div>
+              <div class="form-group">
+                <ngb-timepicker name="updateTime" [(ngModel)]="updateTime" meridian="ON" [minuteStep]="15">
+                </ngb-timepicker>
+              </div>
+              <div class="text-danger mb-2" *ngIf="update_error"><small>{{update_error}}</small></div>
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-sm btn-warning" (click)="updatingTime(daily_meeting._id)"><i class="fa fa-cogs"
+                    aria-hidden="true"></i>&nbsp;Update</button>
+                <button class="btn btn-sm btn-secondary" (click)="untoggle(i)"><i class="fa fa-times"
+                    aria-hidden="true"></i>&nbsp;Cancel</button>
+              </div>
+            </div>
+          </div>
+          <div class="m-2 text-center" *ngIf="daily_meeting.mentee === user._id">
+            <span class="text-primary mb-2">Meeting with <a
+                [routerLink]="['/mentorship', daily_meeting.mentor._id]">{{daily_meeting.mentor.user.firstName}}
+                {{daily_meeting.mentor.user.lastName}}</a></span>
+            <div class="btn-group d-flex" role="group">
+              <button class="btn btn-sm btn-danger" (click)="unSignUp(daily_meeting._id)"><i class="fa fa-times"
+                  aria-hidden="true"></i>&nbsp;Cancel</button>
+            </div>
+          </div>
+        </div>
+        <div class="card border-info mb-2 w-75" *ngIf="daily_meeting.type">
+          <div class="m-2 text-center">
+            <span class="text-warning">Live Webinar:&nbsp;<a
+                [routerLink]="['/courses', daily_meeting._id]">{{daily_meeting.title | slice: 15}}</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container modal-body" *ngIf="new">
+    <div class="card border-info p-4 text-center" *ngIf="user?.mentor_id">
+      <h5>Add Mentoring Availabilities</h5>
+      <form class="d-flex flex-column align-items-center">
+        <div class="form-group">
+          <ngb-timepicker name="newTime" [(ngModel)]="newTime" meridian="ON" [minuteStep]="15"></ngb-timepicker>
+        </div>
+        <div class="text-danger" *ngIf="availability_error"><small>{{availability_error}}</small></div>
+        <div class="d-flex align-items-end">
+          <div class="form-group text-center mr-2 mb-0">
+            <h6 for="recurring">Recurring Weekly?</h6>
+            <input type="checkbox" id="recurring" class="form-control" name="boolean" [(ngModel)]="recurring.boolean">
+          </div>
+          <div class="form-group text-center mr-2 mb-0" *ngIf="recurring.boolean">
+            <h6 for="recur_length">For</h6>
+            <select id="recur_length" name="number" [(ngModel)]="recurring.num" class="form-control">
+              <option value="4">4 weeks</option>
+              <option value="12">12 weeks</option>
+              <option value="24">24 weeks</option>
+              <option value="48">48 weeks</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" (click)="newMeeting()">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="user?.mentor_id" class="modal-footer">
+    <button *ngIf="!new" class="btn btn-success" (click)="toggleNew()">New</button>
+    <button *ngIf="new" class="btn btn-secondary" (click)="toggleNew()">Back</button>
+  </div>
+  <div *ngIf="!user?.mentor_id" class="modal-footer">
+    <button class="btn btn-danger" (click)="modal.dismiss('exit')">Exit</button>
+  </div>
+</ng-template>
+
+<!-- Availability page -->
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Your Schedule</h1>
+    <button class="btn btn-outline-secondary" [routerLink]="['/user']">Back</button>
+  </div>
+  <hr />
+  <div class="d-flex justify-content-around align-items-center">
+    <button class="btn btn-lg btn-outline-success rounded-circle" (click)="prevMonth()"><i class="fa fa-arrow-left"
+        aria-hidden="true"></i></button>
+    <div class="w-75 card m-auto bg-white rounded-lg shadow">
+      <div class="card-header bg-white">
+        <h4 class="text-center text-success p-3">{{ currentDate.format('MMMM YYYY') }}</h4>
+      </div>
+      <div class="card-body">
+        <table class="table w-100">
+          <thead>
+            <tr>
+              <ng-container *ngFor="let name of dayNames">
+                <th class="text-center text-success border-0">{{ name }}</th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let week of weeks">
+              <tr>
+                <ng-container *ngFor="let day of week">
+                  <td class="date-container text-center bg-light border-0"
+                    [ngClass]="{ 'today': day.today, 'available': day.available, 'past': day.isPast, 'not-past': !day.isPast }"
+                    *ngIf="!isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
+                    <div class="date-text m-auto">{{ day.mDate.date() }}</div>
+                  </td>
+                  <td class="clickable date-container text-center border-0"
+                    [ngClass]="{ 'today': day.today, 'available': day.available, 'past': day.isPast, 'not-past': !day.isPast  }"
+                    *ngIf="isSelectedMonth(day.mDate)" (click)="open(day.mDate)">
+                    <div class="date-text m-auto">{{ day.mDate.date() }}</div>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button class="btn btn-lg btn-outline-success rounded-circle" (click)="nextMonth()"><i class="fa fa-arrow-right"
+        aria-hidden="true"></i></button>
+  </div>
+  <div class="card border-info mt-4 p-2">
+    <h5 class="text-center">Legend</h5>
+    <div class="d-flex justify-content-center">
+      <div class="mr-4">
+        <div class="available d-inline-block mr-1">
+          <div class="date-text text-center"> 1 </div>
+        </div>
+        <h6 class="d-inline-block">Events</h6>
+      </div>
+      <div class="mr-4">
+        <div class="bg-light past d-inline-block mr-1">
+          <div class="date-text text-center"> 1 </div>
+        </div>
+        <h6 class="d-inline-block">Past Day</h6>
+      </div>
+      <div>
+        <div class="today d-inline-block mr-1">
+          <div class="date-text text-center"> 1 </div>
+        </div>
+        <h6 class="d-inline-block">Today</h6>
+      </div>
+    </div> 
+  </div>
 </div>

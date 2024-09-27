@@ -11,11 +11,9 @@ export class PartnersService {
     return this._http.get(`/api/partners`);
   }
   addPartner(newpartner) {
-    console.log("http.service addpartner", newpartner);
     return this._http.post('/api/partners', newpartner);
   }
   partnerUpdate(id, partnerUpdate) {
-    console.log("http.service partnerupdate", partnerUpdate);
     return this._http.put('/api/partners/' + id, partnerUpdate);
   }
   deletePartner(id) {

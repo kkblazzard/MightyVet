@@ -1,0 +1,10 @@
+<div class="container">
+  <h3>Unsubscribe from our Newsletter</h3>
+  <div class="form-group">
+    <h6>Enter your Email Address</h6>
+    <input class="form-control" id="newsletter" name="newsletter" [(ngModel)]="newsletter" type="text">
+  </div>
+  <div class="alert alert-danger" *ngIf="newsletter_errors">{{newsletter_errors}}</div>
+  <div class="alert alert-success" *ngIf="newsletterSuccess">You have successfully unsubscribed from our newsletter.</div>
+  <button class="btn btn-primary" (click)="unsubscribe()">Unsubscribe</button>
+</div>

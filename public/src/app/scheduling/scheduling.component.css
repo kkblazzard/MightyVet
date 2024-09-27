@@ -1,3 +1,74 @@
-.btn-group{
-    text-align: center;
+/* * {
+    box-sizing: border-box;
+} */
+/* .available{
+    cursor: pointer;
+    background-color: lightblue;
+}
+.notMonth .date-text{
+    opacity: .7;
+}
+.month-grid .day-names {
+    border-left: solid grey 2px;
+}
+.month-grid .week {
+    border-bottom: solid grey 2px;
+    border-left: solid grey 2px;
+}
+.month-grid .day-name {
+    border: solid grey 2px;
+    border-left: none;
+}
+
+.month-grid .week-date {
+    padding: 20px;
+    border-right: solid grey 2px;
+}
+
+.today .date-text{
+    color: red;
+} */
+.past .date-text{
+    opacity: .5;
+}
+table {
+    table-layout: fixed;
+}
+.date-container:hover {
+    box-shadow: 0px 0px 10px #ccc;
+}
+.date-text {
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+    line-height: 40px;
+}
+.available{
+    cursor: pointer;
+}
+.booked{
+    cursor: pointer;
+}
+.available .date-text {
+    color: #fff;
+    border: 2px solid #38b9a4;
+    background: #38b9a4;
+    box-shadow: 0px 0px 5px #666;
+}
+.booked .date-text {
+    color: #fff;
+    border: 2px solid #435c8e;
+    background: #435c8e;
+    box-shadow: 0px 0px 5px #666;
+}
+.today {
+    background: #cafaf2;
+}
+@media only screen and (max-width:576px){
+    .date-text {
+        width: 30px;
+        height:30px;
+        border-radius: 50%;
+        line-height: 30px;
+    }
 }

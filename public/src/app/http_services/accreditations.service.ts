@@ -10,11 +10,9 @@ export class AccreditationsService {
     return this._http.get(`/api/accreditations`);
   }
   addAccreditation(newAccreditation) {
-    console.log("http.service addaccreditation", newAccreditation);
     return this._http.post('/api/accreditations', newAccreditation);
   }
   accreditationUpdate(id, accreditationUpdate) {
-    console.log("http.service accreditationupdate", accreditationUpdate);
     return this._http.put('/api/accreditations/' + id, accreditationUpdate);
   }
   deleteAccreditation(id) {

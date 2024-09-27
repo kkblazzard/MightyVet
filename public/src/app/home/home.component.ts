@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
   imgSrc3: String = "assets/img/home_page/resources.png";
   featuredCourses: any;
   newsletter: String = "";
+  pendingNewsletter: boolean;
+  successNewsletter: boolean;
+  newsletter_error: string;
   constructor(
     private _webinarsService: WebinarsService,
     private _route: ActivatedRoute,
@@ -32,7 +35,19 @@ export class HomeComponent implements OnInit {
     })
   }
   submitNewsletter(){
+    this.newsletter_error = null;
+    this.pendingNewsletter = true;
     let obs = this._newslettersService.addNewsletter({email: this.newsletter});
-    obs.subscribe(data => this.newsletter = "");
+    obs.subscribe(data => {
+      this.pendingNewsletter = false;
+      if (data['errors']){
+        this.newsletter_error = data['errors'].email.message;
+      }
+      else{
+        this.newsletter = "";
+        this.successNewsletter = true;
+        setTimeout(() => this.successNewsletter = false, 5000);
+      }
+    });
   }
 }

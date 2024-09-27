@@ -8,19 +8,15 @@ export class SpeakersService {
 
   constructor(private _http: HttpClient) { }
   getSpeakers() {
-    console.log("http.service getting speakers");
     return this._http.get(`/api/speakers`);
   }
   addSpeaker(newSpeaker) {
-    console.log("http.service addspeaker", newSpeaker);
     return this._http.post('/api/speakers', newSpeaker);
   }
   speakerUpdate(id, speakerUpdate) {
-    console.log("http.service speakerupdate", speakerUpdate);
     return this._http.put('/api/speakers/' + id, speakerUpdate);
   }
   getSpeaker(id) {
-    console.log("http.service getting speaker", id);
     return this._http.get(`/api/speakers/${id}`);
   }
   addWebinar(speaker_id, webinar) {

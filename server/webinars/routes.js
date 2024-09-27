@@ -9,4 +9,5 @@ module.exports=function(app){
     .put('/api/webinars/:id', controller.webinarUpdate)
     .put('/api/webinars/signup/:id', controller.signUp)
     .delete('/api/webinars/:id', controller.webinarRemove)
+    .post('/api/webinars/find', controller.webinarFind)
 }

@@ -1,0 +1,15 @@
+// Your variable overrides
+$theme-colors: (
+  "primary":#435c8e,
+  "danger": #fe6564,
+  "info": #67bbff,
+  "success": #38b9a4,
+);
+
+$font-family-sans-serif: "Montserrat", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+$link-color: #435c8e;
+$link-hover-color: #67bbff;
+
+// Bootstrap and its default variables
+@import "../../node_modules/bootstrap/scss/bootstrap";
